@@ -309,12 +309,25 @@
     {}
       :name |turn-string
       :tags $ #{} :native
+      :desc "|turn something into a string"
+      :snippets $ []
+        quote $ turn-symbol :key
+        quote $ turn-symbol 'key
+        quote $ turn-symbol 1
     {}
       :name |turn-symbol
       :tags $ #{} :native
+      :desc "|turn something into a symbol"
+      :snippets $ []
+        quote $ turn-symbol |a
+        quote $ turn-symbol :a
     {}
       :name |turn-keyword
       :tags $ #{} :native
+      :desc "|turn something into a keyword"
+      :snippets $ []
+        quote $ turn-keyword |k
+        quote $ turn-keyword 'k
     {}
       :name |identical
       :wip? true
@@ -526,7 +539,7 @@
         quote $ foldl + acc 0
     {}
       :name |unless
-      :tags $ #{} :gen :macro
+      :tags $ #{} :macro
       :desc "|if-not syntax"
       :snippets $ []
         quote $ unless false |false |true
@@ -534,25 +547,25 @@
     {}
       :name |&!=
       :wip? true
-      :tags $ #{} :gen
+      :tags $ #{}
       :desc "|native implemention of not equalify, of 2 arguments. might be `/=` in future"
       :snippets $ []
         quote $ != 1 2
     {}
       :name |&<=
-      :tags $ #{} :gen :number
+      :tags $ #{} :number
       :desc "|native implemention of <=, of 2 arguments"
       :snippets $ []
         quote $ <= 1 2
     {}
       :name |&>=
-      :tags $ #{} :gen :number
+      :tags $ #{} :number
       :desc "|native implemention of >=, of 2 arguments"
       :snippets $ []
         quote $ >= 2 1
     {}
       :name |when
-      :tags $ #{} :gen
+      :tags $ #{}
       :desc "|if with no false branch"
       :snippets $ []
         quote $ when true
@@ -560,292 +573,302 @@
           echo 2
     {}
       :name |+
-      :tags $ #{} :gen :number
+      :tags $ #{} :number
       :desc "|add multiple numbers"
       :snippets $ []
         quote $ + 1 2
         quote $ + 1 2 3
     {}
       :name |-
-      :tags $ #{} :gen :number
+      :tags $ #{} :number
       :desc "|substract numbers from a number"
       :snippets $ []
         quote $ - 2 1
         quote $ - 10 1 2 3
     {}
       :name |*
-      :tags $ #{} :gen :number
+      :tags $ #{} :number
       :desc "|multiply numbers"
       :snippets $ []
         quote $ * 1 2 3
     {}
       :name |/
-      :tags $ #{} :gen :number
+      :tags $ #{} :number
       :desc "|division of multiple numbers"
       :snippets $ []
         quote $ / 12 3 4
     {}
       :name |foldl-compare
-      :tags $ #{} :gen
+      :tags $ #{}
       :desc "|internal function for generation comparing functions"
       :snippets $ []
         quote $ foldl-compare &< ([] 2 3 4) 1
     {}
       :name |<
-      :tags $ #{} :gen :number
+      :tags $ #{} :number
       :desc "|compare multiple numbers"
       :snippets $ []
         quote $ < 1 2 3 4
     {}
       :name |>
-      :tags $ #{} :gen :number
+      :tags $ #{} :number
       :desc "|compare multiple numbers"
       :snippets $ []
         quote $ > 4 3 2 1
     {}
       :name |=
-      :tags $ #{} :gen :number
+      :tags $ #{} :number
       :desc "|compare multiple numbers"
       :snippets $ []
         quote $ = 1 (- 2 1) (- 4 3)
     {}
       :name |!=
       :wip? true
-      :tags $ #{} :gen
+      :tags $ #{}
       :desc "|compare multiple numbers"
       :snippets $ []
         quote $ != 1 2 3 4
     {}
       :name |>=
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{} :number
+      :desc "|compare multiple numbers"
       :snippets $ []
-        quote $ do
+        quote $ >= 4 3 2
     {}
       :name |<=
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|compare multiple numbers"
       :snippets $ []
-        quote $ do
+        quote $ <= 2 3 4
     {}
       :name |apply
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|apply a list of arguments to a function"
       :snippets $ []
-        quote $ do
+        quote $ apply f $ [] 1 2 3 4
     {}
       :name |list?
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|detects a list"
       :snippets $ []
-        quote $ do
+        quote $ list? $ [] 1 2 3 4
     {}
       :name |map?
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|detects a map"
       :snippets $ []
-        quote $ do
+        quote $ map? $ {} (:a 1) (:b 2)
     {}
       :name |number?
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|detects a number"
       :snippets $ []
-        quote $ do
+        quote $ number? 1
     {}
       :name |string?
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|detects a string"
       :snippets $ []
-        quote $ do
+        quote $ string? |demo
     {}
       :name |keyword?
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|detects a keyword"
       :snippets $ []
-        quote $ do
+        quote $ keyword? :key
     {}
       :name |symbol?
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|detects a symbol"
       :snippets $ []
-        quote $ do
+        quote $ symbol? 'a
     {}
       :name |bool?
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|detects a bool"
       :snippets $ []
-        quote $ do
+        quote $ bool? true
     {}
       :name |nil?
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|detects a nil"
       :snippets $ []
-        quote $ do
+        quote $ nil? nil
     {}
       :name |each
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{} :list
+      :desc "|take a list and a function and call each item with function"
       :snippets $ []
-        quote $ do
+        quote $ each ([] 1 2 3 4) $ fn (x)
+          echo x
     {}
       :name |map
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|map items of list into a new list"
       :snippets $ []
-        quote $ do
+        quote $ map ([] 1 2 3 4) $ fn (x)
+          + x 1
     {}
       :name |take
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|take n items from list"
       :snippets $ []
-        quote $ do
+        quote $ take 2 $ [] 1 2 3 4 5
     {}
       :name |drop
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|take items of a list except for first n items"
       :snippets $ []
-        quote $ do
+        quote $ drop 2 $ [] 1 2 3 4 5
     {}
       :name |str
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{} :string
+      :desc "|string concatenation"
       :snippets $ []
-        quote $ do
+        quote $ str |a 1 :k
     {}
       :name |include
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{} :set
+      :desc "|include multiple items to hashset"
       :snippets $ []
-        quote $ do
+        quote $ include (#{} 1 2) 3 4
     {}
       :name |exclude
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|exclude multiple items from hashset"
       :snippets $ []
-        quote $ do
+        quote $ exclude (#{} 1 2 3 4) 1 2
     {}
       :name |difference
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|return a difference hashset of 2 hashsets"
       :snippets $ []
-        quote $ do
+        quote $ difference (#{} 1 2 3 4) (#{} 1 2) (#{} 3)
     {}
       :name |union
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|return a union hashset of 2 hashsets"
       :snippets $ []
-        quote $ do
+        quote $ union (#{} 1 2) (#{} 3 4) (#{} 5 6)
     {}
       :name |intersection
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{} :set
+      :desc "|return a intersection hasset of multiple hashsets"
       :snippets $ []
-        quote $ do
+        quote $ intersection (#{} 1 2 3) (#{} 2 3 4) (#{} 3 4 5)
     {}
       :name |&index-of
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|helper function for index-of"
       :snippets $ []
-        quote $ do
+        quote $ index-of ([] 1 2 3 4) 1
     {}
       :name |index-of
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{} :list
+      :desc "|native implemention of `indexOf` function, returns -1 when not found"
       :snippets $ []
-        quote $ do
+        quote $ index-of ([] 1 2 3 4) 1
     {}
       :name |&find-index
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|helper function for find-index"
       :snippets $ []
-        quote $ do
+        quote $ find-index ([] 1 2 3 4) $ fn (x) (> x 2)
     {}
       :name |find-index
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{} :list
+      :desc "|find index of first item that matches the function, returns -1 when not found"
       :snippets $ []
-        quote $ do
+        quote $ find-index ([] 1 2 3 4) $ fn (x) (> x 2)
     {}
       :name |find
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{} :list
+      :desc "|find first item from list that matches the function"
       :snippets $ []
-        quote $ do
+        quote $ find ([] 1 2 3 4) $ fn (x) (> x 2)
     {}
       :name |->
-      :tags $ #{} :gen :macro
-      :desc "|"
+      :tags $ #{} :macro
+      :desc "|thread macro for nested functions, argument at head"
       :snippets $ []
-        quote $ do
+        quote $ -> a (b) (c d)
     {}
       :name |->>
-      :tags $ #{} :gen :macro
-      :desc "|"
+      :tags $ #{} :macro
+      :desc "|thread macro for nested functions, argument at tail"
       :snippets $ []
-        quote $ do
+        quote $ ->> a (b) (c d)
     {}
       :name |cond
-      :tags $ #{} :gen :macro
-      :desc "|"
+      :tags $ #{} :macro
+      :desc "|like Clojure cond, but using `true` for else case"
       :snippets $ []
-        quote $ do
+        quote $ cond
+          (> a 10) |>10
+          (> a 1) |>1
+          true |false
     {}
       :name |case
-      :tags $ #{} :gen :macro
-      :desc "|"
+      :tags $ #{} :macro
+      :desc "|like Clojure case, but using value itself for else case"
       :snippets $ []
-        quote $ do
+        quote $ case a
+          :a |a
+          :b |b
+          a |else
     {}
       :name |get-in
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{}
+      :desc "|like Clojure get-in function, read property recursively"
       :snippets $ []
-        quote $ do
+        quote $ get data $ [] :a 1
     {}
       :name |&max
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{} :number
+      :desc "|native implemention of max, takes 2 arguments"
       :snippets $ []
-        quote $ do
+        quote $ &max 1 2
     {}
       :name |&min
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{} :number
+      :desc "|native implemention of min, takes 2 arguments"
       :snippets $ []
-        quote $ do
+        quote $ &min 1 2
     {}
       :name |max
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{} :list
+      :desc "|max function that takes a list of arguments"
       :snippets $ []
-        quote $ do
+        quote $ max $ [] 1 2 3 4
     {}
       :name |min
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{} :list
+      :desc "|max function that takes a list of arguments"
       :snippets $ []
-        quote $ do
+        quote $ min $ [] 1 2 3 4
     {}
-      :name |every?
-      :tags $ #{} :gen
-      :desc "|"
+      :name |every? :list
+      :tags $ #{}
+      :desc "|detects if every item in list satisfies function"
       :snippets $ []
-        quote $ do
+        quote $ every? (fn (x) (> x 1)) ([] 1 2 3 4)
     {}
-      :name |any?
-      :tags $ #{} :gen
-      :desc "|"
+      :name |any? :list
+      :tags $ #{}
+      :desc "|detects if any item in list satisfies function"
       :snippets $ []
-        quote $ do
+        quote $ every? (fn (x) (> x 1)) ([] 1 2 3 4)
     {}
-      :name |concat
-      :tags $ #{} :gen
-      :desc "|"
+      :name |concat :list
+      :tags $ #{}
+      :desc "|concat mutiple lists"
       :snippets $ []
-        quote $ do
+        quote $ concat ([] 1 2) ([] 3 4) ([] 5 6)
     {}
       :name |mapcat
-      :tags $ #{} :gen
-      :desc "|"
+      :tags $ #{} :list
+      :desc "|map item to list and then concat, or just flatmap"
       :snippets $ []
-        quote $ do
+        quote $ mapcat
+          fn (x) ([] x (+ x 10))
+          [] 1 2 3 4

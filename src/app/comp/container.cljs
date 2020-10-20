@@ -25,7 +25,7 @@
        cursor (or (:cursor states) [])
        state (or (:data states) {:query "", :selected-tags #{}})
        data (parse (inline "apis.cirru"))
-       current-tags #{:syntax :native :macro :gen :list :map :number}
+       current-tags #{:syntax :native :macro :list :map :number}
        visible-apis (->> (:apis data)
                          (filter
                           (fn [info]
