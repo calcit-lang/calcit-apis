@@ -18,6 +18,6 @@
   {:dev-ui "http://localhost:8100/main-fonts.css",
    :release-ui "http://cdn.tiye.me/favored-fonts/main-fonts.css",
    :cdn-url "http://cdn.tiye.me/calcit-workflow/",
-   :title "Calcit",
+   :title "APIs for calcit-runner",
    :icon "http://cdn.tiye.me/logo/mvc-works.png",
-   :storage-key "workflow"})
+   :storage-key "calcit-runner-apis"})

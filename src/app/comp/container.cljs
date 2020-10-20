@@ -25,14 +25,13 @@
        cursor (or (:cursor states) [])
        state (or (:data states) {:query "", :selected-tags #{}})
        data (parse (inline "apis.cirru"))
-       current-tags #{:syntax :native :macro :gen :list :map}
+       current-tags #{:syntax :native :macro :gen :list :map :number}
        visible-apis (->> (:apis data)
                          (filter
                           (fn [info]
                             (and (or (empty? (:selected-tags state))
                                      (->> (:selected-tags state)
-                                          (every?
-                                           (fn [x] (contains? (into #{} (:tags info)) x)))))
+                                          (every? (fn [x] (contains? (:tags info) x)))))
                                  (string/includes? (:name info) (:query state))))))]
    (div
     {:style (merge ui/global ui/fullscreen ui/row {:background-color (hsl 0 0 96)})}
@@ -40,7 +39,10 @@
      {:style (merge
               ui/expand
               ui/column
-              {:max-width 800, :margin "0 auto", :background-color :white, :padding 40})}
+              {:max-width 800,
+               :margin "0 auto",
+               :background-color :white,
+               :padding "40px 20px"})}
      (div
       {:style ui/row-middle}
       (input
@@ -96,9 +98,12 @@
             (fn [info]
               [(:name info)
                (div
-                {:style {:border-bottom (str "1px solid " (hsl 0 0 93)),
-                         :margin "4px",
-                         :padding "4px 0"}}
+                {:style (merge
+                         {:border-bottom (str "1px solid " (hsl 0 0 93)),
+                          :margin "4px",
+                          :padding "4px 4px"}
+                         (if (:wip? info)
+                           {:color (hsl 0 0 80), :border-left (str "8px solid " (hsl 0 0 90))}))}
                 (div
                  {}
                  (<> (:name info) {:font-family ui/font-code})
