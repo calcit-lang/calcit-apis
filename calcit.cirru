@@ -197,7 +197,6 @@
                           |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1603121284057)
                             :data $ {}
                               |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1603121307030) (:text |#{})
-                              |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1603121289123) (:text |:gen)
                               |b $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1603121291692) (:text |:macro)
                               |X $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1603121293545) (:text |:syntax)
                               |r $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1603121297355) (:text |:list)
