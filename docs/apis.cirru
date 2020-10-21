@@ -232,11 +232,17 @@
       :snippets $ []
         quote $ write-file |demo.md "|some content"
     {}
-      :name |load-json
+      :name |parse-json
       :tags $ #{} :native
-      :desc "|loads JSON string into data"
+      :desc "|parse JSON string into Cirru data"
       :snippets $ []
-        quote $ load-json |demo.json
+        quote $ parse-json "{a: [1, 2]}"
+    {}
+      :name |stringify-json
+      :tags $ #{} :native
+      :desc "|stringify Cirru data into JSON string"
+      :snippets $ []
+        quote $ stringify-json $ {} (:a ([] 1 2))
     {}
       :name |macroexpand
       :tags $ #{} :native
@@ -432,12 +438,12 @@
       :snippets $ []
         quote $ &str-concat |a |b
     {}
-      :name |load-cirru-edn
+      :name |parse-cirru-edn
       :tags $ #{} :native
       :wip? true
-      :desc "|load data from Cirru EDN format, from a relative file path"
+      :desc "|parse data from Cirru EDN format"
       :snippets $ []
-        quote $ load-cirru-edn |demo.cirru
+        quote $ parse-cirru-edn "{} (:a 1)"
     {}
       :name |sqrt
       :tags $ #{} :native
