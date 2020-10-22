@@ -11,11 +11,58 @@
             [app.config :refer [dev?]]
             [shadow.resource :refer [inline]]
             [cirru-edn.core :refer [parse]]
-            [clojure.string :as string])
+            [clojure.string :as string]
+            [respo-md.comp.md :refer [comp-md]]
+            [calcit-theme.comp.expr :refer [render-expr]])
   (:require-macros [clojure.core.strint :refer [<<]]))
 
-(defn list-style [xs]
-  (if (string? xs) xs (str "(" (->> xs (map list-style) (string/join " ")) ")")))
+(defcomp
+ comp-cirru-ui-switcher
+ (state cursor)
+ (div
+  {:style {:cursor :pointer,
+           :font-family ui/font-fancy,
+           :color (hsl 200 80 70),
+           :font-weight 300},
+   :on-click (fn [e d!] (d! cursor (update state :cirru-ui? not)))}
+  (<> "Toggle Cirru")))
+
+(defcomp
+ comp-tags-list
+ (state cursor)
+ (list->
+  {}
+  (->> [:list :map :number :set :syntax :macro :native]
+       (map
+        (fn [tag]
+          [tag
+           (div
+            {:style (merge
+                     {:display :inline-block,
+                      :background-color (hsl 200 80 84),
+                      :margin "4px 4px",
+                      :padding "0 4px",
+                      :color (hsl 0 0 100),
+                      :border-radius "4px",
+                      :cursor :pointer,
+                      :line-height "22px"}
+                     (if (contains? (:selected-tags state) tag)
+                       {:background-color (hsl 200 80 60)})),
+             :on-click (fn [e d!]
+               (d!
+                cursor
+                (assoc
+                 state
+                 :selected-tags
+                 (if (contains? (:selected-tags state) tag)
+                   (disj (:selected-tags state) tag)
+                   (conj (:selected-tags state) tag)))))}
+            (<> (name tag)))])))))
+
+(defn lisp-style [xs]
+  (if (string? xs)
+    (if (re-find #"[\s\"]" xs) (js/JSON.stringify xs) xs)
+    (str "(" (->> xs (map lisp-style) (string/join " ")) ")")))
 
 (defcomp
  comp-container
@@ -23,9 +70,8 @@
  (let [store (:store reel)
        states (:states store)
        cursor (or (:cursor states) [])
-       state (or (:data states) {:query "", :selected-tags #{}})
+       state (or (:data states) {:query "", :selected-tags #{}, :cirru-ui? false})
        data (parse (inline "apis.cirru"))
-       current-tags #{:syntax :native :macro :list :map :number}
        visible-apis (->> (:apis data)
                          (filter
                           (fn [info]
@@ -51,38 +97,9 @@
         :placeholder "search",
         :on-input (fn [e d!] (d! cursor (assoc state :query (:value e))))})
       (=< 8 nil)
-      (list->
-       {}
-       (->> current-tags
-            (map
-             (fn [tag]
-               [tag
-                (div
-                 {:style (merge
-                          {:display :inline-block,
-                           :background-color (hsl 200 80 84),
-                           :margin "4px 4px",
-                           :padding "0 4px",
-                           :color (hsl 0 0 100),
-                           :border-radius "6px",
-                           :cursor :pointer}
-                          (if (contains? (:selected-tags state) tag)
-                            {:background-color (hsl 200 80 60)})),
-                  :on-click (fn [e d!]
-                    (if (contains? (:selected-tags state) tag)
-                      (d!
-                       cursor
-                       (assoc
-                        state
-                        :selected-tags
-                        (disj (or (:selected-tags state) #{}) tag)))
-                      (d!
-                       cursor
-                       (assoc
-                        state
-                        :selected-tags
-                        (conj (or (:selected-tags state) #{}) tag)))))}
-                 (<> (name tag)))])))))
+      (comp-tags-list state cursor)
+      (=< 8 nil)
+      (comp-cirru-ui-switcher state cursor))
      (=< nil 8)
      (div
       {}
@@ -108,16 +125,24 @@
                  {}
                  (<> (:name info) {:font-family ui/font-code})
                  (=< 8 nil)
-                 (<> (or (:desc info) "TODO") {:color (hsl 0 0 70)}))
+                 (span
+                  {:style {:color (hsl 0 0 70)}, :class-name "md-span"}
+                  (comp-md (or (:desc info) "TODO"))))
                 (list->
                  {:style {:margin-left 20}}
                  (->> (:snippets info)
                       (map-indexed
                        (fn [idx snippet]
                          [idx
-                          (<>
-                           (if (vector? snippet)
-                             (list-style snippet)
-                             (list-style (:code snippet)))
-                           {:font-family ui/font-code})])))))])))))
+                          (div
+                           {}
+                           (if (:cirru-ui? state)
+                             (div
+                              {:style {:background-color :black}}
+                              (render-expr (if (vector? snippet) snippet (:code snippet))))
+                             (<>
+                              (if (vector? snippet)
+                                (lisp-style snippet)
+                                (lisp-style (:code snippet)))
+                              {:font-family ui/font-code})))])))))])))))
     (when dev? (comp-reel (>> states :reel) reel {})))))
