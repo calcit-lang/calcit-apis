@@ -119,49 +119,49 @@
         quote $ assert "|x > 0" (> x 0)
     {}
       :name |&+
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|native add function which adds 2 numbers"
       :snippets $ []
         quote $ &+ 1 2
     {}
       :name |&-
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|native add function which substracts one number from another"
       :snippets $ []
         quote $ &+ 2 1
     {}
       :name |&*
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|native add function which multiples 2 numbers"
       :snippets $ []
         quote $ &* 2 3
     {}
       :name |&/
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|native add function which divide one number by another"
       :snippets $ []
         quote $ &+ 10 2
     {}
       :name |mod
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|function for get a reminder value"
       :snippets $ []
         quote $ = 2 $ mod 5 3
     {}
       :name |&<
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|native `<` function for 2 numbers"
       :snippets $ []
         quote $ &< 2 3
     {}
       :name |&>
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|native `>` function for 2 numbers"
       :snippets $ []
         quote $ &> 3 2
     {}
       :name |&=
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|native `=` function for 2 numbers"
       :snippets $ []
         quote $ &= 2 (+ 1 1)
@@ -179,20 +179,20 @@
         quote $ &or false true
     {}
       :name |not
-      :tags $ #{} :native
+      :tags $ #{} :native :bool
       :desc "|just `not`"
       :snippets $ []
         quote $ not true
     {}
       :name |count
-      :tags $ #{} :native
+      :tags $ #{} :native :map
       :desc "|just `count`"
       :snippets $ []
         quote $ count $ []
         quote $ count $ {}
     {}
       :name |get
-      :tags $ #{} :native
+      :tags $ #{} :native :map :list
       :desc "|like Clojure `get`"
       :snippets $ []
         quote $ get ([] 1 2 3) 1
@@ -203,7 +203,7 @@
           , :a
     {}
       :name |rest
-      :tags $ #{} :native
+      :tags $ #{} :native :list
       :desc "|slice list without first item, return empty list if `nil`"
       :snippets $ []
         quote $ rest $ [] 1 2 3 4
@@ -221,31 +221,31 @@
         quote $ type-of a
     {}
       :name |read-file
-      :tags $ #{} :native
+      :tags $ #{} :native :io
       :desc "|read string from a relative file path"
       :snippets $ []
         quote $ read-file |demo.md
     {}
-      :name |write-file
+      :name |write-file :io
       :tags $ #{} :native
       :desc "|write string content to a relative file path"
       :snippets $ []
         quote $ write-file |demo.md "|some content"
     {}
       :name |parse-json
-      :tags $ #{} :native
+      :tags $ #{} :native :json
       :desc "|parse JSON string into Cirru data"
       :snippets $ []
         quote $ parse-json "{a: [1, 2]}"
     {}
       :name |stringify-json
-      :tags $ #{} :native
+      :tags $ #{} :native :json
       :desc "|stringify Cirru data into JSON string"
       :snippets $ []
         quote $ stringify-json $ {} (:a ([] 1 2))
     {}
       :name |macroexpand
-      :tags $ #{} :native
+      :tags $ #{} :native :macro
       :desc "|expand quoted data for debugging purpose, notice that quote is required"
       :snippets $ []
         quote $ macroexpand $ quote $ when true 1 2 3
@@ -288,7 +288,8 @@
         quote $ first $ [] 1 2 3 4
     {}
       :name |empty?
-      :tags $ #{} :native
+      :tags $ #{} :native :list :map :set
+      :wip? true
       :desc "|detects empty list or map, returns `true` for `nil`"
       :snippets $ []
         quote $ empty? nil
@@ -296,19 +297,19 @@
         quote $ empty? $ {}
     {}
       :name |last
-      :tags $ #{} :native
+      :tags $ #{} :native :list
       :desc "|return last item of list"
       :snippets $ []
         quote $ last $ [] 1 2 3 4
     {}
       :name |butlast
-      :tags $ #{} :native
+      :tags $ #{} :native :list
       :desc "|slice list without last item, return empty list if `nil`"
       :snippets $ []
         quote $ butlast $ [] 1 2 3 4
     {}
       :name |reverse
-      :tags $ #{} :native
+      :tags $ #{} :native :list
       :desc "|return a list with order reversed"
       :snippets $ []
         quote $ reverse $ [] 1 2 3 4
@@ -336,13 +337,13 @@
         quote $ turn-keyword 'k
     {}
       :name |identical?
-      :tags $ #{} :native
+      :tags $ #{} :native :list :map
       :desc "|detects if items share the same pointer, mainly for lists and maps"
       :snippets $ []
         quote $ identical? a b
     {}
       :name |range
-      :tags $ #{} :native
+      :tags $ #{} :native :list
       :desc "|return a list of ranged numbers"
       :snippets $ []
         quote $ range 10
@@ -350,7 +351,7 @@
         quote $ range 1 10 2
     {}
       :name |slice
-      :tags $ #{} :native
+      :tags $ #{} :native :list
       :desc "|return a slice of list, item at last index is not included"
       :snippets $ []
         quote $ slice ([] 1 2 3 4) 1 2
@@ -362,7 +363,7 @@
         quote $ &concat ([] 1 2) ([] 3 4)
     {}
       :name |format-ternary-tree
-      :tags $ #{} :native
+      :tags $ #{} :native :list :map
       :desc "|disply string form of internal ternary tree structure"
       :snippets $ []
         quote $ format-ternary-tree $ [] 1 2 3 4 5 6
@@ -372,7 +373,7 @@
           :c 3
     {}
       :name |merge
-      :tags $ #{} :native
+      :tags $ #{} :native :map
       :desc "|merge multiple lists"
       :snippets $ []
         quote $ merge
@@ -380,26 +381,26 @@
           {} (:b 2)
     {}
       :name |contains?
-      :tags $ #{} :native
+      :tags $ #{} :native :map :set
       :wip? true
       :desc "|check if key is contained in map, should work for sets as well"
       :snippets $ []
         quote $ contains? ({} (:a 1) (:b 2)) :a
     {}
       :name |assoc-before
-      :tags $ #{} :native
+      :tags $ #{} :native :list
       :desc "|returns a list with new item associated before specified index"
       :snippets $ []
         quote $ assoc-before ([] 1 2 3) 1 10
     {}
       :name |assoc-after
-      :tags $ #{} :native
+      :tags $ #{} :native :list
       :desc "|returns a list with new item associated after specified index"
       :snippets $ []
         quote $ assoc-after ([] 1 2 3) 1 10
     {}
       :name |keys
-      :tags $ #{} :native
+      :tags $ #{} :native :map
       :desc "|returns a list of keys of a map"
       :snippets $ []
         quote $ keys $ {} (:a 1) (:b 2)
@@ -412,7 +413,7 @@
         quote $ assoc ({} (:a 1) (:b 2)) :c 10
     {}
       :name |dissoc
-      :tags $ #{} :native
+      :tags $ #{} :native :map
       :desc "|returns a list with a key dissociated"
       :snippets $ []
         quote $ dissoc ({} (:a 1) (:b 2)) :a
@@ -443,43 +444,43 @@
         quote $ parse-cirru-edn "{} (:a 1)"
     {}
       :name |sqrt
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|square root of number"
       :snippets $ []
         quote $ sqrt 9
     {}
       :name |ceil
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|ceil of a float"
       :snippets $ []
         quote $ ceil 1.1
     {}
       :name |floor
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|floor of a float"
       :snippets $ []
         quote $ floor 1.1
     {}
       :name |sin
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|sin of a number"
       :snippets $ []
         quote $ sin 0.1
     {}
       :name |cos
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|cos of a number"
       :snippets $ []
         quote $ cos 0.1
     {}
       :name |round
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|round a float number"
       :snippets $ []
         quote $ round 1.1
     {}
       :name |pow
-      :tags $ #{} :native
+      :tags $ #{} :native :number
       :desc "|power of a number"
       :snippets $ []
         quote $ pow 2 2
@@ -521,7 +522,7 @@
         quote $ &intersection (#{} 1 2) (#{} 2 3)
     {}
       :name |recur
-      :tags $ #{} :native
+      :tags $ #{} :native :syntax
       :desc "|operator for tail recursion, can be used in a function or a loop"
       :snippets $ []
         quote $ defn f (acc n)
@@ -536,7 +537,7 @@
             , acc
     {}
       :name |foldl
-      :tags $ #{} :native
+      :tags $ #{} :native :list
       :desc "|Haskell's foldl function, implemented i Nim for performance"
       :snippets $ []
         quote $ foldl + acc 0
@@ -561,7 +562,7 @@
         quote $ >= 2 1
     {}
       :name |when
-      :tags $ #{}
+      :tags $ #{} :macro
       :desc "|if with no false branch"
       :snippets $ []
         quote $ when true
@@ -595,7 +596,7 @@
         quote $ / 12 3 4
     {}
       :name |foldl-compare
-      :tags $ #{}
+      :tags $ #{} :list
       :desc "|internal function for generation comparing functions"
       :snippets $ []
         quote $ foldl-compare &< ([] 2 3 4) 1
@@ -631,7 +632,7 @@
         quote $ >= 4 3 2
     {}
       :name |<=
-      :tags $ #{}
+      :tags $ #{} :number
       :desc "|compare multiple numbers"
       :snippets $ []
         quote $ <= 2 3 4
@@ -698,20 +699,20 @@
           echo x
     {}
       :name |map
-      :tags $ #{}
+      :tags $ #{} :list
       :desc "|map items of list into a new list"
       :snippets $ []
         quote $ map ([] 1 2 3 4) $ fn (x)
           + x 1
     {}
       :name |take
-      :tags $ #{}
+      :tags $ #{} :list
       :desc "|take n items from list"
       :snippets $ []
         quote $ take 2 $ [] 1 2 3 4 5
     {}
       :name |drop
-      :tags $ #{}
+      :tags $ #{} :list
       :desc "|take items of a list except for first n items"
       :snippets $ []
         quote $ drop 2 $ [] 1 2 3 4 5
@@ -729,19 +730,19 @@
         quote $ include (#{} 1 2) 3 4
     {}
       :name |exclude
-      :tags $ #{}
+      :tags $ #{} :set
       :desc "|exclude multiple items from hashset"
       :snippets $ []
         quote $ exclude (#{} 1 2 3 4) 1 2
     {}
       :name |difference
-      :tags $ #{}
+      :tags $ #{} :set
       :desc "|return a difference hashset of 2 hashsets"
       :snippets $ []
         quote $ difference (#{} 1 2 3 4) (#{} 1 2) (#{} 3)
     {}
       :name |union
-      :tags $ #{}
+      :tags $ #{} :set
       :desc "|return a union hashset of 2 hashsets"
       :snippets $ []
         quote $ union (#{} 1 2) (#{} 3 4) (#{} 5 6)
@@ -753,7 +754,7 @@
         quote $ intersection (#{} 1 2 3) (#{} 2 3 4) (#{} 3 4 5)
     {}
       :name |&index-of
-      :tags $ #{}
+      :tags $ #{} :list
       :desc "|helper function for index-of"
       :snippets $ []
         quote $ index-of ([] 1 2 3 4) 1
@@ -765,7 +766,7 @@
         quote $ index-of ([] 1 2 3 4) 1
     {}
       :name |&find-index
-      :tags $ #{}
+      :tags $ #{} :list
       :desc "|helper function for find-index"
       :snippets $ []
         quote $ find-index ([] 1 2 3 4) $ fn (x) (> x 2)
@@ -813,7 +814,7 @@
           a |else
     {}
       :name |get-in
-      :tags $ #{}
+      :tags $ #{} :list :map
       :desc "|like Clojure get-in function, read property recursively"
       :snippets $ []
         quote $ get data $ [] :a 1
@@ -867,3 +868,7 @@
         quote $ mapcat
           fn (x) ([] x (+ x 10))
           [] 1 2 3 4
+    {}
+      :name |group
+      :tags $ #{} :list
+      :desc "|take a list, return grouped result with a map"
