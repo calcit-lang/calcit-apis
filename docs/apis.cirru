@@ -233,13 +233,13 @@
         quote $ write-file |demo.md "|some content"
     {}
       :name |parse-json
-      :tags $ #{} :native :json
+      :tags $ #{} :native :json :string
       :desc "|parse JSON string into Cirru data"
       :snippets $ []
         quote $ parse-json "{a: [1, 2]}"
     {}
       :name |stringify-json
-      :tags $ #{} :native :json
+      :tags $ #{} :native :json :string
       :desc "|stringify Cirru data into JSON string"
       :snippets $ []
         quote $ stringify-json $ {} (:a ([] 1 2))
@@ -264,7 +264,7 @@
     {}
       :name |pr-str
       :wip? true
-      :tags $ #{} :native
+      :tags $ #{} :native :string
       :desc "|displays values with more details, string being escaped"
       :snippets $ []
         quote $ pr-str 1 2 3
@@ -405,6 +405,13 @@
       :snippets $ []
         quote $ keys $ {} (:a 1) (:b 2)
     {}
+      :name |vals
+      :wip? true
+      :tags $ #{} :native :map
+      :desc "|returns a list of values of a map"
+      :snippets $ []
+        quote $ vals $ {} (:a 1) (:b 2)
+    {}
       :name |assoc
       :tags $ #{} :native :list :map
       :desc "|returns a list with new item or key/value associated"
@@ -419,20 +426,20 @@
         quote $ dissoc ({} (:a 1) (:b 2)) :a
     {}
       :name |&str
-      :tags $ #{} :native
+      :tags $ #{} :native :string
       :desc "|turn a single item into string"
       :snippets $ []
         quote $ &str 1
         quote $ = |keyword $ &str :keyword
     {}
       :name |escape
-      :tags $ #{} :native
+      :tags $ #{} :native :string
       :desc "|string escaping"
       :snippets $ []
         quote $ escape "|a b"
     {}
       :name |&str-concat
-      :tags $ #{} :native
+      :tags $ #{} :native :string
       :desc "|concat 2 strings"
       :snippets $ []
         quote $ &str-concat |a |b
@@ -869,6 +876,114 @@
           fn (x) ([] x (+ x 10))
           [] 1 2 3 4
     {}
-      :name |group
+      :name |group-by
       :tags $ #{} :list
       :desc "|take a list, return grouped result with a map"
+      :snippets $ []
+        quote $ group-by
+          fn (x) (mod x 3)
+          range 10
+    {}
+      :name |identity
+      :wip? true
+      :tags $ #{}
+      :desc "|takes an item and just return it"
+      :snippets $ []
+        quote $ map identity (range 10)
+    {}
+      :name |filter
+      :wip? true
+      :tags $ #{} :list
+      :desc "|filter a list with a function"
+      :snippets $ []
+        quote $ filter (fn (x) (> n 5)) (range 10)
+    {}
+      :name |filter-not
+      :wip? true
+      :tags $ #{} :list
+      :desc "|filter a list with a function with false return"
+      :snippets $ []
+        quote $ filter (fn (x) (> n 5)) (range 10)
+    {}
+      :name |zipmap
+      :wip? true
+      :tags $ #{} :list
+      :desc "|create a map with two lists, one for keys and one for values"
+      :snippets $ []
+        quote $ zipmap
+          [] :a :b :c :d
+          [] 1 2 3 4
+    {}
+      :name |pair-map
+      :wip? true
+      :tags $ #{} :list
+      :desc "|create a map from a list of pairs"
+      :snippets $ []
+        quote $ pair-map
+          [] :a 1
+          [] :b 2
+    {}
+      :name |rand
+      :wip? true
+      :tags $ #{} :name
+      :desc "|generates a random float number in a area"
+      :snippets $ []
+        quote $ rand 10
+        quote $ rand -10 10
+    {}
+      :name |map-indexed
+      :wip? true
+      :tags $ #{} :name
+      :desc "|map with index parameter"
+      :snippets $ []
+        quote $ map-indexed (fn (idx x) idx) (range 10)
+    {}
+      :name |join-string
+      :wip? true
+      :tags $ #{} :string :list
+      :desc "|join segments into a string"
+      :snippets $ []
+        quote $ join-string |, $ [] 1 2 3 4
+    {}
+      :name |split
+      :wip? true
+      :tags $ #{} :string
+      :desc "|split string into a list of segments"
+      :snippets $ []
+        quote $ split |1,2,3,4 |,
+    {}
+      :name |replace
+      :wip? true
+      :tags $ #{} :string
+      :desc "|replace segments in a string"
+      :snippets $ []
+        quote $ replace "|looks good" |good |bad
+    {}
+      :name |assoc-in
+      :wip? true
+      :tags $ #{}
+      :desc "|associate data deep in a structure"
+      :snippets $ []
+        quote $ assoc-in data ([] :a 1) 2
+    {}
+      :name |update-in
+      :wip? true
+      :tags $ #{}
+      :desc "|update data deep in a structure"
+      :snippets $ []
+        quote $ update-in data ([] :a 1) (fn (x) (x + 1))
+    {}
+      :name |dissoc-in
+      :wip? true
+      :tags $ #{}
+      :desc "|dissociate data deep in a structure"
+      :snippets $ []
+        quote $ dissoc-in data ([] :a 1)
+    {}
+      :name |\
+      :wip? true
+      :tags $ #{} :macro
+      :desc "|alias for an anounymous function, use `%` for argument"
+      :snippets $ []
+        quote $ map (\ + x 1) (range 10)
+        quote $ map-indexed (\ [] % %2) (range 10)
