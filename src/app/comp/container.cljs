@@ -16,6 +16,44 @@
             [calcit-theme.comp.expr :refer [render-expr]])
   (:require-macros [clojure.core.strint :refer [<<]]))
 
+(defn lisp-style [xs]
+  (if (string? xs)
+    (if (re-find #"[\s\"]" xs) (js/JSON.stringify xs) xs)
+    (str "(" (->> xs (map lisp-style) (string/join " ")) ")")))
+
+(defcomp
+ comp-api-entry
+ (info cirru-ui?)
+ (div
+  {:style (merge
+           {:border-bottom (str "1px solid " (hsl 0 0 93)),
+            :margin "4px",
+            :padding "4px 4px"}
+           (if (:wip? info)
+             {:color (hsl 0 0 80), :border-left (str "8px solid " (hsl 0 0 90))}))}
+  (div
+   {}
+   (<> (:name info) {:font-family ui/font-code})
+   (=< 8 nil)
+   (span
+    {:style {:color (hsl 0 0 70)}, :class-name "md-span"}
+    (comp-md (or (:desc info) "TODO"))))
+  (list->
+   {:style {:margin-left 20}}
+   (->> (:snippets info)
+        (map-indexed
+         (fn [idx snippet]
+           [idx
+            (div
+             {}
+             (if cirru-ui?
+               (div
+                {:style {:background-color :black}}
+                (render-expr (if (vector? snippet) snippet (:code snippet))))
+               (<>
+                (if (vector? snippet) (lisp-style snippet) (lisp-style (:code snippet)))
+                {:font-family ui/font-code})))]))))))
+
 (defcomp
  comp-cirru-ui-switcher
  (state cursor)
@@ -25,14 +63,14 @@
            :color (hsl 200 80 70),
            :font-weight 300},
    :on-click (fn [e d!] (d! cursor (update state :cirru-ui? not)))}
-  (<> "Toggle Cirru")))
+  (<> "Text/Cirru")))
 
 (defcomp
  comp-tags-list
  (state cursor)
  (list->
   {}
-  (->> [:list :map :number :set :syntax :macro :native]
+  (->> [:list :map :number :string :set :syntax :macro :native]
        (map
         (fn [tag]
           [tag
@@ -59,10 +97,16 @@
                    (conj (:selected-tags state) tag)))))}
             (<> (name tag)))])))))
 
-(defn lisp-style [xs]
-  (if (string? xs)
-    (if (re-find #"[\s\"]" xs) (js/JSON.stringify xs) xs)
-    (str "(" (->> xs (map lisp-style) (string/join " ")) ")")))
+(defcomp
+ comp-wip-switcher
+ (state cursor)
+ (div
+  {:style {:font-family ui/font-fancy,
+           :color (hsl 200 80 70),
+           :font-weight 300,
+           :cursor :pointer},
+   :on-click (fn [e d!] (d! cursor (update state :wip? not)))}
+  (<> "All/WIP")))
 
 (defcomp
  comp-container
@@ -70,12 +114,14 @@
  (let [store (:store reel)
        states (:states store)
        cursor (or (:cursor states) [])
-       state (or (:data states) {:query "", :selected-tags #{}, :cirru-ui? false})
+       state (or (:data states)
+                 {:query "", :selected-tags #{}, :cirru-ui? false, :wip? false})
        data (parse (inline "apis.cirru"))
        visible-apis (->> (:apis data)
                          (filter
                           (fn [info]
-                            (and (or (empty? (:selected-tags state))
+                            (and (if (:wip? state) (:wip? info) true)
+                                 (or (empty? (:selected-tags state))
                                      (->> (:selected-tags state)
                                           (every? (fn [x] (contains? (:tags info) x)))))
                                  (string/includes? (:name info) (:query state))))))]
@@ -88,7 +134,9 @@
               {:max-width 800,
                :margin "0 auto",
                :background-color :white,
-               :padding "40px 20px"})}
+               :padding "20px 20px"})}
+     (comp-tags-list state cursor)
+     (=< nil 8)
      (div
       {:style ui/row-middle}
       (input
@@ -97,9 +145,9 @@
         :placeholder "search",
         :on-input (fn [e d!] (d! cursor (assoc state :query (:value e))))})
       (=< 8 nil)
-      (comp-tags-list state cursor)
-      (=< 8 nil)
-      (comp-cirru-ui-switcher state cursor))
+      (comp-cirru-ui-switcher state cursor)
+      (=< 12 nil)
+      (comp-wip-switcher state cursor))
      (=< nil 8)
      (div
       {}
@@ -111,38 +159,5 @@
       {:style ui/expand}
       (->> visible-apis
            (sort-by (fn [info] (:name info)))
-           (map
-            (fn [info]
-              [(:name info)
-               (div
-                {:style (merge
-                         {:border-bottom (str "1px solid " (hsl 0 0 93)),
-                          :margin "4px",
-                          :padding "4px 4px"}
-                         (if (:wip? info)
-                           {:color (hsl 0 0 80), :border-left (str "8px solid " (hsl 0 0 90))}))}
-                (div
-                 {}
-                 (<> (:name info) {:font-family ui/font-code})
-                 (=< 8 nil)
-                 (span
-                  {:style {:color (hsl 0 0 70)}, :class-name "md-span"}
-                  (comp-md (or (:desc info) "TODO"))))
-                (list->
-                 {:style {:margin-left 20}}
-                 (->> (:snippets info)
-                      (map-indexed
-                       (fn [idx snippet]
-                         [idx
-                          (div
-                           {}
-                           (if (:cirru-ui? state)
-                             (div
-                              {:style {:background-color :black}}
-                              (render-expr (if (vector? snippet) snippet (:code snippet))))
-                             (<>
-                              (if (vector? snippet)
-                                (lisp-style snippet)
-                                (lisp-style (:code snippet)))
-                              {:font-family ui/font-code})))])))))])))))
+           (map (fn [info] [(:name info) (comp-api-entry info (:cirru-ui? state))])))))
     (when dev? (comp-reel (>> states :reel) reel {})))))
