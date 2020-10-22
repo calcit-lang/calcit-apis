@@ -877,6 +877,7 @@
           [] 1 2 3 4
     {}
       :name |group-by
+      :wip? true
       :tags $ #{} :list
       :desc "|take a list, return grouped result with a map"
       :snippets $ []
@@ -885,28 +886,24 @@
           range 10
     {}
       :name |identity
-      :wip? true
       :tags $ #{}
       :desc "|takes an item and just return it"
       :snippets $ []
         quote $ map identity (range 10)
     {}
       :name |filter
-      :wip? true
       :tags $ #{} :list
       :desc "|filter a list with a function"
       :snippets $ []
         quote $ filter (fn (x) (> n 5)) (range 10)
     {}
       :name |filter-not
-      :wip? true
       :tags $ #{} :list
       :desc "|filter a list with a function with false return"
       :snippets $ []
         quote $ filter (fn (x) (> n 5)) (range 10)
     {}
       :name |zipmap
-      :wip? true
       :tags $ #{} :list
       :desc "|create a map with two lists, one for keys and one for values"
       :snippets $ []
@@ -915,7 +912,6 @@
           [] 1 2 3 4
     {}
       :name |pair-map
-      :wip? true
       :tags $ #{} :list
       :desc "|create a map from a list of pairs"
       :snippets $ []
@@ -932,7 +928,6 @@
         quote $ rand -10 10
     {}
       :name |map-indexed
-      :wip? true
       :tags $ #{} :name
       :desc "|map with index parameter"
       :snippets $ []
