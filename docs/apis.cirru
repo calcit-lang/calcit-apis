@@ -335,8 +335,7 @@
         quote $ turn-keyword |k
         quote $ turn-keyword 'k
     {}
-      :name |identical
-      :wip? true
+      :name |identical?
       :tags $ #{} :native
       :desc "|detects if items share the same pointer, mainly for lists and maps"
       :snippets $ []
@@ -373,7 +372,6 @@
           :c 3
     {}
       :name |merge
-      :wip? true
       :tags $ #{} :native
       :desc "|merge multiple lists"
       :snippets $ []
@@ -440,7 +438,6 @@
     {}
       :name |parse-cirru-edn
       :tags $ #{} :native
-      :wip? true
       :desc "|parse data from Cirru EDN format"
       :snippets $ []
         quote $ parse-cirru-edn "{} (:a 1)"
@@ -551,13 +548,6 @@
         quote $ unless false |false |true
         quote $ unless false |false
     {}
-      :name |&!=
-      :wip? true
-      :tags $ #{}
-      :desc "|native implemention of not equalify, of 2 arguments. might be `/=` in future"
-      :snippets $ []
-        quote $ != 1 2
-    {}
       :name |&<=
       :tags $ #{} :number
       :desc "|native implemention of <=, of 2 arguments"
@@ -628,12 +618,11 @@
       :snippets $ []
         quote $ = 1 (- 2 1) (- 4 3)
     {}
-      :name |!=
-      :wip? true
+      :name |/=
       :tags $ #{}
-      :desc "|compare multiple numbers"
+      :desc "|compare 2 numbers"
       :snippets $ []
-        quote $ != 1 2 3 4
+        quote $ /= 1 2
     {}
       :name |>=
       :tags $ #{} :number
