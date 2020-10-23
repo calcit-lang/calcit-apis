@@ -19,5 +19,5 @@
    :release-ui "http://cdn.tiye.me/favored-fonts/main-fonts.css",
    :cdn-url "http://cdn.tiye.me/calcit-workflow/",
    :title "APIs for calcit-runner",
-   :icon "http://cdn.tiye.me/logo/mvc-works.png",
+   :icon "http://cdn.tiye.me/logo/cirru.png",
    :storage-key "calcit-runner-apis"})

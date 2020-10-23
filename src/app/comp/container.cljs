@@ -48,7 +48,7 @@
              {}
              (if cirru-ui?
                (div
-                {:style {:background-color :black}}
+                {:style {:background-color :black, :padding "4px 0"}}
                 (render-expr (if (vector? snippet) snippet (:code snippet))))
                (<>
                 (if (vector? snippet) (lisp-style snippet) (lisp-style (:code snippet)))
