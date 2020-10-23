@@ -698,6 +698,12 @@
       :snippets $ []
         quote $ nil? nil
     {}
+      :name |some?
+      :tags $ #{}
+      :desc "|detects something not nil"
+      :snippets $ []
+        quote $ some? 1
+    {}
       :name |each
       :tags $ #{} :list
       :desc "|take a list and a function and call each item with function"
@@ -920,15 +926,31 @@
           [] :b 2
     {}
       :name |rand
-      :wip? true
-      :tags $ #{} :name
-      :desc "|generates a random float number in a area"
+      :tags $ #{} :number
+      :desc "|generates a random float number in a area, defaults to 100 when not specified"
       :snippets $ []
+        quote $ rand
         quote $ rand 10
         quote $ rand -10 10
     {}
+      :name |rand-int
+      :tags $ #{} :number
+      :desc "|generates a random round number in a area, defaults to 100 when not specified"
+      :snippets $ []
+        quote $ rand-int
+        quote $ rand-int 10
+        quote $ rand-int -10 10
+    {}
+      :name |rand-nth
+      :tags $ #{} :number
+      :desc "|takes a random item from a list, returns `nil` for empty list"
+      :snippets $ []
+        quote $ rand-nth
+        quote $ rand-nth 10
+        quote $ rand-nth -10 10
+    {}
       :name |map-indexed
-      :tags $ #{} :name
+      :tags $ #{} :list
       :desc "|map with index parameter"
       :snippets $ []
         quote $ map-indexed (fn (idx x) idx) (range 10)
