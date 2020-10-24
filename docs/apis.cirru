@@ -766,23 +766,11 @@
       :snippets $ []
         quote $ intersection (#{} 1 2 3) (#{} 2 3 4) (#{} 3 4 5)
     {}
-      :name |&index-of
-      :tags $ #{} :list
-      :desc "|helper function for index-of"
-      :snippets $ []
-        quote $ index-of ([] 1 2 3 4) 1
-    {}
       :name |index-of
       :tags $ #{} :list
       :desc "|native implemention of `indexOf` function, returns -1 when not found"
       :snippets $ []
         quote $ index-of ([] 1 2 3 4) 1
-    {}
-      :name |&find-index
-      :tags $ #{} :list
-      :desc "|helper function for find-index"
-      :snippets $ []
-        quote $ find-index ([] 1 2 3 4) $ fn (x) (> x 2)
     {}
       :name |find-index
       :tags $ #{} :list
@@ -883,7 +871,6 @@
           [] 1 2 3 4
     {}
       :name |group-by
-      :wip? true
       :tags $ #{} :list
       :desc "|take a list, return grouped result with a map"
       :snippets $ []
@@ -983,6 +970,13 @@
       :snippets $ []
         quote $ assoc-in data ([] :a 1) 2
     {}
+      :name |update
+      :tags $ #{}
+      :desc "|update map or list"
+      :snippets $ []
+        quote $ update ({} (:a 1)) :a $ \ + % 1
+        quote $ update (range 4) 1 $ \ + % 1
+    {}
       :name |update-in
       :wip? true
       :tags $ #{}
@@ -998,9 +992,20 @@
         quote $ dissoc-in data ([] :a 1)
     {}
       :name |\
-      :wip? true
       :tags $ #{} :macro
-      :desc "|alias for an anounymous function, use `%` for argument"
+      :desc "|alias for an anounymous function, use `%` and `%2` for arguments"
       :snippets $ []
         quote $ map (\ + x 1) (range 10)
         quote $ map-indexed (\ [] % %2) (range 10)
+    {}
+      :name |contains-symbol?
+      :tags $ #{}
+      :desc "|a function for detecting symbol existence in code"
+      :snippets $ []
+        quote $ contains-symbol? (quote $ + a b) 'a
+    {}
+      :name |has-index?
+      :tags $ #{} :list
+      :desc "|detects if a list has item on a index"
+      :snippets $ []
+        quote $ has-index? (range 10) 4
