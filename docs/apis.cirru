@@ -289,7 +289,6 @@
     {}
       :name |empty?
       :tags $ #{} :native :list :map :set
-      :wip? true
       :desc "|detects empty list or map, returns `true` for `nil`"
       :snippets $ []
         quote $ empty? nil
@@ -382,7 +381,6 @@
     {}
       :name |contains?
       :tags $ #{} :native :map :set
-      :wip? true
       :desc "|check if key is contained in map, should work for sets as well"
       :snippets $ []
         quote $ contains? ({} (:a 1) (:b 2)) :a
@@ -406,7 +404,6 @@
         quote $ keys $ {} (:a 1) (:b 2)
     {}
       :name |vals
-      :wip? true
       :tags $ #{} :native :map
       :desc "|returns a list of values of a map"
       :snippets $ []
@@ -950,11 +947,16 @@
         quote $ join-string |, $ [] 1 2 3 4
     {}
       :name |split
-      :wip? true
       :tags $ #{} :string
       :desc "|split string into a list of segments"
       :snippets $ []
         quote $ split |1,2,3,4 |,
+    {}
+      :name |split-lines
+      :tags $ #{} :string
+      :desc "|split lines(currently with `\n`)"
+      :snippets $ []
+        quote $ split-lines "|a\nb\nc"
     {}
       :name |replace
       :wip? true
@@ -1009,3 +1011,10 @@
       :desc "|detects if a list has item on a index"
       :snippets $ []
         quote $ has-index? (range 10) 4
+    {}
+      :name |frequency
+      :tags $ #{} :list
+      :wip? true
+      :desc "|count frequency of items in list, returns a map"
+      :snippets $ []
+        quote $ frequency $ [] 1 1 1 2 2 3
