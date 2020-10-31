@@ -695,6 +695,19 @@
       :snippets $ []
         quote $ nil? nil
     {}
+      :name |fn?
+      :tags $ #{}
+      :desc "|detects a function or a proc"
+      :snippets $ []
+        quote $ fn? $ fn () 1
+        quote $ fn? &=
+    {}
+      :name |macro?
+      :tags $ #{}
+      :desc "|detects a macro"
+      :snippets $ []
+        quote $ fn? cond
+    {}
       :name |some?
       :tags $ #{}
       :desc "|detects something not nil"
@@ -959,7 +972,6 @@
         quote $ split-lines "|a\nb\nc"
     {}
       :name |replace
-      :wip? true
       :tags $ #{} :string
       :desc "|replace segments in a string"
       :snippets $ []
@@ -1012,9 +1024,14 @@
       :snippets $ []
         quote $ has-index? (range 10) 4
     {}
-      :name |frequency
+      :name |frequencies
       :tags $ #{} :list
-      :wip? true
-      :desc "|count frequency of items in list, returns a map"
+      :desc "|count frequencies of items in list, returns a map"
       :snippets $ []
-        quote $ frequency $ [] 1 1 1 2 2 3
+        quote $ frequencies $ [] 1 1 1 2 2 3
+    {}
+      :name |to-pairs?
+      :tags $ #{} :map
+      :desc "|returns pairs of a map as a list of lists"
+      :snippets $ []
+        quote $ to-pairs $ {} (:a 1) (:b 2)
