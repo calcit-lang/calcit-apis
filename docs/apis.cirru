@@ -1035,3 +1035,17 @@
       :desc "|returns pairs of a map as a list of lists"
       :snippets $ []
         quote $ to-pairs $ {} (:a 1) (:b 2)
+    {}
+      :name |init-canvas
+      :tags $ #{} :canvas
+      :desc "|load window of Cairo, see json-paint"
+      :snippets $ []
+        quote $ init-canvas $ {} (:title "\"DEMO") (:width 800) (:height 600)
+    {}
+      :name |draw-canvas
+      :tags $ #{} :canvas
+      :desc "|draw with json-paint shapes"
+      :snippets $ []
+        quote $ draw-canvas $ {} (:type :polyline) (:from $ [] 40 40)
+          :stops $ [] ([] 100 60) ([] 200 200) ([] 600 60) ([] 500 400)
+          :stroke-color $ {} (:r 90) (:g 10) (:b 10)
