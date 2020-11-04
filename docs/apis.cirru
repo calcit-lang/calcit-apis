@@ -10,7 +10,7 @@
         quote $ defn (a $ xs) echo a xs
     {}
       :name |fn
-      :tags $ #{} :syntax
+      :tags $ #{} :macro
       :desc "|create anounymous functions"
       :snippets $ []
         quote $ defn (a b) $ + a b
@@ -73,8 +73,8 @@
         quote $ [] 1 2 3 4 (+ 1 2)
     {}
       :name |{}
-      :tags $ #{} :syntax
-      :desc "|operator for creating maps, internally it's ternary tree map"
+      :tags $ #{} :macro
+      :desc "|operator for creating maps based on `&{}`, internally it's ternary tree map"
       :snippets $ []
         quote $ {} (:a 1) (:b $ + 2 3)
     {}
@@ -1071,3 +1071,11 @@
       :desc "|help function to generate `{:type :group, :children [...]}`"
       :snippets $ []
         quote $ g ({}) a b c
+    {}
+      :name |&{}
+      :tags $ #{} :map
+      :desc "|internal function for `{}`, creating with arrays"
+      :snippets $ []
+        quote $ &{}
+          [] :a 1
+          [] :b 2
