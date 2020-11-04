@@ -1049,3 +1049,25 @@
         quote $ draw-canvas $ {} (:type :polyline) (:from $ [] 40 40)
           :stops $ [] ([] 100 60) ([] 200 200) ([] 600 60) ([] 500 400)
           :stroke-color $ {} (:r 90) (:g 10) (:b 10)
+    {}
+      :name |section-by
+      :tags $ #{} :list
+      :desc "|turn list into a list of lists of n sizes, remaining items also in a list"
+      :snippets $ []
+        quote $ =
+          section-by 3 $ range 5
+          [] ([] 0 1 2) (3 4)
+    {}
+      :name |[][]
+      :tags $ #{} :list :macro
+      :desc "|defining 2-dimensional list with fewer `[]`s"
+      :snippets $ []
+        quote $ =
+          [][] (2 3) (4 5) (6 7)
+          [] ([] 2 3) ([] 4 5) ([] 6 7)
+    {}
+      :name |g
+      :tags $ #{}
+      :desc "|help function to generate `{:type :group, :children [...]}`"
+      :snippets $ []
+        quote $ g ({}) a b c
