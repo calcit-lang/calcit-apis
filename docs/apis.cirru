@@ -1079,3 +1079,9 @@
         quote $ &{}
           [] :a 1
           [] :b 2
+    {}
+      :name |assert=
+      :tags $ #{} :macro
+      :desc "|debugging macro for comparing a value"
+      :snippets $ []
+        quote $ assert= 2 (+ x 1)
