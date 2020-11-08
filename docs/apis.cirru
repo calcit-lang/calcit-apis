@@ -1085,3 +1085,39 @@
       :desc "|debugging macro for comparing a value"
       :snippets $ []
         quote $ assert= 2 (+ x 1)
+    {}
+      :name |defatom
+      :tags $ #{} :syntax :atom
+      :desc "|creating an atom of states. it requires a name, and currently not atomic, just states"
+      :snippets $ []
+        quote $ defatom *a 1
+    {}
+      :name |deref
+      :tags $ #{} :atom
+      :desc "|grab data from atom"
+      :snippets $ []
+        quote $ deref *a
+    {}
+      :name |reset!
+      :tags $ #{} :atom
+      :desc "|update data from atom"
+      :snippets $ []
+        quote $ reset! *a 2
+    {}
+      :name |swap!
+      :tags $ #{} :atom :macro
+      :desc "|update data from atom with a function, syntax from Clojure"
+      :snippets $ []
+        quote $ reset! *a 2
+    {}
+      :name |add-watch
+      :tags $ #{} :atom
+      :desc "|add a watch function to an atom by keyword"
+      :snippets $ []
+        quote $ add-watch *a :log $ \ echo "|changed" %
+    {}
+      :name |remove-watch
+      :tags $ #{} :atom
+      :desc "|remove a watch function from an atom by keyword"
+      :snippets $ []
+        quote $ remove-watch *a :log
