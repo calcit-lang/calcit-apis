@@ -1121,3 +1121,30 @@
       :desc "|remove a watch function from an atom by keyword"
       :snippets $ []
         quote $ remove-watch *a :log
+    {}
+      :name |inc
+      :tags $ #{} :number
+      :desc "|add 1 to a number"
+      :snippets $ []
+        quote $ inc 10
+    {}
+      :name |assoc-in
+      :tags $ #{}
+      :desc "|assoc a field deep inside"
+      :snippets $ []
+        quote $ assoc-in data ([] :a :b :c) 10
+        quote $ assoc-in data ([] :a 1 2) 10
+    {}
+      :name |dissoc
+      :tags $ #{} :number
+      :desc "|dissoc a field deep inside"
+      :snippets $ []
+        quote $ dissoc-in data ([] :a :b :c)
+        quote $ dissoc-in data ([] :a 1 2)
+    {}
+      :name |update-in
+      :tags $ #{} :number
+      :desc "|update a field deep inside"
+      :snippets $ []
+        quote $ update-in data ([] :a :b :c)
+        quote $ update-in data ([] :a 1 2)
