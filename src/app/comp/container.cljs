@@ -4,7 +4,7 @@
             [respo-ui.core :as ui]
             [respo.core
              :refer
-             [defcomp defeffect <> >> div button textarea span input list->]]
+             [defcomp defeffect <> >> div button textarea span input list-> pre]]
             [respo.comp.space :refer [=<]]
             [reel.comp.reel :refer [comp-reel]]
             [respo-md.comp.md :refer [comp-md]]
@@ -13,7 +13,8 @@
             [cirru-edn.core :refer [parse]]
             [clojure.string :as string]
             [respo-md.comp.md :refer [comp-md]]
-            [calcit-theme.comp.expr :refer [render-expr]])
+            [calcit-theme.comp.expr :refer [render-expr]]
+            [cirru-writer.core :refer [write-code]])
   (:require-macros [clojure.core.strint :refer [<<]]))
 
 (defn lisp-style [xs]
@@ -22,8 +23,28 @@
     (str "(" (->> xs (map lisp-style) (string/join " ")) ")")))
 
 (defcomp
+ comp-code
+ (code syntax)
+ (div
+  {:style {:margin-bottom 8}}
+  (case syntax
+    :cirru (div {:style {:background-color :black, :padding "4px 0"}} (render-expr code))
+    :cirru-text
+      (pre
+       {:style {:font-family ui/font-code,
+                :border (str "1px solid " (hsl 0 0 94)),
+                :border-radius "4px",
+                :display :inline-block,
+                :padding "2px 8px",
+                :line-height "22px",
+                :margin "0px 0px"},
+        :innerHTML (string/trim (write-code [code]))})
+    :lisp (<> (lisp-style code) {:font-family ui/font-code})
+    (<> (str "Unknown code: " syntax)))))
+
+(defcomp
  comp-api-entry
- (info cirru-ui?)
+ (info syntax)
  (div
   {:style (merge
            {:border-bottom (str "1px solid " (hsl 0 0 93)),
@@ -44,26 +65,45 @@
         (map-indexed
          (fn [idx snippet]
            [idx
-            (div
-             {}
-             (if cirru-ui?
-               (div
-                {:style {:background-color :black, :padding "4px 0"}}
-                (render-expr (if (vector? snippet) snippet (:code snippet))))
-               (<>
-                (if (vector? snippet) (lisp-style snippet) (lisp-style (:code snippet)))
-                {:font-family ui/font-code})))]))))))
+            (let [snippet (if (vector? snippet) {:code snippet} snippet)
+                  code (:code snippet)]
+              (div
+               {}
+               (comp-code code syntax)
+               (if (and (map? snippet) (some? (:result snippet)))
+                 (div
+                  {:style ui/row}
+                  (div
+                   {:style (merge {:width 80, :text-align :center})}
+                   (<> "=>" {:color (hsl 200 80 76), :font-size 16}))
+                  (div
+                   {}
+                   (comp-code (:result snippet) syntax)
+                   (if (some? (:desc snippet)) (<> (:desc snippet) {:color (hsl 0 0 60)})))))))]))))))
 
 (defcomp
  comp-cirru-ui-switcher
  (state cursor)
- (div
-  {:style {:cursor :pointer,
-           :font-family ui/font-fancy,
-           :color (hsl 200 80 70),
-           :font-weight 300},
+ (list->
+  {:style (merge
+           ui/row-middle
+           {:cursor :pointer,
+            :font-family ui/font-fancy,
+            :color (hsl 200 80 80),
+            :font-weight 300}),
    :on-click (fn [e d!] (d! cursor (update state :cirru-ui? not)))}
-  (<> "Text/Cirru")))
+  (->> [{:value :lisp, :display "Lisp"}
+        {:value :cirru-text, :display "CirruText"}
+        {:value :cirru, :display "Cirru"}]
+       (map-indexed
+        (fn [idx item]
+          [idx
+           (div
+            {:style (merge
+                     {:margin "0 4px"}
+                     (if (= (:syntax state) (:value item)) {:color (hsl 200 90 50)})),
+             :on-click (fn [e d!] (d! cursor (assoc state :syntax (:value item))))}
+            (<> (:display item)))])))))
 
 (defcomp
  comp-tags-list
@@ -114,8 +154,7 @@
  (let [store (:store reel)
        states (:states store)
        cursor (or (:cursor states) [])
-       state (or (:data states)
-                 {:query "", :selected-tags #{}, :cirru-ui? false, :wip? false})
+       state (or (:data states) {:query "", :selected-tags #{}, :syntax :lisp, :wip? false})
        data (parse (inline "apis.cirru"))
        visible-apis (->> (:apis data)
                          (filter
@@ -138,16 +177,17 @@
      (comp-tags-list state cursor)
      (=< nil 8)
      (div
-      {:style ui/row-middle}
+      {:style ui/row-parted}
       (input
        {:style (merge ui/input {:font-family ui/font-code}),
         :value (:query state),
         :placeholder "search",
         :on-input (fn [e d!] (d! cursor (assoc state :query (:value e))))})
-      (=< 8 nil)
-      (comp-cirru-ui-switcher state cursor)
-      (=< 12 nil)
-      (comp-wip-switcher state cursor))
+      (div
+       {:style ui/row-middle}
+       (comp-cirru-ui-switcher state cursor)
+       (=< 12 nil)
+       (comp-wip-switcher state cursor)))
      (=< nil 8)
      (div
       {}
@@ -159,5 +199,5 @@
       {:style ui/expand}
       (->> visible-apis
            (sort-by (fn [info] (:name info)))
-           (map (fn [info] [(:name info) (comp-api-entry info (:cirru-ui? state))])))))
+           (map (fn [info] [(:name info) (comp-api-entry info (:syntax state))])))))
     (when dev? (comp-reel (>> states :reel) reel {})))))
