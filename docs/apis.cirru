@@ -252,7 +252,7 @@
       :tags $ #{} :native :json :string
       :desc "|parse JSON string into Cirru data"
       :snippets $ []
-        quote $ parse-json "{a: [1, 2]}"
+        quote $ parse-json "|{\"a\": [1, 2]}"
     {}
       :name |stringify-json
       :tags $ #{} :native :json :string
@@ -264,7 +264,9 @@
       :tags $ #{} :native :macro
       :desc "|expand quoted data for debugging purpose, notice that quote is required"
       :snippets $ []
-        quote $ macroexpand $ quote $ when true 1 2 3
+        {}
+          :code $ quote $ macroexpand $ quote $ when true 1 2 3
+          :result $ quote $ quote $ if true $ do 1 2 3
     {}
       :name |println
       :tags $ #{} :native
@@ -588,6 +590,9 @@
         quote $ when true
           echo 1
           echo 2
+        {}
+          :code $ quote $ macroexpand $ quote $ when true 1 2 3
+          :result $ quote $ quote $ if true $ do 1 2 3
     {}
       :name |+
       :tags $ #{} :number
@@ -1044,13 +1049,22 @@
       :tags $ #{} :list
       :desc "|count frequencies of items in list, returns a map"
       :snippets $ []
-        quote $ frequencies $ [] 1 1 1 2 2 3
+        {}
+          :code $ quote $ frequencies $ [] 1 1 1 2 2 3
+          :result $ quote $ {}
+            3 1
+            2 2
+            1 3
     {}
       :name |to-pairs?
       :tags $ #{} :map
       :desc "|returns pairs of a map as a list of lists"
       :snippets $ []
-        quote $ to-pairs $ {} (:a 1) (:b 2)
+        {}
+          :code $ quote $ to-pairs $ {} (:a 1) (:b 2)
+          :result $ []
+            [] :a 1
+            [] :b 2
     {}
       :name |init-canvas
       :tags $ #{} :canvas
@@ -1096,9 +1110,11 @@
       :tags $ #{} :map
       :desc "|internal function for `{}`, creating with arrays"
       :snippets $ []
-        quote $ &{}
-          [] :a 1
-          [] :b 2
+        {}
+          :code $ quote $ &{}
+            [] :a 1
+            [] :b 2
+          :result $ {} (:a 1) (:b 2)
     {}
       :name |assert=
       :tags $ #{} :macro
