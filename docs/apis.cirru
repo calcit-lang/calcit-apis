@@ -13,8 +13,11 @@
       :tags $ #{} :macro
       :desc "|create anounymous functions"
       :snippets $ []
-        quote $ defn (a b) $ + a b
-        quote $ defn (a $ xs) echo a xs
+        quote $ fn (a b) $ + a b
+        {}
+          :code $ quote $ macroexpand $ quote $ fn (a $ xs) $ echo a xs
+          :desc "|expands to function"
+          :result $ quote $ quote $ defn generated-fn (a $ xs) $ echo a xs
     {}
       :name |quote
       :tags $ #{} :syntax
@@ -26,7 +29,9 @@
       :tags $ #{} :syntax
       :desc "|used in defmacro, togather with `~` for replacing in quoted data"
       :snippets $ []
-        quote $ quote-replace $ + 1 2 3 (~ a)
+        {}
+          :code $ quote $ quote-replace $ + 1 2 3 (~ a)
+          :result $ quote $ quote $ + 1 2 3 a
     {}
       :name |&
       :tags $ #{} :syntax
@@ -43,13 +48,18 @@
       :tags $ #{} :syntax
       :desc "|replaces variables in quoted data"
       :snippets $ []
-        quote $ quote-replace $ + 1 2 (~ a)
+        {}
+          :code $ quote $ quote-replace $ + 1 2 (~ a)
+          :result $ quote $ quote $ + 1 2 a
     {}
       :name |~@
       :tags $ #{} :syntax
       :desc "|like `~` but turns a list into multiple symbols beforing inserting"
       :snippets $ []
         quote $ quote-replace $ + 1 2 (~@ xs)
+        {}
+          :code $ quote $ quote-replace $ + 1 2 (~@ $ quote $ [] a b)
+          :result $ quote $ quote $ + 1 2 a b
     {}
       :name |do
       :tags $ #{} :syntax
@@ -76,7 +86,13 @@
       :tags $ #{} :macro
       :desc "|operator for creating maps based on `&{}`, internally it's ternary tree map"
       :snippets $ []
-        quote $ {} (:a 1) (:b $ + 2 3)
+        {}
+          :code $ quote $ {} (:a 1) (:b $ + 2 3)
+          :desc "|creates a map"
+        {}
+          :code $ quote $ macroexpand $ quote $ {} (:a 1) (:b $ + 2 3)
+          :desc "|expands to &{}, which creates a map"
+          :result $ quote $ quote $ &{} ([] :a 1) ([] :b $ + 2 3)
     {}
       :name |if
       :tags $ #{} :syntax
@@ -1054,17 +1070,21 @@
       :tags $ #{} :list
       :desc "|turn list into a list of lists of n sizes, remaining items also in a list"
       :snippets $ []
-        quote $ =
-          section-by 3 $ range 5
-          [] ([] 0 1 2) (3 4)
+        {}
+          :code $ quote $ =
+            section-by 3 $ range 5
+          :result $ quote
+            [] ([] 0 1 2) ([] 3 4)
     {}
       :name |[][]
       :tags $ #{} :list :macro
       :desc "|defining 2-dimensional list with fewer `[]`s"
       :snippets $ []
-        quote $ =
-          [][] (2 3) (4 5) (6 7)
-          [] ([] 2 3) ([] 4 5) ([] 6 7)
+        {}
+          :code $ quote
+            [][] (2 3) (4 5) (6 7)
+          :result $ quote $ [] ([] 2 3) ([] 4 5) ([] 6 7)
+          :desc "|This is a macro"
     {}
       :name |g
       :tags $ #{}
@@ -1093,13 +1113,13 @@
         quote $ defatom *a 1
     {}
       :name |deref
-      :tags $ #{} :atom
+      :tags $ #{} :atom :native
       :desc "|grab data from atom"
       :snippets $ []
         quote $ deref *a
     {}
       :name |reset!
-      :tags $ #{} :atom
+      :tags $ #{} :atom :native
       :desc "|update data from atom"
       :snippets $ []
         quote $ reset! *a 2
@@ -1111,13 +1131,13 @@
         quote $ reset! *a 2
     {}
       :name |add-watch
-      :tags $ #{} :atom
+      :tags $ #{} :atom :native
       :desc "|add a watch function to an atom by keyword"
       :snippets $ []
         quote $ add-watch *a :log $ \ echo "|changed" %
     {}
       :name |remove-watch
-      :tags $ #{} :atom
+      :tags $ #{} :atom :native
       :desc "|remove a watch function from an atom by keyword"
       :snippets $ []
         quote $ remove-watch *a :log
