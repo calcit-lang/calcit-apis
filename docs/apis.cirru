@@ -201,11 +201,12 @@
         quote $ not true
     {}
       :name |count
-      :tags $ #{} :native :map
+      :tags $ #{} :native :map :list :string
       :desc "|just `count`"
       :snippets $ []
         quote $ count $ []
         quote $ count $ {}
+        quote $ count $ |abc
     {}
       :name |get
       :tags $ #{} :native :map :list
@@ -402,6 +403,7 @@
       :desc "|check if key is contained in map, should work for sets as well"
       :snippets $ []
         quote $ contains? ({} (:a 1) (:b 2)) :a
+        quote $ contains? |abc |b
     {}
       :name |assoc-before
       :tags $ #{} :native :list
@@ -1184,3 +1186,41 @@
       :snippets $ []
         quote $ update-in data ([] :a :b :c)
         quote $ update-in data ([] :a 1 2)
+    {}
+      :name |starts-with?
+      :tags $ #{} :string
+      :desc "|detects if string starts with item"
+      :snippets $ []
+        quote $ starts-with? |abc |a
+    {}
+      :name |ends-with?
+      :tags $ #{} :string
+      :desc "|detects if string ends with item"
+      :snippets $ []
+        quote $ ends-with? |abc |c
+    {}
+      :name |substr
+      :tags $ #{} :string :native
+      :desc "|get sub string by indexes"
+      :snippets $ []
+        quote $ substr |abcd 1
+        quote $ substr |abcd 1 3
+    {}
+      :name |str-find
+      :tags $ #{} :string :native
+      :desc "|find index of item in a string"
+      :snippets $ []
+        quote $ str-find |abcd |a
+    {}
+      :name |parse-float
+      :tags $ #{} :string :native
+      :desc "|get float number from string"
+      :snippets $ []
+        quote $ parse-float |1.1
+    {}
+      :name |trim
+      :tags $ #{} :string :native
+      :desc "|trim spaces or characters from string"
+      :snippets $ []
+        quote $ trim "|  a  "
+        quote $ trim "|__a__" |_
