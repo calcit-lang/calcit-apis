@@ -138,7 +138,7 @@
           + a b
     {}
       :name |loop
-      :tags $ #{} :syntax
+      :tags $ #{} :macro
       :desc "|like Clojure `loop`, use tail recursion to loop inside expressions"
       :snippets $ []
         quote $ loop
