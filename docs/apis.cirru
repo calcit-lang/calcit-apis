@@ -1022,7 +1022,6 @@
         quote $ replace "|looks good" |good |bad
     {}
       :name |assoc-in
-      :wip? true
       :tags $ #{}
       :desc "|associate data deep in a structure"
       :snippets $ []
@@ -1036,14 +1035,12 @@
         quote $ update (range 4) 1 $ \ + % 1
     {}
       :name |update-in
-      :wip? true
       :tags $ #{}
       :desc "|update data deep in a structure"
       :snippets $ []
         quote $ update-in data ([] :a 1) (fn (x) (x + 1))
     {}
       :name |dissoc-in
-      :wip? true
       :tags $ #{}
       :desc "|dissociate data deep in a structure"
       :snippets $ []
