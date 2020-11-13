@@ -108,12 +108,27 @@
         quote $ ; "this will not be evaludated" "more comments"
     {}
       :name |let
-      :tags $ #{} :syntax
-      :desc "|local variable bindings"
+      :tags $ #{} :macro
+      :desc "|local variable bindings, using Clojure syntax"
       :snippets $ []
         quote $ let
             a 1
             b $ + a 1
+          + a b
+    {}
+      :name |&let
+      :tags $ #{} :syntax
+      :desc "|internal operator for let, which only binds 1 variable per expression"
+      :snippets $ []
+        quote $ &let (a 1) (+ a 1)
+    {}
+      :name |let->
+      :tags $ #{} :macro
+      :desc "|syntax sugar on top of &let for reducing nesting"
+      :snippets $ []
+        quote $ let->
+          let a 1
+          let b 2
           + a b
     {}
       :name |loop
@@ -1064,7 +1079,7 @@
       :snippets $ []
         {}
           :code $ quote $ to-pairs $ {} (:a 1) (:b 2)
-          :result $ []
+          :result $ quote $ []
             [] :a 1
             [] :b 2
     {}
@@ -1116,7 +1131,7 @@
           :code $ quote $ &{}
             [] :a 1
             [] :b 2
-          :result $ {} (:a 1) (:b 2)
+          :result $ quote $ {} (:a 1) (:b 2)
     {}
       :name |assert=
       :tags $ #{} :macro
@@ -1224,3 +1239,9 @@
       :snippets $ []
         quote $ trim "|  a  "
         quote $ trim "|__a__" |_
+    {}
+      :name |set-trace-fn!
+      :tags $ #{} :debug
+      :desc "|set a ns/def for debug tracing, arguments and results will be printed. unstable"
+      :snippets $ []
+        quote $ set-trace-fn! |app.main |f1
