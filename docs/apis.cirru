@@ -77,6 +77,12 @@
           quote-replace $ + (~ a) (~ b)
     {}
       :name |[]
+      :tags $ #{} :macro
+      :desc "|macro for creating lists, `,` children are removed"
+      :snippets $ []
+        quote $ [] 1 , 2 , 3
+    {}
+      :name |&[]
       :tags $ #{} :syntax
       :desc "|operator for creating lists, internally it's ternary tree list"
       :snippets $ []
@@ -144,7 +150,7 @@
         quote $ loop () (echo "|never ends") (recur)
     {}
       :name |assert
-      :tags $ #{} :syntax
+      :tags $ #{} :macro
       :desc "|like Clojure `assert`, but string is placed first"
       :snippets $ []
         quote $ assert "|x > 0" (> x 0)
@@ -240,11 +246,11 @@
       :snippets $ []
         quote $ rest $ [] 1 2 3 4
     {}
-      :name |raise-at
+      :name |raise
       :tags $ #{} :native
-      :desc "|raise exception at give symbol or expression. still putting string first"
+      :desc "|raise exception with a message"
       :snippets $ []
-        quote $ raise-at "|xs has error" xs
+        quote $ raise "|xs has error"
     {}
       :name |type-of
       :tags $ #{} :native
