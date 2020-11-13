@@ -1079,7 +1079,7 @@
             2 2
             1 3
     {}
-      :name |to-pairs?
+      :name |to-pairs
       :tags $ #{} :map
       :desc "|returns pairs of a map as a list of lists"
       :snippets $ []
