@@ -86,7 +86,7 @@
       :tags $ #{} :syntax
       :desc "|operator for creating lists, internally it's ternary tree list"
       :snippets $ []
-        quote $ [] 1 2 3 4 (+ 1 2)
+        quote $ &[] 1 2 3 4 (+ 1 2)
     {}
       :name |{}
       :tags $ #{} :macro
@@ -138,7 +138,7 @@
           + a b
     {}
       :name |loop
-      :tags $ #{} :syntax
+      :tags $ #{} :macro
       :desc "|like Clojure `loop`, use tail recursion to loop inside expressions"
       :snippets $ []
         quote $ loop
@@ -148,6 +148,18 @@
             recur (+ idx 1) (append acc idx)
             , acc
         quote $ loop () (echo "|never ends") (recur)
+        {}
+          :code $ quote $ macroexpand $ quote
+            loop
+                acc 0
+                x 0
+              if (> x 10) acc (recur (+ acc x) (inc x))
+          :result $ quote
+            apply
+              defn generated-loop (acc x)
+                if (> x 10) acc
+                  recur (+ acc x) (inc x)
+              &[] 0 0
     {}
       :name |assert
       :tags $ #{} :macro
@@ -177,13 +189,15 @@
       :tags $ #{} :native :number
       :desc "|native add function which divide one number by another"
       :snippets $ []
-        quote $ &+ 10 2
+        quote $ &/ 10 2
     {}
       :name |mod
       :tags $ #{} :native :number
       :desc "|function for get a reminder value"
       :snippets $ []
-        quote $ = 2 $ mod 5 3
+        {}
+          :code $ quote $ mod 5 3
+          :result $ quote $ do 2
     {}
       :name |&<
       :tags $ #{} :native :number
@@ -290,24 +304,34 @@
           :code $ quote $ macroexpand $ quote $ when true 1 2 3
           :result $ quote $ quote $ if true $ do 1 2 3
     {}
-      :name |println
+      :name |print
       :tags $ #{} :native
-      :desc "|displays values"
+      :desc "|write string values to stdout"
+      :snippets $ []
+        quote $ print 1 2 3
+    {}
+      :name |println
+      :tags $ #{} :macro
+      :desc "|displays values with newline at end"
       :snippets $ []
         quote $ println 1 2 3
     {}
       :name |echo
-      :tags $ #{} :native
-      :desc "|displays values, alias for println"
+      :tags $ #{} :macro
+      :desc "|alias for println"
       :snippets $ []
         quote $ echo 1 2 3
     {}
       :name |pr-str
-      :wip? true
-      :tags $ #{} :native :string
-      :desc "|displays values with more details, string being escaped"
+      :tags $ #{} :string
+      :desc "|return string value with more details, string being escaped"
       :snippets $ []
-        quote $ pr-str 1 2 3
+        {}
+          :code $ quote $ pr-str "|demo with space"
+          :result $ quote $ do "\"|demo with space\""
+        {}
+          :code $ quote $ pr-str 1 2 3 4
+          :result $ quote $ do "|1 2 3 4"
     {}
       :name |prepend
       :tags $ #{} :native :list
@@ -353,13 +377,13 @@
       :snippets $ []
         quote $ reverse $ [] 1 2 3 4
     {}
-      :name |turn-string
+      :name |turn-str
       :tags $ #{} :native
       :desc "|turn something into a string"
       :snippets $ []
-        quote $ turn-symbol :key
-        quote $ turn-symbol 'key
-        quote $ turn-symbol 1
+        quote $ turn-str :key
+        quote $ turn-str 'key
+        quote $ turn-str 1
     {}
       :name |turn-symbol
       :tags $ #{} :native
@@ -558,7 +582,7 @@
       :tags $ #{} :native
       :desc "|union of two hashsets"
       :snippets $ []
-        quote $ &difference (#{} 1 2) (#{} 3 4)
+        quote $ &union (#{} 1 2) (#{} 3 4)
     {}
       :name |&intersection
       :tags $ #{} :native
@@ -571,12 +595,6 @@
       :desc "|operator for tail recursion, can be used in a function or a loop"
       :snippets $ []
         quote $ defn f (acc n)
-          if (< n 10)
-            recur (+ acc n) (+ n 1)
-            , acc
-        quote $ loop
-            acc 0
-            n 0
           if (< n 10)
             recur (+ acc n) (+ n 1)
             , acc
@@ -872,7 +890,7 @@
       :tags $ #{} :list :map
       :desc "|like Clojure get-in function, read property recursively"
       :snippets $ []
-        quote $ get data $ [] :a 1
+        quote $ get-in data $ [] :a 1
     {}
       :name |&max
       :tags $ #{} :number
@@ -908,7 +926,7 @@
       :tags $ #{}
       :desc "|detects if any item in list satisfies function"
       :snippets $ []
-        quote $ every? (fn (x) (> x 1)) ([] 1 2 3 4)
+        quote $ any? (fn (x) (> x 1)) ([] 1 2 3 4)
     {}
       :name |concat :list
       :tags $ #{}
@@ -948,7 +966,7 @@
       :tags $ #{} :list
       :desc "|filter a list with a function with false return"
       :snippets $ []
-        quote $ filter (fn (x) (> n 5)) (range 10)
+        quote $ filter-not (fn (x) (> n 5)) (range 10)
     {}
       :name |zipmap
       :tags $ #{} :list
@@ -996,12 +1014,13 @@
       :snippets $ []
         quote $ map-indexed (fn (idx x) idx) (range 10)
     {}
-      :name |join-string
-      :wip? true
+      :name |join-str
       :tags $ #{} :string :list
       :desc "|join segments into a string"
       :snippets $ []
-        quote $ join-string |, $ [] 1 2 3 4
+        {}
+          :code $ quote $ join-str |- $ [] 1 2 3 4
+          :result $ quote $ do |1-2-3-4
     {}
       :name |split
       :tags $ #{} :string
@@ -1011,7 +1030,7 @@
     {}
       :name |split-lines
       :tags $ #{} :string
-      :desc "|split lines(currently with `\n`)"
+      :desc "|split lines(currently with `\\n`)"
       :snippets $ []
         quote $ split-lines "|a\nb\nc"
     {}
@@ -1020,12 +1039,6 @@
       :desc "|replace segments in a string"
       :snippets $ []
         quote $ replace "|looks good" |good |bad
-    {}
-      :name |assoc-in
-      :tags $ #{}
-      :desc "|associate data deep in a structure"
-      :snippets $ []
-        quote $ assoc-in data ([] :a 1) 2
     {}
       :name |update
       :tags $ #{}
@@ -1105,8 +1118,7 @@
       :desc "|turn list into a list of lists of n sizes, remaining items also in a list"
       :snippets $ []
         {}
-          :code $ quote $ =
-            section-by 3 $ range 5
+          :code $ quote $ section-by 3 $ range 5
           :result $ quote
             [] ([] 0 1 2) ([] 3 4)
     {}
@@ -1164,7 +1176,7 @@
       :tags $ #{} :atom :macro
       :desc "|update data from atom with a function, syntax from Clojure"
       :snippets $ []
-        quote $ reset! *a 2
+        quote $ swap! *a inc
     {}
       :name |add-watch
       :tags $ #{} :atom :native
@@ -1191,7 +1203,7 @@
         quote $ assoc-in data ([] :a :b :c) 10
         quote $ assoc-in data ([] :a 1 2) 10
     {}
-      :name |dissoc
+      :name |dissoc-in
       :tags $ #{} :number
       :desc "|dissoc a field deep inside"
       :snippets $ []
@@ -1248,3 +1260,11 @@
       :desc "|set a ns/def for debug tracing, arguments and results will be printed. unstable"
       :snippets $ []
         quote $ set-trace-fn! |app.main |f1
+    {}
+      :name |join
+      :tags $ #{} :list
+      :desc "|join list of items with a separator"
+      :snippets $ []
+        {}
+          :code $ quote $ join 10 $ [] 1 2 3 4
+          :result $ quote $ [] 1 10 2 10 3 10 4
