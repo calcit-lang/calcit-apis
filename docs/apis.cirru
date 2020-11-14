@@ -304,24 +304,34 @@
           :code $ quote $ macroexpand $ quote $ when true 1 2 3
           :result $ quote $ quote $ if true $ do 1 2 3
     {}
-      :name |println
+      :name |print
       :tags $ #{} :native
-      :desc "|displays values"
+      :desc "|write string values to stdout"
+      :snippets $ []
+        quote $ print 1 2 3
+    {}
+      :name |println
+      :tags $ #{} :macro
+      :desc "|displays values with newline at end"
       :snippets $ []
         quote $ println 1 2 3
     {}
       :name |echo
-      :tags $ #{} :native
-      :desc "|displays values, alias for println"
+      :tags $ #{} :macro
+      :desc "|alias for println"
       :snippets $ []
         quote $ echo 1 2 3
     {}
       :name |pr-str
-      :wip? true
-      :tags $ #{} :native :string
-      :desc "|displays values with more details, string being escaped"
+      :tags $ #{} :string
+      :desc "|return string value with more details, string being escaped"
       :snippets $ []
-        quote $ pr-str 1 2 3
+        {}
+          :code $ quote $ pr-str "|demo with space"
+          :result $ quote $ do "\"|demo with space\""
+        {}
+          :code $ quote $ pr-str 1 2 3 4
+          :result $ quote $ do "|1 2 3 4"
     {}
       :name |prepend
       :tags $ #{} :native :list
@@ -367,13 +377,13 @@
       :snippets $ []
         quote $ reverse $ [] 1 2 3 4
     {}
-      :name |turn-string
+      :name |turn-str
       :tags $ #{} :native
       :desc "|turn something into a string"
       :snippets $ []
-        quote $ turn-string :key
-        quote $ turn-string 'key
-        quote $ turn-string 1
+        quote $ turn-str :key
+        quote $ turn-str 'key
+        quote $ turn-str 1
     {}
       :name |turn-symbol
       :tags $ #{} :native
@@ -1004,12 +1014,13 @@
       :snippets $ []
         quote $ map-indexed (fn (idx x) idx) (range 10)
     {}
-      :name |join-string
-      :wip? true
+      :name |join-str
       :tags $ #{} :string :list
       :desc "|join segments into a string"
       :snippets $ []
-        quote $ join-string |, $ [] 1 2 3 4
+        {}
+          :code $ quote $ join-str |- $ [] 1 2 3 4
+          :result $ quote $ do |1-2-3-4
     {}
       :name |split
       :tags $ #{} :string
@@ -1249,3 +1260,11 @@
       :desc "|set a ns/def for debug tracing, arguments and results will be printed. unstable"
       :snippets $ []
         quote $ set-trace-fn! |app.main |f1
+    {}
+      :name |join
+      :tags $ #{} :list
+      :desc "|join list of items with a separator"
+      :snippets $ []
+        {}
+          :code $ quote $ join 10 $ [] 1 2 3 4
+          :result $ quote $ [] 1 10 2 10 3 10 4
