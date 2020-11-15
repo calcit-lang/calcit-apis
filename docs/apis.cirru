@@ -298,11 +298,44 @@
     {}
       :name |macroexpand
       :tags $ #{} :native :macro
-      :desc "|expand quoted data for debugging purpose, notice that quote is required"
+      :desc "|expand quoted code for debugging purpose, notice that quote is required"
       :snippets $ []
         {}
           :code $ quote $ macroexpand $ quote $ when true 1 2 3
           :result $ quote $ quote $ if true $ do 1 2 3
+        {}
+          :code $ quote $ macroexpand
+            quote
+              case (+ 1 2)
+                1 |one
+                2 |two
+                3 |three
+          :result $ quote
+            quote
+              if (&= (+ 1 2) 1) |one
+                case (+ 1 2)
+                  2 |two
+                  3 |three
+    {}
+      :name |macroexpand-all
+      :tags $ #{} :native :macro
+      :desc "|expand quoted code recursively, notice that quote is required"
+      :snippets $ []
+        {}
+          :code $ quote $ macroexpand-all $ quote $ when true 1 2 3
+          :result $ quote $ quote $ if true $ do 1 2 3
+        {}
+          :code $ quote $ macroexpand-all
+            quote
+              case (+ 1 2)
+                1 |one
+                2 |two
+                3 |three
+          :result $ quote
+            quote
+              if (&= (+ 1 2) 1) |one
+                if (&= (+ 1 2) 2) |two
+                  if (&= (+ 1 2) 3) |three nil
     {}
       :name |print
       :tags $ #{} :native
