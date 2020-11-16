@@ -1301,3 +1301,31 @@
         {}
           :code $ quote $ join 10 $ [] 1 2 3 4
           :result $ quote $ [] 1 10 2 10 3 10 4
+    {}
+      :name |gensym
+      :tags $ #{} :native
+      :desc "|gensym, generates an unique symbol like Clojure"
+      :snippets $ []
+        {}
+          :code $ quote $ gensym
+          :result $ quote $ G__101
+        {}
+          :code $ quote $ gensym |a
+          :result $ quote $ a__102__auto__
+        {}
+          :code $ quote $ gensym 'b
+          :result $ quote $ b__103__auto__
+    {}
+      :name |&PI
+      :tags $ #{} :number
+      :desc "|get value of PI, the ratio of a circle's circumference to its diameter"
+      :snippets $ []
+        {}
+          :code $ quote $ echo &PI
+    {}
+      :name |&E
+      :tags $ #{} :number
+      :desc "|get value of e, natural log"
+      :snippets $ []
+        {}
+          :code $ quote $ code &E
