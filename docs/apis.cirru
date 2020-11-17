@@ -1005,17 +1005,27 @@
       :tags $ #{} :list
       :desc "|create a map with two lists, one for keys and one for values"
       :snippets $ []
-        quote $ zipmap
-          [] :a :b :c :d
-          [] 1 2 3 4
+        {}
+          :code $ quote $ zipmap
+            [] :a :b :c :d
+            [] 1 2 3 4
+          :result $ quote $ {}
+            :a 1
+            :b 2
+            :c 3
+            :d 4
     {}
       :name |pair-map
       :tags $ #{} :list
       :desc "|create a map from a list of pairs"
       :snippets $ []
-        quote $ pair-map
-          [] :a 1
-          [] :b 2
+        {}
+          :code $ quote $ pair-map $ []
+            [] :a 1
+            [] :b 2
+          :result $ quote $ {}
+            :a 1
+            :b 2
     {}
       :name |rand
       :tags $ #{} :number
@@ -1329,3 +1339,19 @@
       :snippets $ []
         {}
           :code $ quote $ code &E
+    {}
+      :name |repeat
+      :tags $ #{} :list
+      :desc "|repeat an item n times"
+      :snippets $ []
+        {}
+          :code $ quote $ repeat 5 :a
+          :result $ quote $ [] :a :a :a :a :a
+    {}
+      :name |interleave
+      :tags $ #{} :list
+      :desc "|interleave of two lists, like Clojure"
+      :snippets $ []
+        {}
+          :code $ quote $ interleave ([] :a :b :c) ([] 1 2 3 4)
+          :result $ quote $ [] :a 1 :b 2 :c 3
