@@ -76,17 +76,17 @@
         quote $ defmacro m1 (a b)
           quote-replace $ + (~ a) (~ b)
     {}
-      :name |[]
+      :name |[,]
       :tags $ #{} :macro
       :desc "|macro for creating lists, `,` children are removed"
       :snippets $ []
-        quote $ [] 1 , 2 , 3
+        quote $ [,] 1 , 2 , 3
     {}
-      :name |&[]
-      :tags $ #{} :syntax
+      :name |[]
+      :tags $ #{} :native
       :desc "|operator for creating lists, internally it's ternary tree list"
       :snippets $ []
-        quote $ &[] 1 2 3 4 (+ 1 2)
+        quote $ [] 1 2 3 4 (+ 1 2)
     {}
       :name |{}
       :tags $ #{} :macro
@@ -286,7 +286,7 @@
     {}
       :name |parse-json
       :tags $ #{} :native :json :string
-      :desc "|parse JSON string into Cirru data"
+      :desc "|parse JSON string into Cirru data, notice that `\":a\"` will be parsed as keyword"
       :snippets $ []
         quote $ parse-json "|{\"a\": [1, 2]}"
     {}
@@ -295,6 +295,11 @@
       :desc "|stringify Cirru data into JSON string"
       :snippets $ []
         quote $ stringify-json $ {} (:a ([] 1 2))
+        {}
+          :code $ quote $ stringify-json
+            {} (:a ([] 1 2))
+            , true
+          :desc "|set true to format keywords with `:`s."
     {}
       :name |macroexpand
       :tags $ #{} :native :macro
