@@ -1329,3 +1329,19 @@
       :snippets $ []
         {}
           :code $ quote $ code &E
+    {}
+      :name |repeat
+      :tags $ #{} :list
+      :desc "|repeat an item n times"
+      :snippets $ []
+        {}
+          :code $ quote $ repeat 5 :a
+          :result $ quote $ [] :a :a :a :a :a
+    {}
+      :name |interleave
+      :tags $ #{} :list
+      :desc "|interleave of two lists, like Clojure"
+      :snippets $ []
+        {}
+          :code $ quote $ interleave ([] :a :b :c) ([] 1 2 3 4)
+          :result $ quote $ [] :a 1 :b 2 :c 3
