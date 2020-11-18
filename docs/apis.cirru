@@ -1020,12 +1020,12 @@
             :c 3
             :d 4
     {}
-      :name |pair-map
+      :name |pairs-map
       :tags $ #{} :list
       :desc "|create a map from a list of pairs"
       :snippets $ []
         {}
-          :code $ quote $ pair-map $ []
+          :code $ quote $ pairs-map $ []
             [] :a 1
             [] :b 2
           :result $ quote $ {}
@@ -1360,3 +1360,13 @@
         {}
           :code $ quote $ interleave ([] :a :b :c) ([] 1 2 3 4)
           :result $ quote $ [] :a 1 :b 2 :c 3
+    {}
+      :name |map-kv
+      :tags $ #{} :map
+      :desc "|map key and value for a map"
+      :snippets $ []
+        {}
+          :code $ quote $ map-kv
+            fn (k v) ([] k (+ v 1))
+            {} (:a 1) (:b 2)
+          :result $ quote $ [][] (:a 2) (:b 3)
