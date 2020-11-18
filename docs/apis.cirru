@@ -1180,12 +1180,6 @@
           :result $ quote $ [] ([] 2 3) ([] 4 5) ([] 6 7)
           :desc "|This is a macro"
     {}
-      :name |g
-      :tags $ #{}
-      :desc "|help function to generate `{:type :group, :children [...]}`"
-      :snippets $ []
-        quote $ g ({}) a b c
-    {}
       :name |&{}
       :tags $ #{} :map
       :desc "|internal function for `{}`, creating with arrays"
@@ -1370,3 +1364,26 @@
             fn (k v) ([] k (+ v 1))
             {} (:a 1) (:b 2)
           :result $ quote $ [][] (:a 2) (:b 3)
+    {}
+      :name |def
+      :tags $ #{} :macro
+      :desc "|def is a macro, just discard the name return the value"
+      :snippets $ []
+        {}
+          :code $ quote $ def x 1
+          :result $ quote $ do 1
+          :desc "|name is totally useless in runtime"
+        {}
+          :code $ quote $ macroexpand $ quote $ def a b
+          :result $ quote $ quote $ b
+    {}
+      :name |either
+      :tags $ #{}
+      :desc "|if x is nil, then return y. `or` only takes booleans"
+      :snippets $ []
+        {}
+          :code $ quote $ either nil 1
+          :result $ quote $ do 1
+        {}
+          :code $ quote $ either 2 1
+          :result $ quote $ do 2
