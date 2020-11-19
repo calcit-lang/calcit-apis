@@ -1387,3 +1387,41 @@
         {}
           :code $ quote $ either 2 1
           :result $ quote $ do 2
+    {}
+      :name |and
+      :tags $ #{}
+      :desc "|varadic `and` operator, `false` for empty arguments"
+      :snippets $ []
+        {}
+          :code $ quote $ either nil 1
+          :result $ quote $ do 1
+        {}
+          :code $ quote $ and
+          :result $ quote $ do false
+        {}
+          :code $ quote $ and true true false
+          :result $ quote $ do false
+        {}
+          :code $ quote $ and true false true
+          :result $ quote $ do false
+        {}
+          :code $ quote $ and true true true
+          :result $ quote $ do true
+    {}
+      :name |or
+      :tags $ #{}
+      :desc "|varadic `or` operator, `false` for empty arguments"
+      :snippets $ []
+        {}
+        {}
+          :code $ quote $ or
+          :result $ quote $ do false
+        {}
+          :code $ quote $ or false false false
+          :result $ quote $ do false
+        {}
+          :code $ quote $ or false true false
+          :result $ quote $ do true
+        {}
+          :code $ quote $ or false false true
+          :result $ quote $ do true
