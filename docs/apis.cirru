@@ -1244,6 +1244,12 @@
       :snippets $ []
         quote $ assoc-in data ([] :a :b :c) 10
         quote $ assoc-in data ([] :a 1 2) 10
+        {}
+          :code $ quote $ assoc-in nil ([] :a :b) 10
+          :desc "|assoc data even when operand is nil"
+          :result $ quote $ {}
+            :a $ {}
+              :b 10
     {}
       :name |dissoc-in
       :tags $ #{} :number
