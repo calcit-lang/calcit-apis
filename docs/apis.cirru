@@ -308,19 +308,6 @@
         {}
           :code $ quote $ macroexpand $ quote $ when true 1 2 3
           :result $ quote $ quote $ if true $ do 1 2 3
-        {}
-          :code $ quote $ macroexpand
-            quote
-              case (+ 1 2)
-                1 |one
-                2 |two
-                3 |three
-          :result $ quote
-            quote
-              if (&= (+ 1 2) 1) |one
-                case (+ 1 2)
-                  2 |two
-                  3 |three
     {}
       :name |macroexpand-all
       :tags $ #{} :native :macro
@@ -338,9 +325,10 @@
                 3 |three
           :result $ quote
             quote
-              if (&= (+ 1 2) 1) |one
-                if (&= (+ 1 2) 2) |two
-                  if (&= (+ 1 2) 3) |three nil
+              &let (v__1 (+ 1 2))
+                if (&= v__1 1) |one
+                  if (&= v__1 2) |two
+                    if (&= v__1 3) |three nil
     {}
       :name |print
       :tags $ #{} :native
@@ -923,6 +911,23 @@
           :a |a
           :b |b
           a |else
+        {}
+          :code $ quote $ macroexpand-all
+            quote
+              case (+ 1 2)
+                1 |one
+                2 |two
+                3 |three
+          :result $ quote
+            quote
+              &let (v__1 (+ 1 2))
+                if (&= v__1 1) |one
+                  if (&= v__1 2) |two
+                    if (&= v__1 3) |three nil
+    {}
+      :name |&case
+      :tags $ #{} :macro
+      :desc "|internal helper for case"
     {}
       :name |get-in
       :tags $ #{} :list :map
@@ -1326,10 +1331,10 @@
           :result $ quote $ G__101
         {}
           :code $ quote $ gensym |a
-          :result $ quote $ a__102__auto__
+          :result $ quote $ a__102
         {}
           :code $ quote $ gensym 'b
-          :result $ quote $ b__103__auto__
+          :result $ quote $ b__103
     {}
       :name |&PI
       :tags $ #{} :number
@@ -1431,3 +1436,7 @@
         {}
           :code $ quote $ or false false true
           :result $ quote $ do true
+    {}
+      :name |&reset-gensym-index!
+      :tags $ #{} :native
+      :desc "|debugging function for gensym"
