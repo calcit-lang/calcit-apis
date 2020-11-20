@@ -1389,8 +1389,8 @@
           :result $ quote $ quote $ b
     {}
       :name |either
-      :tags $ #{}
-      :desc "|if x is nil, then return y. `or` only takes booleans"
+      :tags $ #{} :macro
+      :desc "|if x is nil, then return y, else y is never evaludated. `or` only takes booleans."
       :snippets $ []
         {}
           :code $ quote $ either nil 1
