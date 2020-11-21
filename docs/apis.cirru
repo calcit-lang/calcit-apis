@@ -1456,7 +1456,7 @@
           :desc "|specify length and charset"
     {}
       :name |parse-time
-      :tags $ #{} :native
+      :tags $ #{} :native :time
       :desc "|currently time is represented in float in calcit runner"
       :snippets $ []
         {}
@@ -1469,10 +1469,15 @@
           :result $ quote $ do 1602295800
     {}
       :name |format-time
-      :tags $ #{} :native
+      :tags $ #{} :native :time
       :desc "|format time with syntax defined in Nim `times` module"
       :snippets $ []
         {}
           :code $ quote $ format-time 1602295800 "|yyyy-MM-dd HH:mm"
           :desc "|template syntax of Nim `times` module"
           :result $ quote $ do "|2020-10-10 10:10"
+    {}
+      :name |now!
+      :tags $ #{} :native :time
+      :desc "|get current time, stored as a float"
+      :snippets $ []
