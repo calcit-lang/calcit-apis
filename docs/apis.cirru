@@ -1440,3 +1440,39 @@
       :name |&reset-gensym-index!
       :tags $ #{} :native
       :desc "|debugging function for gensym"
+    {}
+      :name |generate-id!
+      :tags $ #{} :native
+      :desc "|id generator, currently using nanoid"
+      :snippets $ []
+        {}
+          :code $ quote $ generate-id!
+          :desc "|using default configs of nanoid"
+        {}
+          :code $ quote $ generate-id! 10
+          :desc "|specify length of 10"
+        {}
+          :code $ quote $ generate-id! 10 "abcd"
+          :desc "|specify length and charset"
+    {}
+      :name |parse-time
+      :tags $ #{} :native
+      :desc "|currently time is represented in float in calcit runner"
+      :snippets $ []
+        {}
+          :code $ quote $ parse-time "|2020-10-10"
+          :result $ quote $ do 1602259200
+          :desc "|default parsing template is yyyy-MM-dd"
+        {}
+          :code $ quote $ parse-time "|2020-10-10 10:10" "|yyyy-MM-dd HH:mm"
+          :desc "|template syntax of Nim `times` module"
+          :result $ quote $ do 1602295800
+    {}
+      :name |format-time
+      :tags $ #{} :native
+      :desc "|format time with syntax defined in Nim `times` module"
+      :snippets $ []
+        {}
+          :code $ quote $ format-time 1602295800 "|yyyy-MM-dd HH:mm"
+          :desc "|template syntax of Nim `times` module"
+          :result $ quote $ do "|2020-10-10 10:10"
