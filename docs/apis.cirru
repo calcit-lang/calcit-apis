@@ -1481,3 +1481,22 @@
       :tags $ #{} :native :time
       :desc "|get current time, stored as a float"
       :snippets $ []
+    {}
+      :name |format-number
+      :tags $ #{} :native :number
+      :desc "|format a float with specified precision"
+      :snippets $ []
+        {}
+          :code $ quote $ format-number 1.2345 2
+          :result $ quote $ do 1.23
+    {}
+      :name |sort
+      :tags $ #{} :native :list
+      :desc "|sort list with given comparator function"
+      :snippets $ []
+        {}
+          :code $ quote $ sort
+            fn (x y) (&- x y)
+            [] 1 3 4 2
+          :result $ quote $ [] 1 2 3 4
+          :desc "|value returned from comparator function should be a number"
