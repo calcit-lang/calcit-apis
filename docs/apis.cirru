@@ -1440,3 +1440,63 @@
       :name |&reset-gensym-index!
       :tags $ #{} :native
       :desc "|debugging function for gensym"
+    {}
+      :name |generate-id!
+      :tags $ #{} :native
+      :desc "|id generator, currently using nanoid"
+      :snippets $ []
+        {}
+          :code $ quote $ generate-id!
+          :desc "|using default configs of nanoid"
+        {}
+          :code $ quote $ generate-id! 10
+          :desc "|specify length of 10"
+        {}
+          :code $ quote $ generate-id! 10 "abcd"
+          :desc "|specify length and charset"
+    {}
+      :name |parse-time
+      :tags $ #{} :native :time
+      :desc "|currently time is represented in float in calcit runner"
+      :snippets $ []
+        {}
+          :code $ quote $ parse-time "|2020-10-10"
+          :result $ quote $ do 1602259200
+          :desc "|default parsing template is yyyy-MM-dd"
+        {}
+          :code $ quote $ parse-time "|2020-10-10 10:10" "|yyyy-MM-dd HH:mm"
+          :desc "|template syntax of Nim `times` module"
+          :result $ quote $ do 1602295800
+    {}
+      :name |format-time
+      :tags $ #{} :native :time
+      :desc "|format time with syntax defined in Nim `times` module"
+      :snippets $ []
+        {}
+          :code $ quote $ format-time 1602295800 "|yyyy-MM-dd HH:mm"
+          :desc "|template syntax of Nim `times` module"
+          :result $ quote $ do "|2020-10-10 10:10"
+    {}
+      :name |now!
+      :tags $ #{} :native :time
+      :desc "|get current time, stored as a float"
+      :snippets $ []
+    {}
+      :name |format-number
+      :tags $ #{} :native :number
+      :desc "|format a float with specified precision"
+      :snippets $ []
+        {}
+          :code $ quote $ format-number 1.2345 2
+          :result $ quote $ do 1.23
+    {}
+      :name |sort
+      :tags $ #{} :native :list
+      :desc "|sort list with given comparator function"
+      :snippets $ []
+        {}
+          :code $ quote $ sort
+            fn (x y) (&- x y)
+            [] 1 3 4 2
+          :result $ quote $ [] 1 2 3 4
+          :desc "|value returned from comparator function should be a number"
