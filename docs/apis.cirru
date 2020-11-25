@@ -1500,3 +1500,30 @@
             [] 1 3 4 2
           :result $ quote $ [] 1 2 3 4
           :desc "|value returned from comparator function should be a number"
+    {}
+      :name |{,}
+      :tags $ #{} :macro :map
+      :desc "|quicker way for creating literal maps, seperated with comma"
+      :snippets $ []
+        {}
+          :code $ quote
+            macroexpand $ quote $ {,} :a 1 , :b 2 , :c 3
+          :result $ quote
+            pairs-map $ section-by 2 $ [] :a 1 :b 2 :c 3
+          :desc "|commas are just removed after macro expansion"
+        {}
+          :code $ quote $ {,} :a 1 , :b 2 , :c 3
+          :result $ quote $ {} (:a 1) (:b 2) (:c 3)
+    {}
+      :name |with-log
+      :tags $ #{} :debug :macro
+      :desc "|for debug purpose, add log to an expression"
+      :snippets $ []
+        {}
+          :code $ quote
+            macroexpand $ quote $ with-log $ + 1 2
+          :result $ quote
+            &let
+              v__1 $ + 1 2
+              echo (quote $ + 1 2) |=> v__1
+              , v__1
