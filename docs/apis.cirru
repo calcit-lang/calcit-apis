@@ -569,10 +569,11 @@
         quote $ cos 0.1
     {}
       :name |round
-      :tags $ #{} :native :number
-      :desc "|round a float number"
+      :tags $ #{} :native :number :ternary
+      :desc "|round a float number, also works for a ternary value"
       :snippets $ []
         quote $ round 1.1
+        quote $ round &1.1
     {}
       :name |pow
       :tags $ #{} :native :number
@@ -662,27 +663,27 @@
           :result $ quote $ quote $ if true $ do 1 2 3
     {}
       :name |+
-      :tags $ #{} :number
+      :tags $ #{} :number :ternary
       :desc "|add multiple numbers"
       :snippets $ []
         quote $ + 1 2
         quote $ + 1 2 3
     {}
       :name |-
-      :tags $ #{} :number
+      :tags $ #{} :number :ternary
       :desc "|substract numbers from a number"
       :snippets $ []
         quote $ - 2 1
         quote $ - 10 1 2 3
     {}
       :name |*
-      :tags $ #{} :number
+      :tags $ #{} :number :ternary
       :desc "|multiply numbers"
       :snippets $ []
         quote $ * 1 2 3
     {}
       :name |/
-      :tags $ #{} :number
+      :tags $ #{} :number :ternary
       :desc "|division of multiple numbers"
       :snippets $ []
         quote $ / 12 3 4
@@ -1527,3 +1528,17 @@
               v__1 $ + 1 2
               echo (quote $ + 1 2) |=> v__1
               , v__1
+    {}
+      :name |dual-balanced-ternary
+      :tags $ #{} :ternary
+      :desc "|create a dual balanced ternary value from 2 numbers"
+      :snippets $ []
+        quote $ dual-balanced-ternary 1.1 1.1
+    {}
+      :name |ternary->point
+      :tags $ #{} :ternary
+      :desc "|return a list of 2 numbers from a dual balanced ternary value"
+      :snippets $ []
+        {}
+          :code $ quote $ ternary->point &4
+          :result $ quote $ [] 1 -1
