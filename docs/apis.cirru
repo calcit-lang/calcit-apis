@@ -1349,7 +1349,21 @@
       :desc "|get value of e, natural log"
       :snippets $ []
         {}
-          :code $ quote $ code &E
+          :code $ quote $ echo &E
+    {}
+      :name |&newline
+      :tags $ #{} :string
+      :desc "|just `\n`"
+      :snippets $ []
+        {}
+          :code $ quote $ echo &newline
+    {}
+      :name |&tab
+      :tags $ #{} :string
+      :desc "|just `\t`"
+      :snippets $ []
+        {}
+          :code $ quote $ echo &tab
     {}
       :name |repeat
       :tags $ #{} :list
@@ -1542,3 +1556,10 @@
         {}
           :code $ quote $ ternary->point &4
           :result $ quote $ [] 1 -1
+    {}
+      :name |quit
+      :tags $ #{} :native
+      :desc "|call Nim's `quit` function"
+      :snippets $ []
+        {}
+          :code $ quote $ quit 1
