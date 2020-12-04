@@ -1563,3 +1563,10 @@
       :snippets $ []
         {}
           :code $ quote $ quit 1
+    {}
+      :name |get-env
+      :tags $ #{} :native
+      :desc "|read from environment variable"
+      :snippets $ []
+        {}
+          :code $ quote $ get-env |HOME
