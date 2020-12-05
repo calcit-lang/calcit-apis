@@ -1570,3 +1570,17 @@
       :snippets $ []
         {}
           :code $ quote $ get-env |HOME
+    {}
+      :name |cpu-time
+      :tags $ #{} :native
+      :desc "|call Nim's `cpuTime` function, return in seconds"
+      :snippets $ []
+        {}
+          :code $ quote $ cpu-time
+    {}
+      :name |with-cpu-time
+      :tags $ #{} :macro
+      :desc "|log cost CPU time of given expression in milliseconds"
+      :snippets $ []
+        {}
+          :code $ quote $ with-cpu-time $ + 1 2
