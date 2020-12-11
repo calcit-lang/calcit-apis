@@ -403,13 +403,13 @@
       :snippets $ []
         quote $ reverse $ [] 1 2 3 4
     {}
-      :name |turn-str
+      :name |turn-string
       :tags $ #{} :native
       :desc "|turn something into a string"
       :snippets $ []
-        quote $ turn-str :key
-        quote $ turn-str 'key
-        quote $ turn-str 1
+        quote $ turn-string :key
+        quote $ turn-string 'key
+        quote $ turn-string 1
     {}
       :name |turn-symbol
       :tags $ #{} :native
@@ -1584,3 +1584,11 @@
       :snippets $ []
         {}
           :code $ quote $ with-cpu-time $ + 1 2
+    {}
+      :name |get-char-code
+      :wip? true
+      :tags $ #{} :native
+      :desc "|get char code of a single character of string(not ready for Chinese characters yet)"
+      :snippets $ []
+        {}
+          :code $ quote $ get-char-code |a
