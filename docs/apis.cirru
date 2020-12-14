@@ -1639,3 +1639,12 @@
         {}
           :code $ quote $ re-find-all |\d+ |1a2a34
           :result $ quote $ [] |1 |2 |34
+    {}
+      :name |call-with-log
+      :tags $ #{} :debug :macro
+      :desc "|for debug purpose, add log to a function call"
+      :snippets $ []
+        {}
+          :code $ quote
+            call-with-log + 1 2
+          :desc "|prints expression and arguments for debugging"
