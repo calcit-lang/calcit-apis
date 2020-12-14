@@ -403,13 +403,13 @@
       :snippets $ []
         quote $ reverse $ [] 1 2 3 4
     {}
-      :name |turn-str
+      :name |turn-string
       :tags $ #{} :native
       :desc "|turn something into a string"
       :snippets $ []
-        quote $ turn-str :key
-        quote $ turn-str 'key
-        quote $ turn-str 1
+        quote $ turn-string :key
+        quote $ turn-string 'key
+        quote $ turn-string 1
     {}
       :name |turn-symbol
       :tags $ #{} :native
@@ -1584,3 +1584,58 @@
       :snippets $ []
         {}
           :code $ quote $ with-cpu-time $ + 1 2
+    {}
+      :name |get-char-code
+      :wip? true
+      :tags $ #{} :native
+      :desc "|get char code of a single character of string(not ready for Chinese characters yet)"
+      :snippets $ []
+        {}
+          :code $ quote $ get-char-code |a
+    {}
+      :name |re-matches
+      :wip? true
+      :tags $ #{} :native
+      :desc "|match string with regular expression"
+      :snippets $ []
+        {}
+          :code $ quote $ re-matches |\d |2
+          :result $ quote $ do true
+        {}
+          :code $ quote $ re-matches |\d+ |23
+          :result $ quote $ do true
+        {}
+          :code $ quote $ re-matches |\d |a
+          :result $ quote $ do false
+
+    {}
+      :name |re-find-index
+      :wip? true
+      :tags $ #{} :native
+      :desc "|get char code of a single character of string(not ready for Chinese characters yet)"
+      :snippets $ []
+        {}
+          :code $ quote $ re-find-index |\d |a1
+          :result $ quote $ do 1
+        {}
+          :code $ quote $ re-find-index |\d |aa
+          :result $ quote $ do -1
+
+    {}
+      :name |re-fine-all
+      :wip? true
+      :tags $ #{} :native
+      :desc "|get char code of a single character of string(not ready for Chinese characters yet)"
+      :snippets $ []
+        {}
+          :code $ quote $ re-find-all |\d |123
+          :result $ quote $ [] |1 |2 |3
+        {}
+          :code $ quote $ re-find-all |\d+ |123
+          :result $ quote $ [] |123
+        {}
+          :code $ quote $ re-find-all |\d+ |1a2a3
+          :result $ quote $ [] |1 |2 |3
+        {}
+          :code $ quote $ re-find-all |\d+ |1a2a34
+          :result $ quote $ [] |1 |2 |34
