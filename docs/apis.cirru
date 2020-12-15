@@ -1648,3 +1648,21 @@
           :code $ quote
             call-with-log + 1 2
           :desc "|prints expression and arguments for debugging"
+    {}
+      :name |let{}
+      :tags $ #{} :macro
+      :desc "|extracting from map with keywords"
+      :snippets $ []
+        {}
+          :code $ quote
+            macroexpand $ quote
+              let{}
+                (a b) o
+                + a b
+          :result $ quote
+            &let (result__1 o)
+              let
+                  a $ :a result__1
+                  b $ :b result__1
+                + a b
+          :desc "|extracting a map, use the names of symbols as keywords"
