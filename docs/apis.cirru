@@ -1543,6 +1543,7 @@
               echo (quote $ + 1 2) |=> v__1
               , v__1
     {}
+<<<<<<< HEAD
       :name |dual-balanced-ternary
       :tags $ #{} :ternary
       :desc "|create a dual balanced ternary value from 2 numbers"
@@ -1666,3 +1667,11 @@
                   b $ :b result__1
                 + a b
           :desc "|extracting a map, use the names of symbols as keywords"
+    {}
+      :name |display-stack
+      :tags $ #{} :debug
+      :desc "|display call stack information at current position"
+      :snippets $ []
+        {}
+          :code $ quote
+            display-stack "|identifier message"
