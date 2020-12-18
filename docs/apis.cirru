@@ -1543,19 +1543,18 @@
               echo (quote $ + 1 2) |=> v__1
               , v__1
     {}
-<<<<<<< HEAD
       :name |dual-balanced-ternary
       :tags $ #{} :ternary
       :desc "|create a dual balanced ternary value from 2 numbers"
       :snippets $ []
         quote $ dual-balanced-ternary 1.1 1.1
     {}
-      :name |ternary->point
+      :name |dbt->point
       :tags $ #{} :ternary
       :desc "|return a list of 2 numbers from a dual balanced ternary value"
       :snippets $ []
         {}
-          :code $ quote $ ternary->point &4
+          :code $ quote $ dbt->point &4
           :result $ quote $ [] 1 -1
     {}
       :name |quit
@@ -1675,3 +1674,13 @@
         {}
           :code $ quote
             display-stack "|identifier message"
+    {}
+      :name |dbt-digits
+      :tags $ #{} :dual-balanced-ternary
+      :desc "|get list of digits from a dual-balanced-ternary value"
+      :snippets $ []
+        {}
+          :code $ quote
+            dbt-digits &34.56
+          :result $ quote
+            [] (1 &3) (0 &4) (-1 &5) (-2 &6)
