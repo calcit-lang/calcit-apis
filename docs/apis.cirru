@@ -630,7 +630,13 @@
       :tags $ #{} :native :list
       :desc "|Haskell's foldl function, implemented i Nim for performance"
       :snippets $ []
-        quote $ foldl + acc 0
+        quote $ foldl + 0 acc
+    {}
+      :name |reduce
+      :tags $ #{} :native :list
+      :desc "|just an alias for foldl"
+      :snippets $ []
+        quote $ reduce + 0 acc
     {}
       :name |unless
       :tags $ #{} :macro
@@ -692,7 +698,7 @@
       :tags $ #{} :list
       :desc "|internal function for generation comparing functions"
       :snippets $ []
-        quote $ foldl-compare &< ([] 2 3 4) 1
+        quote $ foldl-compare &< 1 ([] 2 3 4)
     {}
       :name |<
       :tags $ #{} :number
