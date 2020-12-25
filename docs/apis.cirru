@@ -1250,6 +1250,12 @@
       :snippets $ []
         quote $ inc 10
     {}
+      :name |dec
+      :tags $ #{} :number
+      :desc "|substract 1 to a number"
+      :snippets $ []
+        quote $ dec 10
+    {}
       :name |assoc-in
       :tags $ #{}
       :desc "|assoc a field deep inside"
