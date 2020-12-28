@@ -742,6 +742,12 @@
       :snippets $ []
         quote $ apply f $ [] 1 2 3 4
     {}
+      :name |apply-args
+      :tags $ #{}
+      :desc "|like `apply` but list of arguments are placed first"
+      :snippets $ []
+        quote $ apply-args ([] 1 2 3 4) f
+    {}
       :name |list?
       :tags $ #{}
       :desc "|detects a list"
@@ -813,8 +819,19 @@
       :tags $ #{} :list
       :desc "|take a list and a function and call each item with function"
       :snippets $ []
-        quote $ each ([] 1 2 3 4) $ fn (x)
-          echo x
+        quote $ each
+          fn (x)
+            echo x
+          range 4
+    {}
+      :name |&doseq
+      :tags $ #{} :list
+      :desc "|take item from list and run a piece of code with it"
+      :snippets $ []
+        quote
+          &doseq
+            idx $ range 4
+            echo idx
     {}
       :name |map
       :tags $ #{} :list
@@ -1249,6 +1266,12 @@
       :desc "|add 1 to a number"
       :snippets $ []
         quote $ inc 10
+    {}
+      :name |dec
+      :tags $ #{} :number
+      :desc "|substract 1 to a number"
+      :snippets $ []
+        quote $ dec 10
     {}
       :name |assoc-in
       :tags $ #{}
