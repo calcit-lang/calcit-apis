@@ -1338,12 +1338,6 @@
         quote $ trim "|  a  "
         quote $ trim "|__a__" |_
     {}
-      :name |set-trace-fn!
-      :tags $ #{} :debug
-      :desc "|set a ns/def for debug tracing, arguments and results will be printed. unstable"
-      :snippets $ []
-        quote $ set-trace-fn! |app.main |f1
-    {}
       :name |join
       :tags $ #{} :list
       :desc "|join list of items with a separator"
@@ -1677,6 +1671,14 @@
           :code $ quote
             call-with-log + 1 2
           :desc "|prints expression and arguments for debugging"
+    {}
+      :name |defn-with-log
+      :tags $ #{} :debug :macro
+      :desc "|for debugging, wrap function with logs"
+      :snippets $ []
+        {}
+          :code $ quote
+            defn-with-log f (a b) (+ a b)
     {}
       :name |let{}
       :tags $ #{} :macro
