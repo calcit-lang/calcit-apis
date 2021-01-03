@@ -1715,3 +1715,20 @@
             dbt-digits &34.56
           :result $ quote
             [] (1 &3) (0 &4) (-1 &5) (-2 &6)
+    {}
+      :name |timeout-call
+      :tags $ #{} :native
+      :desc "|like `setTimeout` but args in different order"
+      :snippets $ []
+        {}
+          :code $ quote
+            timeout-call 100
+              fn () (echo "|100ms passed")
+    {}
+      :name |&get-calcit-backend
+      :tags $ #{} :native
+      :desc "|detects backend, returns `:nim` or `:js`"
+      :snippets $ []
+        {}
+          :code $ quote
+            &get-calcit-backend
