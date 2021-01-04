@@ -1338,12 +1338,6 @@
         quote $ trim "|  a  "
         quote $ trim "|__a__" |_
     {}
-      :name |set-trace-fn!
-      :tags $ #{} :debug
-      :desc "|set a ns/def for debug tracing, arguments and results will be printed. unstable"
-      :snippets $ []
-        quote $ set-trace-fn! |app.main |f1
-    {}
       :name |join
       :tags $ #{} :list
       :desc "|join list of items with a separator"
@@ -1678,6 +1672,14 @@
             call-with-log + 1 2
           :desc "|prints expression and arguments for debugging"
     {}
+      :name |defn-with-log
+      :tags $ #{} :debug :macro
+      :desc "|for debugging, wrap function with logs"
+      :snippets $ []
+        {}
+          :code $ quote
+            defn-with-log f (a b) (+ a b)
+    {}
       :name |let{}
       :tags $ #{} :macro
       :desc "|extracting from map with keywords"
@@ -1713,3 +1715,20 @@
             dbt-digits &34.56
           :result $ quote
             [] (1 &3) (0 &4) (-1 &5) (-2 &6)
+    {}
+      :name |timeout-call
+      :tags $ #{} :native
+      :desc "|like `setTimeout` but args in different order"
+      :snippets $ []
+        {}
+          :code $ quote
+            timeout-call 100
+              fn () (echo "|100ms passed")
+    {}
+      :name |&get-calcit-backend
+      :tags $ #{} :native
+      :desc "|detects backend, returns `:nim` or `:js`"
+      :snippets $ []
+        {}
+          :code $ quote
+            &get-calcit-backend
