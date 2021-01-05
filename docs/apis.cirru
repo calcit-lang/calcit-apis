@@ -490,13 +490,13 @@
     {}
       :name |keys
       :tags $ #{} :native :map
-      :desc "|returns a list of keys of a map"
+      :desc "|returns a set of keys of a map"
       :snippets $ []
         quote $ keys $ {} (:a 1) (:b 2)
     {}
       :name |vals
       :tags $ #{} :native :map
-      :desc "|returns a list of values of a map"
+      :desc "|returns a set of values of a map"
       :snippets $ []
         quote $ vals $ {} (:a 1) (:b 2)
     {}
@@ -837,8 +837,15 @@
       :tags $ #{} :list
       :desc "|map items of list into a new list"
       :snippets $ []
-        quote $ map ([] 1 2 3 4) $ fn (x)
-          + x 1
+        {}
+          :code $ quote $ map
+            fn (x) $ + x 1
+            [] 1 2 3 4
+          :result $ quote $ [] 2 3 4 5
+        {}
+          :code $ quote $ map inc (#{} 1 2 3)
+          :result $ quote $ #{} 2 3 4
+          :desc "|maps a set to a set, order is not ensured"
     {}
       :name |take
       :tags $ #{} :list
@@ -1172,7 +1179,7 @@
       :snippets $ []
         {}
           :code $ quote $ to-pairs $ {} (:a 1) (:b 2)
-          :result $ quote $ []
+          :result $ quote $ #{}
             [] :a 1
             [] :b 2
     {}
@@ -1739,3 +1746,11 @@
         {}
           :code $ quote
             &get-calcit-backend
+    {}
+      :name |set->list
+      :tags $ #{} :set
+      :desc "|turn a set into a list with a given(more like random) order"
+      :snippets $ []
+        {}
+          :code $ quote
+            set->list $ #{} 1 2 3
