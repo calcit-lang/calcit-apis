@@ -1225,6 +1225,13 @@
       :snippets $ []
         quote $ assert= 2 (+ x 1)
     {}
+      :name |assert-detect
+      :tags $ #{} :macro
+      :desc "|debugging macro for detecting a value"
+      :snippets $ []
+        quote $ assert-detect fn? &+
+        quote $ assert-detect bool? true
+    {}
       :name |defatom
       :tags $ #{} :syntax :atom
       :desc "|creating an atom of states. it requires a name, and currently not atomic, just states"
