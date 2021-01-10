@@ -668,6 +668,12 @@
           :code $ quote $ macroexpand $ quote $ when true 1 2 3
           :result $ quote $ quote $ if true $ do 1 2 3
     {}
+      :name |when-not
+      :tags $ #{} :macro
+      :desc "|when but using not"
+      :snippets $ []
+        quote $ when-not (> 0 1) $ echo "|1 is larger"
+    {}
       :name |+
       :tags $ #{} :number :ternary
       :desc "|add multiple numbers"
@@ -1754,3 +1760,16 @@
         {}
           :code $ quote
             set->list $ #{} 1 2 3
+    {}
+      :name |aget
+      :tags $ #{} :js
+      :desc "|(js only) read a property on object"
+      :snippets $ []
+        quote $ aget js/document |body
+            {}
+    {}
+      :name |aset
+      :tags $ #{} :js
+      :desc "|(js only) write to a property on object"
+      :snippets $ []
+        quote $ aset js/document.body.innerHTML |demo
