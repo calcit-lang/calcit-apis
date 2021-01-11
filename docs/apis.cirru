@@ -1718,6 +1718,20 @@
                 + a b
           :desc "|extracting a map, use the names of symbols as keywords"
     {}
+      :name |let[]
+      :tags $ #{} :macro
+      :desc "|extracting from list"
+      :snippets $ []
+        {}
+          :code $ quote
+            let[]
+              a b & c
+              [] 1 2 3 4
+              [] a b c
+          :result $ quote
+            [] 1 2 ([] 3 4)
+          :desc "|`&` is like argument spreading"
+    {}
       :name |display-stack
       :tags $ #{} :debug
       :desc "|display call stack information at current position"
