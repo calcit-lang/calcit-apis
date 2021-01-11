@@ -1761,15 +1761,47 @@
           :code $ quote
             set->list $ #{} 1 2 3
     {}
+      :name |to-js-data
+      :tags $ #{} :js
+      :desc "|(js only) convert calcit data to plain js data object"
+      :snippets $ []
+        quote $ to-js-data $ {} (:a 1)
+    {}
+      :name |to-calcit-data
+      :tags $ #{} :js
+      :desc "|(js only) convert from js data object to calcit data"
+      :snippets $ []
+        quote $ to-calcit-data $ js/window.performance
+    {}
       :name |aget
       :tags $ #{} :js
       :desc "|(js only) read a property on object"
       :snippets $ []
         quote $ aget js/document |body
-            {}
     {}
       :name |aset
       :tags $ #{} :js
       :desc "|(js only) write to a property on object"
       :snippets $ []
         quote $ aset js/document.body.innerHTML |demo
+    {}
+      :name |to-cirru-edn
+      :tags $ #{} :js
+      :desc "|(js only) convert data to array based Cirru EDN format"
+      :snippets $ []
+        {}
+          :code
+            quote $ to-cirru-edn $ {}
+              :a $ [] :b :c
+          :result $ quote
+            to-js-data $ [] |{}
+              [] |:a $ [] |[] |:b |:c
+    {}
+      :name |extract-cirru-edn
+      :tags $ #{} :js
+      :desc "|(js only) get data from array based Cirru EDN format"
+      :snippets $ []
+        quote
+          extract-cirru-edn
+            to-js-data $ [] |{}
+              [] |:a $ [] |[] |:b |:c
