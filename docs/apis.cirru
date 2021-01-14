@@ -726,9 +726,15 @@
     {}
       :name |/=
       :tags $ #{}
-      :desc "|compare 2 numbers"
+      :desc "|not equal of 2 values"
       :snippets $ []
         quote $ /= 1 2
+    {}
+      :name |not=
+      :tags $ #{}
+      :desc "|alias for `/=`"
+      :snippets $ []
+        quote $ not= 1 2
     {}
       :name |>=
       :tags $ #{} :number
