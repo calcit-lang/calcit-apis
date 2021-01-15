@@ -385,6 +385,15 @@
         quote $ empty? $ []
         quote $ empty? $ {}
     {}
+      :name |blank?
+      :tags $ #{} :native :string
+      :desc "|detects empty string or only whitespaces"
+      :snippets $ []
+        quote $ blank? nil
+        quote $ blank? |
+        quote $ blank? "| "
+        quote $ blank? "|\n"
+    {}
       :name |last
       :tags $ #{} :native :list
       :desc "|return last item of list"
