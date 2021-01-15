@@ -1834,3 +1834,10 @@
           extract-cirru-edn
             to-js-data $ [] |{}
               [] |:a $ [] |[] |:b |:c
+    {}
+      :name |exists?
+      :tags $ #{} :js
+      :desc "|(js only) detects if variable is defined"
+      :snippets $ []
+        quote
+          exists? x
