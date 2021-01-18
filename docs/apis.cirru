@@ -548,6 +548,12 @@
       :snippets $ []
         quote $ parse-cirru-edn "{} (:a 1)"
     {}
+      :name |parse-cirru
+      :tags $ #{} :native
+      :desc "|parse Cirru syntax with native parser"
+      :snippets $ []
+        quote $ parse-cirru "def f (x) y"
+    {}
       :name |sqrt
       :tags $ #{} :native :number
       :desc "|square root of number"
@@ -745,6 +751,12 @@
       :desc "|alias for `/=`"
       :snippets $ []
         quote $ not= 1 2
+    {}
+      :name |compare-string
+      :tags $ #{}
+      :desc "|compare order of two strings, retuns `-1` `0` or `1`"
+      :snippets $ []
+        quote $ compare-string |a |b
     {}
       :name |>=
       :tags $ #{} :number
