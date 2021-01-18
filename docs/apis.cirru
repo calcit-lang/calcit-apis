@@ -7,7 +7,8 @@
       :desc "|create functions on namespaces"
       :snippets $ []
         quote $ defn (a b) $ + a b
-        quote $ defn (a $ xs) echo a xs
+        quote $ defn (a $ xs)
+          echo a xs
     {}
       :name |fn
       :tags $ #{} :macro
@@ -278,8 +279,8 @@
       :snippets $ []
         quote $ read-file |demo.md
     {}
-      :name |write-file :io
-      :tags $ #{} :native
+      :name |write-file
+      :tags $ #{} :native :io
       :desc "|write string content to a relative file path"
       :snippets $ []
         quote $ write-file |demo.md "|some content"
@@ -1011,20 +1012,20 @@
       :snippets $ []
         quote $ min $ [] 1 2 3 4
     {}
-      :name |every? :list
-      :tags $ #{}
+      :name |every?
+      :tags $ #{} :list
       :desc "|detects if every item in list satisfies function"
       :snippets $ []
         quote $ every? (fn (x) (> x 1)) ([] 1 2 3 4)
     {}
-      :name |any? :list
-      :tags $ #{}
+      :name |any?
+      :tags $ #{} :list
       :desc "|detects if any item in list satisfies function"
       :snippets $ []
         quote $ any? (fn (x) (> x 1)) ([] 1 2 3 4)
     {}
-      :name |concat :list
-      :tags $ #{}
+      :name |concat
+      :tags $ #{} :list
       :desc "|concat mutiple lists"
       :snippets $ []
         quote $ concat ([] 1 2) ([] 3 4) ([] 5 6)
