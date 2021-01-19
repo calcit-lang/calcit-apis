@@ -1,29 +1,7 @@
 {
-  "name": "calcit-workflow",
-  "version": "0.1.0",
-  "description": "ClojureScript workflow using Calcit Editor",
-  "main": "index.js",
-  "scripts": {
-    "deploy": "clj -A:release",
-    "m2": "clj -A:release install",
-    "watch": "shadow-cljs watch client",
-    "build-cdn": "shadow-cljs clj-run build.main/build-cdn",
-    "build": "shadow-cljs clj-run build.main/build",
-    "up": "yarn build-cdn && tiye-up",
-    "page": "shadow-cljs clj-run build.main/page",
-    "ln": "cd target && rm -f entry && ln -s ../entry"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:mvc-works/calcit-workflow.git"
-  },
-  "author": "jiyinyiyong",
-  "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
-    "shadow-cljs": "^2.11.7"
+    "vite": "^2.0.0-beta.23"
   },
-  "dependencies": {
-    "feather-icons": "^4.28.0",
-    "shortid": "^2.2.16"
-  }
+  "version": "0.0.1"
 }
