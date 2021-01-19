@@ -8,6 +8,15 @@
           :require ([] respo.util.format :refer $ [] hsl) ([] respo-ui.core :as ui) ([] respo.core :refer $ [] defcomp defeffect <> >> div button textarea span input list-> pre) ([] respo.comp.space :refer $ [] =<) ([] reel.comp.reel :refer $ [] comp-reel) ([] respo-md.comp.md :refer $ [] comp-md) ([] app.config :refer $ [] dev?) ([] respo-md.comp.md :refer $ [] comp-md) ([] calcit-theme.comp.expr :refer $ [] render-expr) ([] cirru-writer.core :refer $ [] write-code)
           :require-macros $ [] clojure.core.strint :refer ([] <<)
       :defs $ {}
+        |stringify-cirru $ quote
+          defn stringify-cirru (x)
+            cond
+                string? x
+                escape x
+              (list? x)
+                str "\"[" (join-str "\"," $ map stringify-cirru x) (, "\"]")
+              true $ raise
+                str "\"Unknown type: " (type-of x) x
         |comp-cirru-ui-switcher $ quote
           defcomp comp-cirru-ui-switcher (state cursor)
             list->
@@ -30,6 +39,8 @@
                       :on-click $ fn (e d!)
                         d! cursor $ assoc state :syntax (:value item)
                     <> $ :display item
+        |apis-data $ quote
+          def apis-data $ extract-cirru-edn (js/JSON.parse $ slurp-cirru-edn "\"docs/apis.cirru")
         |comp-api-entry $ quote
           defcomp comp-api-entry (info syntax)
             div
@@ -99,9 +110,7 @@
                 cursor $ either (:cursor states) ([])
                 state $ either (:data states)
                   {} (:query "\"") (:selected-tags $ #{}) (:syntax :lisp) (:wip? false)
-                data $ extract-cirru-edn
-                  wrap-literals $ js/JSON.parse (slurp-cirru-edn "\"docs/apis.cirru")
-                visible-apis $ ->> (:apis data)
+                visible-apis $ ->> (:apis apis-data)
                   filter $ fn (info)
                     and
                       if (:wip? state) (:wip? info) (, true)
@@ -173,25 +182,7 @@
               true $ str "\"TODO: " (str xs)
         |slurp-cirru-edn $ quote
           defmacro slurp-cirru-edn (file)
-            stringify-json
-              first $ parse-cirru (read-file file)
-              , true
-        |wrap-literals $ quote
-          defn wrap-literals (xs)
-            cond
-                nil? xs
-                , |null
-              (list? xs)
-                map wrap-literals xs
-              (number? xs)
-                turn-string xs
-              (bool? xs)
-                turn-string xs
-              (symbol? xs)
-                turn-string xs
-              (string? xs)
-                , xs
-              true $ raise "\"Unknown data for converting"
+            stringify-cirru $ first (parse-cirru $ read-file file)
         |comp-wip-switcher $ quote
           defcomp comp-wip-switcher (state cursor)
             div
