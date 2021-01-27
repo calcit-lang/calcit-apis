@@ -99,7 +99,7 @@
         {}
           :code $ quote $ macroexpand $ quote $ {} (:a 1) (:b $ + 2 3)
           :desc "|expands to &{}, which creates a map"
-          :result $ quote $ quote $ &{} ([] :a 1) ([] :b $ + 2 3)
+          :result $ quote $ quote $ &{} :a 1 :b $ + 2 3
     {}
       :name |if
       :tags $ #{} :syntax
@@ -1252,12 +1252,10 @@
     {}
       :name |&{}
       :tags $ #{} :map
-      :desc "|internal function for `{}`, creating with arrays"
+      :desc "|internal implementation for `{}`, creating with even number of items"
       :snippets $ []
         {}
-          :code $ quote $ &{}
-            [] :a 1
-            [] :b 2
+          :code $ quote $ &{} :a 1 :b 2
           :result $ quote $ {} (:a 1) (:b 2)
     {}
       :name |assert=
