@@ -387,13 +387,13 @@
               |r $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1611040177451)
                 :data $ {}
                   |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1611040177451) (:text |extract-cirru-edn)
-                  |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1611040177451)
+                  |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1611846389472)
                     :data $ {}
-                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1611040177451) (:text |js/JSON.parse)
-                      |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1611040177451)
+                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1611846389472) (:text |js/JSON.parse)
+                      |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1611846389472)
                         :data $ {}
-                          |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1611040177451) (:text |slurp-cirru-edn)
-                          |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1611040177451) (:text "|\"docs/apis.cirru")
+                          |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1611846389472) (:text |slurp-cirru-edn)
+                          |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1611846389472) (:text "|\"docs/apis.cirru")
           |comp-api-entry $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1603363201369)
             :data $ {}
               |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1603363205264) (:text |defcomp)
@@ -1012,10 +1012,10 @@
                                                 :data $ {}
                                                   |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1603363499529) (:text |:wip?)
                                                   |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1603363501502) (:text |info)
-                              |b $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1603123017145)
+                              |b $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1611845210028)
                                 :data $ {}
-                                  |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1603123017145) (:text |:apis)
-                                  |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1611040199013) (:text |apis-data)
+                                  |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1611845210028) (:text |:apis)
+                                  |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1611845210028) (:text |apis-data)
                   |T $ {} (:type :expr) (:at 1499755354983)
                     :data $ {}
                       |T $ {} (:type :leaf) (:by |root) (:at 1499755354983) (:text |div)

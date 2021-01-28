@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@calcit/procs": "^0.2.39",
+    "@calcit/procs": "^0.2.40",
     "@calcit/ternary-tree": "^0.0.7"
   },
   "devDependencies": {
