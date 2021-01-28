@@ -2,10 +2,17 @@
 # yarn lockfile v1
 
 
-"@calcit/ternary-tree@^0.0.4-a2":
-  version "0.0.4-a2"
-  resolved "https://registry.npmjs.org/@calcit/ternary-tree/-/ternary-tree-0.0.4-a2.tgz#674e50b056bebc6abb7fa3d0931d96a8e9be399b"
-  integrity sha512-HjVNGu6relbRS4+mrLMOw1iG1jwb0yYrX/7uTVxfOJmgQAniErT9qK3G0BaEDQfQcw/Uots4Gzu1vtPNEYn0cQ==
+"@calcit/procs@^0.2.39":
+  version "0.2.39"
+  resolved "https://registry.yarnpkg.com/@calcit/procs/-/procs-0.2.39.tgz#c57dc4d6e6e1e489cce38e3b329ae886ff52153c"
+  integrity sha512-SiY8LybkO4gjPK3YLcVAdlWdZYaaTbDb5VpDbjpIbkaGoKWxjz4lPV3Bs8C7ZgmWK0pzgjCFetd5ENU8upCP7g==
+  dependencies:
+    "@calcit/ternary-tree" "0.0.7"
+
+"@calcit/ternary-tree@0.0.7", "@calcit/ternary-tree@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@calcit/ternary-tree/-/ternary-tree-0.0.7.tgz#ae41e3b02cc51f6ff08aa11c7db4cbd4c55440d5"
+  integrity sha512-7MCgpJ36yVvObQYE+budozGLtvHzZU50bh3PyCa2j/B9fcpdRaDESyrZu7DEPaaE+FDAS/ivAzNIXKLBPImqug==
 
 colorette@^1.2.1:
   version "1.2.1"

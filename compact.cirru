@@ -5,7 +5,7 @@
     |app.comp.container $ {}
       :ns $ quote
         ns app.comp.container
-          :require ([] respo.util.format :refer $ [] hsl) ([] respo-ui.core :as ui) ([] respo.core :refer $ [] defcomp defeffect <> >> div button textarea span input list-> pre) ([] respo.comp.space :refer $ [] =<) ([] reel.comp.reel :refer $ [] comp-reel) ([] respo-md.comp.md :refer $ [] comp-md) ([] app.config :refer $ [] dev?) ([] respo-md.comp.md :refer $ [] comp-md) ([] calcit-theme.comp.expr :refer $ [] render-expr) ([] cirru-writer.core :refer $ [] write-code)
+          :require ([] respo.util.format :refer $ [] hsl) ([] respo-ui.core :as ui) ([] respo.core :refer $ [] defcomp defeffect <> >> div button textarea span input list-> pre) ([] respo.comp.space :refer $ [] =<) ([] reel.comp.reel :refer $ [] comp-reel) ([] respo-md.comp.md :refer $ [] comp-md) ([] app.config :refer $ [] dev?) ([] respo-md.comp.md :refer $ [] comp-md) ([] calcit-theme.comp.expr :refer $ [] render-expr) ([] cirru-writer.core :refer $ [] write-code) ([] memof.alias :refer $ [] memof-call)
           :require-macros $ [] clojure.core.strint :refer ([] <<)
       :defs $ {}
         |stringify-cirru $ quote
@@ -125,7 +125,7 @@
                 div
                   {} $ :style
                     merge ui/expand ui/column $ {} (:max-width 800) (:margin "\"0 auto") (:background-color :white) (:padding "\"20px 20px")
-                  comp-tags-list state cursor
+                  memof-call comp-tags-list state cursor
                   =< nil 8
                   div ({} $ :style ui/row-parted)
                     input $ {}
@@ -134,7 +134,7 @@
                       :placeholder "\"search"
                       :on-input $ fn (e d!)
                         d! cursor $ assoc state :query (:value e)
-                    div ({} $ :style ui/row-middle) (comp-cirru-ui-switcher state cursor) (=< 12 nil) (comp-wip-switcher state cursor)
+                    div ({} $ :style ui/row-middle) (memof-call comp-cirru-ui-switcher state cursor) (=< 12 nil) (memof-call comp-wip-switcher state cursor)
                   =< nil 8
                   div ({})
                     <>
@@ -146,7 +146,7 @@
                       sort $ fn (a b)
                         compare-string (:name a) (:name b)
                       map $ fn (info)
-                        [] (:name info) (comp-api-entry info $ :syntax state)
+                        [] (:name info) (memof-call comp-api-entry info $ :syntax state)
                 when dev? $ comp-reel (>> states :reel) reel ({})
         |comp-tags-list $ quote
           defcomp comp-tags-list (state cursor)
