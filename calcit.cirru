@@ -1640,35 +1640,6 @@
             |T $ {} (:type :leaf) (:by |root) (:at 1527788237503) (:text |ns)
             |j $ {} (:type :leaf) (:by |root) (:at 1527788237503) (:text |app.config)
         :defs $ {}
-          |cdn? $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1544873887168)
-            :data $ {}
-              |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1544873887168) (:text |def)
-              |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1544873887168) (:text |cdn?)
-              |r $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1544873887168)
-                :data $ {}
-                  |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1544873887168) (:text |cond)
-                  |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1544873887168)
-                    :data $ {}
-                      |T $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1544873887168)
-                        :data $ {}
-                          |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1544873887168) (:text |exists?)
-                          |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1544873887168) (:text |js/window)
-                      |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1544873887168) (:text |false)
-                  |r $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1544873887168)
-                    :data $ {}
-                      |T $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1544873887168)
-                        :data $ {}
-                          |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1544873887168) (:text |exists?)
-                          |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1544873887168) (:text |js/process)
-                      |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1544873887168)
-                        :data $ {}
-                          |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1544873887168) (:text |=)
-                          |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1544873887168) (:text "|\"true")
-                          |r $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1544873887168) (:text |js/process.env.cdn)
-                  |v $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1544873887168)
-                    :data $ {}
-                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1544873887168) (:text |:else)
-                      |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1544873887168) (:text |false)
           |dev? $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1544873875614)
             :data $ {}
               |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1544873875614) (:text |def)
