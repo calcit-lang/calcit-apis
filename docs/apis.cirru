@@ -499,10 +499,18 @@
         quote $ assoc-after ([] 1 2 3) 1 10
     {}
       :name |keys
-      :tags $ #{} :native :map
+      :tags $ #{} :map
       :desc "|returns a set of keys of a map"
       :snippets $ []
         quote $ keys $ {} (:a 1) (:b 2)
+    {}
+      :name |keys-non-nil
+      :tags $ #{} :map
+      :desc "|returns a set of keys of a map whose values are not nil"
+      :snippets $ []
+        {}
+          :code $ quote $ keys $ {} (:a 1) (:b 2) (:c nil)
+          :result $ quote $ #{} :a :b
     {}
       :name |vals
       :tags $ #{} :native :map

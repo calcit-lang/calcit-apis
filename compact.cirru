@@ -215,7 +215,7 @@
             reset! *reel $ reel-updater updater @*reel op op-data
         |main! $ quote
           defn main! () (println "\"Running mode:" $ if config/dev? "\"dev" "\"release") (if ssr? $ render-app! realize-ssr!) (render-app! render!)
-            add-watch *reel :changes $ fn () (render-app! render!)
+            add-watch *reel :changes $ fn (reel prev-reel) (render-app! render!)
             listen-devtools! |a dispatch!
             ; .addEventListener js/window |beforeunload persist-storage!
             ; repeat! 60 persist-storage!
