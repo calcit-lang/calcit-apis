@@ -1741,8 +1741,7 @@
         {}
           :code $ quote
             macroexpand $ quote
-              let{}
-                (a b) o
+              let{} (a b) o
                 + a b
           :result $ quote
             &let (result__1 o)
@@ -1765,6 +1764,25 @@
           :result $ quote
             [] 1 2 ([] 3 4)
           :desc "|`&` is like argument spreading"
+    {}
+      :name |let-destruct
+      :tags $ #{} :macro
+      :desc "|helper macro for directing any of: &let let{} let[]"
+      :snippets $ []
+        quote $ let-destruct a 1 a
+        quote $ let-destruct ([] a b) ([] 1 2) a
+        quote $ let-destruct ({} a b) ({,} :a 1 :b 2) a
+    {}
+      :name |let-sugar
+      :tags $ #{} :macro
+      :desc "|let macro with more sugars"
+      :snippets $ []
+        quote $
+          let-sugar
+              a 1
+              ([] b c) ([] 1 2)
+              ({} d e) ({,} :d 1 :e 2)
+            [] a b c d e
     {}
       :name |display-stack
       :tags $ #{} :debug
