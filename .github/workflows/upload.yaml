@@ -23,10 +23,10 @@ jobs:
         && git clone https://github.com/calcit-lang/memof.git
         && git clone https://github.com/Respo/respo.calcit.git
         && git clone https://github.com/Respo/reel.calcit.git
-        && git clone https://github.com/Respo/respo-markdown.calcit.git
+        && git clone https://github.com/Respo/respo-markdown.calcit.git --branch 0.3.2
         && git clone https://github.com/Respo/respo-ui.calcit.git
         && git clone https://github.com/Cirru/calcit-theme.calcit.git
-        && git clone https://github.com/Cirru/writer.calcit.git --branch 0.2.1
+        && git clone https://github.com/Cirru/writer.calcit.git
 
     - name: "compiles to js"
       run: >
