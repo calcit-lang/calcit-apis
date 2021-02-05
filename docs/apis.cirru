@@ -1849,7 +1849,19 @@
       :tags $ #{} :js
       :desc "|(js only) write to a property on object"
       :snippets $ []
-        quote $ aset js/document.body.innerHTML |demo
+        quote $ aset js/document.body |innerHTML |demo
+    {}
+      :name |set!
+      :tags $ #{} :js
+      :desc "|(js only) modify property of an JavaScript object"
+      :snippets $ []
+        quote $ set! js/document.body.innerHTML |demo
+    {}
+      :name |new
+      :tags $ #{} :js
+      :desc "|(js only) just generate syntax for creating an instance"
+      :snippets $ []
+        quote $ new js/Array 10
     {}
       :name |to-cirru-edn
       :tags $ #{} :js
