@@ -1816,6 +1816,14 @@
           :code $ quote
             &get-calcit-backend
     {}
+      :name |&get-calcit-running-mode
+      :tags $ #{} :native
+      :desc "|detects compiler, returns `:eval` or `:js` or `:ir`"
+      :snippets $ []
+        {}
+          :code $ quote
+            &get-calcit-running-mode
+    {}
       :name |set->list
       :tags $ #{} :set
       :desc "|turn a set into a list with a given(more like random) order"
