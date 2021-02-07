@@ -2,17 +2,23 @@
 # yarn lockfile v1
 
 
-"@calcit/procs@^0.2.40":
-  version "0.2.40"
-  resolved "https://registry.yarnpkg.com/@calcit/procs/-/procs-0.2.40.tgz#dee23dc6f9a29749744c3aad76c955ffbe6762e0"
-  integrity sha512-qN6iBsPVM3v5nSGPGS0zCmvH1xcpZ5isjvS5PbxhwOIO6uyXEIUejr24zOqpnlOJZH+zyXMMCrviWl3aiEvOIw==
+"@calcit/procs@^0.2.53":
+  version "0.2.53"
+  resolved "https://registry.yarnpkg.com/@calcit/procs/-/procs-0.2.53.tgz#7f04bbbac3db9182ef4af513d12426806468fb4a"
+  integrity sha512-d+bvCHf4rOHuodh7uoifyxDjHkXOD6cEszlZ22IcnpMJ0HuqVRQqRbT1ltNZbBlFgqT3715wlltPVU+y8qGP0g==
   dependencies:
     "@calcit/ternary-tree" "0.0.7"
+    "@cirru/parser.ts" "^0.0.1"
 
 "@calcit/ternary-tree@0.0.7", "@calcit/ternary-tree@^0.0.7":
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/@calcit/ternary-tree/-/ternary-tree-0.0.7.tgz#ae41e3b02cc51f6ff08aa11c7db4cbd4c55440d5"
   integrity sha512-7MCgpJ36yVvObQYE+budozGLtvHzZU50bh3PyCa2j/B9fcpdRaDESyrZu7DEPaaE+FDAS/ivAzNIXKLBPImqug==
+
+"@cirru/parser.ts@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@cirru/parser.ts/-/parser.ts-0.0.1.tgz#0870b051bd9f56626759ec22d7a0d5c51b19fe9c"
+  integrity sha512-FlUWZ2VqIUK/5cG926CVw9fQ7IGQzRDz8NL2Zc1lK2NyvOltAyZEDxxj/ztWjGOOnetVtM5mDx8rsbsr/SLYhg==
 
 colorette@^1.2.1:
   version "1.2.1"

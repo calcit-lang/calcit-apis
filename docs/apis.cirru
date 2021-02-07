@@ -129,15 +129,6 @@
       :snippets $ []
         quote $ &let (a 1) (+ a 1)
     {}
-      :name |let->
-      :tags $ #{} :macro
-      :desc "|syntax sugar on top of &let for reducing nesting"
-      :snippets $ []
-        quote $ let->
-          let a 1
-          let b 2
-          + a b
-    {}
       :name |loop
       :tags $ #{} :macro
       :desc "|like Clojure `loop`, use tail recursion to loop inside expressions"
@@ -1849,7 +1840,19 @@
       :tags $ #{} :js
       :desc "|(js only) write to a property on object"
       :snippets $ []
-        quote $ aset js/document.body.innerHTML |demo
+        quote $ aset js/document.body |innerHTML |demo
+    {}
+      :name |set!
+      :tags $ #{} :js
+      :desc "|(js only) modify property of an JavaScript object"
+      :snippets $ []
+        quote $ set! js/document.body.innerHTML |demo
+    {}
+      :name |new
+      :tags $ #{} :js
+      :desc "|(js only) just generate syntax for creating an instance"
+      :snippets $ []
+        quote $ new js/Array 10
     {}
       :name |to-cirru-edn
       :tags $ #{} :js
