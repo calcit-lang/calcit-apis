@@ -958,6 +958,12 @@
       :snippets $ []
         quote $ ->> a (b) (c d)
     {}
+      :name |->%
+      :tags $ #{} :macro
+      :desc "|thread macro for nested functions, using `%` for argument"
+      :snippets $ []
+        quote $ ->> a (+ % b) (* % c)
+    {}
       :name |cond
       :tags $ #{} :macro
       :desc "|like Clojure cond, but using `true` for else case"
