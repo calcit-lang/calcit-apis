@@ -129,15 +129,6 @@
       :snippets $ []
         quote $ &let (a 1) (+ a 1)
     {}
-      :name |let->
-      :tags $ #{} :macro
-      :desc "|syntax sugar on top of &let for reducing nesting"
-      :snippets $ []
-        quote $ let->
-          let a 1
-          let b 2
-          + a b
-    {}
       :name |loop
       :tags $ #{} :macro
       :desc "|like Clojure `loop`, use tail recursion to loop inside expressions"
