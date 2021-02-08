@@ -975,7 +975,7 @@
     {}
       :name |case
       :tags $ #{} :macro
-      :desc "|like Clojure case, but using value itself for else case"
+      :desc "|like Clojure case, but using value itself for else case, , returns `nil` if no match"
       :snippets $ []
         quote $ case a
           :a |a
@@ -995,9 +995,29 @@
                   if (&= v__1 2) |two
                     if (&= v__1 3) |three nil
     {}
+      :name |case-default
+      :tags $ #{} :macro
+      :desc "|like Clojure case, but using putting default case at 2nd parameter"
+      :snippets $ []
+        quote $ case-default a |else
+          :a |a
+          :b |b
+        {}
+          :code $ quote $ macroexpand-all
+            quote
+              case (+ 1 2) |else
+                1 |one
+                2 |two
+          :result $ quote
+            quote
+              &let (v__3 (+ 1 2))
+                &let (default__4 |else)
+                  if (&= v__3 1) |one
+                    if (&= v__3 2) |two default__4
+    {}
       :name |&case
       :tags $ #{} :macro
-      :desc "|internal helper for case"
+      :desc "|internal helper for case and case-default"
     {}
       :name |get-in
       :tags $ #{} :list :map
