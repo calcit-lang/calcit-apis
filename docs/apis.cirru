@@ -958,6 +958,12 @@
       :snippets $ []
         quote $ ->> a (b) (c d)
     {}
+      :name |->%
+      :tags $ #{} :macro
+      :desc "|thread macro for nested functions, using `%` for argument"
+      :snippets $ []
+        quote $ ->> a (+ % b) (* % c)
+    {}
       :name |cond
       :tags $ #{} :macro
       :desc "|like Clojure cond, but using `true` for else case"
@@ -969,7 +975,7 @@
     {}
       :name |case
       :tags $ #{} :macro
-      :desc "|like Clojure case, but using value itself for else case"
+      :desc "|like Clojure case, but using value itself for else case, , returns `nil` if no match"
       :snippets $ []
         quote $ case a
           :a |a
@@ -989,9 +995,29 @@
                   if (&= v__1 2) |two
                     if (&= v__1 3) |three nil
     {}
+      :name |case-default
+      :tags $ #{} :macro
+      :desc "|like Clojure case, but using putting default case at 2nd parameter"
+      :snippets $ []
+        quote $ case-default a |else
+          :a |a
+          :b |b
+        {}
+          :code $ quote $ macroexpand-all
+            quote
+              case (+ 1 2) |else
+                1 |one
+                2 |two
+          :result $ quote
+            quote
+              &let (v__3 (+ 1 2))
+                &let (default__4 |else)
+                  if (&= v__3 1) |one
+                    if (&= v__3 2) |two default__4
+    {}
       :name |&case
       :tags $ #{} :macro
-      :desc "|internal helper for case"
+      :desc "|internal helper for case and case-default"
     {}
       :name |get-in
       :tags $ #{} :list :map
@@ -1810,6 +1836,14 @@
           :code $ quote
             &get-calcit-backend
     {}
+      :name |&get-calcit-running-mode
+      :tags $ #{} :native
+      :desc "|detects compiler, returns `:eval` or `:js` or `:ir`"
+      :snippets $ []
+        {}
+          :code $ quote
+            &get-calcit-running-mode
+    {}
       :name |set->list
       :tags $ #{} :set
       :desc "|turn a set into a list with a given(more like random) order"
@@ -1853,6 +1887,12 @@
       :desc "|(js only) just generate syntax for creating an instance"
       :snippets $ []
         quote $ new js/Array 10
+    {}
+      :name |instance?
+      :tags $ #{} :js
+      :desc "|(js only) like Clojure `instance?`"
+      :snippets $ []
+        quote $ instance? js/Number a
     {}
       :name |to-cirru-edn
       :tags $ #{} :js
