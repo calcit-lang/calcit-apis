@@ -1888,6 +1888,12 @@
       :snippets $ []
         quote $ new js/Array 10
     {}
+      :name |instance?
+      :tags $ #{} :js
+      :desc "|(js only) like Clojure `instance?`"
+      :snippets $ []
+        quote $ instance? js/Number a
+    {}
       :name |to-cirru-edn
       :tags $ #{} :js
       :desc "|(js only) convert data to array based Cirru EDN format"
