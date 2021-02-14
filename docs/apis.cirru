@@ -472,10 +472,17 @@
     {}
       :name |contains?
       :tags $ #{} :native :map :set
-      :desc "|check if key is contained in map, should work for sets as well"
+      :desc "|check if key is contained in a structure, like indexes of a list"
       :snippets $ []
         quote $ contains? ({} (:a 1) (:b 2)) :a
-        quote $ contains? |abc |b
+        quote $ contains? ([] :a :b :c) 1
+    {}
+      :name |includes?
+      :tags $ #{} :native :map :set
+      :desc "|check if values is included in a structure, like items of a list"
+      :snippets $ []
+        quote $ contains? ({} (:a 1) (:b 2)) 2
+        quote $ contains? |abc |bc
     {}
       :name |assoc-before
       :tags $ #{} :native :list
