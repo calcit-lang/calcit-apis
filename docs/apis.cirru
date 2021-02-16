@@ -103,7 +103,7 @@
     {}
       :name |if
       :tags $ #{} :syntax
-      :desc "|if syntax, when ELSE branch is omitted, it will be `nil`"
+      :desc "|if syntax, any value other than `false` and `nil` are treated as `true`"
       :snippets $ []
         quote $ if (> a 1) |true |false
         quote $ if (> a 1) |just-true
@@ -208,18 +208,6 @@
       :desc "|native `=` function for 2 numbers"
       :snippets $ []
         quote $ &= 2 (+ 1 1)
-    {}
-      :name |&and
-      :tags $ #{} :native
-      :desc "|native `and` function for 2 booleans"
-      :snippets $ []
-        quote $ &and true true
-    {}
-      :name |&or
-      :tags $ #{} :native
-      :desc "|native `or` function for 2 booleans"
-      :snippets $ []
-        quote $ &or false true
     {}
       :name |not
       :tags $ #{} :native :bool
@@ -1517,11 +1505,8 @@
     {}
       :name |and
       :tags $ #{}
-      :desc "|varadic `and` operator, `false` for empty arguments"
+      :desc "|varadic `and` operator, returns value or `false`"
       :snippets $ []
-        {}
-          :code $ quote $ either nil 1
-          :result $ quote $ do 1
         {}
           :code $ quote $ and
           :result $ quote $ do false
@@ -1534,10 +1519,16 @@
         {}
           :code $ quote $ and true true true
           :result $ quote $ do true
+        {}
+          :code $ quote $ and nil 1
+          :result $ quote $ do false
+        {}
+          :code $ quote $ and 1 nil
+          :result $ quote $ do false
     {}
       :name |or
       :tags $ #{}
-      :desc "|varadic `or` operator, `false` for empty arguments"
+      :desc "|varadic `or` operator, returns value or `false`"
       :snippets $ []
         {}
         {}
@@ -1552,6 +1543,12 @@
         {}
           :code $ quote $ or false false true
           :result $ quote $ do true
+        {}
+          :code $ quote $ and nil 1
+          :result $ quote $ do 1
+        {}
+          :code $ quote $ and 1 nil
+          :result $ quote $ do 1
     {}
       :name |&reset-gensym-index!
       :tags $ #{} :native
