@@ -540,13 +540,26 @@
       :tags $ #{} :native
       :desc "|parse data from Cirru EDN format"
       :snippets $ []
-        quote $ parse-cirru-edn "{} (:a 1)"
+        quote $ parse-cirru-edn "|{} (:a 1)"
     {}
       :name |parse-cirru
       :tags $ #{} :native
       :desc "|parse Cirru syntax with native parser"
       :snippets $ []
-        quote $ parse-cirru "def f (x) y"
+        quote $ parse-cirru "|def f (x) y"
+    {}
+      :name |write-cirru
+      :tags $ #{} :native
+      :desc "|generate Cirru syntax with native writer"
+      :snippets $ []
+        quote $ write-cirru $ []
+          [] |a |b $ [] |c |d
+    {}
+      :name |write-cirru-edn
+      :tags $ #{} :native
+      :desc "|generate Cirru syntax from data"
+      :snippets $ []
+        quote $ write-cirru-edn data
     {}
       :name |sqrt
       :tags $ #{} :native :number
