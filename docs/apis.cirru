@@ -1233,6 +1233,10 @@
       :snippets $ []
         quote $ map (\ + x 1) (range 10)
         quote $ map-indexed (\ [] % %2) (range 10)
+        {}
+          :code $ quote $ \x + x 1
+          :result $ quote $ fn (x) (+ x 1)
+          :desc "|special syntax of lambda alias, happening inside preprocessing"
     {}
       :name |contains-symbol?
       :tags $ #{}

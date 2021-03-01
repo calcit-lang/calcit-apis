@@ -2028,6 +2028,27 @@
                 :data $ {}
                   |T $ {} (:type :leaf) (:by |root) (:at 1499755354983) (:text |println)
                   |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1596818890934) (:text "||Code updated.")
+              |v $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1614610456287)
+                :data $ {}
+                  |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610456287) (:text |add-watch)
+                  |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610456287) (:text |*reel)
+                  |r $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610456287) (:text |:changes)
+                  |v $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1614610456287)
+                    :data $ {}
+                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610456287) (:text |fn)
+                      |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1614610456287)
+                        :data $ {}
+                          |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610456287) (:text |reel)
+                          |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610456287) (:text |prev-reel)
+                      |r $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1614610456287)
+                        :data $ {}
+                          |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610456287) (:text |render-app!)
+                          |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610456287) (:text |render!)
+              |s $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1614610459743)
+                :data $ {}
+                  |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610461848) (:text |remove-watch)
+                  |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610463332) (:text |*reel)
+                  |r $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610465053) (:text |:changes)
           |mount-target $ {} (:type :expr) (:at 1499755354983)
             :data $ {}
               |T $ {} (:type :leaf) (:by |root) (:at 1499755354983) (:text |def)
