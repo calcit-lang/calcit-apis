@@ -308,7 +308,8 @@
           defn render-app! (renderer)
             renderer mount-target (comp-container @*reel) (\ dispatch! % %2)
         |reload! $ quote
-          defn reload! () (clear-cache!)
+          defn reload! () (remove-watch *reel :changes) (clear-cache!)
+            add-watch *reel :changes $ fn (reel prev-reel) (render-app! render!)
             reset! *reel $ refresh-reel @*reel schema/store updater
             println "|Code updated."
         |mount-target $ quote

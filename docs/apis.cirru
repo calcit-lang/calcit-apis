@@ -223,9 +223,26 @@
         quote $ count $ {}
         quote $ count $ |abc
     {}
-      :name |get
+      :name |&get
+      :tags $ #{} :native :map
+      :desc "|like Clojure `get` but for map"
+      :snippets $ []
+        quote $ &get
+          {}
+            :a 1
+            :b 2
+          , :a
+    {}
+      :name |nth
       :tags $ #{} :native :map :list
-      :desc "|like Clojure `get`"
+      :desc "|like Clojure `nth`"
+      :snippets $ []
+        quote $ nth ([] 1 2 3) 1
+        quote $ nth |abc 1
+    {}
+      :name |get
+      :tags $ #{} :native :map :list :string
+      :desc "|wrapped `&get` and `nth`, like Clojure `get`"
       :snippets $ []
         quote $ get ([] 1 2 3) 1
         quote $ get
@@ -1216,6 +1233,10 @@
       :snippets $ []
         quote $ map (\ + x 1) (range 10)
         quote $ map-indexed (\ [] % %2) (range 10)
+        {}
+          :code $ quote $ \x + x 1
+          :result $ quote $ fn (x) (+ x 1)
+          :desc "|special syntax of lambda alias, happening inside preprocessing"
     {}
       :name |contains-symbol?
       :tags $ #{}
@@ -1543,7 +1564,6 @@
       :tags $ #{}
       :desc "|varadic `or` operator, returns value or `false`"
       :snippets $ []
-        {}
         {}
           :code $ quote $ or
           :result $ quote $ do false
