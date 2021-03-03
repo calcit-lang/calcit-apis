@@ -1233,10 +1233,23 @@
       :snippets $ []
         quote $ map (\ + x 1) (range 10)
         quote $ map-indexed (\ [] % %2) (range 10)
+    {}
+      :name |\.
+      :tags $ #{} :macro
+      :desc "|alias for lambda expression, use `.` for generating curried function"
+      :snippets $ []
         {}
-          :code $ quote $ \x + x 1
-          :result $ quote $ fn (x) (+ x 1)
-          :desc "|special syntax of lambda alias, happening inside preprocessing"
+          :code $ quote $ \. x (+ x 1)
+          :result $ quote $ defn f_x (x) (+ x 1)
+        {}
+          :code $ quote $ \. x.y (+ x y)
+          :result $ quote $ defn f_x (x)
+            defn f_y (y) (+ x y)
+        {}
+          :code $ quote $ \. x.y.z (+ x y z)
+          :result $ quote $ defn f_x (x)
+            defn f_y (y)
+              defn f_z (z) (+ x y z)
     {}
       :name |contains-symbol?
       :tags $ #{}
