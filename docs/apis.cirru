@@ -1844,7 +1844,7 @@
       :tags $ #{} :macro
       :desc "|let macro with more sugars"
       :snippets $ []
-        quote $
+        quote
           let-sugar
               a 1
               ([] b c) ([] 1 2)
