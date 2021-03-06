@@ -199,7 +199,7 @@
         |comp-tags-list $ quote
           defcomp comp-tags-list (state cursor)
             list-> ({})
-              ->> ([] :list :map :number :string :set :syntax :macro :native)
+              ->> ([] :list :map :number :string :set :syntax :macro :record :native)
                 map $ fn (tag)
                   [] tag $ div
                     {}
@@ -311,6 +311,7 @@
           defn reload! () (remove-watch *reel :changes) (clear-cache!)
             add-watch *reel :changes $ fn (reel prev-reel) (render-app! render!)
             reset! *reel $ refresh-reel @*reel schema/store updater
+            render-app! render!
             println "|Code updated."
         |mount-target $ quote
           def mount-target $ .querySelector js/document |.app

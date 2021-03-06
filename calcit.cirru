@@ -1320,6 +1320,7 @@
                           |x $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1603353223462) (:text |:set)
                           |v $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1603353223462) (:text |:number)
                           |yj $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1603353223462) (:text |:native)
+                          |yb $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1615024849659) (:text |:record)
                           |r $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1603353223462) (:text |:map)
                           |y $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1603353223462) (:text |:syntax)
                       |r $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1603353193859)
@@ -2008,12 +2009,6 @@
           |reload! $ {} (:type :expr) (:at 1499755354983)
             :data $ {}
               |T $ {} (:type :leaf) (:by |root) (:at 1499755354983) (:text |defn)
-              |j $ {} (:type :leaf) (:by |root) (:at 1499755354983) (:text |reload!)
-              |r $ {} (:type :expr) (:at 1499755354983)
-                :data $ {}
-              |u $ {} (:type :expr) (:by |root) (:at 1507461699387)
-                :data $ {}
-                  |T $ {} (:type :leaf) (:by |root) (:at 1507461702453) (:text |clear-cache!)
               |w $ {} (:type :expr) (:by |root) (:at 1507461704162)
                 :data $ {}
                   |T $ {} (:type :leaf) (:by |root) (:at 1507461706990) (:text |reset!)
@@ -2024,10 +2019,16 @@
                       |j $ {} (:type :leaf) (:by |root) (:at 1507461719097) (:text |@*reel)
                       |r $ {} (:type :leaf) (:by |root) (:at 1507461721870) (:text |schema/store)
                       |v $ {} (:type :leaf) (:by |root) (:at 1507461722724) (:text |updater)
-              |y $ {} (:type :expr) (:at 1499755354983)
+              |s $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1614610459743)
                 :data $ {}
-                  |T $ {} (:type :leaf) (:by |root) (:at 1499755354983) (:text |println)
-                  |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1596818890934) (:text "||Code updated.")
+                  |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610461848) (:text |remove-watch)
+                  |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610463332) (:text |*reel)
+                  |r $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610465053) (:text |:changes)
+              |j $ {} (:type :leaf) (:by |root) (:at 1499755354983) (:text |reload!)
+              |x $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1615024896477)
+                :data $ {}
+                  |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1615024896477) (:text |render-app!)
+                  |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1615024896477) (:text |render!)
               |v $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1614610456287)
                 :data $ {}
                   |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610456287) (:text |add-watch)
@@ -2044,11 +2045,15 @@
                         :data $ {}
                           |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610456287) (:text |render-app!)
                           |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610456287) (:text |render!)
-              |s $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1614610459743)
+              |r $ {} (:type :expr) (:at 1499755354983)
                 :data $ {}
-                  |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610461848) (:text |remove-watch)
-                  |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610463332) (:text |*reel)
-                  |r $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1614610465053) (:text |:changes)
+              |y $ {} (:type :expr) (:at 1499755354983)
+                :data $ {}
+                  |T $ {} (:type :leaf) (:by |root) (:at 1499755354983) (:text |println)
+                  |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1596818890934) (:text "||Code updated.")
+              |u $ {} (:type :expr) (:by |root) (:at 1507461699387)
+                :data $ {}
+                  |T $ {} (:type :leaf) (:by |root) (:at 1507461702453) (:text |clear-cache!)
           |mount-target $ {} (:type :expr) (:at 1499755354983)
             :data $ {}
               |T $ {} (:type :leaf) (:by |root) (:at 1499755354983) (:text |def)
