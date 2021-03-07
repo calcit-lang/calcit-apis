@@ -687,13 +687,13 @@
     {}
       :name |&<=
       :tags $ #{} :number
-      :desc "|native implemention of <=, of 2 arguments"
+      :desc "|native implementation of <=, of 2 arguments"
       :snippets $ []
         quote $ <= 1 2
     {}
       :name |&>=
       :tags $ #{} :number
-      :desc "|native implemention of >=, of 2 arguments"
+      :desc "|native implementation of >=, of 2 arguments"
       :snippets $ []
         quote $ >= 2 1
     {}
@@ -955,7 +955,7 @@
     {}
       :name |index-of
       :tags $ #{} :list
-      :desc "|native implemention of `indexOf` function, returns -1 when not found"
+      :desc "|native implementation of `indexOf` function, returns -1 when not found"
       :snippets $ []
         quote $ index-of ([] 1 2 3 4) 1
     {}
@@ -1052,13 +1052,13 @@
     {}
       :name |&max
       :tags $ #{} :number
-      :desc "|native implemention of max, takes 2 arguments"
+      :desc "|native implementation of max, takes 2 arguments"
       :snippets $ []
         quote $ &max 1 2
     {}
       :name |&min
       :tags $ #{} :number
-      :desc "|native implemention of min, takes 2 arguments"
+      :desc "|native implementation of min, takes 2 arguments"
       :snippets $ []
         quote $ &min 1 2
     {}
@@ -1971,3 +1971,51 @@
       :snippets $ []
         quote
           exists? x
+    {}
+      :name |defrecord
+      :tags $ #{} :record
+      :desc "|create a prototype of record, first argument requires symbol, with values in `nil`"
+      :snippets $ []
+        quote $ defrecord 'Person :name :age
+    {}
+      :name |make-record
+      :tags $ #{} :record
+      :desc "|create record from existing data, throws error when keys are not sufficient"
+      :snippets $ []
+        quote $ make-record 'Person $ {} (:name |Chen) (:ago 20)
+    {}
+      :name |record?
+      :tags $ #{} :record
+      :desc "|detects record"
+      :snippets $ []
+        quote $ record? x
+    {}
+      :name |%{}
+      :tags $ #{} :record :macro
+      :desc "|create a record, first argument is a record, wraps `&%{}`"
+      :snippets $ []
+        quote $ %{} Person (:name |Ye) (:age 21)
+    {}
+      :name |&%{}
+      :tags $ #{} :record
+      :desc "|internal implementation of `%{}`, first argument is record"
+      :snippets $ []
+        quote $ &%{} Person :name |Ye :age 21
+    {}
+      :name |get-record-name
+      :tags $ #{} :record
+      :desc "|get name of a record in a symbol"
+      :snippets $ []
+        quote $ get-record-name x
+    {}
+      :name |turn-map
+      :tags $ #{} :record
+      :desc "|turn record into a map"
+      :snippets $ []
+        quote $ turn-map x
+    {}
+      :name |relevant-record?
+      :tags $ #{} :record
+      :desc "|detects if two records have same name and fields"
+      :snippets $ []
+        quote $ relevant-record? x y
