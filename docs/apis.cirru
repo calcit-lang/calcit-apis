@@ -2019,3 +2019,9 @@
       :desc "|detects if two records have same name and fields"
       :snippets $ []
         quote $ relevant-record? x y
+    {}
+      :name |load-console-formatter!
+      :tags $ #{} :js :debug
+      :desc "|Turn on custom formatter for Chrome Console"
+      :snippets $ []
+        quote $ load-console-formatter!
