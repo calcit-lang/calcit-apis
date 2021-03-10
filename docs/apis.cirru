@@ -1972,11 +1972,20 @@
         quote
           exists? x
     {}
-      :name |defrecord
+      :name |new-record
       :tags $ #{} :record
-      :desc "|create a prototype of record, first argument requires symbol, with values in `nil`"
+      :desc "|create a prototype of record, first argument requires symbol value, with values in `nil`"
       :snippets $ []
-        quote $ defrecord 'Person :name :age
+        quote $ new-record 'Person :name :age
+    {}
+      :name |defrecord
+      :tags $ #{} :record :macro
+      :desc "|macro that wraps on new-record, first argument uses a bare symbol"
+      :snippets $ []
+        quote $ defrecord Person :name :age
+        {}
+          :code $ quote $ macroexpand $ quote $ defrecord Person :name :age
+          :result $ quote $ quote $ def Person $ new-record 'Person :name :age
     {}
       :name |make-record
       :tags $ #{} :record
