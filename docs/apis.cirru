@@ -2034,3 +2034,11 @@
       :desc "|Turn on custom formatter for Chrome Console"
       :snippets $ []
         quote $ load-console-formatter!
+    {}
+      :name |try
+      :tags $ #{} :syntax
+      :desc "|try block that takes 2 arguments, second one expected to function"
+      :snippets $ []
+        quote $ try
+          do (echo "|somthing")
+          fn (error) (echo "error message:" error)
