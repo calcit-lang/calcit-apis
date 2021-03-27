@@ -2042,3 +2042,9 @@
         quote $ try
           do (echo "|somthing")
           fn (error) (echo "error message:" error)
+    {}
+      :name |&list-map
+      :tags $ #{} :list
+      :desc "|internal function exposing native seq map and tree map for performance"
+      :snippets $ []
+        quote $ &list-map (\ + % 1) ([] 1 2 3 4)
