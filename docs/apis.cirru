@@ -2048,3 +2048,14 @@
       :desc "|internal function exposing native seq map and tree map for performance"
       :snippets $ []
         quote $ &list-map (\ + % 1) ([] 1 2 3 4)
+    {}
+      :name |format-to-lisp
+      :tags $ #{} :debug
+      :desc "|display quoted code like a Lisp expression"
+      :snippets $ []
+        {}
+          :code $ quote $ format-to-lisp $ quote $ + a b c
+          :result $ quote $ do "|(+ a b c)"
+        {}
+          :code $ quote $ format-to-lisp ([] |+ 'a 'b 'c)
+          :result $ quote $ do "|(+ a b c)"
