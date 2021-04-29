@@ -12,9 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: wget
-      run: mkdir ci-bin/ && wget -O ci-bin/cr_once http://repo.calcit-lang.org/binaries/linux/cr_once
+      run: mkdir ci-bin/ && wget -O ci-bin/calcit_runner http://repo.calcit-lang.org/binaries/linux/calcit_runner
     - name: "permission"
-      run: chmod +x ci-bin/cr_once
+      run: chmod +x ci-bin/calcit_runner
 
     - name: "prepare modules"
       run: >
@@ -25,12 +25,11 @@ jobs:
         && git clone https://github.com/Respo/reel.calcit.git
         && git clone https://github.com/Respo/respo-markdown.calcit.git
         && git clone https://github.com/Respo/respo-ui.calcit.git
-        && git clone https://github.com/Cirru/calcit-theme.calcit.git
-        && git clone https://github.com/Cirru/writer.calcit.git
+        && git clone https://github.com/Cirru/calcit-theme.calcit.git --branch 0.2.2
 
     - name: "compiles to js"
       run: >
-        ./ci-bin/cr_once --emit-js --once
+        ./ci-bin/calcit_runner --emit-js --once
         && wget -O js-out/calcit.procs.mjs http://js.calcit-lang.org/calcit.procs.mjs
         && yarn && yarn vite build --base=./
 
