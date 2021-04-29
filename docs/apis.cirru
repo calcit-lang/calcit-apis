@@ -63,8 +63,8 @@
           :result $ quote $ quote $ + 1 2 a b
     {}
       :name |do
-      :tags $ #{} :syntax
-      :desc "|add multiple numbers"
+      :tags $ #{} :macro
+      :desc "|do for multiple expressions and return value from last one. internally its using `&let`"
       :snippets $ []
         quote $ do
           echo 1
@@ -131,7 +131,7 @@
     {}
       :name |loop
       :tags $ #{} :macro
-      :desc "|like Clojure `loop`, use tail recursion to loop inside expressions"
+      :desc "|like Clojure `loop`, use tail recursion to loop inside expressions, implemented with macro"
       :snippets $ []
         quote $ loop
             idx 0
@@ -183,12 +183,12 @@
       :snippets $ []
         quote $ &/ 10 2
     {}
-      :name |mod
+      :name |rem
       :tags $ #{} :native :number
       :desc "|function for get a reminder value"
       :snippets $ []
         {}
-          :code $ quote $ mod 5 3
+          :code $ quote $ rem 5 3
           :result $ quote $ do 2
     {}
       :name |&<
@@ -459,7 +459,7 @@
     {}
       :name |format-ternary-tree
       :tags $ #{} :native :list :map
-      :desc "|disply string form of internal ternary tree structure"
+      :desc "|display string form of internal ternary tree structure, currently js only"
       :snippets $ []
         quote $ format-ternary-tree $ [] 1 2 3 4 5 6
         quote $ format-ternary-tree $ {}
@@ -574,9 +574,9 @@
     {}
       :name |write-cirru-edn
       :tags $ #{} :native
-      :desc "|generate Cirru syntax from data"
+      :desc "|generate Cirru syntax from data, with an extra `use_inline` option from Cirru"
       :snippets $ []
-        quote $ write-cirru-edn data
+        quote $ write-cirru-edn data true
     {}
       :name |sqrt
       :tags $ #{} :native :number
@@ -670,13 +670,13 @@
       :tags $ #{} :native :list
       :desc "|Haskell's foldl function, implemented i Nim for performance"
       :snippets $ []
-        quote $ foldl + 0 acc
+        quote $ foldl acc 0 +
     {}
       :name |reduce
       :tags $ #{} :native :list
       :desc "|just an alias for foldl"
       :snippets $ []
-        quote $ reduce + 0 acc
+        quote $ reduce acc 0 +
     {}
       :name |unless
       :tags $ #{} :macro
@@ -744,7 +744,7 @@
       :tags $ #{} :list
       :desc "|internal function for generation comparing functions"
       :snippets $ []
-        quote $ foldl-compare &< 1 ([] 2 3 4)
+        quote $ foldl-compare ([] 2 3 4) 1 &<
     {}
       :name |<
       :tags $ #{} :number
@@ -897,11 +897,11 @@
       :snippets $ []
         {}
           :code $ quote $ map
-            fn (x) $ + x 1
             [] 1 2 3 4
+            fn (x) $ + x 1
           :result $ quote $ [] 2 3 4 5
         {}
-          :code $ quote $ map inc (#{} 1 2 3)
+          :code $ quote $ map (#{} 1 2 3) inc
           :result $ quote $ #{} 2 3 4
           :desc "|maps a set to a set, order is not ensured"
     {}
@@ -909,13 +909,13 @@
       :tags $ #{} :list
       :desc "|take n items from list"
       :snippets $ []
-        quote $ take 2 $ [] 1 2 3 4 5
+        quote $ take ([] 1 2 3 4 5) 2
     {}
       :name |drop
       :tags $ #{} :list
       :desc "|take items of a list except for first n items"
       :snippets $ []
-        quote $ drop 2 $ [] 1 2 3 4 5
+        quote $ drop ([] 1 2 3 4 5) 2
     {}
       :name |str
       :tags $ #{} :string
@@ -1078,13 +1078,13 @@
       :tags $ #{} :list
       :desc "|detects if every item in list satisfies function"
       :snippets $ []
-        quote $ every? (fn (x) (> x 1)) ([] 1 2 3 4)
+        quote $ every? ([] 1 2 3 4) (fn (x) (> x 1))
     {}
       :name |any?
       :tags $ #{} :list
       :desc "|detects if any item in list satisfies function"
       :snippets $ []
-        quote $ any? (fn (x) (> x 1)) ([] 1 2 3 4)
+        quote $ any? ([] 1 2 3 4) (fn (x) (> x 1))
     {}
       :name |concat
       :tags $ #{} :list
@@ -1097,34 +1097,34 @@
       :desc "|map item to list and then concat, or just flatmap"
       :snippets $ []
         quote $ mapcat
-          fn (x) ([] x (+ x 10))
           [] 1 2 3 4
+          fn (x) ([] x (+ x 10))
     {}
       :name |group-by
       :tags $ #{} :list
       :desc "|take a list, return grouped result with a map"
       :snippets $ []
         quote $ group-by
-          fn (x) (mod x 3)
           range 10
+          fn (x) (mod x 3)
     {}
       :name |identity
       :tags $ #{}
       :desc "|takes an item and just return it"
       :snippets $ []
-        quote $ map identity (range 10)
+        quote $ map (range 10) identity
     {}
       :name |filter
       :tags $ #{} :list
       :desc "|filter a list with a function"
       :snippets $ []
-        quote $ filter (fn (x) (> n 5)) (range 10)
+        quote $ filter (range 10) (fn (x) (> n 5))
     {}
       :name |filter-not
       :tags $ #{} :list
       :desc "|filter a list with a function with false return"
       :snippets $ []
-        quote $ filter-not (fn (x) (> n 5)) (range 10)
+        quote $ filter-not (range 10) (fn (x) (> n 5))
     {}
       :name |zipmap
       :tags $ #{} :list
@@ -1180,7 +1180,7 @@
       :tags $ #{} :list
       :desc "|map with index parameter"
       :snippets $ []
-        quote $ map-indexed (fn (idx x) idx) (range 10)
+        quote $ map-indexed (range 10) (fn (idx x) idx)
     {}
       :name |join-str
       :tags $ #{} :string :list
@@ -1292,7 +1292,8 @@
     {}
       :name |draw-canvas
       :tags $ #{} :canvas
-      :desc "|draw with json-paint shapes"
+      :desc "|draw with json-paint shapes(dropped after refactor)"
+      :wip? true
       :snippets $ []
         quote $ draw-canvas $ {} (:type :polyline) (:from $ [] 40 40)
           :stops $ [] ([] 100 60) ([] 200 200) ([] 600 60) ([] 500 400)
@@ -1339,37 +1340,37 @@
         quote $ assert-detect bool? true
     {}
       :name |defatom
-      :tags $ #{} :syntax :atom
-      :desc "|creating an atom of states. it requires a name, and currently not atomic, just states"
+      :tags $ #{} :syntax :ref
+      :desc "|creating an atom(`ref`) of states. it requires a name, and currently not atomic, just states"
       :snippets $ []
         quote $ defatom *a 1
     {}
       :name |deref
-      :tags $ #{} :atom :native
+      :tags $ #{} :ref :native
       :desc "|grab data from atom"
       :snippets $ []
         quote $ deref *a
     {}
       :name |reset!
-      :tags $ #{} :atom :native
+      :tags $ #{} :ref :native
       :desc "|update data from atom"
       :snippets $ []
         quote $ reset! *a 2
     {}
       :name |swap!
-      :tags $ #{} :atom :macro
+      :tags $ #{} :ref :macro
       :desc "|update data from atom with a function, syntax from Clojure"
       :snippets $ []
         quote $ swap! *a inc
     {}
       :name |add-watch
-      :tags $ #{} :atom :native
+      :tags $ #{} :ref :native
       :desc "|add a watch function to an atom by keyword"
       :snippets $ []
         quote $ add-watch *a :log $ \ echo "|changed" %
     {}
       :name |remove-watch
-      :tags $ #{} :atom :native
+      :tags $ #{} :ref :native
       :desc "|remove a watch function from an atom by keyword"
       :snippets $ []
         quote $ remove-watch *a :log
@@ -1456,7 +1457,7 @@
       :desc "|join list of items with a separator"
       :snippets $ []
         {}
-          :code $ quote $ join 10 $ [] 1 2 3 4
+          :code $ quote $ join ([] 1 2 3 4) 10
           :result $ quote $ [] 1 10 2 10 3 10 4
     {}
       :name |gensym
@@ -1506,7 +1507,7 @@
       :desc "|repeat an item n times"
       :snippets $ []
         {}
-          :code $ quote $ repeat 5 :a
+          :code $ quote $ repeat :a 5
           :result $ quote $ [] :a :a :a :a :a
     {}
       :name |interleave
@@ -1523,8 +1524,8 @@
       :snippets $ []
         {}
           :code $ quote $ map-kv
-            fn (k v) ([] k (+ v 1))
             {} (:a 1) (:b 2)
+            fn (k v) ([] k (+ v 1))
           :result $ quote $ [][] (:a 2) (:b 3)
     {}
       :name |def
@@ -1655,8 +1656,8 @@
       :snippets $ []
         {}
           :code $ quote $ sort
-            fn (x y) (&- x y)
             [] 1 3 4 2
+            fn (x y) (&- x y)
           :result $ quote $ [] 1 2 3 4
           :desc "|value returned from comparator function should be a number"
     {}
@@ -1689,13 +1690,13 @@
     {}
       :name |dual-balanced-ternary
       :tags $ #{} :ternary
-      :desc "|create a dual balanced ternary value from 2 numbers"
+      :desc "|create a dual balanced ternary value from 2 numbers(dropped during refactor)"
       :snippets $ []
         quote $ dual-balanced-ternary 1.1 1.1
     {}
       :name |dbt->point
       :tags $ #{} :ternary
-      :desc "|return a list of 2 numbers from a dual balanced ternary value"
+      :desc "|return a list of 2 numbers from a dual balanced ternary value(dropped during refactor)"
       :snippets $ []
         {}
           :code $ quote $ dbt->point &4
@@ -1743,13 +1744,13 @@
       :desc "|match string with regular expression"
       :snippets $ []
         {}
-          :code $ quote $ re-matches |\d |2
+          :code $ quote $ re-matches |2 |\d
           :result $ quote $ do true
         {}
-          :code $ quote $ re-matches |\d+ |23
+          :code $ quote $ re-matches |23 |\d+
           :result $ quote $ do true
         {}
-          :code $ quote $ re-matches |\d |a
+          :code $ quote $ re-matches |a |\d
           :result $ quote $ do false
 
     {}
@@ -1759,10 +1760,10 @@
       :desc "|get char code of a single character of string(not ready for Chinese characters yet)"
       :snippets $ []
         {}
-          :code $ quote $ re-find-index |\d |a1
+          :code $ quote $ re-find-index |a1 |\d
           :result $ quote $ do 1
         {}
-          :code $ quote $ re-find-index |\d |aa
+          :code $ quote $ re-find-index |aa |\d
           :result $ quote $ do -1
 
     {}
@@ -1772,16 +1773,16 @@
       :desc "|get char code of a single character of string(not ready for Chinese characters yet)"
       :snippets $ []
         {}
-          :code $ quote $ re-find-all |\d |123
+          :code $ quote $ re-find-all |123 |\d
           :result $ quote $ [] |1 |2 |3
         {}
-          :code $ quote $ re-find-all |\d+ |123
+          :code $ quote $ re-find-all |123 |\d+
           :result $ quote $ [] |123
         {}
-          :code $ quote $ re-find-all |\d+ |1a2a3
+          :code $ quote $ re-find-all |1a2a3 |\d+
           :result $ quote $ [] |1 |2 |3
         {}
-          :code $ quote $ re-find-all |\d+ |1a2a34
+          :code $ quote $ re-find-all |1a2a34 |\d+
           :result $ quote $ [] |1 |2 |34
     {}
       :name |call-with-log
@@ -1861,7 +1862,7 @@
     {}
       :name |dbt-digits
       :tags $ #{} :dual-balanced-ternary
-      :desc "|get list of digits from a dual-balanced-ternary value"
+      :desc "|get list of digits from a dual-balanced-ternary value(dropped after refactor)"
       :snippets $ []
         {}
           :code $ quote
@@ -1871,7 +1872,7 @@
     {}
       :name |timeout-call
       :tags $ #{} :native
-      :desc "|like `setTimeout` but args in different order"
+      :desc "|like `setTimeout` but args in different order(js only)"
       :snippets $ []
         {}
           :code $ quote
