@@ -58,8 +58,7 @@
                         d! cursor $ assoc state :syntax (:value item)
                     <> $ :display item
         |apis-data $ quote
-          def apis-data $ extract-cirru-edn
-            js/JSON.parse $ replace (slurp-cirru-edn "\"docs/apis.cirru") "\"\\'" "\"'"
+          def apis-data $ parse-cirru-edn (slurp-cirru-edn "\"docs/apis.cirru")
         |comp-api-entry $ quote
           defcomp comp-api-entry (info syntax)
             div
@@ -235,9 +234,7 @@
                   , "\")"
               true $ str "\"TODO: " (str xs)
         |slurp-cirru-edn $ quote
-          defmacro slurp-cirru-edn (file)
-            stringify-cirru $ first
-              parse-cirru $ read-file file
+          defmacro slurp-cirru-edn (file) (read-file file)
         |comp-wip-switcher $ quote
           defcomp comp-wip-switcher (state cursor)
             div
