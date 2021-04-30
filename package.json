@@ -1,10 +1,9 @@
 {
   "dependencies": {
-    "@calcit/procs": "^0.2.108",
-    "@calcit/ternary-tree": "^0.0.12"
+    "@calcit/procs": "^0.3.0-a11"
   },
   "devDependencies": {
-    "vite": "^2.1.4"
+    "vite": "^2.2.3"
   },
   "version": "0.0.1"
 }

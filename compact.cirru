@@ -1,7 +1,7 @@
 
 {} (:package |app)
   :configs $ {} (:init-fn |app.main/main!) (:reload-fn |app.main/reload!)
-    :modules $ [] |lilac/compact.cirru |memof/compact.cirru |respo.calcit/compact.cirru |respo-ui.calcit/compact.cirru |respo-markdown.calcit/compact.cirru |calcit-theme.calcit/compact.cirru |writer.calcit/compact.cirru |reel.calcit/compact.cirru
+    :modules $ [] |lilac/compact.cirru |memof/compact.cirru |respo.calcit/compact.cirru |respo-ui.calcit/compact.cirru |respo-markdown.calcit/compact.cirru |calcit-theme.calcit/compact.cirru |reel.calcit/compact.cirru
     :version nil
   :files $ {}
     |app.comp.container $ {}
@@ -17,7 +17,6 @@
             [] app.config :refer $ [] dev?
             [] respo-md.comp.md :refer $ [] comp-md
             [] calcit-theme.comp.expr :refer $ [] render-expr
-            [] cirru-writer.core :refer $ [] write-code
             [] memof.alias :refer $ [] memof-call
           :require-macros $ [] clojure.core.strint :refer ([] <<)
       :defs $ {}
@@ -28,7 +27,7 @@
                 escape x
               (list? x)
                 str "\"["
-                  join-str "\"," $ map stringify-cirru x
+                  join-str (map x stringify-cirru) "\","
                   , "\"]"
               true $ raise
                 str "\"Unknown type: " (type-of x) x
@@ -42,7 +41,7 @@
                     :font-weight 300
                 :on-click $ fn (e d!)
                   d! cursor $ update state :cirru-ui? not
-              ->>
+              ->
                 []
                   {} (:value :lisp) (:display "\"Lisp")
                   {} (:value :cirru-text) (:display "\"CirruText")
@@ -59,8 +58,7 @@
                         d! cursor $ assoc state :syntax (:value item)
                     <> $ :display item
         |apis-data $ quote
-          def apis-data $ extract-cirru-edn
-            js/JSON.parse $ slurp-cirru-edn "\"docs/apis.cirru"
+          def apis-data $ parse-cirru-edn (slurp-cirru-edn "\"docs/apis.cirru")
         |comp-api-entry $ quote
           defcomp comp-api-entry (info syntax)
             div
@@ -87,7 +85,7 @@
               list->
                 {} $ :style
                   {} $ :margin-left 20
-                ->> (:snippets info)
+                -> (:snippets info)
                   map-indexed $ fn (idx snippet)
                     [] idx $ let
                         code-snippet $ if (list? snippet)
@@ -132,7 +130,7 @@
                       :line-height "\"22px"
                       :margin "\"0px 0px"
                     :innerHTML $ trim
-                      write-code $ [] code
+                      write-cirru ([] code) true
                 :lisp $ <> (lisp-style code)
                   {} $ :font-family ui/font-code
                 <> $ str "\"Unknown code: " syntax
@@ -147,13 +145,13 @@
                     :selected-tags $ #{}
                     :syntax :lisp
                     :wip? false
-                visible-apis $ ->> (:apis apis-data)
+                visible-apis $ -> (:apis apis-data)
                   filter $ fn (info)
                     and
                       if (:wip? state) (:wip? info) true
                       or
                         empty? $ :selected-tags state
-                        ->> (:selected-tags state)
+                        -> (:selected-tags state)
                           every? $ fn (x)
                             includes? (:tags info) x
                       includes? (:name info) (:query state)
@@ -189,7 +187,7 @@
                   =< nil 8
                   list->
                     {} $ :style ui/expand
-                    ->> visible-apis
+                    -> visible-apis
                       sort $ fn (a b)
                         compare-string (:name a) (:name b)
                       map $ fn (info)
@@ -199,7 +197,7 @@
         |comp-tags-list $ quote
           defcomp comp-tags-list (state cursor)
             list-> ({})
-              ->> ([] :list :map :number :string :set :syntax :macro :record :native)
+              -> ([] :list :map :number :string :set :syntax :macro :record :native)
                 map $ fn (tag)
                   [] tag $ div
                     {}
@@ -232,13 +230,11 @@
                   , xs
               (list? xs)
                 str "\"("
-                  ->> xs (map lisp-style) (join-str "\" ")
+                  -> xs (map lisp-style) (join-str "\" ")
                   , "\")"
               true $ str "\"TODO: " (str xs)
         |slurp-cirru-edn $ quote
-          defmacro slurp-cirru-edn (file)
-            stringify-cirru $ first
-              parse-cirru $ read-file file
+          defmacro slurp-cirru-edn (file) (read-file file)
         |comp-wip-switcher $ quote
           defcomp comp-wip-switcher (state cursor)
             div
