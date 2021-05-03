@@ -672,6 +672,17 @@
       :snippets $ []
         quote $ foldl acc 0 +
     {}
+      :name |foldl-shortcut
+      :tags $ #{} :native :list
+      :desc "|foldl with a shortcut, using a bool to indicate immediate return"
+      :snippets $ []
+        {}
+          :code $ quote $ foldl-shortcut ([] 1 2 3 4) 0 nil $ fn (idx x)
+            if (&> x 1)
+              [] true idx
+              [] false (inc idx)
+          :result $ quote $ do 1
+    {}
       :name |reduce
       :tags $ #{} :native :list
       :desc "|just an alias for foldl"
@@ -1043,6 +1054,7 @@
       :name |&case
       :tags $ #{} :macro
       :desc "|internal helper for case and case-default"
+      :snippets $ []
     {}
       :name |get-in
       :tags $ #{} :list :map
@@ -1600,6 +1612,7 @@
       :name |&reset-gensym-index!
       :tags $ #{} :native
       :desc "|debugging function for gensym"
+      :snippets $ []
     {}
       :name |generate-id!
       :tags $ #{} :native
@@ -1686,6 +1699,19 @@
             &let
               v__1 $ + 1 2
               echo (quote $ + 1 2) |=> v__1
+              , v__1
+    {}
+      :name |with-js-log
+      :tags $ #{} :debug :macro
+      :desc "|for debug purpose, add `console.log` to an expression"
+      :snippets $ []
+        {}
+          :code $ quote
+            macroexpand $ quote $ with-js-log $ + 1 2
+          :result $ quote
+            &let
+              v__1 $ + 1 2
+              js/console.log (quote $ + 1 2) |=> v__1
               , v__1
     {}
       :name |dual-balanced-ternary

@@ -10,7 +10,7 @@
           :require
             [] respo.util.format :refer $ [] hsl
             [] respo-ui.core :as ui
-            [] respo.core :refer $ [] defcomp defeffect <> >> div button textarea span input list-> pre
+            [] respo.core :refer $ [] defcomp defeffect <> >> div button textarea span input pre list->
             [] respo.comp.space :refer $ [] =<
             [] reel.comp.reel :refer $ [] comp-reel
             [] respo-md.comp.md :refer $ [] comp-md
@@ -33,7 +33,7 @@
                 str "\"Unknown type: " (type-of x) x
         |comp-cirru-ui-switcher $ quote
           defcomp comp-cirru-ui-switcher (state cursor)
-            list->
+            div
               {}
                 :style $ merge ui/row-middle
                   {} (:cursor :pointer) (:font-family ui/font-fancy)
@@ -41,13 +41,13 @@
                     :font-weight 300
                 :on-click $ fn (e d!)
                   d! cursor $ update state :cirru-ui? not
-              ->
+              , & $ ->
                 []
                   {} (:value :lisp) (:display "\"Lisp")
                   {} (:value :cirru-text) (:display "\"CirruText")
                   {} (:value :cirru) (:display "\"Cirru")
-                map-indexed $ fn (idx item)
-                  [] idx $ div
+                map $ fn (item)
+                  div
                     {}
                       :style $ merge
                         {} $ :margin "\"0 4px"
@@ -82,12 +82,12 @@
                       :color $ hsl 0 0 70
                     :class-name "\"md-span"
                   comp-md $ either (:desc info) "\"TODO"
-              list->
+              div
                 {} $ :style
                   {} $ :margin-left 20
-                -> (:snippets info)
-                  map-indexed $ fn (idx snippet)
-                    [] idx $ let
+                , & $ -> (:snippets info)
+                  map $ fn (snippet)
+                    let
                         code-snippet $ if (list? snippet)
                           {} $ :code snippet
                           , snippet
@@ -196,30 +196,29 @@
                 when dev? $ comp-reel (>> states :reel) reel ({})
         |comp-tags-list $ quote
           defcomp comp-tags-list (state cursor)
-            list-> ({})
-              -> ([] :list :map :number :string :set :syntax :macro :record :native)
-                map $ fn (tag)
-                  [] tag $ div
-                    {}
-                      :style $ merge
-                        {} (:display :inline-block)
-                          :background-color $ hsl 200 80 84
-                          :margin "\"4px 4px"
-                          :padding "\"0 4px"
-                          :color $ hsl 0 0 100
-                          :border-radius "\"4px"
-                          :cursor :pointer
-                          :line-height "\"22px"
+            div ({}) & $ -> ([] :list :map :number :string :set :syntax :macro :record :native)
+              map $ fn (tag)
+                div
+                  {}
+                    :style $ merge
+                      {} (:display :inline-block)
+                        :background-color $ hsl 200 80 84
+                        :margin "\"4px 4px"
+                        :padding "\"0 4px"
+                        :color $ hsl 0 0 100
+                        :border-radius "\"4px"
+                        :cursor :pointer
+                        :line-height "\"22px"
+                      if
+                        includes? (:selected-tags state) tag
+                        {} $ :background-color (hsl 200 80 60)
+                    :on-click $ fn (e d!)
+                      d! cursor $ assoc state :selected-tags
                         if
                           includes? (:selected-tags state) tag
-                          {} $ :background-color (hsl 200 80 60)
-                      :on-click $ fn (e d!)
-                        d! cursor $ assoc state :selected-tags
-                          if
-                            includes? (:selected-tags state) tag
-                            exclude (:selected-tags state) tag
-                            include (:selected-tags state) tag
-                    <> $ turn-string tag
+                          exclude (:selected-tags state) tag
+                          include (:selected-tags state) tag
+                  <> $ turn-string tag
         |lisp-style $ quote
           defn lisp-style (xs)
             cond
@@ -280,7 +279,7 @@
               println "\"Dispatch:" op
             reset! *reel $ reel-updater updater @*reel op op-data
         |main! $ quote
-          defn main! ()
+          defn main! () (load-console-formatter!)
             println "\"Running mode:" $ if config/dev? "\"dev" "\"release"
             if ssr? $ render-app! realize-ssr!
             render-app! render!
