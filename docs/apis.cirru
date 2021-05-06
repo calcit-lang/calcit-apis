@@ -368,6 +368,14 @@
       :snippets $ []
         quote $ append ([] 1 2 3) 4
     {}
+      :name |coll-append
+      :tags $ #{} :native :list :map :set
+      :desc "|general operation like append, works for list, set, map"
+      :snippets $ []
+        quote $ coll-append ([] 1 2 3) 4
+        quote $ coll-append (#{} 1 2 3) 4
+        quote $ coll-append ({} (:a 1)) ([] :b 2)
+    {}
       :name |first
       :tags $ #{} :native
       :desc "|return first item of list"
@@ -381,6 +389,23 @@
         quote $ empty? nil
         quote $ empty? $ []
         quote $ empty? $ {}
+    {}
+      :name |empty
+      :tags $ #{} :native :list :map :set :string
+      :desc "|return an empty piece of data from given data"
+      :snippets $ []
+        {}
+          :code $ quote $ empty nil
+          :result $ quote $ do nil
+        {}
+          :code $ quote $ empty $ [] 1 2 3
+          :result $ quote $ []
+        {}
+          :code $ quote $ empty $ #{} 1 2 3
+          :result $ quote $ #{}
+        {}
+          :code $ quote $ empty $ {} (:a 1)
+          :result $ quote $ {}
     {}
       :name |blank?
       :tags $ #{} :native :string
@@ -671,6 +696,12 @@
       :desc "|Haskell's foldl function, implemented i Nim for performance"
       :snippets $ []
         quote $ foldl acc 0 +
+        {}
+          :code $ quote $ foldl
+            {} (:a 1)
+            {} (:b 2)
+            fn (acc pair) (assoc acc & pair)
+          :result $ {} (:a 1) (:b 2)
     {}
       :name |foldl-shortcut
       :tags $ #{} :native :list
@@ -915,6 +946,10 @@
           :code $ quote $ map (#{} 1 2 3) inc
           :result $ quote $ #{} 2 3 4
           :desc "|maps a set to a set, order is not ensured"
+        {}
+          :code $ quote $ map ({} (:a 1) (:b 2)) $ fn (pair) (update pair 1 inc)
+          :result $ quote $ {} (:a 2) (:b 3)
+          :desc "|map on a hashmap returns another hashmap"
     {}
       :name |take
       :tags $ #{} :list
@@ -1131,6 +1166,10 @@
       :desc "|filter a list with a function"
       :snippets $ []
         quote $ filter (range 10) (fn (x) (> n 5))
+        {}
+          :code $ quote $ filter ({} (:a 1) (:b 2)) (fn (pair) (&> (last pair) 1))
+          :result $ quote $ {} (:b 2)
+          :desc "|filter could also return a hashmap"
     {}
       :name |filter-not
       :tags $ #{} :list
@@ -1538,7 +1577,7 @@
           :code $ quote $ map-kv
             {} (:a 1) (:b 2)
             fn (k v) ([] k (+ v 1))
-          :result $ quote $ [][] (:a 2) (:b 3)
+          :result $ quote $ {} (:a 2) (:b 3)
     {}
       :name |def
       :tags $ #{} :macro
@@ -2086,3 +2125,21 @@
         {}
           :code $ quote $ format-to-lisp ([] |+ 'a 'b 'c)
           :result $ quote $ do "|(+ a b c)"
+    {}
+      :name |js-array
+      :tags $ #{} :native :js
+      :desc "|special function for creating a JavaScript Array"
+      :snippets $ []
+        quote $ js-array 1 2 3 4
+    {}
+      :name |js-object
+      :tags $ #{} :macro :js
+      :desc "|special function for creating a JavaScript object, keys can be strings or keywords"
+      :snippets $ []
+        quote $ js-object (:a 1) (:b 2)
+    {}
+      :name |&js-object
+      :tags $ #{} :native :js
+      :desc "|internal function for creating a JavaScript object, used inside `js-object`"
+      :snippets $ []
+        quote $ &js-object :a 1 :b 2
