@@ -110,9 +110,16 @@
     {}
       :name |;
       :tags $ #{} :syntax
-      :desc "|adds comments"
+      :desc "|add a comment"
       :snippets $ []
         quote $ ; "this will not be evaludated" "more comments"
+    {}
+      :name |;nil
+      :tags $ #{} :macro
+      :desc "|add a comment with nil placeholder"
+      :snippets $ []
+        quote $ assert= nil
+          ;nil "this will not be evaludated" "more comments"
     {}
       :name |let
       :tags $ #{} :macro
