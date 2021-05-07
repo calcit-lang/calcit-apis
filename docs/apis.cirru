@@ -1245,7 +1245,7 @@
       :desc "|join segments into a string"
       :snippets $ []
         {}
-          :code $ quote $ join-str |- $ [] 1 2 3 4
+          :code $ quote $ join-str ([] 1 2 3 4) |-
           :result $ quote $ do |1-2-3-4
     {}
       :name |split
@@ -2150,3 +2150,47 @@
       :desc "|internal function for creating a JavaScript object, used inside `js-object`"
       :snippets $ []
         quote $ &js-object :a 1 :b 2
+    {}
+      :name |strip-prefix
+      :tags $ #{} :string
+      :desc "|strip given string from start of a string"
+      :snippets $ []
+        {}
+          :code $ quote $ strip-prefix |ababc |ab
+          :result $ quote $ do |abc
+        {}
+          :code $ quote $ strip-prefix |0abc |ab
+          :result $ quote $ do |0abc
+    {}
+      :name |strip-suffix
+      :tags $ #{} :string
+      :desc "|strip given string from end of a string"
+      :snippets $ []
+        {}
+          :code $ quote $ strip-suffix |ababc |bc
+          :result $ quote $ do |aba
+        {}
+          :code $ quote $ strip-suffix |abc0 |bc
+          :result $ quote $ do |abc0
+    {}
+      :name |select-keys
+      :tags $ #{} :map
+      :desc "|select map with given keys. get nil values when extra keys provided"
+      :snippets $ []
+        {}
+          :code $ quote $ select-keys ({} (:a 1) (:b 2) (:c 3)) ([] :a :b)
+          :result $ quote $ {} (:a 1) (:b 2)
+        {}
+          :code $ quote $ select-keys ({} (:a 1) (:b 2) (:c 3)) ([] :d)
+          :result $ quote $ {} (:d nil)
+    {}
+      :name |unselect-keys
+      :tags $ #{} :map
+      :desc "|unselect given keys from based on a map"
+      :snippets $ []
+        {}
+          :code $ quote $ unselect-keys ({} (:a 1) (:b 2) (:c 3)) ([] :a :b)
+          :result $ quote $ {} (:c 3)
+        {}
+          :code $ quote $ unselect-keys ({} (:a 1) (:b 2) (:c 3)) ([] :c :d)
+          :result $ quote $ {} (:a 1) (:b 2)
