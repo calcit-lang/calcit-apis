@@ -2194,3 +2194,9 @@
         {}
           :code $ quote $ unselect-keys ({} (:a 1) (:b 2) (:c 3)) ([] :c :d)
           :result $ quote $ {} (:a 1) (:b 2)
+    {}
+      :name |&ffi-message
+      :tags $ #{} :native
+      :desc "|messages stored to be read by Rust code, string message, varadic arguments"
+      :snippets $ []
+        quote $ &ffi-message |message |arg1 |arg2

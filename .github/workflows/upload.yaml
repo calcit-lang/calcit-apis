@@ -11,10 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: wget
-      run: mkdir ci-bin/ && wget -O ci-bin/calcit_runner http://repo.calcit-lang.org/binaries/linux/calcit_runner
-    - name: "permission"
-      run: chmod +x ci-bin/calcit_runner
+
+    - name: ACTIONS_ALLOW_UNSECURE_COMMANDS
+      id: ACTIONS_ALLOW_UNSECURE_COMMANDS
+      run: echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=true' >> $GITHUB_ENV
+
+    - name: add cr
+      run: |
+        mkdir -p $GITHUB_WORKSPACE/bin
+        wget -O $GITHUB_WORKSPACE/bin/cr http://repo.calcit-lang.org/binaries/linux/cr
+        chmod +x $GITHUB_WORKSPACE/bin/cr
+        echo "::add-path::$GITHUB_WORKSPACE/bin"
 
     - name: "prepare modules"
       run: >
@@ -25,12 +32,11 @@ jobs:
         && git clone https://github.com/Respo/reel.calcit.git
         && git clone https://github.com/Respo/respo-markdown.calcit.git
         && git clone https://github.com/Respo/respo-ui.calcit.git
-        && git clone https://github.com/Cirru/calcit-theme.calcit.git --branch 0.2.2
+        && git clone https://github.com/Cirru/calcit-theme.calcit.git
 
     - name: "compiles to js"
       run: >
-        ./ci-bin/calcit_runner --emit-js --once
-        && wget -O js-out/calcit.procs.mjs http://js.calcit-lang.org/calcit.procs.mjs
+        cr --emit-js --once
         && yarn && yarn vite build --base=./
 
     - name: Deploy to server
