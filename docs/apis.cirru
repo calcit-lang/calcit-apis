@@ -708,7 +708,7 @@
             {} (:a 1)
             {} (:b 2)
             fn (acc pair) (assoc acc & pair)
-          :result $ {} (:a 1) (:b 2)
+          :result $ quote $ {} (:a 1) (:b 2)
     {}
       :name |foldl-shortcut
       :tags $ #{} :native :list
