@@ -112,6 +112,7 @@
                                   {} $ :color (hsl 0 0 60)
         |comp-code $ quote
           defcomp comp-code (code syntax)
+            assert "\"expected code in list" $ list? code
             div
               {} $ :style
                 {} $ :margin-bottom 8

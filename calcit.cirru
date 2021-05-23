@@ -848,6 +848,14 @@
                 :data $ {}
                   |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1604978962329) (:text |code)
                   |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1604978973624) (:text |syntax)
+              |p $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1621704426474)
+                :data $ {}
+                  |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1621704428199) (:text |assert)
+                  |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1621704437260) (:text "|\"expected code in list")
+                  |r $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1621704438502)
+                    :data $ {}
+                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1621704439262) (:text |list?)
+                      |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1621704440649) (:text |code)
           |comp-container $ {} (:type :expr) (:at 1499755354983)
             :data $ {}
               |T $ {} (:type :leaf) (:by |root) (:at 1499755354983) (:text |defcomp)
