@@ -2200,3 +2200,27 @@
       :desc "|messages stored to be read by Rust code, string message, varadic arguments"
       :snippets $ []
         quote $ &ffi-message |message |arg1 |arg2
+    {}
+      :name |invoke
+      :tags $ #{} :fn
+      :desc "|a dynamic function for simulating ad-hoc polyporphism"
+      :snippets $ []
+        quote $ let
+            %Num $ defrecord %Num :inc :show
+            Num $ %{} %Num
+              :inc $ fn (x) $ [] Num (&+ x 1)
+              :show &str
+          assert=
+            [] Num 2
+            -> a (invoke :inc) (invoke :inc)
+          assert= |1
+            -> a (invoke :inc) (invoke :show)
+    {}
+      :name |key-match
+      :tags $ #{} :macro
+      :desc "|a dynamic macro for simulating pattern matching"
+      :snippets $ []
+        quote $ key-match data
+          (:a x) (' "|pattern a:" x)
+          (:b x y) (' "|pattern b:" x y)
+          _ (' "|no match")
