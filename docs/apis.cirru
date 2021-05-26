@@ -2215,3 +2215,12 @@
             -> a (invoke :inc) (invoke :inc)
           assert= |1
             -> a (invoke :inc) (invoke :show)
+    {}
+      :name |key-match
+      :tags $ #{} :macro
+      :desc "|a dynamic macro for simulating pattern matching"
+      :snippets $ []
+        quote $ key-match data
+          (:a x) (' "|pattern a:" x)
+          (:b x y) (' "|pattern b:" x y)
+          _ (' "|no match")
