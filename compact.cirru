@@ -110,6 +110,32 @@
                                 some? $ :desc code-snippet
                                 <> (:desc code-snippet)
                                   {} $ :color (hsl 0 0 60)
+        |comp-method-targets $ quote
+          defcomp comp-method-targets (state cursor)
+            div
+              {} $ :style ui/row
+              <> "\"Methods:"
+              div ({}) & $ -> ([] nil :list :map :number :string :set :record)
+                map $ fn (target)
+                  div
+                    {}
+                      :style $ merge
+                        {} (:display :inline-block)
+                          :background-color $ hsl 150 50 85
+                          :margin "\"4px 4px"
+                          :padding "\"0 8px"
+                          :color $ hsl 0 0 100
+                          :border-radius "\"2px"
+                          :cursor :pointer
+                          :line-height "\"22px"
+                        if
+                          = (:method-target state) target
+                          {} $ :background-color (hsl 160 40 60)
+                      :on-click $ fn (e d!)
+                        d! cursor $ assoc state :method-target target
+                    if (some? target)
+                      <> $ turn-string target
+                      <> "\"None" $ {} (:font-weight 300) (:font-family ui/font-fancy)
         |comp-code $ quote
           defcomp comp-code (code syntax)
             assert "\"expected code in list" $ list? code
@@ -142,20 +168,26 @@
                 states $ :states store
                 cursor $ either (:cursor states) ([])
                 state $ either (:data states)
-                  {} (:query "\"")
+                  {} (:query "\"") (:method-target nil)
                     :selected-tags $ #{}
                     :syntax :lisp
                     :wip? false
-                visible-apis $ -> (:apis apis-data)
-                  filter $ fn (info)
-                    and
-                      if (:wip? state) (:wip? info) true
-                      or
-                        empty? $ :selected-tags state
-                        -> (:selected-tags state)
-                          every? $ fn (x)
-                            includes? (:tags info) x
+                target $ :method-target state
+                visible-apis $ if (some? target)
+                  ->
+                    get (:methods apis-data) target
+                    filter $ fn (info)
                       includes? (:name info) (:query state)
+                  -> (:apis apis-data)
+                    filter $ fn (info)
+                      and
+                        if (:wip? state) (:wip? info) true
+                        or
+                          empty? $ :selected-tags state
+                          -> (:selected-tags state)
+                            every? $ fn (x)
+                              includes? (:tags info) x
+                        includes? (:name info) (:query state)
               div
                 {} $ :style
                   merge ui/global ui/fullscreen ui/row $ {}
@@ -163,7 +195,10 @@
                 div
                   {} $ :style
                     merge ui/expand ui/column $ {} (:max-width 800) (:margin "\"0 auto") (:background-color :white) (:padding "\"20px 20px")
-                  memof-call comp-tags-list state cursor
+                  comp-method-targets state cursor
+                  if
+                    nil? $ :method-target state
+                    memof-call comp-tags-list state cursor
                   =< nil 8
                   div
                     {} $ :style ui/row-parted
@@ -197,35 +232,38 @@
                 when dev? $ comp-reel (>> states :reel) reel ({})
         |comp-tags-list $ quote
           defcomp comp-tags-list (state cursor)
-            div ({}) & $ -> ([] :list :map :number :string :set :syntax :macro :record :native)
-              map $ fn (tag)
-                div
-                  {}
-                    :style $ merge
-                      {} (:display :inline-block)
-                        :background-color $ hsl 200 80 84
-                        :margin "\"4px 4px"
-                        :padding "\"0 4px"
-                        :color $ hsl 0 0 100
-                        :border-radius "\"4px"
-                        :cursor :pointer
-                        :line-height "\"22px"
-                      if
-                        includes? (:selected-tags state) tag
-                        {} $ :background-color (hsl 200 80 60)
-                    :on-click $ fn (e d!)
-                      d! cursor $ assoc state :selected-tags
+            div
+              {} $ :style ui/row
+              <> "\"tags:"
+              div ({}) & $ -> ([] :list :map :number :string :set :syntax :macro :record :native)
+                map $ fn (tag)
+                  div
+                    {}
+                      :style $ merge
+                        {} (:display :inline-block)
+                          :background-color $ hsl 200 80 84
+                          :margin "\"4px 4px"
+                          :padding "\"0 4px"
+                          :color $ hsl 0 0 100
+                          :border-radius "\"4px"
+                          :cursor :pointer
+                          :line-height "\"20px"
                         if
                           includes? (:selected-tags state) tag
-                          exclude (:selected-tags state) tag
-                          include (:selected-tags state) tag
-                  <> $ turn-string tag
+                          {} $ :background-color (hsl 200 80 60)
+                      :on-click $ fn (e d!)
+                        d! cursor $ assoc state :selected-tags
+                          if
+                            includes? (:selected-tags state) tag
+                            exclude (:selected-tags state) tag
+                            include (:selected-tags state) tag
+                    <> $ turn-string tag
         |lisp-style $ quote
           defn lisp-style (xs)
             cond
                 string? xs
                 if
-                  or (includes? xs "\" ") (includes? xs "\"\\n") (includes? xs "|\"")
+                  or (includes? xs "\" ") (includes? xs &newline) (includes? xs "|\"")
                   js/JSON.stringify xs
                   , xs
               (list? xs)

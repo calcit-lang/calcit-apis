@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@calcit/procs@^0.3.19":
-  version "0.3.19"
-  resolved "https://registry.npmjs.org/@calcit/procs/-/procs-0.3.19.tgz#eb2991d570b9e7b2ff8fbbdb4f27b83ec44083d0"
-  integrity sha512-zz8S+DbHEflQ9qrG62ZmVkwC/vmiQpA7KBxV8EK8RxilU3LsTopBdmCFzSjkUR56iQ7WRZwk6gtAV2dViM1OzQ==
+"@calcit/procs@^0.3.25":
+  version "0.3.25"
+  resolved "https://registry.npmjs.org/@calcit/procs/-/procs-0.3.25.tgz#88eab4107a8b641409ac4531ef2052165f990e2a"
+  integrity sha512-8/hHv3m5jBVKZMMmoqBKcQOK1t2J9aL+VpLHf0xOXYgZ7d3CnhaQXSHjNNgDn+nzSAKlmjbGnX5zTe0BTrvXng==
   dependencies:
     "@calcit/ternary-tree" "0.0.12"
     "@cirru/parser.ts" "^0.0.3"
@@ -31,10 +31,10 @@ colorette@^1.2.2:
   resolved "https://registry.npmjs.org/colorette/-/colorette-1.2.2.tgz#cbcc79d5e99caea2dbf10eb3a26fd8b3e6acfa94"
   integrity sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==
 
-esbuild@^0.11.23:
-  version "0.11.23"
-  resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.11.23.tgz#c42534f632e165120671d64db67883634333b4b8"
-  integrity sha512-iaiZZ9vUF5wJV8ob1tl+5aJTrwDczlvGP0JoMmnpC2B0ppiMCu8n8gmy5ZTGl5bcG081XBVn+U+jP+mPFm5T5Q==
+esbuild@^0.12.5:
+  version "0.12.5"
+  resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.12.5.tgz#36076a6bc1966ba2741981d30512e95e8aaff495"
+  integrity sha512-vcuP53pA5XiwUU4FnlXM+2PnVjTfHGthM7uP1gtp+9yfheGvFFbq/KyuESThmtoHPUrfZH5JpxGVJIFDVD1Egw==
 
 fsevents@~2.3.1:
   version "2.3.2"
@@ -66,9 +66,9 @@ nanoid@^3.1.23:
   integrity sha512-FiB0kzdP0FFVGDKlRLEQ1BgDzU87dy5NnzjeW9YZNt+/c3+q82EQDUwniSAUxp/F0gFNI1ZhKU1FqYsMuqZVnw==
 
 path-parse@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.npmjs.org/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
-  integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
+  version "1.0.7"
+  resolved "https://registry.npmjs.org/path-parse/-/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
+  integrity sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==
 
 postcss@^8.2.10:
   version "8.3.0"
@@ -88,9 +88,9 @@ resolve@^1.19.0:
     path-parse "^1.0.6"
 
 rollup@^2.38.5:
-  version "2.48.0"
-  resolved "https://registry.npmjs.org/rollup/-/rollup-2.48.0.tgz#fceb01ed771f991f29f7bd2ff7838146e55acb74"
-  integrity sha512-wl9ZSSSsi5579oscSDYSzGn092tCS076YB+TQrzsGuSfYyJeep8eEWj0eaRjuC5McuMNmcnR8icBqiE/FWNB1A==
+  version "2.50.5"
+  resolved "https://registry.npmjs.org/rollup/-/rollup-2.50.5.tgz#bbee9d6411af3f5fa5c6e7e2c69f7a65b753e568"
+  integrity sha512-Ztz4NurU2LbS3Jn5rlhnYv35z6pkjBUmYKr94fOBIKINKRO6kug9NTFHArT7jqwMP2kqEZ39jJuEtkk91NBltQ==
   optionalDependencies:
     fsevents "~2.3.1"
 
@@ -99,12 +99,12 @@ source-map-js@^0.6.2:
   resolved "https://registry.npmjs.org/source-map-js/-/source-map-js-0.6.2.tgz#0bb5de631b41cfbda6cfba8bd05a80efdfd2385e"
   integrity sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==
 
-vite@^2.3.3:
-  version "2.3.3"
-  resolved "https://registry.npmjs.org/vite/-/vite-2.3.3.tgz#7e88a71abd03985c647789938d784cce0ee3b0fd"
-  integrity sha512-eO1iwRbn3/BfkNVMNJDeANAFCZ5NobYOFPu7IqfY7DcI7I9nFGjJIZid0EViTmLDGwwSUPmRAq3cRBbO3+DsMA==
+vite@^2.3.6:
+  version "2.3.6"
+  resolved "https://registry.npmjs.org/vite/-/vite-2.3.6.tgz#1f7cfde88a51a802d69000c7bac85d481c2e871c"
+  integrity sha512-fsEpNKDHgh3Sn66JH06ZnUBnIgUVUtw6ucDhlOj1CEqxIkymU25yv1/kWDPlIjyYHnalr0cN6V+zzUJ+fmWHYw==
   dependencies:
-    esbuild "^0.11.23"
+    esbuild "^0.12.5"
     postcss "^8.2.10"
     resolve "^1.19.0"
     rollup "^2.38.5"

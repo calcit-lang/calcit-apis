@@ -2224,3 +2224,535 @@
           (:a x) (' "|pattern a:" x)
           (:b x y) (' "|pattern b:" x y)
           _ (' "|no match")
+    {}
+      :name |negate
+      :tags $ #{} :number
+      :desc "|turn negative of number"
+      :snippets $ []
+        quote $ negate 1
+
+  :methods $ {}
+    :number $ []
+      {}
+        :name |.ceil
+        :tags $ #{} :number
+        :desc "|ceil of a float"
+        :snippets $ []
+          quote $ .ceil 1.1
+      {}
+        :name |.floor
+        :tags $ #{} :number
+        :desc "|floor of a float"
+        :snippets $ []
+          quote $ .floor 1.1
+      {}
+        :name |.inc
+        :tags $ #{} :number
+        :desc "|add 1 to a number"
+        :snippets $ []
+      {}
+        :name |.format
+        :tags $ #{} :number
+        :desc "|format a float with specified precision"
+        :snippets $ []
+      {}
+        :name |.pow
+        :tags $ #{} :number
+        :desc "|power of a number"
+        :snippets $ []
+      {}
+        :name |.round
+        :tags $ #{} :number
+        :desc "|round a float number, also works for a ternary value"
+        :snippets $ []
+
+    :string $ []
+      {}
+        :name |.blank?
+        :tags $ #{} :string
+        :desc "|detects empty string or only whitespaces"
+        :snippets $ []
+      {}
+        :name |.count
+        :tags $ #{} :string
+        :desc "|count string"
+        :snippets $ []
+          quote $ .count |a
+      {}
+        :name |.empty
+        :tags $ #{} :string
+        :desc "|return empty string"
+        :snippets $ []
+      {}
+        :name |.empty?
+        :tags $ #{} :string
+        :desc "|detects empty string"
+        :wip? true
+        :snippets $ []
+      {}
+        :name |.ends-with?
+        :tags $ #{} :string
+        :desc "|detects if string ends with given pattern"
+        :snippets $ []
+      {}
+        :name |.get
+        :tags $ #{} :string
+        :desc "|get char form string as string"
+        :snippets $ []
+      {}
+        :name |.parse-float
+        :tags $ #{} :string
+        :desc "|get float number from string"
+        :snippets $ []
+      {}
+        :name |.parse-json
+        :tags $ #{} :string
+        :desc "|parse JSON string into Cirru data, notice that \":a\" will be parsed as keyword"
+        :snippets $ []
+      {}
+        :name |.replace
+        :tags $ #{} :string
+        :desc "|replace segments in a string"
+        :snippets $ []
+      {}
+        :name |.split
+        :tags $ #{} :string
+        :desc "|split string into a list of segments"
+        :snippets $ []
+      {}
+        :name |.split-lines
+        :tags $ #{} :string
+        :desc "|split lines(currently with `\\n`)"
+        :snippets $ []
+      {}
+        :name |.starts-with?
+        :tags $ #{} :string
+        :desc "|detects if string starts with given pattern"
+        :snippets $ []
+          quote $ .starts-with? |abc |a
+      {}
+        :name |.strip-prefix
+        :tags $ #{} :string
+        :desc "|strip given string from start of a string"
+        :snippets $ []
+          quote $ .strip-prefix |ababc |ab
+      {}
+        :name |.strip-suffix
+        :tags $ #{} :string
+        :desc "|strip given string from end of a string"
+        :snippets $ []
+          quote $ strip-suffix |ababc |bc
+      {}
+        :name |.substr
+        :tags $ #{} :string
+        :desc "|get sub string by indexes"
+        :snippets $ []
+          quote $ substr |abcd 1
+          quote $ substr |abcd 1 3
+      {}
+        :name |.trim
+        :tags $ #{} :string
+        :desc "|trim spaces or characters from string"
+        :snippets $ []
+          quote $ trim "|  a  "
+          quote $ trim |__a__ |_
+
+    :set $ []
+      {}
+        :name |.add
+        :tags $ #{} :set
+        :desc "|add item to a set"
+        :snippets $ []
+          quote $ .add (#{} 1) 2
+      {}
+        :name |.difference
+        :tags $ #{} :set
+        :desc "|return a difference hashset of 2 hashsets"
+        :wip? true
+        :snippets $ []
+          quote $ .difference (#{} 1 2 3 4) (#{} 1 2)
+      {}
+        :name |.exclude
+        :tags $ #{} :set
+        :desc "|exclude an item out of a hashset"
+        :wip? true
+        :snippets $ []
+          quote $ .exclude (#{} 1 2 3 4) 1 2
+      {}
+        :name |.empty
+        :tags $ #{} :set
+        :desc "|return an empty piece of data from given data"
+        :snippets $ []
+      {}
+        :name |.empty?
+        :tags $ #{} :set
+        :desc "|detects empty set"
+        :snippets $ []
+      {}
+        :name |.include
+        :tags $ #{} :set
+        :desc "|include an item into a hashset"
+        :snippets $ []
+      {}
+        :name |.include?
+        :tags $ #{} :set
+        :desc "|check if values is included in a structure, like items of a list"
+        :snippets $ []
+      {}
+        :name |.intersection
+        :tags $ #{} :set
+        :desc "|intersection of two hashsets"
+        :snippets $ []
+      {}
+        :name |.to-list
+        :tags $ #{} :set
+        :desc "|turn a set into a list with a given(more like random) order"
+        :snippets $ []
+      {}
+        :name |.union
+        :tags $ #{} :set
+        :desc "|union of two hashsets"
+        :snippets $ []
+    :map $ []
+      {}
+        :name |.assoc
+        :tags $ #{} :map
+        :desc "|returns a new map with given key/value associated"
+        :snippets $ []
+      {}
+        :name |.assoc-in
+        :tags $ #{} :map
+        :wip? true
+        :desc "|returns a new map with given path/value associated"
+        :snippets $ []
+      {}
+        :name |.contains?
+        :tags $ #{} :map
+        :desc "|check if key is contained in a hashmap"
+        :snippets $ []
+      {}
+        :name |.count
+        :tags $ #{} :map
+        :desc "|count map"
+        :snippets $ []
+      {}
+        :name |.dissoc
+        :tags $ #{} :map
+        :desc "|returns a list with a key dissociated"
+        :snippets $ []
+      {}
+        :name |.dissoc-in
+        :tags $ #{} :map
+        :wip? true
+        :desc "|dissociate data deep in a structure via a path"
+        :snippets $ []
+      {}
+        :name |.empty
+        :tags $ #{} :map
+        :desc "|return empty map"
+        :snippets $ []
+      {}
+        :name |.empty?
+        :tags $ #{} :map
+        :desc "|detects empty map"
+        :snippets $ []
+      {}
+        :name |.get
+        :tags $ #{} :map
+        :desc "|get value from map via a key"
+        :snippets $ []
+
+      {}
+        :name |.get-in
+        :tags $ #{} :map
+        :desc "|get value from map via a path"
+        :snippets $ []
+      {}
+        :name |.includes?
+        :tags $ #{} :map
+        :desc "|check if values is included in a map"
+        :snippets $ []
+      {}
+        :name |.keys
+        :tags $ #{} :map
+        :desc "|returns a set of keys of a map"
+        :snippets $ []
+      {}
+        :name |.keys-non-nil
+        :tags $ #{} :map
+        :desc "|returns a set of keys of a map, which has real values"
+        :snippets $ []
+      {}
+        :name |.map-kv
+        :tags $ #{} :map
+        :desc "|map key and value for a map"
+        :snippets $ []
+          {}
+            :code $ quote $ map-kv
+              {} (:a 1) (:b 2)
+              fn (k v)
+                [] k $ + v 1
+            :result $ quote $ {} (:a 2) (:b 3)
+
+      {}
+        :name |.merge
+        :tags $ #{} :map
+        :desc "|merge two maps"
+        :snippets $ []
+      {}
+        :name |.select-keys
+        :tags $ #{} :map
+        :desc "|select map with given keys. get nil values when extra keys provided"
+        :snippets $ []
+          {}
+            :code $ quote $ select-keys
+              {} (:a 1) (:b 2) (:c 3)
+              [] :a :b
+            :result $ quote $ {} (:a 1) (:b 2)
+          {}
+            :code $ quote $ select-keys
+              {} (:a 1) (:b 2) (:c 3)
+              [] :d
+            :result $ quote $ {} $ :d nil
+
+      {}
+        :name |.to-pairs
+        :tags $ #{} :map
+        :desc "|returns pairs of a map as a list of lists"
+        :snippets $ []
+      {}
+        :name |.unselect-keys
+        :tags $ #{} :map
+        :desc "|unselect given keys from based on a map"
+        :snippets $ []
+    :record $ []
+      {}
+        :name |.get-name
+        :tags $ #{} :record
+        :desc "|get name of a record in a symbol"
+        :snippets $ []
+      {}
+        :name |.same-kind?
+        :tags $ #{} :record
+        :desc "|detects if two records have same name and fields"
+        :snippets $ []
+      {}
+        :name |.turn-map
+        :tags $ #{} :record
+        :desc "|turn record into a map"
+        :snippets $ []
+    :list $ []
+      {}
+        :name |.any?
+        :tags $ #{} :list
+        :desc "|detects if any item in list satisfies function"
+        :snippets $ []
+      {}
+        :name |.add
+        :tags $ #{} :list
+        :desc "|general operation like append, works for list, set, map"
+        :snippets $ []
+      {}
+        :name |.append
+        :tags $ #{} :list
+        :desc "|returns new list, with new item at tail"
+        :snippets $ []
+      {}
+        :name |.assoc
+        :tags $ #{} :list
+        :desc "|returns a list with new item associated"
+        :snippets $ []
+      {}
+        :name |.assoc-after
+        :tags $ #{} :list
+        :desc "|returns a list with new item associated after specified index"
+        :snippets $ []
+      {}
+        :name |.assoc-before
+        :tags $ #{} :list
+        :desc "|returns a list with new item associated before specified index"
+        :snippets $ []
+      {}
+        :name |.butlast
+        :tags $ #{} :list
+        :desc "|slice list without last item, return empty list if `nil`"
+        :snippets $ []
+      {}
+        :name |.concat
+        :tags $ #{} :list
+        :desc "|concat mutiple lists"
+        :snippets $ []
+      {}
+        :name |.drop
+        :tags $ #{} :list
+        :desc "|take items of a list except for first n items"
+        :snippets $ []
+      {}
+        :name |.each
+        :tags $ #{} :list
+        :desc "|take a list and a function and call each item with function"
+        :snippets $ []
+      {}
+        :name |.empty
+        :tags $ #{} :list
+        :desc "|return an empty list"
+        :snippets $ []
+      {}
+        :name |.empty?
+        :tags $ #{} :list
+        :desc "|detects empty list"
+        :snippets $ []
+      {}
+        :name |.filter
+        :tags $ #{} :list
+        :desc "|filter a list with a function"
+        :snippets $ []
+      {}
+        :name |.filter-not
+        :tags $ #{} :list
+        :desc "|filter a list with a function with false return"
+        :snippets $ []
+      {}
+        :name |.find-index
+        :tags $ #{} :list
+        :desc "|find index of first item that matches the function, returns -1 when not found"
+        :snippets $ []
+      {}
+        :name |.foldl
+        :tags $ #{} :list
+        :desc "|Haskell's foldl function, implemented i Nim for performance"
+        :snippets $ []
+      {}
+        :name |.frequencies
+        :tags $ #{} :list
+        :desc "|count frequencies of items in list, returns a map"
+        :snippets $ []
+      {}
+        :name |.get
+        :tags $ #{} :list
+        :desc "|alias for nth"
+        :snippets $ []
+      {}
+        :name |.get-in
+        :tags $ #{} :list
+        :desc "|get data deep value from list via path"
+        :snippets $ []
+      {}
+        :name |.group-by
+        :tags $ #{} :list
+        :desc "|take a list, return grouped result with a map"
+        :snippets $ []
+      {}
+        :name |.has-index?
+        :tags $ #{} :list
+        :desc "|detects if a list has item on a index"
+        :snippets $ []
+          quote $ .has-index? (range 10) 4
+      {}
+        :name |.index-of
+        :tags $ #{} :list
+        :desc "|native implementation of indexOf function, returns -1 when not found"
+        :snippets $ []
+      {}
+        :name |.interleave
+        :tags $ #{} :list
+        :desc "|interleave of two lists, like Clojure"
+        :snippets $ []
+          {}
+            :code $ quote $ interleave ([] :a :b :c) ([] 1 2 3 4)
+            :result $ quote $ [] :a 1 :b 2 :c 3
+      {}
+        :name |.join
+        :tags $ #{} :list
+        :desc "|join list of items with a separator"
+        :snippets $ []
+      {}
+        :name |.join-str
+        :tags $ #{} :list
+        :wip? true
+        :desc "|join segments into a string"
+        :snippets $ []
+      {}
+        :name |.map
+        :tags $ #{} :list
+        :desc "|map items of list into a new list"
+        :snippets $ []
+      {}
+        :name |.map-indexed
+        :tags $ #{} :list
+        :desc "|map with index parameter"
+        :snippets $ []
+          quote $ .map-indexed (range 10)
+            fn (idx x) idx
+      {}
+        :name |.max
+        :tags $ #{} :list
+        :desc "|max function that takes a list of arguments"
+        :snippets $ []
+      {}
+        :name |.min
+        :tags $ #{} :list
+        :desc "|max function that takes a list of arguments"
+        :snippets $ []
+      {}
+        :name |.nth
+        :tags $ #{} :list
+        :desc "|get value from list via index"
+        :snippets $ []
+      {}
+        :name |.pairs-map
+        :tags $ #{} :list
+        :desc "|create a map from a list of pairs"
+        :snippets $ []
+      {}
+        :name |.prepend
+        :tags $ #{} :list
+        :desc "|returns new list, with new item at first"
+        :snippets $ []
+      {}
+        :name |.reduce
+        :tags $ #{} :list
+        :desc "|just an alias for `foldl`"
+        :snippets $ []
+      {}
+        :name |.rest
+        :tags $ #{} :list
+        :desc "|slice list without first item, return empty list if `nil`"
+        :snippets $ []
+      {}
+        :name |.reverse
+        :tags $ #{} :list
+        :desc "|return a list with order reversed"
+        :snippets $ []
+      {}
+        :name |.section-by
+        :tags $ #{} :list
+        :desc "|turn list into a list of lists of n sizes, remaining items also in a list"
+        :snippets $ []
+      {}
+        :name |.slice
+        :tags $ #{} :list
+        :desc "|return a slice of list, item at last index is not included"
+        :snippets $ []
+      {}
+        :name |.sort
+        :tags $ #{} :list
+        :desc "|sort list with given comparator function"
+        :snippets $ []
+          {}
+            :code $ quote $ .sort ([] 1 3 4 2)
+              fn (x y) (&- x y)
+            :result $ quote $ [] 1 2 3 4
+      {}
+        :name |.take
+        :tags $ #{} :list
+        :desc "|take n items from list"
+        :snippets $ []
+      {}
+        :name |.zipmap
+        :tags $ #{} :list
+        :desc "|create a map with two lists, one for keys and one for values"
+        :snippets $ []
+          {}
+            :code $ quote $ zipmap ([] :a :b :c :d) ([] 1 2 3 4)
+            :result $ quote $ {} (:a 1) (:b 2) (:c 3) (:d 4)
