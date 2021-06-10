@@ -2265,6 +2265,22 @@
         :tags $ #{} :number
         :desc "|round a float number, also works for a ternary value"
         :snippets $ []
+      {}
+        :name |.rand-shift
+        :tags $ #{} :number
+        :desc "|add or substract a rand value from current value"
+        :snippets $ []
+          {}
+            :code $ quote $ .rand-shift 10 5
+            :desc "|returns a random value in 5~15"
+      {}
+        :name |.rand-between
+        :tags $ #{} :number
+        :desc "|add or substract a rand value from current value"
+        :snippets $ []
+          {}
+            :code $ quote $ .rand-shift 10 5
+            :desc "|returns a random value in 5~10"
 
     :string $ []
       {}
@@ -2275,7 +2291,7 @@
       {}
         :name |.count
         :tags $ #{} :string
-        :desc "|count string"
+        :desc "|count string size"
         :snippets $ []
           quote $ .count |a
       {}
@@ -2341,21 +2357,21 @@
         :tags $ #{} :string
         :desc "|strip given string from end of a string"
         :snippets $ []
-          quote $ strip-suffix |ababc |bc
+          quote $ .strip-suffix |ababc |bc
       {}
         :name |.substr
         :tags $ #{} :string
         :desc "|get sub string by indexes"
         :snippets $ []
-          quote $ substr |abcd 1
-          quote $ substr |abcd 1 3
+          quote $ .substr |abcd 1
+          quote $ .substr |abcd 1 3
       {}
         :name |.trim
         :tags $ #{} :string
         :desc "|trim spaces or characters from string"
         :snippets $ []
-          quote $ trim "|  a  "
-          quote $ trim |__a__ |_
+          quote $ .trim "|  a  "
+          quote $ .trim |__a__ |_
 
     :set $ []
       {}
@@ -2413,6 +2429,13 @@
         :tags $ #{} :set
         :desc "|union of two hashsets"
         :snippets $ []
+      {}
+        :name |.count
+        :tags $ #{} :set
+        :desc "|count set size"
+        :snippets $ []
+          quote $ .count $ #{} 1 2
+
     :map $ []
       {}
         :name |.assoc
@@ -2433,8 +2456,9 @@
       {}
         :name |.count
         :tags $ #{} :map
-        :desc "|count map"
+        :desc "|count map size"
         :snippets $ []
+          quote $ .count $ {} (:a 1)
       {}
         :name |.dissoc
         :tags $ #{} :map
@@ -2525,6 +2549,7 @@
         :tags $ #{} :map
         :desc "|unselect given keys from based on a map"
         :snippets $ []
+
     :record $ []
       {}
         :name |.get-name
@@ -2541,6 +2566,13 @@
         :tags $ #{} :record
         :desc "|turn record into a map"
         :snippets $ []
+      {}
+        :name |.count
+        :tags $ #{} :record
+        :desc "|count record size"
+        :snippets $ []
+          quote $ .count x
+
     :list $ []
       {}
         :name |.any?
@@ -2756,3 +2788,9 @@
           {}
             :code $ quote $ zipmap ([] :a :b :c :d) ([] 1 2 3 4)
             :result $ quote $ {} (:a 1) (:b 2) (:c 3) (:d 4)
+      {}
+        :name |.count
+        :tags $ #{} :list
+        :desc "|count list size"
+        :snippets $ []
+          quote $ .count $ [] 1 2 3
