@@ -230,16 +230,6 @@
         quote $ count $ {}
         quote $ count $ |abc
     {}
-      :name |&get
-      :tags $ #{} :native :map
-      :desc "|like Clojure `get` but for map"
-      :snippets $ []
-        quote $ &get
-          {}
-            :a 1
-            :b 2
-          , :a
-    {}
       :name |nth
       :tags $ #{} :native :map :list
       :desc "|like Clojure `nth`"
@@ -2060,6 +2050,12 @@
           :code $ quote $ macroexpand $ quote $ defrecord Person :name :age
           :result $ quote $ quote $ def Person $ new-record 'Person :name :age
     {}
+      :name |defrecord!
+      :tags $ #{} :record :macro
+      :desc "|macro that wraps on defrecord with values defined, first argument uses a bare symbol"
+      :snippets $ []
+        quote $ defrecord! Person (:name |Cat) (:age 10)
+    {}
       :name |make-record
       :tags $ #{} :record
       :desc "|create record from existing data, throws error when keys are not sufficient"
@@ -2372,6 +2368,40 @@
         :snippets $ []
           quote $ .trim "|  a  "
           quote $ .trim |__a__ |_
+      {}
+        :name |.contains?
+        :tags $ #{} :string
+        :desc "|check if string contains an index"
+        :snippets $ []
+          quote $ .contains? |abc 1
+      {}
+        :name |.includes?
+        :tags $ #{} :string
+        :desc "|check if string includes a character"
+        :snippets $ []
+          quote $ .includes? |abc |a
+      {}
+        :name |.nth
+        :tags $ #{} :string
+        :desc "|get nth character from string"
+        :snippets $ []
+          quote $ .nth |abc 1
+      {}
+        :name |.first
+        :tags $ #{} :string
+        :desc "|get first character"
+        :snippets $ []
+          {}
+            :code $ quote $ .first |abc
+            :result $ quote $ do |a
+      {}
+        :name |.rest
+        :tags $ #{} :string
+        :desc "|get rest part of the string except for the first one"
+        :snippets $ []
+          {}
+            :code $ quote $ .rest |abc
+            :result $ quote $ do |bc
 
     :set $ []
       {}
@@ -2437,6 +2467,12 @@
           quote $ .count $ #{} 1 2
 
     :map $ []
+      {}
+        :name |.add
+        :tags $ #{} :map
+        :desc "|add a pair of key/value to a map"
+        :snippets $ []
+          quote $ .add m ([] :d 10)
       {}
         :name |.assoc
         :tags $ #{} :map
@@ -2549,6 +2585,19 @@
         :tags $ #{} :map
         :desc "|unselect given keys from based on a map"
         :snippets $ []
+      {}
+        :name |.first
+        :tags $ #{} :map
+        :desc "|get a pair of key/vale from a map, order is not guaranteed"
+        :snippets $ []
+          quote $ .first ({} (:a 1) (:b 2))
+      {}
+        :name |.rest
+        :tags $ #{} :map
+        :wip? true
+        :desc "|get a new map, without a first pair of entry, order is not guaranteed"
+        :snippets $ []
+          quote $ .rest
 
     :record $ []
       {}
@@ -2572,6 +2621,24 @@
         :desc "|count record size"
         :snippets $ []
           quote $ .count x
+      {}
+        :name |.contains?
+        :tags $ #{} :record
+        :desc "|detect if a field in contained in record"
+        :snippets $ []
+          quote $ .contains? x :a
+      {}
+        :name |.nth
+        :tags $ #{} :record
+        :desc "|return nth pair of value"
+        :snippets $ []
+          quote $ .nth x :a
+      {}
+        :name |.assoc
+        :tags $ #{} :record
+        :desc "|assoc new value to an existing key, new keys are not allowed"
+        :snippets $ []
+          quote $ .assoc x :a 2
 
     :list $ []
       {}
@@ -2794,3 +2861,15 @@
         :desc "|count list size"
         :snippets $ []
           quote $ .count $ [] 1 2 3
+      {}
+        :name |.first
+        :tags $ #{} :list
+        :desc "|return first element of a list"
+        :snippets $ []
+          quote $ .first $ [] 1 2 3
+      {}
+        :name |.dissoc
+        :tags $ #{} :list
+        :desc "|dissociate a key from a map"
+        :snippets $ []
+          quote $ .dissoc ([] 1 2 3) 1
