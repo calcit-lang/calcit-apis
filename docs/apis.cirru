@@ -326,7 +326,8 @@
     {}
       :name |print
       :tags $ #{} :native
-      :desc "|write string values to stdout"
+      :desc "|write string values to stdout(not avaliable after refactor)"
+      :wip? true
       :snippets $ []
         quote $ print 1 2 3
     {}
@@ -605,18 +606,6 @@
       :desc "|square root of number"
       :snippets $ []
         quote $ sqrt 9
-    {}
-      :name |ceil
-      :tags $ #{} :native :number
-      :desc "|ceil of a float"
-      :snippets $ []
-        quote $ ceil 1.1
-    {}
-      :name |floor
-      :tags $ #{} :native :number
-      :desc "|floor of a float"
-      :snippets $ []
-        quote $ floor 1.1
     {}
       :name |sin
       :tags $ #{} :native :number
@@ -1244,18 +1233,6 @@
       :snippets $ []
         quote $ split |1,2,3,4 |,
     {}
-      :name |split-lines
-      :tags $ #{} :string
-      :desc "|split lines(currently with `\\n`)"
-      :snippets $ []
-        quote $ split-lines "|a\nb\nc"
-    {}
-      :name |replace
-      :tags $ #{} :string
-      :desc "|replace segments in a string"
-      :snippets $ []
-        quote $ replace "|looks good" |good |bad
-    {}
       :name |update
       :tags $ #{}
       :desc "|update map or list"
@@ -1273,7 +1250,8 @@
       :tags $ #{}
       :desc "|dissociate data deep in a structure"
       :snippets $ []
-        quote $ dissoc-in data ([] :a 1)
+        quote $ dissoc-in data ([] :a :b :c)
+        quote $ dissoc-in data ([] :a 1 2)
     {}
       :name |\
       :tags $ #{} :macro
@@ -1305,23 +1283,6 @@
       :snippets $ []
         quote $ contains-symbol? (quote $ + a b) 'a
     {}
-      :name |has-index?
-      :tags $ #{} :list
-      :desc "|detects if a list has item on a index"
-      :snippets $ []
-        quote $ has-index? (range 10) 4
-    {}
-      :name |frequencies
-      :tags $ #{} :list
-      :desc "|count frequencies of items in list, returns a map"
-      :snippets $ []
-        {}
-          :code $ quote $ frequencies $ [] 1 1 1 2 2 3
-          :result $ quote $ {}
-            3 1
-            2 2
-            1 3
-    {}
       :name |to-pairs
       :tags $ #{} :map
       :desc "|returns pairs of a map as a list of lists"
@@ -1331,30 +1292,6 @@
           :result $ quote $ #{}
             [] :a 1
             [] :b 2
-    {}
-      :name |init-canvas
-      :tags $ #{} :canvas
-      :desc "|load window of Cairo, see json-paint"
-      :snippets $ []
-        quote $ init-canvas $ {} (:title "\"DEMO") (:width 800) (:height 600)
-    {}
-      :name |draw-canvas
-      :tags $ #{} :canvas
-      :desc "|draw with json-paint shapes(dropped after refactor)"
-      :wip? true
-      :snippets $ []
-        quote $ draw-canvas $ {} (:type :polyline) (:from $ [] 40 40)
-          :stops $ [] ([] 100 60) ([] 200 200) ([] 600 60) ([] 500 400)
-          :stroke-color $ {} (:r 90) (:g 10) (:b 10)
-    {}
-      :name |section-by
-      :tags $ #{} :list
-      :desc "|turn list into a list of lists of n sizes, remaining items also in a list"
-      :snippets $ []
-        {}
-          :code $ quote $ section-by 3 $ range 5
-          :result $ quote
-            [] ([] 0 1 2) ([] 3 4)
     {}
       :name |[][]
       :tags $ #{} :list :macro
@@ -1448,13 +1385,6 @@
             :a $ {}
               :b 10
     {}
-      :name |dissoc-in
-      :tags $ #{} :number
-      :desc "|dissoc a field deep inside"
-      :snippets $ []
-        quote $ dissoc-in data ([] :a :b :c)
-        quote $ dissoc-in data ([] :a 1 2)
-    {}
       :name |update-in
       :tags $ #{} :number
       :desc "|update a field deep inside"
@@ -1468,24 +1398,12 @@
       :snippets $ []
         quote $ starts-with? |abc |a
     {}
-      :name |ends-with?
-      :tags $ #{} :string
-      :desc "|detects if string ends with item"
-      :snippets $ []
-        quote $ ends-with? |abc |c
-    {}
       :name |substr
       :tags $ #{} :string :native
       :desc "|get sub string by indexes"
       :snippets $ []
         quote $ substr |abcd 1
         quote $ substr |abcd 1 3
-    {}
-      :name |str-find
-      :tags $ #{} :string :native
-      :desc "|find index of item in a string"
-      :snippets $ []
-        quote $ str-find |abcd |a
     {}
       :name |parse-float
       :tags $ #{} :string :native
@@ -1724,18 +1642,24 @@
           :code $ quote $ {,} :a 1 , :b 2 , :c 3
           :result $ quote $ {} (:a 1) (:b 2) (:c 3)
     {}
-      :name |with-log
+      :name |w-log
       :tags $ #{} :debug :macro
       :desc "|for debug purpose, add log to an expression"
       :snippets $ []
         {}
           :code $ quote
-            macroexpand $ quote $ with-log $ + 1 2
+            macroexpand $ quote $ w-log $ + 1 2
           :result $ quote
             &let
               v__1 $ + 1 2
               echo (quote $ + 1 2) |=> v__1
               , v__1
+    {}
+      :name |wo-log
+      :tags $ #{} :debug :macro
+      :desc "|for debug purpose, log-less version of w-log, like `identity`"
+      :snippets $ []
+        quote $ wo-log 1
     {}
       :name |with-js-log
       :tags $ #{} :debug :macro
@@ -1749,6 +1673,12 @@
               v__1 $ + 1 2
               js/console.log (quote $ + 1 2) |=> v__1
               , v__1
+    {}
+      :name |wo-js-log
+      :tags $ #{} :debug :macro
+      :desc "|for debug purpose, log-less version of w-js0log, like `identity`"
+      :snippets $ []
+        quote $ wo-log 1
     {}
       :name |dual-balanced-ternary
       :tags $ #{} :ternary
@@ -1847,22 +1777,33 @@
           :code $ quote $ re-find-all |1a2a34 |\d+
           :result $ quote $ [] |1 |2 |34
     {}
-      :name |call-with-log
+      :name |call-w-log
       :tags $ #{} :debug :macro
       :desc "|for debug purpose, add log to a function call"
       :snippets $ []
         {}
           :code $ quote
-            call-with-log + 1 2
+            call-w-log + 1 2
           :desc "|prints expression and arguments for debugging"
     {}
-      :name |defn-with-log
+      :name |call-wo-log
+      :tags $ #{} :debug :macro
+      :desc "|for debug purpose, log-less version of call-w-log"
+      :snippets $ []
+        quote $ call-log + 1 2
+    {}
+      :name |defn-w-log
       :tags $ #{} :debug :macro
       :desc "|for debugging, wrap function with logs"
       :snippets $ []
         {}
           :code $ quote
-            defn-with-log f (a b) (+ a b)
+            defn-w-log f (a b) (+ a b)
+    {}
+      :name |defn-wo-log
+      :tags $ #{} :debug :macro
+      :desc "|for debug purpose, log-less version of defn-w-log, use like `defn`"
+      :snippets $ []
     {}
       :name |let{}
       :tags $ #{} :macro
@@ -1956,14 +1897,6 @@
         {}
           :code $ quote
             &get-calcit-running-mode
-    {}
-      :name |set->list
-      :tags $ #{} :set
-      :desc "|turn a set into a list with a given(more like random) order"
-      :snippets $ []
-        {}
-          :code $ quote
-            set->list $ #{} 1 2 3
     {}
       :name |to-js-data
       :tags $ #{} :js
@@ -2080,12 +2013,6 @@
       :snippets $ []
         quote $ &%{} Person :name |Ye :age 21
     {}
-      :name |get-record-name
-      :tags $ #{} :record
-      :desc "|get name of a record in a symbol"
-      :snippets $ []
-        quote $ get-record-name x
-    {}
       :name |turn-map
       :tags $ #{} :record
       :desc "|turn record into a map"
@@ -2111,12 +2038,6 @@
         quote $ try
           do (echo "|somthing")
           fn (error) (echo "error message:" error)
-    {}
-      :name |&list-map
-      :tags $ #{} :list
-      :desc "|internal function exposing native seq map and tree map for performance"
-      :snippets $ []
-        quote $ &list-map (\ + % 1) ([] 1 2 3 4)
     {}
       :name |format-to-lisp
       :tags $ #{} :debug
@@ -2146,28 +2067,6 @@
       :desc "|internal function for creating a JavaScript object, used inside `js-object`"
       :snippets $ []
         quote $ &js-object :a 1 :b 2
-    {}
-      :name |strip-prefix
-      :tags $ #{} :string
-      :desc "|strip given string from start of a string"
-      :snippets $ []
-        {}
-          :code $ quote $ strip-prefix |ababc |ab
-          :result $ quote $ do |abc
-        {}
-          :code $ quote $ strip-prefix |0abc |ab
-          :result $ quote $ do |0abc
-    {}
-      :name |strip-suffix
-      :tags $ #{} :string
-      :desc "|strip given string from end of a string"
-      :snippets $ []
-        {}
-          :code $ quote $ strip-suffix |ababc |bc
-          :result $ quote $ do |aba
-        {}
-          :code $ quote $ strip-suffix |abc0 |bc
-          :result $ quote $ do |abc0
     {}
       :name |select-keys
       :tags $ #{} :map
@@ -2220,12 +2119,6 @@
           (:a x) (' "|pattern a:" x)
           (:b x y) (' "|pattern b:" x y)
           _ (' "|no match")
-    {}
-      :name |negate
-      :tags $ #{} :number
-      :desc "|turn negative of number"
-      :snippets $ []
-        quote $ negate 1
 
   :methods $ {}
     :number $ []
@@ -2277,6 +2170,12 @@
           {}
             :code $ quote $ .rand-shift 10 5
             :desc "|returns a random value in 5~10"
+      {}
+        :name |.negate
+        :tags $ #{} :number
+        :desc "|turn negative of number"
+        :snippets $ []
+          quote $ .negate 1
 
     :string $ []
       {}
@@ -2306,6 +2205,7 @@
         :tags $ #{} :string
         :desc "|detects if string ends with given pattern"
         :snippets $ []
+          quote $ .ends-with? |abc |c
       {}
         :name |.get
         :tags $ #{} :string
@@ -2326,6 +2226,7 @@
         :tags $ #{} :string
         :desc "|replace segments in a string"
         :snippets $ []
+          quote $ .replace "|looks good" |good |bad
       {}
         :name |.split
         :tags $ #{} :string
@@ -2336,6 +2237,8 @@
         :tags $ #{} :string
         :desc "|split lines(currently with `\\n`)"
         :snippets $ []
+          quote $ .split-lines "|a\nb\nc"
+
       {}
         :name |.starts-with?
         :tags $ #{} :string
@@ -2347,13 +2250,23 @@
         :tags $ #{} :string
         :desc "|strip given string from start of a string"
         :snippets $ []
-          quote $ .strip-prefix |ababc |ab
+          {}
+            :code $ quote $ .strip-prefix |ababc |ab
+            :result $ quote $ do |abc
+          {}
+            :code $ quote $ .strip-prefix |0abc |ab
+            :result $ quote $ do |0abc
       {}
         :name |.strip-suffix
         :tags $ #{} :string
         :desc "|strip given string from end of a string"
         :snippets $ []
-          quote $ .strip-suffix |ababc |bc
+          {}
+            :code $ quote $ .strip-suffix |ababc |bc
+            :result $ quote $ do |aba
+          {}
+            :code $ quote $ .strip-suffix |abc0 |bc
+            :result $ quote $ do |abc0
       {}
         :name |.substr
         :tags $ #{} :string
@@ -2402,6 +2315,12 @@
           {}
             :code $ quote $ .rest |abc
             :result $ quote $ do |bc
+      {}
+        :name |.find-index
+        :tags $ #{} :string :native
+        :desc "|find index of item in a string"
+        :snippets $ []
+          quote $ .find-index |abcd |a
 
     :set $ []
       {}
@@ -2454,6 +2373,9 @@
         :tags $ #{} :set
         :desc "|turn a set into a list with a given(more like random) order"
         :snippets $ []
+          {}
+            :code $ quote
+              .to-list $ #{} 1 2 3
       {}
         :name |.union
         :tags $ #{} :set
@@ -2726,6 +2648,12 @@
         :tags $ #{} :list
         :desc "|count frequencies of items in list, returns a map"
         :snippets $ []
+          {}
+            :code $ quote $ .frequencies $ [] 1 1 1 2 2 3
+            :result $ quote $ {}
+              3 1
+              2 2
+              1 3
       {}
         :name |.get
         :tags $ #{} :list
@@ -2828,6 +2756,10 @@
         :tags $ #{} :list
         :desc "|turn list into a list of lists of n sizes, remaining items also in a list"
         :snippets $ []
+          {}
+            :code $ quote $ section-by 3 $ range 5
+            :result $ quote
+              [] ([] 0 1 2) ([] 3 4)
       {}
         :name |.slice
         :tags $ #{} :list
