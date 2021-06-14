@@ -157,7 +157,7 @@
                       :line-height "\"22px"
                       :margin "\"0px 0px"
                     :innerHTML $ trim
-                      write-cirru ([] code) true
+                      format-cirru ([] code) true
                 :lisp $ <> (lisp-style code)
                   {} $ :font-family ui/font-code
                 <> $ str "\"Unknown code: " syntax
@@ -239,7 +239,7 @@
                     {} $ :style ui/expand
                     -> visible-apis
                       sort $ fn (a b)
-                        compare-string (:name a) (:name b)
+                        &str:compare (:name a) (:name b)
                       map $ fn (info)
                         [] (:name info)
                           memof-call comp-api-entry info $ :syntax state
