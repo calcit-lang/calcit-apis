@@ -130,12 +130,6 @@
             b $ + a 1
           + a b
     {}
-      :name |&let
-      :tags $ #{} :syntax
-      :desc "|internal operator for let, which only binds 1 variable per expression"
-      :snippets $ []
-        quote $ &let (a 1) (+ a 1)
-    {}
       :name |loop
       :tags $ #{} :macro
       :desc "|like Clojure `loop`, use tail recursion to loop inside expressions, implemented with macro"
@@ -166,30 +160,6 @@
       :snippets $ []
         quote $ assert "|x > 0" (> x 0)
     {}
-      :name |&+
-      :tags $ #{} :native :number
-      :desc "|native add function which adds 2 numbers"
-      :snippets $ []
-        quote $ &+ 1 2
-    {}
-      :name |&-
-      :tags $ #{} :native :number
-      :desc "|native add function which substracts one number from another"
-      :snippets $ []
-        quote $ &+ 2 1
-    {}
-      :name |&*
-      :tags $ #{} :native :number
-      :desc "|native add function which multiples 2 numbers"
-      :snippets $ []
-        quote $ &* 2 3
-    {}
-      :name |&/
-      :tags $ #{} :native :number
-      :desc "|native add function which divide one number by another"
-      :snippets $ []
-        quote $ &/ 10 2
-    {}
       :name |rem
       :tags $ #{} :native :number
       :desc "|function for get a reminder value"
@@ -197,24 +167,6 @@
         {}
           :code $ quote $ rem 5 3
           :result $ quote $ do 2
-    {}
-      :name |&<
-      :tags $ #{} :native :number
-      :desc "|native `<` function for 2 numbers"
-      :snippets $ []
-        quote $ &< 2 3
-    {}
-      :name |&>
-      :tags $ #{} :native :number
-      :desc "|native `>` function for 2 numbers"
-      :snippets $ []
-        quote $ &> 3 2
-    {}
-      :name |&=
-      :tags $ #{} :native :number
-      :desc "|native `=` function for 2 numbers"
-      :snippets $ []
-        quote $ &= 2 (+ 1 1)
     {}
       :name |not
       :tags $ #{} :native :bool
@@ -474,12 +426,6 @@
       :snippets $ []
         quote $ slice ([] 1 2 3 4) 1 2
     {}
-      :name |&concat
-      :tags $ #{} :native
-      :desc "|native list concatenation of 2 lists"
-      :snippets $ []
-        quote $ &concat ([] 1 2) ([] 3 4)
-    {}
       :name |format-ternary-tree
       :tags $ #{} :native :list :map
       :desc "|display string form of internal ternary tree structure, currently js only"
@@ -557,24 +503,11 @@
       :snippets $ []
         quote $ dissoc ({} (:a 1) (:b 2)) :a
     {}
-      :name |&str
-      :tags $ #{} :native :string
-      :desc "|turn a single item into string"
-      :snippets $ []
-        quote $ &str 1
-        quote $ = |keyword $ &str :keyword
-    {}
       :name |escape
       :tags $ #{} :native :string
       :desc "|string escaping"
       :snippets $ []
         quote $ escape "|a b"
-    {}
-      :name |&str-concat
-      :tags $ #{} :native :string
-      :desc "|concat 2 strings"
-      :snippets $ []
-        quote $ &str-concat |a |b
     {}
       :name |parse-cirru-edn
       :tags $ #{} :native
@@ -638,36 +571,6 @@
       :snippets $ []
         quote $ #{} 1 2 3 4
     {}
-      :name |&include
-      :tags $ #{} :native :set
-      :desc "|include an item into a hashset"
-      :snippets $ []
-        quote $ &include (#{} 1 2 3) 4
-    {}
-      :name |&exclude
-      :tags $ #{} :native :set
-      :desc "|exclude an item out of a hashset"
-      :snippets $ []
-        quote $ &exclude (#{} 1 2 3 4) 4
-    {}
-      :name |&difference
-      :tags $ #{} :native :set
-      :desc "|difference of two hashsets"
-      :snippets $ []
-        quote $ &difference (#{} 1 2 3 4) (#{} 1 2)
-    {}
-      :name |&union
-      :tags $ #{} :native
-      :desc "|union of two hashsets"
-      :snippets $ []
-        quote $ &union (#{} 1 2) (#{} 3 4)
-    {}
-      :name |&intersection
-      :tags $ #{} :native
-      :desc "|intersection of two hashsets"
-      :snippets $ []
-        quote $ &intersection (#{} 1 2) (#{} 2 3)
-    {}
       :name |recur
       :tags $ #{} :native :syntax
       :desc "|operator for tail recursion, can be used in a function or a loop"
@@ -712,18 +615,6 @@
       :snippets $ []
         quote $ unless false |false |true
         quote $ unless false |false
-    {}
-      :name |&<=
-      :tags $ #{} :number
-      :desc "|native implementation of <=, of 2 arguments"
-      :snippets $ []
-        quote $ <= 1 2
-    {}
-      :name |&>=
-      :tags $ #{} :number
-      :desc "|native implementation of >=, of 2 arguments"
-      :snippets $ []
-        quote $ >= 2 1
     {}
       :name |when
       :tags $ #{} :macro
@@ -910,15 +801,6 @@
             echo x
           range 4
     {}
-      :name |&doseq
-      :tags $ #{} :list
-      :desc "|take item from list and run a piece of code with it"
-      :snippets $ []
-        quote
-          &doseq
-            idx $ range 4
-            echo idx
-    {}
       :name |map
       :tags $ #{} :list
       :desc "|map items of list into a new list"
@@ -1072,28 +954,11 @@
                   if (&= v__3 1) |one
                     if (&= v__3 2) |two default__4
     {}
-      :name |&case
-      :tags $ #{} :macro
-      :desc "|internal helper for case and case-default"
-      :snippets $ []
-    {}
       :name |get-in
       :tags $ #{} :list :map
       :desc "|like Clojure get-in function, read property recursively"
       :snippets $ []
         quote $ get-in data $ [] :a 1
-    {}
-      :name |&max
-      :tags $ #{} :number
-      :desc "|native implementation of max, takes 2 arguments"
-      :snippets $ []
-        quote $ &max 1 2
-    {}
-      :name |&min
-      :tags $ #{} :number
-      :desc "|native implementation of min, takes 2 arguments"
-      :snippets $ []
-        quote $ &min 1 2
     {}
       :name |max
       :tags $ #{} :list
@@ -1302,14 +1167,6 @@
             [][] (2 3) (4 5) (6 7)
           :result $ quote $ [] ([] 2 3) ([] 4 5) ([] 6 7)
           :desc "|This is a macro"
-    {}
-      :name |&{}
-      :tags $ #{} :map
-      :desc "|internal implementation for `{}`, creating with even number of items"
-      :snippets $ []
-        {}
-          :code $ quote $ &{} :a 1 :b 2
-          :result $ quote $ {} (:a 1) (:b 2)
     {}
       :name |assert=
       :tags $ #{} :macro
@@ -1562,11 +1419,6 @@
         {}
           :code $ quote $ and 1 nil
           :result $ quote $ do 1
-    {}
-      :name |&reset-gensym-index!
-      :tags $ #{} :native
-      :desc "|debugging function for gensym"
-      :snippets $ []
     {}
       :name |generate-id!
       :tags $ #{} :native
@@ -1865,6 +1717,7 @@
     {}
       :name |dbt-digits
       :tags $ #{} :dual-balanced-ternary
+      :wip? true
       :desc "|get list of digits from a dual-balanced-ternary value(dropped after refactor)"
       :snippets $ []
         {}
@@ -1881,22 +1734,6 @@
           :code $ quote
             timeout-call 100
               fn () (echo "|100ms passed")
-    {}
-      :name |&get-calcit-backend
-      :tags $ #{} :native
-      :desc "|detects backend, returns `:nim` or `:js`"
-      :snippets $ []
-        {}
-          :code $ quote
-            &get-calcit-backend
-    {}
-      :name |&get-calcit-running-mode
-      :tags $ #{} :native
-      :desc "|detects compiler, returns `:eval` or `:js` or `:ir`"
-      :snippets $ []
-        {}
-          :code $ quote
-            &get-calcit-running-mode
     {}
       :name |to-js-data
       :tags $ #{} :js
@@ -2007,12 +1844,6 @@
       :snippets $ []
         quote $ %{} Person (:name |Ye) (:age 21)
     {}
-      :name |&%{}
-      :tags $ #{} :record
-      :desc "|internal implementation of `%{}`, first argument is record"
-      :snippets $ []
-        quote $ &%{} Person :name |Ye :age 21
-    {}
       :name |turn-map
       :tags $ #{} :record
       :desc "|turn record into a map"
@@ -2062,12 +1893,6 @@
       :snippets $ []
         quote $ js-object (:a 1) (:b 2)
     {}
-      :name |&js-object
-      :tags $ #{} :native :js
-      :desc "|internal function for creating a JavaScript object, used inside `js-object`"
-      :snippets $ []
-        quote $ &js-object :a 1 :b 2
-    {}
       :name |select-keys
       :tags $ #{} :map
       :desc "|select map with given keys. get nil values when extra keys provided"
@@ -2089,12 +1914,6 @@
         {}
           :code $ quote $ unselect-keys ({} (:a 1) (:b 2) (:c 3)) ([] :c :d)
           :result $ quote $ {} (:a 1) (:b 2)
-    {}
-      :name |&ffi-message
-      :tags $ #{} :native
-      :desc "|messages stored to be read by Rust code, string message, varadic arguments"
-      :snippets $ []
-        quote $ &ffi-message |message |arg1 |arg2
     {}
       :name |invoke
       :tags $ #{} :fn
@@ -2119,6 +1938,409 @@
           (:a x) (' "|pattern a:" x)
           (:b x y) (' "|pattern b:" x y)
           _ (' "|no match")
+
+  :internals $ []
+    {}
+      :name |&let
+      :tags $ #{} :syntax
+      :desc "|internal operator for let, which only binds 1 variable per expression"
+      :snippets $ []
+        quote $ &let (a 1) (+ a 1)
+    {}
+      :name |&+
+      :tags $ #{} :native :number
+      :desc "|native add function which adds 2 numbers"
+      :snippets $ []
+        quote $ &+ 1 2
+    {}
+      :name |&-
+      :tags $ #{} :native :number
+      :desc "|native add function which substracts one number from another"
+      :snippets $ []
+        quote $ &+ 2 1
+    {}
+      :name |&*
+      :tags $ #{} :native :number
+      :desc "|native add function which multiples 2 numbers"
+      :snippets $ []
+        quote $ &* 2 3
+    {}
+      :name |&/
+      :tags $ #{} :native :number
+      :desc "|native add function which divide one number by another"
+      :snippets $ []
+        quote $ &/ 10 2
+    {}
+      :name |&<
+      :tags $ #{} :native :number
+      :desc "|native `<` function for 2 numbers"
+      :snippets $ []
+        quote $ &< 2 3
+    {}
+      :name |&>
+      :tags $ #{} :native :number
+      :desc "|native `>` function for 2 numbers"
+      :snippets $ []
+        quote $ &> 3 2
+    {}
+      :name |&=
+      :tags $ #{} :native :number
+      :desc "|native `=` function for 2 numbers"
+      :snippets $ []
+        quote $ &= 2 (+ 1 1)
+    {}
+      :name |&concat
+      :tags $ #{} :native
+      :desc "|native list concatenation of 2 lists"
+      :snippets $ []
+        quote $ &concat ([] 1 2) ([] 3 4)
+    {}
+      :name |&str
+      :tags $ #{} :native :string
+      :desc "|turn a single item into string"
+      :snippets $ []
+        quote $ &str 1
+        quote $ = |keyword $ &str :keyword
+    {}
+      :name |&case
+      :tags $ #{} :macro
+      :desc "|internal helper for case and case-default"
+      :snippets $ []
+    {}
+      :name |&doseq
+      :tags $ #{} :list
+      :desc "|take item from list and run a piece of code with it"
+      :snippets $ []
+        quote
+          &doseq
+            idx $ range 4
+            echo idx
+    {}
+      :name |&str-concat
+      :tags $ #{} :native :string
+      :desc "|concat 2 strings"
+      :snippets $ []
+        quote $ &str-concat |a |b
+    {}
+      :name |&include
+      :tags $ #{} :native :set
+      :desc "|include an item into a hashset"
+      :snippets $ []
+        quote $ &include (#{} 1 2 3) 4
+    {}
+      :name |&exclude
+      :tags $ #{} :native :set
+      :desc "|exclude an item out of a hashset"
+      :snippets $ []
+        quote $ &exclude (#{} 1 2 3 4) 4
+    {}
+      :name |&difference
+      :tags $ #{} :native :set
+      :desc "|difference of two hashsets"
+      :snippets $ []
+        quote $ &difference (#{} 1 2 3 4) (#{} 1 2)
+    {}
+      :name |&union
+      :tags $ #{} :native
+      :desc "|union of two hashsets"
+      :snippets $ []
+        quote $ &union (#{} 1 2) (#{} 3 4)
+    {}
+      :name |&intersection
+      :tags $ #{} :native
+      :desc "|intersection of two hashsets"
+      :snippets $ []
+        quote $ &intersection (#{} 1 2) (#{} 2 3)
+    {}
+      :name |&<=
+      :tags $ #{} :number
+      :desc "|native implementation of <=, of 2 arguments"
+      :snippets $ []
+        quote $ <= 1 2
+    {}
+      :name |&>=
+      :tags $ #{} :number
+      :desc "|native implementation of >=, of 2 arguments"
+      :snippets $ []
+        quote $ >= 2 1
+    {}
+      :name |&max
+      :tags $ #{} :number
+      :desc "|native implementation of max, takes 2 arguments"
+      :snippets $ []
+        quote $ &max 1 2
+    {}
+      :name |&min
+      :tags $ #{} :number
+      :desc "|native implementation of min, takes 2 arguments"
+      :snippets $ []
+        quote $ &min 1 2
+    {}
+      :name |&{}
+      :tags $ #{} :map
+      :desc "|internal implementation for `{}`, creating with even number of items"
+      :snippets $ []
+        {}
+          :code $ quote $ &{} :a 1 :b 2
+          :result $ quote $ {} (:a 1) (:b 2)
+    {}
+      :name |&reset-gensym-index!
+      :tags $ #{} :native
+      :desc "|debugging function for gensym"
+      :snippets $ []
+    {}
+      :name |&get-calcit-backend
+      :tags $ #{} :native
+      :desc "|detects backend, returns `:nim` or `:js`"
+      :snippets $ []
+        {}
+          :code $ quote
+            &get-calcit-backend
+    {}
+      :name |&get-calcit-running-mode
+      :tags $ #{} :native
+      :desc "|detects compiler, returns `:eval` or `:js` or `:ir`"
+      :snippets $ []
+        {}
+          :code $ quote
+            &get-calcit-running-mode
+    {}
+      :name |&%{}
+      :tags $ #{} :record
+      :desc "|internal implementation of `%{}`, first argument is record"
+      :snippets $ []
+        quote $ &%{} Person :name |Ye :age 21
+    {}
+      :name |&js-object
+      :tags $ #{} :native :js
+      :desc "|internal function for creating a JavaScript object, used inside `js-object`"
+      :snippets $ []
+        quote $ &js-object :a 1 :b 2
+    {}
+      :name |&ffi-message
+      :tags $ #{} :native
+      :desc "|messages stored to be read by Rust code, string message, varadic arguments"
+      :snippets $ []
+        quote $ &ffi-message |message |arg1 |arg2
+    {}
+      :name |&compare
+      :tags $ #{} :native
+      :desc "compare data in any kinds with native code, returns `-1` `0` `1`"
+      :snippets $ []
+        quote $ &compare :a 1
+    {}
+      :name |&tuple:nth
+      :tags $ #{} :tuple
+      :desc "|accessing value in a tuple"
+      :snippets $ []
+    {}
+      :name |&tuple:assoc
+      :tags $ #{} :tuple
+      :desc "|create a new tuple with value changed"
+      :snippets $ []
+    {}
+      :name |&str:replace
+      :tags $ #{} :string
+      :desc "|internal function for replacing string"
+      :snippets $ []
+    {}
+      :name |&str:find-index
+      :tags $ #{} :string
+      :desc "|find a pattern in string and return index"
+      :snippets $ []
+    {}
+      :name |&str:count
+      :tags $ #{} :string
+      :desc "|count string length"
+      :snippets $ []
+    {}
+      :name |&str:empty?
+      :tags $ #{} :string
+      :desc "|detects if a string is empty(still different with `blank?`)"
+      :snippets $ []
+    {}
+      :name |&str:contains?
+      :tags $ #{} :string
+      :wip? true
+      :desc "|detects if a string has index"
+      :snippets $ []
+    {}
+      :name |&str:includes?
+      :tags $ #{} :string
+      :desc "|detects if a pattern is inside given string"
+      :snippets $ []
+    {}
+      :name |&str:nth
+      :tags $ #{} :string
+      :desc "|access `n`th character of a string"
+      :snippets $ []
+    {}
+      :name |&str:first
+      :tags $ #{} :string
+      :desc "|first character of a string"
+      :snippets $ []
+    {}
+      :name |&str:rest
+      :tags $ #{} :string
+      :desc "|rest part of a string"
+      :snippets $ []
+    {}
+      :name |&list:count
+      :tags $ #{} :list
+      :desc "|count size of a list"
+      :snippets $ []
+    {}
+      :name |&list:empty?
+      :tags $ #{} :list
+      :desc "|detects if a list is empty"
+      :snippets $ []
+    {}
+      :name |&list:contains?
+      :tags $ #{} :list
+      :wip? true
+      :desc "|detects if a list has item on given index"
+      :snippets $ []
+    {}
+      :name |&list:includes?
+      :tags $ #{} :list
+      :desc "|detects if a list has given item"
+      :snippets $ []
+    {}
+      :name |&list:nth
+      :tags $ #{} :list
+      :desc "|access `n`th item in a list"
+      :snippets $ []
+    {}
+      :name |&list:rest
+      :tags $ #{} :list
+      :desc "|return rest part of a list"
+      :snippets $ []
+    {}
+      :name |&list:assoc
+      :tags $ #{} :list
+      :desc "|associate new item on list"
+      :snippets $ []
+    {}
+      :name |&list:dissoc
+      :tags $ #{} :list
+      :desc "|dissociate item from list, return a new list with smaller size"
+      :snippets $ []
+    {}
+      :name |&merge
+      :tags $ #{} :map
+      :desc "|merge 2 maps"
+      :snippets $ []
+    {}
+      :name |&map:get
+      :tags $ #{} :map
+      :desc "|get value from a map with a key"
+      :snippets $ []
+    {}
+      :name |&map:dissoc
+      :tags $ #{} :map
+      :desc "|dissociate key from a map"
+      :snippets $ []
+    {}
+      :name |&map:to-list
+      :tags $ #{} :map
+      :desc "|return a list of pairs from map, order is not guaranteed"
+      :snippets $ []
+    {}
+      :name |&map:count
+      :tags $ #{} :map
+      :desc "|count size of a map"
+      :snippets $ []
+    {}
+      :name |&map:empty?
+      :tags $ #{} :map
+      :desc "|detects if a map is empty"
+      :snippets $ []
+    {}
+      :name |&map:contains?
+      :tags $ #{} :map
+      :desc "|detects if a map has given key"
+      :snippets $ []
+    {}
+      :name |&map:includes?
+      :tags $ #{} :map
+      :wip? true
+      :desc "|detects if a map has given value"
+      :snippets $ []
+    {}
+      :name |&map:first
+      :tags $ #{} :map
+      :desc "|return first entry as a pair from a map, order is not guaranteed"
+      :snippets $ []
+    {}
+      :name |&map:rest
+      :tags $ #{} :map
+      :desc "|return pairs of rest entries of a map, order is not guaranteed"
+      :snippets $ []
+    {}
+      :name |&map:assoc
+      :tags $ #{} :map
+      :desc "|associate a pair of key/value to a map"
+      :snippets $ []
+    {}
+      :name |&set:count
+      :tags $ #{} :set
+      :desc "|count size of a set"
+      :snippets $ []
+    {}
+      :name |&set:empty?
+      :tags $ #{} :set
+      :desc "|detects if a set is empty"
+      :snippets $ []
+    {}
+      :name |&set:includes?
+      :tags $ #{} :set
+      :desc "|detects if a set has given value"
+      :snippets $ []
+    {}
+      :name |&set:first
+      :tags $ #{} :set
+      :desc "|return a first item from given set, order is not guaranteed"
+      :snippets $ []
+    {}
+      :name |&set:rest
+      :tags $ #{} :set
+      :desc "|return rest part of given set, order is not guaranteed"
+      :snippets $ []
+    {}
+      :name |&set:assoc
+      :tags $ #{} :set
+      :desc "|associate new value to a set"
+      :snippets $ []
+    {}
+      :name |&set:dissoc
+      :tags $ #{} :set
+      :desc "|dissociate a value from given set"
+      :snippets $ []
+    {}
+      :name |&record:count
+      :tags $ #{} :record
+      :desc "|count size of a record"
+      :snippets $ []
+    {}
+      :name |&record:contains?
+      :tags $ #{} :record
+      :desc "|detects if a record contains given key"
+      :snippets $ []
+    {}
+      :name |&record:nth
+      :tags $ #{} :record
+      :desc "|get a pair of a record since fields in record are ordered"
+      :snippets $ []
+    {}
+      :name |&record:get
+      :tags $ #{} :record
+      :desc "|get value from record via a field"
+      :snippets $ []
+    {}
+      :name |&record:assoc
+      :tags $ #{} :record
+      :desc "|associate new value to an existing field"
+      :snippets $ []
 
   :methods $ {}
     :number $ []
