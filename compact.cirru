@@ -115,7 +115,7 @@
             div
               {} $ :style ui/row
               <> "\"Methods:"
-              div ({}) & $ -> ([] nil :list :map :number :string :set :record)
+              div ({}) & $ -> ([] nil :list :map :number :string :set :record :internals)
                 map $ fn (target)
                   div
                     {}
@@ -157,7 +157,7 @@
                       :line-height "\"22px"
                       :margin "\"0px 0px"
                     :innerHTML $ trim
-                      write-cirru ([] code) true
+                      format-cirru ([] code) true
                 :lisp $ <> (lisp-style code)
                   {} $ :font-family ui/font-code
                 <> $ str "\"Unknown code: " syntax
@@ -173,12 +173,24 @@
                     :syntax :lisp
                     :wip? false
                 target $ :method-target state
-                visible-apis $ if (some? target)
-                  ->
-                    get (:methods apis-data) target
-                    filter $ fn (info)
-                      includes? (:name info) (:query state)
-                  -> (:apis apis-data)
+                visible-apis $ cond
+                    = target :internals
+                    -> (:internals apis-data)
+                      filter $ fn (info)
+                        and
+                          if (:wip? state) (:wip? info) true
+                          or
+                            empty? $ :selected-tags state
+                            -> (:selected-tags state)
+                              every? $ fn (x)
+                                includes? (:tags info) x
+                          includes? (:name info) (:query state)
+                  (some? target)
+                    ->
+                      get (:methods apis-data) target
+                      filter $ fn (info)
+                        includes? (:name info) (:query state)
+                  true $ -> (:apis apis-data)
                     filter $ fn (info)
                       and
                         if (:wip? state) (:wip? info) true
@@ -197,7 +209,9 @@
                     merge ui/expand ui/column $ {} (:max-width 800) (:margin "\"0 auto") (:background-color :white) (:padding "\"20px 20px")
                   comp-method-targets state cursor
                   if
-                    nil? $ :method-target state
+                    or
+                      nil? $ :method-target state
+                      = :internals $ :method-target state
                     memof-call comp-tags-list state cursor
                   =< nil 8
                   div
@@ -225,7 +239,7 @@
                     {} $ :style ui/expand
                     -> visible-apis
                       sort $ fn (a b)
-                        compare-string (:name a) (:name b)
+                        &str:compare (:name a) (:name b)
                       map $ fn (info)
                         [] (:name info)
                           memof-call comp-api-entry info $ :syntax state

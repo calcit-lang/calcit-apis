@@ -26,11 +26,11 @@ jobs:
     - name: "prepare modules"
       run: >
         mkdir -p ~/.config/calcit/modules/ && cd ~/.config/calcit/modules/
-        && git clone https://github.com/calcit-lang/lilac.git
-        && git clone https://github.com/calcit-lang/memof.git
-        && git clone https://github.com/Respo/respo.calcit.git
+        && git clone https://github.com/calcit-lang/lilac.git --branch 0.1.5
+        && git clone https://github.com/calcit-lang/memof.git --branch 0.0.7
+        && git clone https://github.com/Respo/respo.calcit.git --branch 0.14.28
         && git clone https://github.com/Respo/reel.calcit.git
-        && git clone https://github.com/Respo/respo-markdown.calcit.git
+        && git clone https://github.com/Respo/respo-markdown.calcit.git --branch 0.3.5
         && git clone https://github.com/Respo/respo-ui.calcit.git
         && git clone https://github.com/Cirru/calcit-theme.calcit.git
 
