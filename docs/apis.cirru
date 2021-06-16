@@ -2792,7 +2792,12 @@
       {}
         :name |.to-pairs
         :tags $ #{} :map
-        :desc "|returns pairs of a map as a list of lists"
+        :desc "|returns a set of pairs from a map"
+        :snippets $ []
+      {}
+        :name |.to-list
+        :tags $ #{} :map
+        :desc "|returns a list of pairs from a map"
         :snippets $ []
       {}
         :name |.unselect-keys
