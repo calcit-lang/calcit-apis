@@ -2375,6 +2375,30 @@
       :desc "|add a pair to map"
       :snippets $ []
         quote $ &map:add-entry m ([] :d 4)
+    {}
+      :name |&map:diff-new
+      :tags $ #{} :native :map
+      :desc "|compare 2 maps and return a new map of new keys and their values"
+      :snippets $ []
+        {}
+          :code $ quote $ &map:diff-new (&{} :a 1 :b 2) (&{} :a 3)
+          :result $ quote $ {} (:b 2)
+    {}
+      :name |&map:diff-keys
+      :tags $ #{} :native :map
+      :desc "|compare 2 maps and return a set of new keys"
+      :snippets $ []
+        {}
+          :code $ quote $ &map:diff-new (&{} :a 1 :b 2) (&{} :a 3)
+          :result $ quote $ #{} :b
+    {}
+      :name |&map:common-keys
+      :tags $ #{} :native :map
+      :desc "|compare 2 maps and return a set of new keys"
+      :snippets $ []
+        {}
+          :code $ quote $ &map:diff-new (&{} :a 1 :b 2) (&{} :a 3)
+          :result $ quote $ #{} :a
 
   :methods $ {}
     :number $ []
@@ -2817,6 +2841,24 @@
         :desc "|get a new map, without a first pair of entry, order is not guaranteed"
         :snippets $ []
           quote $ .rest
+      {}
+        :name |.diff-new
+        :tags $ #{} :map
+        :wip? true
+        :desc "|compare with an old map to find new keys with their values"
+        :snippets $ []
+      {}
+        :name |.diff-keys
+        :tags $ #{} :map
+        :wip? true
+        :desc "|compare with an old map to find new keys"
+        :snippets $ []
+      {}
+        :name |.common-keys
+        :tags $ #{} :map
+        :wip? true
+        :desc "|compare with a map to find common keys"
+        :snippets $ []
 
     :record $ []
       {}

@@ -2,19 +2,19 @@
 # yarn lockfile v1
 
 
-"@calcit/procs@^0.4.0-a6":
-  version "0.4.0-a6"
-  resolved "https://registry.npmjs.org/@calcit/procs/-/procs-0.4.0-a6.tgz#ba610d090610829b32a26232f8d3671de39c9f35"
-  integrity sha512-TWHIU9dE0gLVKQWOS8IJ+TB2fzPb6vHs9Nsthr+gfUWR7cz6oM4mNNLN8pkE+tap3PtgQp/ad3rq9mUZBO5U0g==
+"@calcit/procs@^0.4.0-a12":
+  version "0.4.0-a12"
+  resolved "https://registry.npmjs.org/@calcit/procs/-/procs-0.4.0-a12.tgz#edb3a083d9b4bd5c1f427c9c3d9418d59eab456a"
+  integrity sha512-X2rpv+ZRD9lsjJ4tGN/6GZbLf5fCFjJPzXpK7gl680CMyQ/hk61nijGzopOGvzZYhjJ0UiW3I4Uj/cUN7ZUIyw==
   dependencies:
-    "@calcit/ternary-tree" "0.0.13"
+    "@calcit/ternary-tree" "0.0.16"
     "@cirru/parser.ts" "^0.0.3"
     "@cirru/writer.ts" "^0.1.3"
 
-"@calcit/ternary-tree@0.0.13":
-  version "0.0.13"
-  resolved "https://registry.npmjs.org/@calcit/ternary-tree/-/ternary-tree-0.0.13.tgz#8532c6eb327e26564bf708446a4062ee1ea97ec3"
-  integrity sha512-AfDfkc/npJBk1P5Q1eUy8kJUVa9NalXcO9/ZV31nJmwTQiEbmPX2DpOSF9H4LrwryMLZevmju2B54y+/+WeaIQ==
+"@calcit/ternary-tree@0.0.16":
+  version "0.0.16"
+  resolved "https://registry.npmjs.org/@calcit/ternary-tree/-/ternary-tree-0.0.16.tgz#8932ab23fea3c3d13e61671b06ca3b38c2244736"
+  integrity sha512-SsYe0qXRutmPKLvkDYydqQx+i5pDdlkkOAyGqyCHlcvknHj1oMEue4N0FBNN0VhgWxplCS5VXqMgSIL/rWktpA==
 
 "@cirru/parser.ts@^0.0.3":
   version "0.0.3"
