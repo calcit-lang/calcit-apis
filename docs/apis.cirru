@@ -2776,6 +2776,11 @@
         :desc "|returns a set of keys of a map"
         :snippets $ []
       {}
+        :name |.values
+        :tags $ #{} :map
+        :desc "|returns a set of values of a map"
+        :snippets $ []
+      {}
         :name |.keys-non-nil
         :tags $ #{} :map
         :desc "|returns a set of keys of a map, which has real values"
