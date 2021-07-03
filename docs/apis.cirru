@@ -1866,6 +1866,18 @@
           (:a x) (' "|pattern a:" x)
           (:b x y) (' "|pattern b:" x y)
           _ (' "|no match")
+    {}
+      :name |bit-shr
+      :tags $ #{} :number
+      :desc "|bit op, shr"
+      :snippets $ []
+        quote $ bit-shr 2 1
+    {}
+      :name |bit-shl
+      :tags $ #{} :number
+      :desc "|bit op, shl"
+      :snippets $ []
+        quote $ bit-shl 2 1
 
   :internals $ []
     {}
@@ -2465,6 +2477,7 @@
         :name |.fract
         :tags $ #{} :number
         :desc "|get fractional part of number"
+        :snippets $ []
       {}
         :name |.rem
         :tags $ #{} :native :number
