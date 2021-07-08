@@ -800,6 +800,12 @@
       :snippets $ []
         quote $ take ([] 1 2 3 4 5) 2
     {}
+      :name |take-last
+      :tags $ #{} :list
+      :desc "|take-last n items from list"
+      :snippets $ []
+        quote $ take-last ([] 1 2 3 4 5) 2
+    {}
       :name |drop
       :tags $ #{} :list
       :desc "|take items of a list except for first n items"
@@ -3155,6 +3161,11 @@
         :name |.take
         :tags $ #{} :list
         :desc "|take n items from list"
+        :snippets $ []
+      {}
+        :name |.take-last
+        :tags $ #{} :list
+        :desc "|take last n items from list"
         :snippets $ []
       {}
         :name |.zipmap
