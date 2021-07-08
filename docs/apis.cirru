@@ -2382,6 +2382,18 @@
       :snippets $ []
         quote $ &list:slice ([] 1 2 3 4) 1 2
     {}
+      :name |&list:distinct
+      :tags $ #{} :native :list
+      :desc "|turn list into distinct elements"
+      :snippets $ []
+        quote $ &list:distinct ([] 1 2 3 1 2)
+    {}
+      :name |&list:to-set
+      :tags $ #{} :native :list :set
+      :desc "|turn a list into a set"
+      :snippets $ []
+        quote $ &list:to-set ([] 1 2 3 1 2)
+    {}
       :name |&map:add-entry
       :tags $ #{} :native :map
       :desc "|add a pair to map"
@@ -2809,6 +2821,14 @@
               fn (k v)
                 [] k $ + v 1
             :result $ quote $ {} (:a 2) (:b 3)
+          {}
+            :desc "|use it like filter for map"
+            :code $ quote $ map-kv
+              {} (:a 1) (:b 2) (:c 13)
+              fn (k v)
+                if (> v 10) nil
+                  [] k v
+            :result $ quote $ {} (:a 1) (:b 2)
 
       {}
         :name |.merge
@@ -3168,3 +3188,25 @@
         :desc "|iterate values of a list"
         :snippets $ []
           quote $ .each ([] 1 2 3) $ fn (x) x
+      {}
+        :name |.sort-by
+        :tags $ #{} :list
+        :desc "|sort list by result from a function"
+        :snippets $ []
+          quote $ .sort-ny ([] 1 2 3) $ fn (x) x
+      {}
+        :name |.distinct
+        :tags $ #{} :list
+        :desc "|turn list into distinct elements"
+        :snippets $ []
+          {}
+            :code $ quote $ .distinct ([] 1 2 3 1 2)
+            :result $ quote $ [] 1 2 3
+      {}
+        :name |.to-set
+        :tags $ #{} :list
+        :desc "|turn a list into a set"
+        :snippets $ []
+          {}
+            :code $ quote $ .to-set ([] 1 2 3 1 2)
+            :result $ quote $ #{} 1 2 3
