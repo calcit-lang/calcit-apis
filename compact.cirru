@@ -86,13 +86,13 @@
                 {} $ :style
                   {} $ :margin-left 20
                 , & $ -> (:snippets info)
-                  map $ fn (snippet)
+                  map $ fn (entry)
                     let
-                        code-snippet $ if (list? snippet)
-                          {} $ :code snippet
-                          , snippet
+                        code-snippet $ if (map? entry) entry
+                          {} $ :code entry
                         code $ :code code-snippet
-                      div ({}) (comp-code code syntax)
+                      div ({})
+                        comp-code (nth code 1) syntax
                         if
                           and (map? code-snippet)
                             some? $ :result code-snippet
@@ -105,7 +105,9 @@
                                 :color $ hsl 200 80 76
                                 :font-size 16
                             div ({})
-                              comp-code (:result code-snippet) syntax
+                              comp-code
+                                nth (:result code-snippet) 1
+                                , syntax
                               if
                                 some? $ :desc code-snippet
                                 <> (:desc code-snippet)
