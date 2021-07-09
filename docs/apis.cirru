@@ -2429,6 +2429,14 @@
         {}
           :code $ quote $ &map:diff-new (&{} :a 1 :b 2) (&{} :a 3)
           :result $ quote $ #{} :a
+    {}
+      :name |&map:map-list
+      :tags $ #{} :native :map
+      :desc "|call map function on hashmap into a list"
+      :snippets $ []
+        {}
+          :code $ quote $ &map:map-list (&{} :a 1 :b 2) $ fn (entry) add-entry
+          :result $ quote $ [] ([] la 1) ([] :b 2)
 
   :methods $ {}
     :number $ []
@@ -2902,6 +2910,11 @@
         :tags $ #{} :map
         :wip? true
         :desc "|compare with a map to find common keys"
+        :snippets $ []
+      {}
+        :name |.map-list
+        :tags $ #{} :map
+        :desc "|call map on hashmap, returns a list"
         :snippets $ []
 
     :record $ []
