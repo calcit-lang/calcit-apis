@@ -57,112 +57,6 @@
                       :on-click $ fn (e d!)
                         d! cursor $ assoc state :syntax (:value item)
                     <> $ :display item
-        |apis-data $ quote
-          def apis-data $ parse-cirru-edn (slurp-cirru-edn "\"docs/apis.cirru")
-        |comp-api-entry $ quote
-          defcomp comp-api-entry (info syntax)
-            div
-              {} $ :style
-                merge
-                  {}
-                    :border-bottom $ str "\"1px solid " (hsl 0 0 93)
-                    :margin "\"4px"
-                    :padding "\"4px 4px"
-                  if (:wip? info)
-                    {}
-                      :color $ hsl 0 0 80
-                      :border-left $ str "\"8px solid " (hsl 0 0 90)
-              div ({})
-                <> (:name info)
-                  {} $ :font-family ui/font-code
-                =< 8 nil
-                span
-                  {}
-                    :style $ {}
-                      :color $ hsl 0 0 70
-                    :class-name "\"md-span"
-                  comp-md $ either (:desc info) "\"TODO"
-              div
-                {} $ :style
-                  {} $ :margin-left 20
-                , & $ -> (:snippets info)
-                  map $ fn (entry)
-                    let
-                        code-snippet $ if (map? entry) entry
-                          {} $ :code entry
-                        code $ :code code-snippet
-                      div ({})
-                        comp-code (nth code 1) syntax
-                        if
-                          and (map? code-snippet)
-                            some? $ :result code-snippet
-                          div
-                            {} $ :style ui/row
-                            div
-                              {} $ :style
-                                merge $ {} (:width 80) (:text-align :center)
-                              <> "\"=>" $ {}
-                                :color $ hsl 200 80 76
-                                :font-size 16
-                            div ({})
-                              comp-code
-                                nth (:result code-snippet) 1
-                                , syntax
-                              if
-                                some? $ :desc code-snippet
-                                <> (:desc code-snippet)
-                                  {} $ :color (hsl 0 0 60)
-        |comp-method-targets $ quote
-          defcomp comp-method-targets (state cursor)
-            div
-              {} $ :style ui/row
-              <> "\"Methods:"
-              div ({}) & $ -> ([] nil :list :map :number :string :set :record :internals)
-                map $ fn (target)
-                  div
-                    {}
-                      :style $ merge
-                        {} (:display :inline-block)
-                          :background-color $ hsl 150 50 85
-                          :margin "\"4px 4px"
-                          :padding "\"0 8px"
-                          :color $ hsl 0 0 100
-                          :border-radius "\"2px"
-                          :cursor :pointer
-                          :line-height "\"22px"
-                        if
-                          = (:method-target state) target
-                          {} $ :background-color (hsl 160 40 60)
-                      :on-click $ fn (e d!)
-                        d! cursor $ assoc state :method-target target
-                    if (some? target)
-                      <> $ turn-string target
-                      <> "\"None" $ {} (:font-weight 300) (:font-family ui/font-fancy)
-        |comp-code $ quote
-          defcomp comp-code (code syntax)
-            assert "\"expected code in list" $ list? code
-            div
-              {} $ :style
-                {} $ :margin-bottom 8
-              case syntax
-                :cirru $ div
-                  {} $ :style
-                    {} (:background-color :black) (:padding "\"4px 0")
-                  render-expr code
-                :cirru-text $ pre
-                  {}
-                    :style $ {} (:font-family ui/font-code)
-                      :border $ str "\"1px solid " (hsl 0 0 94)
-                      :border-radius "\"4px"
-                      :display :inline-block
-                      :padding "\"2px 8px"
-                      :line-height "\"22px"
-                      :margin "\"0px 0px"
-                    :innerHTML $ trim
-                      format-cirru ([] code) true
-                :lisp $ <> (lisp-style code)
-                  {} $ :font-family ui/font-code
-                <> $ str "\"Unknown code: " syntax
         |comp-container $ quote
           defcomp comp-container (reel)
             let
@@ -246,6 +140,72 @@
                         [] (:name info)
                           memof-call comp-api-entry info $ :syntax state
                 when dev? $ comp-reel (>> states :reel) reel ({})
+        |comp-code $ quote
+          defcomp comp-code (code syntax)
+            assert "\"expected code in list" $ list? code
+            div
+              {} $ :style
+                {} $ :margin-bottom 8
+              case syntax
+                :cirru $ div
+                  {} $ :style
+                    {} (:background-color :black) (:padding "\"4px 0")
+                  render-expr code
+                :cirru-text $ pre
+                  {}
+                    :style $ {} (:font-family ui/font-code)
+                      :border $ str "\"1px solid " (hsl 0 0 94)
+                      :border-radius "\"4px"
+                      :display :inline-block
+                      :padding "\"2px 8px"
+                      :line-height "\"22px"
+                      :margin "\"0px 0px"
+                    :innerHTML $ trim
+                      format-cirru ([] code) true
+                :lisp $ <> (lisp-style code)
+                  {} $ :font-family ui/font-code
+                <> $ str "\"Unknown code: " syntax
+        |apis-data $ quote
+          def apis-data $ parse-cirru-edn (slurp-cirru-edn "\"docs/apis.cirru")
+        |slurp-cirru-edn $ quote
+          defmacro slurp-cirru-edn (file) (read-file file)
+        |comp-wip-switcher $ quote
+          defcomp comp-wip-switcher (state cursor)
+            div
+              {}
+                :style $ {} (:font-family ui/font-fancy)
+                  :color $ hsl 200 80 70
+                  :font-weight 300
+                  :cursor :pointer
+                :on-click $ fn (e d!)
+                  d! cursor $ update state :wip? not
+              <> "\"All/WIP"
+        |comp-method-targets $ quote
+          defcomp comp-method-targets (state cursor)
+            div
+              {} $ :style ui/row
+              <> "\"Methods:"
+              div ({}) & $ -> ([] nil :list :map :number :string :set :record :internals)
+                map $ fn (target)
+                  div
+                    {}
+                      :style $ merge
+                        {} (:display :inline-block)
+                          :background-color $ hsl 150 50 85
+                          :margin "\"4px 4px"
+                          :padding "\"0 8px"
+                          :color $ hsl 0 0 100
+                          :border-radius "\"2px"
+                          :cursor :pointer
+                          :line-height "\"22px"
+                        if
+                          = (:method-target state) target
+                          {} $ :background-color (hsl 160 40 60)
+                      :on-click $ fn (e d!)
+                        d! cursor $ assoc state :method-target target
+                    if (some? target)
+                      <> $ turn-string target
+                      <> "\"None" $ {} (:font-weight 300) (:font-family ui/font-fancy)
         |comp-tags-list $ quote
           defcomp comp-tags-list (state cursor)
             div
@@ -274,6 +234,59 @@
                             exclude (:selected-tags state) tag
                             include (:selected-tags state) tag
                     <> $ turn-string tag
+        |comp-api-entry $ quote
+          defcomp comp-api-entry (info syntax)
+            div
+              {} $ :style
+                merge
+                  {}
+                    :border-bottom $ str "\"1px solid " (hsl 0 0 93)
+                    :margin "\"4px"
+                    :padding "\"4px 4px"
+                  if (:wip? info)
+                    {}
+                      :color $ hsl 0 0 80
+                      :border-left $ str "\"8px solid " (hsl 0 0 90)
+              div ({})
+                <> (:name info)
+                  {} $ :font-family ui/font-code
+                =< 8 nil
+                span
+                  {}
+                    :style $ {}
+                      :color $ hsl 0 0 70
+                    :class-name "\"md-span"
+                  comp-md $ either (:desc info) "\"TODO"
+              div
+                {} $ :style
+                  {} $ :margin-left 20
+                , & $ -> (:snippets info)
+                  map $ fn (entry)
+                    let
+                        code-snippet $ if (map? entry) entry
+                          {} $ :code entry
+                        code $ :code code-snippet
+                      div ({})
+                        comp-code (nth code 1) syntax
+                        if
+                          and (map? code-snippet)
+                            some? $ :result code-snippet
+                          div
+                            {} $ :style ui/row
+                            div
+                              {} $ :style
+                                merge $ {} (:width 80) (:text-align :center)
+                              <> "\"=>" $ {}
+                                :color $ hsl 200 80 76
+                                :font-size 16
+                            div ({})
+                              comp-code
+                                nth (:result code-snippet) 1
+                                , syntax
+                              if
+                                some? $ :desc code-snippet
+                                <> (:desc code-snippet)
+                                  {} $ :color (hsl 0 0 60)
         |lisp-style $ quote
           defn lisp-style (xs)
             cond
@@ -287,27 +300,24 @@
                   -> xs (map lisp-style) (join-str "\" ")
                   , "\")"
               true $ str "\"TODO: " (str xs)
-        |slurp-cirru-edn $ quote
-          defmacro slurp-cirru-edn (file) (read-file file)
-        |comp-wip-switcher $ quote
-          defcomp comp-wip-switcher (state cursor)
-            div
-              {}
-                :style $ {} (:font-family ui/font-fancy)
-                  :color $ hsl 200 80 70
-                  :font-weight 300
-                  :cursor :pointer
-                :on-click $ fn (e d!)
-                  d! cursor $ update state :wip? not
-              <> "\"All/WIP"
-      :proc $ quote ()
-    |app.config $ {}
-      :ns $ quote (ns app.config)
+    |app.schema $ {}
+      :ns $ quote (ns app.schema)
       :defs $ {}
-        |dev? $ quote (def dev? true)
-        |site $ quote
-          def site $ {} (:dev-ui "\"http://localhost:8100/main-fonts.css") (:release-ui "\"http://cdn.tiye.me/favored-fonts/main-fonts.css") (:cdn-url "\"http://cdn.tiye.me/calcit-workflow/") (:title "\"APIs for calcit-runner") (:icon "\"http://cdn.tiye.me/logo/cirru.png") (:storage-key "\"calcit-runner-apis")
-      :proc $ quote ()
+        |store $ quote
+          def store $ {}
+            :states $ {}
+              :cursor $ []
+    |app.updater $ {}
+      :ns $ quote
+        ns app.updater $ :require
+          [] respo.cursor :refer $ [] update-states
+      :defs $ {}
+        |updater $ quote
+          defn updater (store op data op-id op-time)
+            case op
+              :states $ update-states store data
+              :hydrate-storage data
+              op store
     |app.main $ {}
       :ns $ quote
         ns app.main $ :require
@@ -320,19 +330,18 @@
           [] reel.schema :as reel-schema
           [] app.config :as config
       :defs $ {}
+        |render-app! $ quote
+          defn render-app! (renderer)
+            renderer mount-target (comp-container @*reel) (\ dispatch! % %2)
         |ssr? $ quote
           def ssr? $ some? (js/document.querySelector |meta.respo-ssr)
-        |repeat! $ quote
-          defn repeat! (duration cb)
-            js/setTimeout
-              fn () (cb) (repeat! duration cb)
-              * 1000 duration
-        |dispatch! $ quote
-          defn dispatch! (op op-data)
-            when
-              and config/dev? $ not= op :states
-              println "\"Dispatch:" op
-            reset! *reel $ reel-updater updater @*reel op op-data
+        |persist-storage! $ quote
+          defn persist-storage! () $ ; .setItem js/localStorage (:storage-key config/site)
+            js/JSON.stringify $ to-calcit-data (:store @*reel)
+        |mount-target $ quote
+          def mount-target $ .querySelector js/document |.app
+        |*reel $ quote
+          defatom *reel $ -> reel-schema/reel (assoc :base schema/store) (assoc :store schema/store)
         |main! $ quote
           defn main! () (load-console-formatter!)
             println "\"Running mode:" $ if config/dev? "\"dev" "\"release"
@@ -347,42 +356,28 @@
               when (some? raw)
                 dispatch! :hydrate-storage $ extract-cirru-data (js/JSON.parse raw)
             println "|App started."
-        |persist-storage! $ quote
-          defn persist-storage! () $ ; .setItem js/localStorage (:storage-key config/site)
-            js/JSON.stringify $ to-calcit-data (:store @*reel)
-        |*reel $ quote
-          defatom *reel $ -> reel-schema/reel (assoc :base schema/store) (assoc :store schema/store)
         |snippets $ quote
           defn snippets () $ println config/cdn?
-        |render-app! $ quote
-          defn render-app! (renderer)
-            renderer mount-target (comp-container @*reel) (\ dispatch! % %2)
+        |dispatch! $ quote
+          defn dispatch! (op op-data)
+            when
+              and config/dev? $ not= op :states
+              println "\"Dispatch:" op
+            reset! *reel $ reel-updater updater @*reel op op-data
         |reload! $ quote
           defn reload! () (remove-watch *reel :changes) (clear-cache!)
             add-watch *reel :changes $ fn (reel prev-reel) (render-app! render!)
             reset! *reel $ refresh-reel @*reel schema/store updater
             render-app! render!
             println "|Code updated."
-        |mount-target $ quote
-          def mount-target $ .querySelector js/document |.app
-      :proc $ quote ()
-    |app.schema $ {}
-      :ns $ quote (ns app.schema)
+        |repeat! $ quote
+          defn repeat! (duration cb)
+            js/setTimeout
+              fn () (cb) (repeat! duration cb)
+              * 1000 duration
+    |app.config $ {}
+      :ns $ quote (ns app.config)
       :defs $ {}
-        |store $ quote
-          def store $ {}
-            :states $ {}
-              :cursor $ []
-      :proc $ quote ()
-    |app.updater $ {}
-      :ns $ quote
-        ns app.updater $ :require
-          [] respo.cursor :refer $ [] update-states
-      :defs $ {}
-        |updater $ quote
-          defn updater (store op data op-id op-time)
-            case op
-              :states $ update-states store data
-              :hydrate-storage data
-              op store
-      :proc $ quote ()
+        |dev? $ quote (def dev? true)
+        |site $ quote
+          def site $ {} (:dev-ui "\"http://localhost:8100/main-fonts.css") (:release-ui "\"http://cdn.tiye.me/favored-fonts/main-fonts.css") (:cdn-url "\"http://cdn.tiye.me/calcit-workflow/") (:title "\"APIs for calcit-runner") (:icon "\"http://cdn.tiye.me/logo/cirru.png") (:storage-key "\"calcit-runner-apis")
