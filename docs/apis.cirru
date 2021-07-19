@@ -761,6 +761,12 @@
       :snippets $ []
         quote $ fn? cond
     {}
+      :name |ref?
+      :tags $ #{}
+      :desc "|detects a reference, created by `defatom`"
+      :snippets $ []
+        quote $ ref? *a
+    {}
       :name |some?
       :tags $ #{}
       :desc "|detects something not nil"
@@ -1448,7 +1454,7 @@
           :code $ quote
             macroexpand $ quote $ {,} :a 1 , :b 2 , :c 3
           :result $ quote
-            pairs-map $ section-by 2 $ [] :a 1 :b 2 :c 3
+            pairs-map $ section-by ([] :a 1 :b 2 :c 3) 2
           :desc "|commas are just removed after macro expansion"
         {}
           :code $ quote $ {,} :a 1 , :b 2 , :c 3
@@ -3153,7 +3159,7 @@
         :desc "|turn list into a list of lists of n sizes, remaining items also in a list"
         :snippets $ []
           {}
-            :code $ quote $ section-by 3 $ range 5
+            :code $ quote $ section-by (range 5) 3
             :result $ quote
               [] ([] 0 1 2) ([] 3 4)
       {}
