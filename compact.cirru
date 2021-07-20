@@ -64,7 +64,9 @@
                 states $ :states store
                 cursor $ either (:cursor states) ([])
                 state $ either (:data states)
-                  {} (:query "\"") (:method-target nil)
+                  {}
+                    :query $ get-query!
+                    :method-target nil
                     :selected-tags $ #{}
                     :syntax :lisp
                     :wip? false
@@ -234,6 +236,10 @@
                             exclude (:selected-tags state) tag
                             include (:selected-tags state) tag
                     <> $ turn-string tag
+        |get-query! $ quote
+          defn get-query! () $ let
+              obj $ new js/URLSearchParams js/location.search
+            if (.!has obj "\"q") (.!get obj "\"q") "\""
         |comp-api-entry $ quote
           defcomp comp-api-entry (info syntax)
             div

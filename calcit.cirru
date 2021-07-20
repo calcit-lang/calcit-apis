@@ -537,7 +537,12 @@
                                   |j $ {}
                                     :data $ {}
                                       |T $ {} (:text |:query) (:type :leaf) (:at 1603121145959) (:by |rJG4IHzWf)
-                                      |j $ {} (:text "|\"") (:type :leaf) (:at 1584780907617) (:by |rJG4IHzWf)
+                                      |j $ {}
+                                        :data $ {}
+                                          |T $ {} (:text |get-query!) (:type :leaf) (:at 1626769072728) (:by |rJG4IHzWf)
+                                        :type :expr
+                                        :at 1626769070787
+                                        :by |rJG4IHzWf
                                     :type :expr
                                     :at 1584780901741
                                     :by |rJG4IHzWf
@@ -2625,6 +2630,66 @@
                 :by |rJG4IHzWf
             :type :expr
             :at 1603353193859
+            :by |rJG4IHzWf
+          |get-query! $ {}
+            :data $ {}
+              |T $ {} (:text |defn) (:type :leaf) (:at 1626769075120) (:by |rJG4IHzWf)
+              |j $ {} (:text |get-query!) (:type :leaf) (:at 1626769073313) (:by |rJG4IHzWf)
+              |r $ {}
+                :data $ {}
+                :type :expr
+                :at 1626769073313
+                :by |rJG4IHzWf
+              |v $ {}
+                :data $ {}
+                  |T $ {} (:text |let) (:type :leaf) (:at 1626769125473) (:by |rJG4IHzWf)
+                  |j $ {}
+                    :data $ {}
+                      |T $ {}
+                        :data $ {}
+                          |T $ {} (:text |obj) (:type :leaf) (:at 1626769127105) (:by |rJG4IHzWf)
+                          |j $ {}
+                            :data $ {}
+                              |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1626769127598) (:text |new)
+                              |j $ {} (:text |js/URLSearchParams) (:type :leaf) (:at 1626769180506) (:by |rJG4IHzWf)
+                              |r $ {} (:text |js/location.search) (:type :leaf) (:at 1626769257997) (:by |rJG4IHzWf)
+                            :type :expr
+                            :at 1626769127598
+                            :by |rJG4IHzWf
+                        :type :expr
+                        :at 1626769126136
+                        :by |rJG4IHzWf
+                    :type :expr
+                    :at 1626769125946
+                    :by |rJG4IHzWf
+                  |t $ {}
+                    :data $ {}
+                      |T $ {} (:text |if) (:type :leaf) (:at 1626769207273) (:by |rJG4IHzWf)
+                      |j $ {}
+                        :data $ {}
+                          |D $ {} (:text |.!has) (:type :leaf) (:at 1626769213020) (:by |rJG4IHzWf)
+                          |T $ {} (:text |obj) (:type :leaf) (:at 1626769208482) (:by |rJG4IHzWf)
+                          |j $ {} (:text "|\"q") (:type :leaf) (:at 1626769217054) (:by |rJG4IHzWf)
+                        :type :expr
+                        :at 1626769208592
+                        :by |rJG4IHzWf
+                      |r $ {}
+                        :data $ {}
+                          |T $ {} (:text |.!get) (:type :leaf) (:at 1626769219866) (:by |rJG4IHzWf)
+                          |j $ {} (:text |obj) (:type :leaf) (:at 1626769220399) (:by |rJG4IHzWf)
+                          |r $ {} (:text "|\"q") (:type :leaf) (:at 1626769221240) (:by |rJG4IHzWf)
+                        :type :expr
+                        :at 1626769217683
+                        :by |rJG4IHzWf
+                      |v $ {} (:text "|\"") (:type :leaf) (:at 1626769221996) (:by |rJG4IHzWf)
+                    :type :expr
+                    :at 1626769206707
+                    :by |rJG4IHzWf
+                :type :expr
+                :at 1626769076526
+                :by |rJG4IHzWf
+            :type :expr
+            :at 1626769073313
             :by |rJG4IHzWf
           |comp-api-entry $ {}
             :data $ {}
