@@ -335,6 +335,8 @@
           [] reel.core :refer $ [] reel-updater refresh-reel
           [] reel.schema :as reel-schema
           [] app.config :as config
+          "\"bottom-tip" :default tip!
+          "\"./calcit.build-errors" :default build-errors
       :defs $ {}
         |render-app! $ quote
           defn render-app! (renderer)
@@ -371,11 +373,12 @@
               println "\"Dispatch:" op
             reset! *reel $ reel-updater updater @*reel op op-data
         |reload! $ quote
-          defn reload! () (remove-watch *reel :changes) (clear-cache!)
-            add-watch *reel :changes $ fn (reel prev-reel) (render-app! render!)
-            reset! *reel $ refresh-reel @*reel schema/store updater
-            render-app! render!
-            println "|Code updated."
+          defn reload! () $ if (some? build-errors) (tip! "\"error" build-errors)
+            do (tip! "\"inactive" nil) (remove-watch *reel :changes) (clear-cache!)
+              add-watch *reel :changes $ fn (reel prev-reel) (render-app! render!)
+              reset! *reel $ refresh-reel @*reel schema/store updater
+              render-app! render!
+              println "|Code updated."
         |repeat! $ quote
           defn repeat! (duration cb)
             js/setTimeout
