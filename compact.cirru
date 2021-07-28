@@ -374,11 +374,12 @@
             reset! *reel $ reel-updater updater @*reel op op-data
         |reload! $ quote
           defn reload! () $ if (some? build-errors) (tip! "\"error" build-errors)
-            do (tip! "\"inactive" nil) (remove-watch *reel :changes) (clear-cache!)
+            do (remove-watch *reel :changes) (clear-cache!)
               add-watch *reel :changes $ fn (reel prev-reel) (render-app! render!)
               reset! *reel $ refresh-reel @*reel schema/store updater
               render-app! render!
               println "|Code updated."
+              tip! "\"ok~" nil
         |repeat! $ quote
           defn repeat! (duration cb)
             js/setTimeout

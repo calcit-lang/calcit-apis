@@ -191,6 +191,7 @@
             :a 1
             :b 2
           , :a
+        quote $ get (:: :tag |data) 0
     {}
       :name |rest
       :tags $ #{} :native :list
@@ -322,13 +323,12 @@
       :snippets $ []
         quote $ append ([] 1 2 3) 4
     {}
-      :name |coll-append
-      :tags $ #{} :native :list :map :set
-      :desc "|general operation like append, works for list, set, map"
+      :name |conj
+      :tags $ #{} :list
+      :desc "|like for `append`, returns new list, with new items at tail"
       :snippets $ []
-        quote $ coll-append ([] 1 2 3) 4
-        quote $ coll-append (#{} 1 2 3) 4
-        quote $ coll-append ({} (:a 1)) ([] :b 2)
+        quote $ conj ([] 1 2 3) 4
+        quote $ conj ([] 1 2 3) 4 5 6
     {}
       :name |first
       :tags $ #{} :native
@@ -421,6 +421,7 @@
       :name |format-ternary-tree
       :tags $ #{} :native :list :map
       :desc "|display string form of internal ternary tree structure, currently js only"
+      :wip? true
       :snippets $ []
         quote $ format-ternary-tree $ [] 1 2 3 4 5 6
         quote $ format-ternary-tree $ {}
@@ -476,12 +477,14 @@
       :snippets $ []
         quote $ assoc ([] 1 2 3) 1 :a
         quote $ assoc ({} (:a 1) (:b 2)) :c 10
+        quote $ assoc ({}) :c 10 :d 20
     {}
       :name |dissoc
       :tags $ #{} :native :map
       :desc "|returns a list with a key dissociated"
       :snippets $ []
         quote $ dissoc ({} (:a 1) (:b 2)) :a
+        quote $ dissoc ({} (:a 1) (:b 2)) :a :b
     {}
       :name |parse-cirru-edn
       :tags $ #{} :native
@@ -778,9 +781,9 @@
       :desc "|take a list and a function and call each item with function"
       :snippets $ []
         quote $ each
+          range 4
           fn (x)
             echo x
-          range 4
     {}
       :name |map
       :tags $ #{} :list
