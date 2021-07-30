@@ -1836,6 +1836,22 @@
       :snippets $ []
         quote $ js-object (:a 1) (:b 2)
     {}
+      :name |js-await
+      :tags $ #{} :js :syntax
+      :desc "|synax for generating `await` for js"
+      :snippets $ []
+        quote $ defn f ()
+          hint-fn async
+          js-await async-f
+    {}
+      :name |hint-fn
+      :tags $ #{} :syntax :js
+      :desc "|syntax inside a js function to indicate `async`"
+      :snippets $ []
+        quote $ defn f ()
+          hint-fn async
+          js-await async-f
+    {}
       :name |select-keys
       :tags $ #{} :map
       :desc "|select map with given keys. get nil values when extra keys provided"

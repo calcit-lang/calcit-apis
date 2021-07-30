@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@calcit/procs@^0.4.11":
-  version "0.4.11"
-  resolved "https://registry.npmjs.org/@calcit/procs/-/procs-0.4.11.tgz#27bc872a7a8d4f997b8b1cdbb9b08e1bc29a778c"
-  integrity sha512-3csUcjD++Js1pijsFqpEP4Tz3OxUkmLNsLhjHKxgf+mXC8ZkoVbvqaOkD+d1Zck7/1202ibkh4iDmoxJJR/uTg==
+"@calcit/procs@^0.4.13":
+  version "0.4.13"
+  resolved "https://registry.npmjs.org/@calcit/procs/-/procs-0.4.13.tgz#db8d7f58105a9f055bbcb3073a5964e3e4eb97ab"
+  integrity sha512-J4mYw+xwr62j+L+Xzke4caqE8AQhTQ3PU0kkMf1NeZgubxvBhNsphgsRyJs+CQWDwl0/Vg6kFVgY6tyqxdP/dA==
   dependencies:
     "@calcit/ternary-tree" "0.0.16"
     "@cirru/parser.ts" "^0.0.3"
@@ -63,9 +63,9 @@ error@^4.3.0:
     xtend "~4.0.0"
 
 esbuild@^0.12.8:
-  version "0.12.16"
-  resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.12.16.tgz#c397144ce13b445a6ead9c1f747da11f79ec5e67"
-  integrity sha512-XqI9cXP2bmQ6MREIqrYBb13KfYFSERsV1+e5jSVWps8dNlLZK+hln7d0mznzDIpfISsg/AgQW0DW3kSInXWhrg==
+  version "0.12.17"
+  resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.12.17.tgz#5816f905c2905de0ebbc658860df7b5b48afbcd3"
+  integrity sha512-GshKJyVYUnlSXIZj/NheC2O0Kblh42CS7P1wJyTbbIHevTG4jYMS9NNw8EOd8dDWD0dzydYHS01MpZoUcQXB4g==
 
 ev-store@^7.0.0:
   version "7.0.0"
@@ -161,9 +161,9 @@ resolve@^1.20.0:
     path-parse "^1.0.6"
 
 rollup@^2.38.5:
-  version "2.54.0"
-  resolved "https://registry.npmjs.org/rollup/-/rollup-2.54.0.tgz#99ea816e8e9b1c6af3ab957a4e7a8f78dbd87773"
-  integrity sha512-RHzvstAVwm9A751NxWIbGPFXs3zL4qe/eYg+N7WwGtIXVLy1cK64MiU37+hXeFm1jqipK6DGgMi6Z2hhPuCC3A==
+  version "2.55.1"
+  resolved "https://registry.npmjs.org/rollup/-/rollup-2.55.1.tgz#66a444648e2fb603d8e329e77a61c608a6510fda"
+  integrity sha512-1P9w5fpb6b4qroePh8vHKGIvPNxwoCQhjJpIqfZGHLKpZ0xcU2/XBmFxFbc9697/6bmHpmFTLk5R1dAQhFSo0g==
   optionalDependencies:
     fsevents "~2.3.2"
 
