@@ -3260,7 +3260,7 @@
         :tags $ #{} :list
         :desc "|sort list by result from a function"
         :snippets $ []
-          quote $ .sort-ny ([] 1 2 3) $ fn (x) x
+          quote $ .sort-by ([] 1 2 3) $ fn (x) x
       {}
         :name |.distinct
         :tags $ #{} :list
