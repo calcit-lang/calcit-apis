@@ -2342,9 +2342,9 @@
     {}
       :name |&record:from-map
       :tags $ #{} :record
-      :desc "|create record from existing data, throws error when keys are not sufficient"
+      :desc "|new record from existing data, throws error when keys are not sufficient"
       :snippets $ []
-        quote $ &record:from-map 'Person $ {} (:name |Chen) (:ago 20)
+        quote $ &record:from-map Person $ {} (:name |Chen) (:ago 20)
     {}
       :name |&record:matches?
       :tags $ #{} :record
@@ -2391,6 +2391,12 @@
       :desc "|turn record into a map"
       :snippets $ []
         quote $ &record:to-map x
+    {}
+      :name |&record:extend-as
+      :tags $ #{} :record
+      :desc "|extend existing record with a new name, a new field, and a new value"
+      :snippets $ []
+        quote $ &record:extend-as r "|New Record" :a 2
     {}
       :name |&str:slice
       :tags $ #{} :string :native
@@ -2982,6 +2988,18 @@
         :desc "|assoc new value to an existing key, new keys are not allowed"
         :snippets $ []
           quote $ .assoc x :a 2
+      {}
+        :name |.from-map
+        :tags $ #{} :record
+        :desc "|new record from existing data, throws error when keys are not sufficient"
+        :snippets $ []
+          quote $ .from-map Person $ {} (:name |Chen) (:ago 20)
+      {}
+        :name |.extend-as
+        :tags $ #{} :record
+        :desc "|extend existing record with a new name, a new field, and a new value"
+        :snippets $ []
+          quote $ .extend-as r "|New Record" :a 2
 
     :list $ []
       {}
