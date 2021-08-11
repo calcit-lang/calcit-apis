@@ -100,38 +100,44 @@
                         includes? (:name info) (:query state)
               div
                 {} $ :style
-                  merge ui/global ui/fullscreen ui/row $ {}
+                  merge ui/global ui/fullscreen ui/column $ {}
                     :background-color $ hsl 0 0 96
                 div
                   {} $ :style
-                    merge ui/expand ui/column $ {} (:max-width 800) (:margin "\"0 auto") (:background-color :white) (:padding "\"20px 20px")
+                    merge ui/column $ {} (:background-color :white) (:padding 8)
+                      :border-bottom $ str "\"1px solid " (hsl 0 0 90)
+                      :box-shadow $ str "\"0 0 6px " (hsl 0 0 0 0.2)
+                      :z-index 99
                   comp-method-targets state cursor
                   if
                     or
                       nil? $ :method-target state
                       = :internals $ :method-target state
                     memof-call comp-tags-list state cursor
-                  =< nil 8
                   div
                     {} $ :style ui/row-parted
-                    input $ {}
-                      :style $ merge ui/input
-                        {} $ :font-family ui/font-code
-                      :value $ :query state
-                      :placeholder "\"search"
-                      :on-input $ fn (e d!)
-                        d! cursor $ assoc state :query (:value e)
+                    div
+                      {} $ :style ui/row-middle
+                      input $ {}
+                        :style $ merge ui/input
+                          {} $ :font-family ui/font-code
+                        :value $ :query state
+                        :placeholder "\"search"
+                        :on-input $ fn (e d!)
+                          d! cursor $ assoc state :query (:value e)
+                      =< 8 nil
+                      <>
+                        str "\"has " (count visible-apis) "\" entries."
+                        {} (:font-family ui/font-fancy)
+                          :color $ hsl 0 0 70
                     div
                       {} $ :style ui/row-middle
                       memof-call comp-cirru-ui-switcher state cursor
                       =< 12 nil
                       memof-call comp-wip-switcher state cursor
-                  =< nil 8
-                  div ({})
-                    <>
-                      str "\"Found " (count visible-apis) "\" entries."
-                      {} (:font-family ui/font-fancy)
-                        :color $ hsl 0 0 70
+                div
+                  {} $ :style
+                    merge ui/expand $ {} (:background-color :white)
                   =< nil 8
                   list->
                     {} $ :style ui/expand
@@ -141,6 +147,7 @@
                       map $ fn (info)
                         [] (:name info)
                           memof-call comp-api-entry info $ :syntax state
+                  =< nil 400
                 when dev? $ comp-reel (>> states :reel) reel ({})
         |comp-code $ quote
           defcomp comp-code (code syntax)
@@ -185,8 +192,9 @@
         |comp-method-targets $ quote
           defcomp comp-method-targets (state cursor)
             div
-              {} $ :style ui/row
-              <> "\"Methods:"
+              {} $ :style
+                merge ui/row $ {} (:user-select :none)
+              <> "\"Methods:" $ {} (:font-family ui/font-fancy)
               div ({}) & $ -> ([] nil :list :map :number :string :set :record :internals)
                 map $ fn (target)
                   div
@@ -212,23 +220,20 @@
           defcomp comp-tags-list (state cursor)
             div
               {} $ :style ui/row
-              <> "\"tags:"
+              <> "\"Data:" $ {} (:font-family ui/font-fancy) (:user-select :none)
               div ({}) & $ -> ([] :list :map :number :string :set :syntax :macro :record :native)
                 map $ fn (tag)
                   div
                     {}
                       :style $ merge
-                        {} (:display :inline-block)
-                          :background-color $ hsl 200 80 84
-                          :margin "\"4px 4px"
-                          :padding "\"0 4px"
-                          :color $ hsl 0 0 100
+                        {} (:display :inline-block) (:margin "\"4px 4px") (:padding "\"0 4px")
+                          :color $ hsl 280 80 84
                           :border-radius "\"4px"
                           :cursor :pointer
                           :line-height "\"20px"
                         if
                           includes? (:selected-tags state) tag
-                          {} $ :background-color (hsl 200 80 60)
+                          {} $ :color (hsl 280 80 50)
                       :on-click $ fn (e d!)
                         d! cursor $ assoc state :selected-tags
                           if
@@ -244,35 +249,39 @@
           defcomp comp-api-entry (info syntax)
             div
               {} $ :style
-                merge
+                merge ui/row
                   {}
                     :border-bottom $ str "\"1px solid " (hsl 0 0 93)
                     :margin "\"4px"
-                    :padding "\"4px 4px"
+                    :padding "\"0px 4px"
                   if (:wip? info)
                     {}
                       :color $ hsl 0 0 80
                       :border-left $ str "\"8px solid " (hsl 0 0 90)
-              div ({})
+              div
+                {} $ :style ui/flex
                 <> (:name info)
                   {} $ :font-family ui/font-code
                 =< 8 nil
-                span
+                div
                   {}
                     :style $ {}
                       :color $ hsl 0 0 70
+                      :padding-left 16
+                      :line-height "\"20px"
                     :class-name "\"md-span"
                   comp-md $ either (:desc info) "\"TODO"
               div
                 {} $ :style
-                  {} $ :margin-left 20
+                  merge ui/expand $ {} (:margin-left 20) (:flex 2)
                 , & $ -> (:snippets info)
                   map $ fn (entry)
                     let
                         code-snippet $ if (map? entry) entry
                           {} $ :code entry
                         code $ :code code-snippet
-                      div ({})
+                      div
+                        {} $ :style ui/row
                         comp-code (nth code 1) syntax
                         if
                           and (map? code-snippet)
@@ -281,9 +290,9 @@
                             {} $ :style ui/row
                             div
                               {} $ :style
-                                merge $ {} (:width 80) (:text-align :center)
-                              <> "\"=>" $ {}
-                                :color $ hsl 200 80 76
+                                merge $ {} (:width 40) (:text-align :center)
+                              <> "\"⮕" $ {}
+                                :color $ hsl 200 0 50
                                 :font-size 16
                             div ({})
                               comp-code
@@ -374,12 +383,11 @@
             reset! *reel $ reel-updater updater @*reel op op-data
         |reload! $ quote
           defn reload! () $ if (some? build-errors) (tip! "\"error" build-errors)
-            do (remove-watch *reel :changes) (clear-cache!)
+            do (tip! "\"inactive" nil) (remove-watch *reel :changes) (clear-cache!)
               add-watch *reel :changes $ fn (reel prev-reel) (render-app! render!)
               reset! *reel $ refresh-reel @*reel schema/store updater
               render-app! render!
               println "|Code updated."
-              tip! "\"ok~" nil
         |repeat! $ quote
           defn repeat! (duration cb)
             js/setTimeout
