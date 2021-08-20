@@ -185,6 +185,8 @@
               :record $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-record.cirru")
               :number $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-number.cirru")
               :string $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-string.cirru")
+              :nil $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-nil.cirru")
+              :fn $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-fn.cirru")
         |slurp-cirru-edn $ quote
           defmacro slurp-cirru-edn (file) (read-file file)
         |comp-wip-switcher $ quote
@@ -204,7 +206,7 @@
               {} $ :style
                 merge ui/row $ {} (:user-select :none)
               <> "\"Methods:" $ {} (:font-family ui/font-fancy)
-              div ({}) & $ -> ([] nil :list :map :number :string :set :record :internals)
+              div ({}) & $ -> ([] nil :internals :list :map :number :string :set :record :nil :fn)
                 map $ fn (target)
                   div
                     {}
