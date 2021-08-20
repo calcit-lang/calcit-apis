@@ -2431,6 +2431,28 @@
       :snippets $ []
         quote $ &list:to-set ([] 1 2 3 1 2)
     {}
+      :name |&list:map-pair
+      :tags $ #{} :list :set
+      :desc "|map by pair"
+      :snippets $ []
+        quote $ &list:map-pair
+          []
+            [] :a 1
+            [] :b 2
+          fn (k n)
+            [] k (+ n 10)
+    {}
+      :name |&list:filter-pair
+      :tags $ #{} :native :list :set
+      :desc "|turn a list into a set"
+      :snippets $ []
+        quote $ &list:filter-pair
+          []
+            [] :a 1
+            [] :b 12
+          fn (k n)
+            > n 10
+    {}
       :name |&map:add-entry
       :tags $ #{} :native :map
       :desc "|add a pair to map"
@@ -3277,3 +3299,25 @@
           {}
             :code $ quote $ .to-set ([] 1 2 3 1 2)
             :result $ quote $ #{} 1 2 3
+      {}
+        :name |.map-pair
+        :tags $ #{} :list :set
+        :desc "|map by pair"
+        :snippets $ []
+          quote $ .map-pair
+            []
+              [] :a 1
+              [] :b 2
+            fn (k n)
+              [] k (+ n 10)
+      {}
+        :name |.filter-pair
+        :tags $ #{} :native :list :set
+        :desc "|turn a list into a set"
+        :snippets $ []
+          quote $ .filter-pair
+            []
+              [] :a 1
+              [] :b 12
+            fn (k n)
+              > n 10
