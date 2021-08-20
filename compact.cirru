@@ -175,7 +175,16 @@
                   {} $ :font-family ui/font-code
                 <> $ str "\"Unknown code: " syntax
         |apis-data $ quote
-          def apis-data $ parse-cirru-edn (slurp-cirru-edn "\"docs/apis.cirru")
+          def apis-data $ {}
+            :apis $ parse-cirru-edn (slurp-cirru-edn "\"docs/apis.cirru")
+            :internals $ parse-cirru-edn (slurp-cirru-edn "\"docs/internals.cirru")
+            :methods $ {}
+              :list $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-list.cirru")
+              :map $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-map.cirru")
+              :set $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-set.cirru")
+              :record $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-record.cirru")
+              :number $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-number.cirru")
+              :string $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-string.cirru")
         |slurp-cirru-edn $ quote
           defmacro slurp-cirru-edn (file) (read-file file)
         |comp-wip-switcher $ quote
