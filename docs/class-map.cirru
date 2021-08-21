@@ -172,3 +172,14 @@
     :tags $ #{} :map
     :desc "|call map on hashmap, returns a list"
     :snippets $ []
+  {}
+    :name |.to-map
+    :tags $ #{} :map
+    :desc "|returns current map, like identity"
+    :snippets $ []
+  {}
+    :name |.mappend
+    :tags $ #{} :map
+    :wip? true
+    :desc "|like `append` from PureScript, merge maps"
+    :snippets $ []

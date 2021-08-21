@@ -48,3 +48,27 @@
       {}
         :code $ quote $ .to-list nil
         :result $ quote $ do |
+  {}
+    :name |.bind
+    :tags $ #{} :nil
+    :wip? true
+    :desc "|like `bind` from PureScript"
+    :snippets $ []
+  {}
+    :name |.apply
+    :tags $ #{} :nil
+    :wip? true
+    :desc "|like `apply` from PureScript"
+    :snippets $ []
+  {}
+    :name |.mappend
+    :tags $ #{} :nil
+    :wip? true
+    :desc "|like `mappend` from PureScript"
+    :snippets $ []
+  {}
+    :name |.map
+    :tags $ #{} :nil
+    :wip? true
+    :desc "|like `map` from PureScript"
+    :snippets $ []

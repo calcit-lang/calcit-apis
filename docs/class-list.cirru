@@ -107,12 +107,6 @@
     :desc "|take a list, return grouped result with a map"
     :snippets $ []
   {}
-    :name |.has-index?
-    :tags $ #{} :list
-    :desc "|detects if a list has item on a index"
-    :snippets $ []
-      quote $ .has-index? (range 10) 4
-  {}
     :name |.index-of
     :tags $ #{} :list
     :desc "|native implementation of indexOf function, returns -1 when not found"
@@ -297,3 +291,21 @@
           [] :b 12
         fn (k n)
           > n 10
+  {}
+    :name |.mappend
+    :tags $ #{} :list
+    :wip? true
+    :desc "|like `append` from PureScript, same as &list:concat"
+    :snippets $ []
+  {}
+    :name |.bind
+    :tags $ #{} :list
+    :wip? true
+    :desc "|like `bind` from PureScript, as mapcat"
+    :snippets $ []
+  {}
+    :name |.apply
+    :tags $ #{} :list
+    :wip? true
+    :desc "|like `apply` from PureScript"
+    :snippets $ []

@@ -64,3 +64,14 @@
     :desc "|count set size"
     :snippets $ []
       quote $ .count $ #{} 1 2
+  {}
+    :name |.map-set
+    :tags $ #{} :set
+    :desc "|returns current set, like identity"
+    :snippets $ []
+  {}
+    :name |.mappend
+    :tags $ #{} :set
+    :wip? true
+    :desc "|like `append` from PureScript, like union"
+    :snippets $ []

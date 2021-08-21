@@ -162,3 +162,9 @@
     :snippets $ []
       quote $ .slice |abcd 1
       quote $ .slice |abcd 1 3
+  {}
+    :name |.mappend
+    :tags $ #{} :string
+    :wip? true
+    :desc "|like `append` from PureScript, string concat"
+    :snippets $ []
