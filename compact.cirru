@@ -1,24 +1,23 @@
 
 {} (:package |app)
   :configs $ {} (:init-fn |app.main/main!) (:reload-fn |app.main/reload!)
-    :modules $ [] |lilac/compact.cirru |memof/compact.cirru |respo.calcit/compact.cirru |respo-ui.calcit/compact.cirru |respo-markdown.calcit/compact.cirru |calcit-theme.calcit/compact.cirru |reel.calcit/compact.cirru
+    :modules $ [] |lilac/compact.cirru |memof/compact.cirru |respo.calcit/compact.cirru |respo-ui.calcit/compact.cirru |respo-markdown.calcit/compact.cirru |calcit-theme.calcit/compact.cirru |reel.calcit/compact.cirru |respo-feather.calcit/
     :version nil
   :files $ {}
     |app.comp.container $ {}
       :ns $ quote
-        ns app.comp.container
-          :require
-            [] respo.util.format :refer $ [] hsl
-            [] respo-ui.core :as ui
-            [] respo.core :refer $ [] defcomp defeffect <> >> div button textarea span input pre list->
-            [] respo.comp.space :refer $ [] =<
-            [] reel.comp.reel :refer $ [] comp-reel
-            [] respo-md.comp.md :refer $ [] comp-md
-            [] app.config :refer $ [] dev?
-            [] respo-md.comp.md :refer $ [] comp-md
-            [] calcit-theme.comp.expr :refer $ [] render-expr
-            [] memof.alias :refer $ [] memof-call
-          :require-macros $ [] clojure.core.strint :refer ([] <<)
+        ns app.comp.container $ :require
+          [] respo.util.format :refer $ [] hsl
+          [] respo-ui.core :as ui
+          [] respo.core :refer $ [] defcomp defeffect <> >> div button textarea span input pre list->
+          [] respo.comp.space :refer $ [] =<
+          [] reel.comp.reel :refer $ [] comp-reel
+          [] respo-md.comp.md :refer $ [] comp-md
+          [] app.config :refer $ [] dev?
+          [] respo-md.comp.md :refer $ [] comp-md
+          [] calcit-theme.comp.expr :refer $ [] render-expr
+          [] memof.alias :refer $ [] memof-call
+          feather.core :refer $ comp-i
       :defs $ {}
         |stringify-cirru $ quote
           defn stringify-cirru (x)
@@ -302,9 +301,7 @@
                             div
                               {} $ :style
                                 merge $ {} (:width 40) (:text-align :center)
-                              <> "\"⮕" $ {}
-                                :color $ hsl 200 0 50
-                                :font-size 16
+                              comp-i :arrow-right-circle 16 $ hsl 200 0 50
                             div ({})
                               comp-code
                                 nth (:result code-snippet) 1
