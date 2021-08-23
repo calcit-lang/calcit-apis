@@ -1347,6 +1347,9 @@
         :code $ quote $ either nil 1
         :result $ quote $ do 1
       {}
+        :code $ quote $ either false 1
+        :result $ quote $ do false
+      {}
         :code $ quote $ either 2 1
         :result $ quote $ do 2
   {}
