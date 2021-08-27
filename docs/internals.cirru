@@ -78,7 +78,7 @@
   {}
     :name |&str:compare
     :tags $ #{}
-    :desc "|compare order of two strings, retuns `-1` `0` or `1`"
+    :desc "|compare order of two strings, returns `-1` `0` or `1`"
     :snippets $ []
       quote $ &str:compare |a |b
   {}
@@ -544,7 +544,8 @@
   {}
     :name |&map:add-entry
     :tags $ #{} :native :map
-    :desc "|add a pair to map"
+    :wip? true
+    :desc "|add a pair to a map. (probably using `&map:assoc` is enough, and remove this)"
     :snippets $ []
       quote $ &map:add-entry m ([] :d 4)
   {}
@@ -577,5 +578,29 @@
     :desc "|call map function on hashmap into a list"
     :snippets $ []
       {}
-        :code $ quote $ &map:map-list (&{} :a 1 :b 2) $ fn (entry) add-entry
-        :result $ quote $ [] ([] la 1) ([] :b 2)
+        :code $ quote $ &map:map-list (&{} :a 1 :b 2) identity
+        :result $ quote $ [] ([] :a 1) ([] :b 2)
+  {}
+    :name |&map:filter
+    :tags $ #{} :native :map
+    :desc "|call filter function on a hashmap, returns a hashmap"
+    :snippets $ []
+      {}
+        :code $ quote $ &map:filter (&{} :a 1 :b 2) $ fn (pair) (&> (last pair) 1)
+        :result $ quote $ {} (:b 2)
+  {}
+    :name |&map:filter-kv
+    :tags $ #{} :native :map
+    :desc "|call filter function on a hashmap, returns a hashmap"
+    :snippets $ []
+      {}
+        :code $ quote $ &map:filter-kv (&{} :a 1 :b 2) $ fn (k v) (&> v 1)
+        :result $ quote $ {} (:b 2)
+  {}
+    :name |&set:filter
+    :tags $ #{} :native :set
+    :desc "|call filter function on a set, returns a set"
+    :snippets $ []
+      {}
+        :code $ quote $ &set:filter (#{} 1 2) $ fn (x) (&> x 1)
+        :result $ quote $ #{} 2
