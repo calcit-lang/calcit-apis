@@ -65,7 +65,7 @@
     :snippets $ []
       quote $ .count $ #{} 1 2
   {}
-    :name |.map-set
+    :name |.to-set
     :tags $ #{} :set
     :desc "|returns current set, like identity"
     :snippets $ []
@@ -74,4 +74,10 @@
     :tags $ #{} :set
     :wip? true
     :desc "|like `append` from PureScript, like union"
+    :snippets $ []
+  {}
+    :name |.filter
+    :tags $ #{} :set
+    :wip? true
+    :desc "|like `filter` from PureScript"
     :snippets $ []

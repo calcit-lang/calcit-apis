@@ -72,3 +72,9 @@
     :wip? true
     :desc "|like `map` from PureScript"
     :snippets $ []
+  {}
+    :name |.filter
+    :tags $ #{} :nil
+    :wip? true
+    :desc "|just a helper method like filter, also returns nil"
+    :snippets $ []

@@ -183,3 +183,21 @@
     :wip? true
     :desc "|like `append` from PureScript, merge maps"
     :snippets $ []
+  {}
+    :name |.map
+    :tags $ #{} :map
+    :wip? true
+    :desc "|like `map` from lodash.js"
+    :snippets $ []
+  {}
+    :name |.filter
+    :tags $ #{} :map
+    :wip? true
+    :desc "|like `filter` from lodash.js"
+    :snippets $ []
+  {}
+    :name |.filter-kv
+    :tags $ #{} :map
+    :wip? true
+    :desc "|like `filter` from lodash.js but use key/value as arguments"
+    :snippets $ []
