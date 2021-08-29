@@ -1553,6 +1553,14 @@
       {}
         :code $ quote $ get-char-code |a
   {}
+    :name |char-from-code
+    :wip? true
+    :tags $ #{} :native
+    :desc "|create charactor from integer"
+    :snippets $ []
+      {}
+        :code $ quote $ char-from-code 10
+  {}
     :name |re-matches
     :wip? true
     :tags $ #{} :native
@@ -1905,9 +1913,3 @@
     :desc "|bit op, shr"
     :snippets $ []
       quote $ bit-shr 2 1
-  {}
-    :name |bit-shl
-    :tags $ #{} :number
-    :desc "|bit op, shl"
-    :snippets $ []
-      quote $ bit-shl 2 1
