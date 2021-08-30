@@ -604,3 +604,32 @@
       {}
         :code $ quote $ &set:filter (#{} 1 2) $ fn (x) (&> x 1)
         :result $ quote $ #{} 2
+  {}
+    :name |&get-os
+    :tags $ #{} :native
+    :desc "|internal function to detect platform, returns `:macos` `:linus` `:windows` or more from Rust"
+    :snippets $ []
+  {}
+    :name |&call-dylib:str->str
+    :tags $ #{} :native
+    :desc "|call function from dynamic lib, notice the argument types"
+    :snippets $ []
+      quote $ &call-dylib:str->str |path |fn |a
+  {}
+    :name |&call-dylib:str:str->str
+    :tags $ #{} :native
+    :desc "|call function from dynamic lib, notice the argument types"
+    :snippets $ []
+      quote $ &call-dylib:str:str->str |path |fn |a |b
+  {}
+    :name |&call-dylib:str->bool
+    :tags $ #{} :native
+    :desc "|call function from dynamic lib, notice the argument types"
+    :snippets $ []
+      quote $ &call-dylib:str->bool |path |fn |a
+  {}
+    :name |&call-dylib->str
+    :tags $ #{} :native
+    :desc "|call function from dynamic lib, notice the argument types"
+    :snippets $ []
+      quote $ &call-dylib->str |path |fn
