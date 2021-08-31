@@ -73,7 +73,7 @@
   {}
     :name |.find-index
     :tags $ #{} :list
-    :desc "|find index of first item that matches the function, returns -1 when not found"
+    :desc "|find index of first item that matches the function, returns `nil` when not found"
     :snippets $ []
   {}
     :name |.foldl
@@ -109,7 +109,7 @@
   {}
     :name |.index-of
     :tags $ #{} :list
-    :desc "|native implementation of indexOf function, returns -1 when not found"
+    :desc "|native implementation of indexOf function, returns `nil` when not found"
     :snippets $ []
   {}
     :name |.interleave
@@ -308,4 +308,24 @@
     :tags $ #{} :list
     :wip? true
     :desc "|like `apply` from PureScript"
+    :snippets $ []
+  {}
+    :name |.find-last-index
+    :tags $ #{} :list
+    :desc "|find index of first item that satisfies the function from tail, returns `nil` when not found"
+    :snippets $ []
+  {}
+    :name |.find
+    :tags $ #{} :list
+    :desc "|find first item that satisfies the function, returns `nil` when not found"
+    :snippets $ []
+  {}
+    :name |.find-last
+    :tags $ #{} :list
+    :desc "|find first item that satisfies the function from tail, returns `nil` when not found"
+    :snippets $ []
+  {}
+    :name |.last-index-of
+    :tags $ #{} :list
+    :desc "|detect index of given element from end of a list, returns `nil` when not found"
     :snippets $ []
