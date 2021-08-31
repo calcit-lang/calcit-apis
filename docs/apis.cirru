@@ -577,13 +577,24 @@
   {}
     :name |foldl-shortcut
     :tags $ #{} :native :list
-    :desc "|foldl with a shortcut, using a bool to indicate immediate return"
+    :desc "|foldl with a shortcut, using a tuple with bool `true` to indicate immediate return"
     :snippets $ []
       {}
         :code $ quote $ foldl-shortcut ([] 1 2 3 4) 0 nil $ fn (idx x)
           if (&> x 1)
-            [] true idx
-            [] false (inc idx)
+            :: true idx
+            :: false (inc idx)
+        :result $ quote $ do 1
+  {}
+    :name |foldr-shortcut
+    :tags $ #{} :native :list
+    :desc "|foldr with a shortcut, using a tuple with bool `true` to indicate immediate return"
+    :snippets $ []
+      {}
+        :code $ quote $ foldr-shortcut ([] 1 2 3 4) 0 nil $ fn (idx x)
+          if (&> x 1)
+            :: true idx
+            :: false (inc idx)
         :result $ quote $ do 1
   {}
     :name |reduce

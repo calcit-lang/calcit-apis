@@ -633,3 +633,18 @@
     :desc "|call function from dynamic lib, notice the argument types"
     :snippets $ []
       quote $ &call-dylib->str |path |fn
+  {}
+    :name |&list:last-index-of
+    :tags $ #{} :list :native
+    :desc "|implementation for `.last-index-of` on list"
+    :snippets $ []
+  {}
+    :name |&list:find-last
+    :tags $ #{} :list :native
+    :desc "|implementation for `.find-last` on list"
+    :snippets $ []
+  {}
+    :name |&list:find-last-index
+    :tags $ #{} :list :native
+    :desc "|implementation for `.find-last-index` on list"
+    :snippets $ []
