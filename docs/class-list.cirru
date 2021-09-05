@@ -329,3 +329,8 @@
     :tags $ #{} :list
     :desc "|detect index of given element from end of a list, returns `nil` when not found"
     :snippets $ []
+  {}
+    :name |.flatten
+    :tags $ #{} :list
+    :desc "|flatten nested list"
+    :snippets $ []
