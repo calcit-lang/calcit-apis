@@ -648,3 +648,17 @@
     :tags $ #{} :list :native
     :desc "|implementation for `.find-last-index` on list"
     :snippets $ []
+  {}
+    :name |&list:map
+    :tags $ #{} :list :native
+    :desc "|implementation for `map` on list"
+    :snippets $ []
+  {}
+    :name |&list:flatten
+    :tags $ #{} :list
+    :desc "|flatten list"
+    :snippets $ []
+      quote $ &list:flatten
+        [] 1 2
+          [] 3 4
+            [] 5 6
