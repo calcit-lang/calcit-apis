@@ -443,6 +443,13 @@
       quote $ contains? ({} (:a 1) (:b 2)) :a
       quote $ contains? ([] :a :b :c) 1
   {}
+    :name |contains-in?
+    :tags $ #{} :native :map
+    :desc "|check if a path is contained in a nexted structure"
+    :snippets $ []
+      quote $ contains-in? (&{} :a ([] 1 2 3)) $ [] :a 1
+      quote $ contains? ([] 1 2 $ [] 3 4) ([] 2 1)
+  {}
     :name |includes?
     :tags $ #{} :native :map :set
     :desc "|check if values is included in a structure, like items of a list"
@@ -1068,9 +1075,7 @@
     :tags $ #{} :number
     :desc "|takes a random item from a list, returns `nil` for empty list"
     :snippets $ []
-      quote $ rand-nth
-      quote $ rand-nth 10
-      quote $ rand-nth -10 10
+      quote $ rand-nth $ [] :a :b :c
   {}
     :name |map-indexed
     :tags $ #{} :list
