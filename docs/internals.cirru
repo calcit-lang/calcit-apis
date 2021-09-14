@@ -654,6 +654,11 @@
     :desc "|implementation for `map` on list"
     :snippets $ []
   {}
+    :name |&map:map
+    :tags $ #{} :map :native
+    :desc "|implementation for `map` on hashmap"
+    :snippets $ []
+  {}
     :name |&list:flatten
     :tags $ #{} :list
     :desc "|flatten list"

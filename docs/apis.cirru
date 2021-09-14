@@ -498,6 +498,14 @@
     :snippets $ []
       quote $ parse-cirru-edn "|{} (:a 1)"
   {}
+    :name |keywordize-edn
+    :tags $ #{} :edn
+    :desc "|turn string keys into keyword keys in nested data"
+    :snippets $ []
+      {}
+        :code $ quote $ keywordize-edn $ {} (|a 1) (|b 2)
+        :result $ quote $ {} (:a 1) (:b 2)
+  {}
     :name |parse-cirru
     :tags $ #{} :native
     :desc "|parse Cirru syntax with native parser"
