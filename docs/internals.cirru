@@ -634,6 +634,18 @@
     :snippets $ []
       quote $ &call-dylib->str |path |fn
   {}
+    :name |&call-dylib:cirru->str
+    :tags $ #{} :native
+    :desc "|call function from dynamic lib, notice the argument types"
+    :snippets $ []
+      quote $ &call-dylib:cirru->str tree
+  {}
+    :name |&call-dylib:str-i64->i64
+    :tags $ #{} :native
+    :desc "|call function from dynamic lib, notice the argument types"
+    :snippets $ []
+      quote $ &call-dylib:str-i64->i64 tree
+  {}
     :name |&list:last-index-of
     :tags $ #{} :list :native
     :desc "|implementation for `.last-index-of` on list"
