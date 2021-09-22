@@ -1325,6 +1325,13 @@
       {}
         :code $ quote $ echo &tab
   {}
+    :name |&calcit-version
+    :tags $ #{} :string
+    :desc "|a string of current version"
+    :snippets $ []
+      {}
+        :code $ quote $ echo &calcit-version
+  {}
     :name |repeat
     :tags $ #{} :list
     :desc "|repeat an item n times"
