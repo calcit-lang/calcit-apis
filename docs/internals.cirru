@@ -610,47 +610,11 @@
     :desc "|internal function to detect platform, returns `:macos` `:linus` `:windows` or more from Rust"
     :snippets $ []
   {}
-    :name |&call-dylib:str->str
-    :tags $ #{} :native
-    :desc "|call function from dynamic lib, notice the argument types"
-    :snippets $ []
-      quote $ &call-dylib:str->str |path |fn |a
-  {}
-    :name |&call-dylib:str:str->str
-    :tags $ #{} :native
-    :desc "|call function from dynamic lib, notice the argument types"
-    :snippets $ []
-      quote $ &call-dylib:str:str->str |path |fn |a |b
-  {}
-    :name |&call-dylib:str->bool
-    :tags $ #{} :native
-    :desc "|call function from dynamic lib, notice the argument types"
-    :snippets $ []
-      quote $ &call-dylib:str->bool |path |fn |a
-  {}
-    :name |&call-dylib->str
-    :tags $ #{} :native
-    :desc "|call function from dynamic lib, notice the argument types"
-    :snippets $ []
-      quote $ &call-dylib->str |path |fn
-  {}
-    :name |&call-dylib:cirru->str
-    :tags $ #{} :native
-    :desc "|call function from dynamic lib, notice the argument types"
-    :snippets $ []
-      quote $ &call-dylib:cirru->str tree
-  {}
-    :name |&call-dylib:str-i64->i64
-    :tags $ #{} :native
-    :desc "|call function from dynamic lib, notice the argument types"
-    :snippets $ []
-      quote $ &call-dylib:str-i64->i64 tree
-  {}
-    :name |&call-dylib:edn
+    :name |&call-dylib-edn
     :tags $ #{} :native
     :desc "|call function from dynamic lib, using EDN arguments and result"
     :snippets $ []
-      quote $ &call-dylib:edn a b c
+      quote $ &call-dylib-edn a b c
   {}
     :name |&list:last-index-of
     :tags $ #{} :list :native
