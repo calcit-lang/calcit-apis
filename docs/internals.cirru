@@ -646,6 +646,12 @@
     :snippets $ []
       quote $ &call-dylib:str-i64->i64 tree
   {}
+    :name |&call-dylib:edn
+    :tags $ #{} :native
+    :desc "|call function from dynamic lib, using EDN arguments and result"
+    :snippets $ []
+      quote $ &call-dylib:edn a b c
+  {}
     :name |&list:last-index-of
     :tags $ #{} :list :native
     :desc "|implementation for `.last-index-of` on list"
