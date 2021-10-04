@@ -1046,28 +1046,6 @@
           :a 1
           :b 2
   {}
-    :name |rand
-    :tags $ #{} :number
-    :desc "|generates a random float number in a area, defaults to 100 when not specified"
-    :snippets $ []
-      quote $ rand
-      quote $ rand 10
-      quote $ rand -10 10
-  {}
-    :name |rand-int
-    :tags $ #{} :number
-    :desc "|generates a random round number in a area, defaults to 100 when not specified"
-    :snippets $ []
-      quote $ rand-int
-      quote $ rand-int 10
-      quote $ rand-int -10 10
-  {}
-    :name |rand-nth
-    :tags $ #{} :number
-    :desc "|takes a random item from a list, returns `nil` for empty list"
-    :snippets $ []
-      quote $ rand-nth $ [] :a :b :c
-  {}
     :name |map-indexed
     :tags $ #{} :list
     :desc "|map with index parameter"
@@ -1415,17 +1393,11 @@
   {}
     :name |generate-id!
     :tags $ #{} :native
-    :desc "|id generator, currently using nanoid"
+    :desc "|id generator(refer to std for `nanoid!`)"
     :snippets $ []
       {}
         :code $ quote $ generate-id!
-        :desc "|using default configs of nanoid"
-      {}
-        :code $ quote $ generate-id! 10
-        :desc "|specify length of 10"
-      {}
-        :code $ quote $ generate-id! 10 "abcd"
-        :desc "|specify length and charset"
+        :desc "|using counter id"
   {}
     :name |sort
     :tags $ #{} :native :list
