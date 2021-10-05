@@ -38,22 +38,6 @@
     :desc "|detects a round number"
     :snippets $ []
   {}
-    :name |.rand-shift
-    :tags $ #{} :number
-    :desc "|add or substract a rand value from current value"
-    :snippets $ []
-      {}
-        :code $ quote $ .rand-shift 10 5
-        :desc "|returns a random value in 5~15"
-  {}
-    :name |.rand-between
-    :tags $ #{} :number
-    :desc "|add or substract a rand value from current value"
-    :snippets $ []
-      {}
-        :code $ quote $ .rand-shift 10 5
-        :desc "|returns a random value in 5~10"
-  {}
     :name |.negate
     :tags $ #{} :number
     :desc "|turn negative of number"

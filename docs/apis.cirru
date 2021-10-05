@@ -234,23 +234,6 @@
     :snippets $ []
       quote $ write-file |demo.md "|some content"
   {}
-    :name |parse-json
-    :tags $ #{} :native :json :string
-    :desc "|parse JSON string into Cirru data, notice that `\":a\"` will be parsed as keyword"
-    :snippets $ []
-      quote $ parse-json "|{\"a\": [1, 2]}"
-  {}
-    :name |stringify-json
-    :tags $ #{} :native :json :string
-    :desc "|stringify Cirru data into JSON string"
-    :snippets $ []
-      quote $ stringify-json $ {} (:a ([] 1 2))
-      {}
-        :code $ quote $ stringify-json
-          {} (:a ([] 1 2))
-          , true
-        :desc "|set true to format keywords with `:`s."
-  {}
     :name |macroexpand
     :tags $ #{} :native :macro
     :desc "|expand quoted code for debugging purpose, notice that quote is required"
@@ -1063,28 +1046,6 @@
           :a 1
           :b 2
   {}
-    :name |rand
-    :tags $ #{} :number
-    :desc "|generates a random float number in a area, defaults to 100 when not specified"
-    :snippets $ []
-      quote $ rand
-      quote $ rand 10
-      quote $ rand -10 10
-  {}
-    :name |rand-int
-    :tags $ #{} :number
-    :desc "|generates a random round number in a area, defaults to 100 when not specified"
-    :snippets $ []
-      quote $ rand-int
-      quote $ rand-int 10
-      quote $ rand-int -10 10
-  {}
-    :name |rand-nth
-    :tags $ #{} :number
-    :desc "|takes a random item from a list, returns `nil` for empty list"
-    :snippets $ []
-      quote $ rand-nth $ [] :a :b :c
-  {}
     :name |map-indexed
     :tags $ #{} :list
     :desc "|map with index parameter"
@@ -1432,44 +1393,11 @@
   {}
     :name |generate-id!
     :tags $ #{} :native
-    :desc "|id generator, currently using nanoid"
+    :desc "|id generator(refer to std for `nanoid!`)"
     :snippets $ []
       {}
         :code $ quote $ generate-id!
-        :desc "|using default configs of nanoid"
-      {}
-        :code $ quote $ generate-id! 10
-        :desc "|specify length of 10"
-      {}
-        :code $ quote $ generate-id! 10 "abcd"
-        :desc "|specify length and charset"
-  {}
-    :name |parse-time
-    :tags $ #{} :native :time
-    :desc "|currently time is represented in float in calcit runner"
-    :snippets $ []
-      {}
-        :code $ quote $ parse-time "|2020-10-10"
-        :result $ quote $ do 1602259200
-        :desc "|default parsing template is yyyy-MM-dd"
-      {}
-        :code $ quote $ parse-time "|2020-10-10 10:10" "|yyyy-MM-dd HH:mm"
-        :desc "|template syntax of Nim `times` module"
-        :result $ quote $ do 1602295800
-  {}
-    :name |format-time
-    :tags $ #{} :native :time
-    :desc "|format time with syntax defined in Nim `times` module"
-    :snippets $ []
-      {}
-        :code $ quote $ format-time 1602295800 "|yyyy-MM-dd HH:mm"
-        :desc "|template syntax of Nim `times` module"
-        :result $ quote $ do "|2020-10-10 10:10"
-  {}
-    :name |get-time!
-    :tags $ #{} :native :time
-    :desc "|get current time, stored as a float"
-    :snippets $ []
+        :desc "|using counter id"
   {}
     :name |sort
     :tags $ #{} :native :list
@@ -1591,53 +1519,6 @@
     :snippets $ []
       {}
         :code $ quote $ char-from-code 10
-  {}
-    :name |re-matches
-    :wip? true
-    :tags $ #{} :native
-    :desc "|match string with regular expression"
-    :snippets $ []
-      {}
-        :code $ quote $ re-matches |2 |\d
-        :result $ quote $ do true
-      {}
-        :code $ quote $ re-matches |23 |\d+
-        :result $ quote $ do true
-      {}
-        :code $ quote $ re-matches |a |\d
-        :result $ quote $ do false
-
-  {}
-    :name |re-find-index
-    :wip? true
-    :tags $ #{} :native
-    :desc "|get char code of a single character of string(not ready for Chinese characters yet)"
-    :snippets $ []
-      {}
-        :code $ quote $ re-find-index |a1 |\d
-        :result $ quote $ do 1
-      {}
-        :code $ quote $ re-find-index |aa |\d
-        :result $ quote $ do -1
-
-  {}
-    :name |re-fine-all
-    :wip? true
-    :tags $ #{} :native
-    :desc "|get char code of a single character of string(not ready for Chinese characters yet)"
-    :snippets $ []
-      {}
-        :code $ quote $ re-find-all |123 |\d
-        :result $ quote $ [] |1 |2 |3
-      {}
-        :code $ quote $ re-find-all |123 |\d+
-        :result $ quote $ [] |123
-      {}
-        :code $ quote $ re-find-all |1a2a3 |\d+
-        :result $ quote $ [] |1 |2 |3
-      {}
-        :code $ quote $ re-find-all |1a2a34 |\d+
-        :result $ quote $ [] |1 |2 |34
   {}
     :name |call-w-log
     :tags $ #{} :debug :macro
