@@ -1746,6 +1746,14 @@
         :code $ quote $ format-to-lisp ([] |+ 'a 'b 'c)
         :result $ quote $ do "|(+ a b c)"
   {}
+    :name |format-to-cirru
+    :tags $ #{} :debug
+    :desc "|display quoted code in Cirru syntax"
+    :snippets $ []
+      {}
+        :code $ quote $ format-to-cirru $ quote $ + a (+ b (+ c d))
+        :result $ quote $ do "|\n+ a $ + b (+ c d)\n"
+  {}
     :name |js-array
     :tags $ #{} :native :js
     :desc "|special function for creating a JavaScript Array"
