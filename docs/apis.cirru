@@ -1692,7 +1692,7 @@
     :tags $ #{} :record
     :desc "|create a prototype of record, first argument requires symbol value, with values in `nil`"
     :snippets $ []
-      quote $ new-record 'Person :name :age
+      quote $ new-record :Person :name :age
   {}
     :name |defrecord
     :tags $ #{} :record :macro
@@ -1701,7 +1701,7 @@
       quote $ defrecord Person :name :age
       {}
         :code $ quote $ macroexpand $ quote $ defrecord Person :name :age
-        :result $ quote $ quote $ def Person $ new-record 'Person :name :age
+        :result $ quote $ quote $ def Person $ new-record :Person :name :age
   {}
     :name |defrecord!
     :tags $ #{} :record :macro
@@ -1745,6 +1745,14 @@
       {}
         :code $ quote $ format-to-lisp ([] |+ 'a 'b 'c)
         :result $ quote $ do "|(+ a b c)"
+  {}
+    :name |format-to-cirru
+    :tags $ #{} :debug
+    :desc "|display quoted code in Cirru syntax"
+    :snippets $ []
+      {}
+        :code $ quote $ format-to-cirru $ quote $ + a (+ b (+ c d))
+        :result $ quote $ do "|\n+ a $ + b (+ c d)\n"
   {}
     :name |js-array
     :tags $ #{} :native :js

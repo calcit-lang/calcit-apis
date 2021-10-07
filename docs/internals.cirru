@@ -409,11 +409,6 @@
     :desc "|detects if a record contains given key"
     :snippets $ []
   {}
-    :name |&record:nth
-    :tags $ #{} :record
-    :desc "|get a pair of a record since fields in record are ordered"
-    :snippets $ []
-  {}
     :name |&record:get
     :tags $ #{} :record
     :desc "|get value from record via a field"
