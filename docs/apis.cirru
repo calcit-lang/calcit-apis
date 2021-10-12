@@ -271,16 +271,22 @@
       quote $ print 1 2 3
   {}
     :name |println
-    :tags $ #{} :macro
+    :tags $ #{} :native
     :desc "|displays values with newline at end"
     :snippets $ []
       quote $ println 1 2 3
   {}
     :name |echo
-    :tags $ #{} :macro
+    :tags $ #{} :native
     :desc "|alias for println"
     :snippets $ []
       quote $ echo 1 2 3
+  {}
+    :name |print-values
+    :tags $ #{} :debug
+    :desc "|displays formatted values with newline at end"
+    :snippets $ []
+      quote $ print-values 1 2 3
   {}
     :name |pr-str
     :tags $ #{} :string
