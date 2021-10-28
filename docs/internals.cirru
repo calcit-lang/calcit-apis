@@ -606,10 +606,16 @@
     :snippets $ []
   {}
     :name |&call-dylib-edn
-    :tags $ #{} :native
+    :tags $ #{} :injection
     :desc "|call function from dynamic lib, using EDN arguments and result"
     :snippets $ []
       quote $ &call-dylib-edn a b c
+  {}
+    :name |&call-dylib-edn-fn
+    :tags $ #{} :injection
+    :desc "|call function from dynamic lib, using EDN arguments and result, also pass a closure"
+    :snippets $ []
+      quote $ &call-dylib-edn-fn a b c $ fn (& args)
   {}
     :name |&list:last-index-of
     :tags $ #{} :list :native

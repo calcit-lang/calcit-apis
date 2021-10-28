@@ -277,7 +277,7 @@
       quote $ println 1 2 3
   {}
     :name |echo
-    :tags $ #{} :native
+    :tags $ #{} :native :injection
     :desc "|alias for println"
     :snippets $ []
       quote $ echo 1 2 3
@@ -1839,3 +1839,9 @@
     :desc "|bit op, shr"
     :snippets $ []
       quote $ bit-shr 2 1
+  {}
+    :name |on-control-c
+    :tags $ #{} :injection
+    :desc "|injected function for handling SIGINT"
+    :snippets $ []
+      quote $ on-control-c $ fn () (println "|exiting") (quit! 0)
