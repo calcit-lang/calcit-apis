@@ -81,3 +81,13 @@
     :wip? true
     :desc "|like `filter` from PureScript"
     :snippets $ []
+  {}
+    :name |.max
+    :tags $ #{} :list
+    :desc "|find max value"
+    :snippets $ []
+  {}
+    :name |.min
+    :tags $ #{} :list
+    :desc "|find min value"
+    :snippets $ []
