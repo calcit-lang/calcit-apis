@@ -81,17 +81,6 @@
     :desc "|Haskell's foldl function, implemented i Nim for performance"
     :snippets $ []
   {}
-    :name |.frequencies
-    :tags $ #{} :list
-    :desc "|count frequencies of items in list, returns a map"
-    :snippets $ []
-      {}
-        :code $ quote $ .frequencies $ [] 1 1 1 2 2 3
-        :result $ quote $ {}
-          3 1
-          2 2
-          1 3
-  {}
     :name |.get
     :tags $ #{} :list
     :desc "|alias for nth"
@@ -111,14 +100,6 @@
     :tags $ #{} :list
     :desc "|native implementation of indexOf function, returns `nil` when not found"
     :snippets $ []
-  {}
-    :name |.interleave
-    :tags $ #{} :list
-    :desc "|interleave of two lists, like Clojure"
-    :snippets $ []
-      {}
-        :code $ quote $ interleave ([] :a :b :c) ([] 1 2 3 4)
-        :result $ quote $ [] :a 1 :b 2 :c 3
   {}
     :name |.join
     :tags $ #{} :list
@@ -183,15 +164,6 @@
     :desc "|return a list with order reversed"
     :snippets $ []
   {}
-    :name |.section-by
-    :tags $ #{} :list
-    :desc "|turn list into a list of lists of n sizes, remaining items also in a list"
-    :snippets $ []
-      {}
-        :code $ quote $ section-by (range 5) 3
-        :result $ quote
-          [] ([] 0 1 2) ([] 3 4)
-  {}
     :name |.slice
     :tags $ #{} :list
     :desc "|return a slice of list, item at last index is not included"
@@ -215,14 +187,6 @@
     :tags $ #{} :list
     :desc "|take last n items from list"
     :snippets $ []
-  {}
-    :name |.zipmap
-    :tags $ #{} :list
-    :desc "|create a map with two lists, one for keys and one for values"
-    :snippets $ []
-      {}
-        :code $ quote $ zipmap ([] :a :b :c :d) ([] 1 2 3 4)
-        :result $ quote $ {} (:a 1) (:b 2) (:c 3) (:d 4)
   {}
     :name |.count
     :tags $ #{} :list
@@ -253,14 +217,6 @@
     :desc "|sort list by result from a function"
     :snippets $ []
       quote $ .sort-by ([] 1 2 3) $ fn (x) x
-  {}
-    :name |.distinct
-    :tags $ #{} :list
-    :desc "|turn list into distinct elements"
-    :snippets $ []
-      {}
-        :code $ quote $ .distinct ([] 1 2 3 1 2)
-        :result $ quote $ [] 1 2 3
   {}
     :name |.to-set
     :tags $ #{} :list
