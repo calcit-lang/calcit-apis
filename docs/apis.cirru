@@ -1845,3 +1845,28 @@
     :desc "|injected function for handling SIGINT"
     :snippets $ []
       quote $ on-control-c $ fn () (println "|exiting") (quit! 0)
+  {}
+    :name |reverse
+    :tags $ #{} :list
+    :desc "|reverse order of items in a list"
+    :snippets $ []
+      quote $ reverse $ [] 1 2 3 4
+  {}
+    :name |distinct
+    :tags $ #{} :list
+    :desc "|return list without duplications"
+    :snippets $ []
+      {}
+        :code $ quote $ distinct ([] 1 2 3 1 2)
+        :result $ quote $ [] 1 2 3
+  {}
+    :name |frequencies
+    :tags $ #{} :list
+    :desc "|count frequencies of items in list, returns a map"
+    :snippets $ []
+      {}
+        :code $ quote $ frequencies $ [] 1 1 1 2 2 3
+        :result $ quote $ {}
+          3 1
+          2 2
+          1 3

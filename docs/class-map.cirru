@@ -76,11 +76,6 @@
     :desc "|returns a set of values of a map"
     :snippets $ []
   {}
-    :name |.keys-non-nil
-    :tags $ #{} :map
-    :desc "|returns a set of keys of a map, which has real values"
-    :snippets $ []
-  {}
     :name |.map-kv
     :tags $ #{} :map
     :desc "|map key and value for a map"
@@ -106,22 +101,6 @@
     :desc "|merge two maps"
     :snippets $ []
   {}
-    :name |.select-keys
-    :tags $ #{} :map
-    :desc "|select map with given keys. get nil values when extra keys provided"
-    :snippets $ []
-      {}
-        :code $ quote $ select-keys
-          {} (:a 1) (:b 2) (:c 3)
-          [] :a :b
-        :result $ quote $ {} (:a 1) (:b 2)
-      {}
-        :code $ quote $ select-keys
-          {} (:a 1) (:b 2) (:c 3)
-          [] :d
-        :result $ quote $ {} $ :d nil
-
-  {}
     :name |.to-pairs
     :tags $ #{} :map
     :desc "|returns a set of pairs from a map"
@@ -130,11 +109,6 @@
     :name |.to-list
     :tags $ #{} :map
     :desc "|returns a list of pairs from a map"
-    :snippets $ []
-  {}
-    :name |.unselect-keys
-    :tags $ #{} :map
-    :desc "|unselect given keys from based on a map"
     :snippets $ []
   {}
     :name |.first

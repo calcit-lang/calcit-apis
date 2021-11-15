@@ -650,3 +650,23 @@
         [] 1 2
           [] 3 4
             [] 5 6
+  {}
+    :name |&list:max
+    :tags $ #{} :list
+    :desc "|find max value of a list"
+    :snippets $ []
+  {}
+    :name |&list:min
+    :tags $ #{} :list
+    :desc "|find min value of a list"
+    :snippets $ []
+  {}
+    :name |&set:max
+    :tags $ #{} :set
+    :desc "|find max value of a set"
+    :snippets $ []
+  {}
+    :name |&set:min
+    :tags $ #{} :set
+    :desc "|find min value of a set"
+    :snippets $ []
