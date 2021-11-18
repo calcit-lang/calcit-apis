@@ -1,9 +1,8 @@
 
 {}
-  :configs $ {} (:reload-fn |app.main/reload!) (:port 6001) (:output |src) (:compact-output? true) (:storage-key |calcit.cirru)
-    :modules $ [] |lilac/compact.cirru |memof/compact.cirru |respo.calcit/compact.cirru |respo-ui.calcit/compact.cirru |respo-markdown.calcit/compact.cirru |calcit-theme.calcit/compact.cirru |reel.calcit/compact.cirru |respo-feather.calcit/
-    :init-fn |app.main/main!
-    :extension |.cljs
+  :users $ {}
+    |root $ {} (:avatar nil) (:name |root) (:nickname |root) (:id |root) (:theme :star-trail) (:password |d41d8cd98f00b204e9800998ecf8427e)
+    |rJG4IHzWf $ {} (:avatar nil) (:name |chen) (:nickname |chen) (:id |rJG4IHzWf) (:theme :star-trail) (:password |d41d8cd98f00b204e9800998ecf8427e)
   :ir $ {} (:package |app)
     :files $ {}
       |app.comp.container $ {}
@@ -1198,14 +1197,106 @@
                         :at 1499755354983
                       |v $ {}
                         :data $ {}
-                          |fT $ {}
+                          |fT $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252361870)
                             :data $ {}
-                              |T $ {} (:text |comp-method-targets) (:type :leaf) (:at 1622633381256) (:by |rJG4IHzWf)
-                              |j $ {} (:text |state) (:type :leaf) (:at 1622633391592) (:by |rJG4IHzWf)
-                              |r $ {} (:text |cursor) (:type :leaf) (:at 1622633394147) (:by |rJG4IHzWf)
-                            :type :expr
-                            :at 1622633369697
-                            :by |rJG4IHzWf
+                              |T $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252453224)
+                                :data $ {}
+                                  |T $ {}
+                                    :data $ {}
+                                      |T $ {} (:text |comp-method-targets) (:type :leaf) (:at 1622633381256) (:by |rJG4IHzWf)
+                                      |j $ {} (:text |state) (:type :leaf) (:at 1622633391592) (:by |rJG4IHzWf)
+                                      |r $ {} (:text |cursor) (:type :leaf) (:at 1622633394147) (:by |rJG4IHzWf)
+                                    :type :expr
+                                    :at 1622633369697
+                                    :by |rJG4IHzWf
+                                  |D $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252454413) (:text |div)
+                                  |L $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252454671)
+                                    :data $ {}
+                                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252454986) (:text |{})
+                                      |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252455233)
+                                        :data $ {}
+                                          |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252456017) (:text |:style)
+                                          |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252460681) (:text |ui/row-middle)
+                                  |P $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252518113)
+                                    :data $ {}
+                                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252518113) (:text |a)
+                                      |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252518113)
+                                        :data $ {}
+                                          |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252518113) (:text |{})
+                                          |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252518113)
+                                            :data $ {}
+                                              |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252518113) (:text |:inner-text)
+                                              |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252522201) (:text "|\"Calcit")
+                                          |r $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252518113)
+                                            :data $ {}
+                                              |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252518113) (:text |:target)
+                                              |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252518113) (:text "|\"_blank")
+                                          |v $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252518113)
+                                            :data $ {}
+                                              |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252518113) (:text |:href)
+                                              |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252528550) (:text "|\"http://calcit-lang.org/")
+                                          |x $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252545288)
+                                            :data $ {}
+                                              |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252563062) (:text |:style)
+                                              |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252554287)
+                                                :data $ {}
+                                                  |T $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252548862)
+                                                    :data $ {}
+                                                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252549848) (:text |:font-size)
+                                                      |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252608381) (:text |20)
+                                                  |D $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252554758) (:text |{})
+                                                  |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252576212)
+                                                    :data $ {}
+                                                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252579290) (:text |:font-family)
+                                                      |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252584472) (:text |ui/font-fancy)
+                                                  |r $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252589618)
+                                                    :data $ {}
+                                                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252594109) (:text |:text-decoration)
+                                                      |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252596433) (:text |:none)
+                                                  |v $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252620491)
+                                                    :data $ {}
+                                                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252622563) (:text |:color)
+                                                      |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252622964)
+                                                        :data $ {}
+                                                          |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252624778) (:text |hsl)
+                                                          |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252626838) (:text |200)
+                                                          |r $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252636040) (:text |100)
+                                                          |v $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252632169) (:text |60)
+                                                  |t $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252639246)
+                                                    :data $ {}
+                                                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252642564) (:text |:font-weight)
+                                                      |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252643968) (:text |:bold)
+                                  |R $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252536892)
+                                    :data $ {}
+                                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252537393) (:text |=<)
+                                      |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252603997) (:text |12)
+                                      |r $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252538489) (:text |nil)
+                              |D $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252362456) (:text |div)
+                              |L $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252362681)
+                                :data $ {}
+                                  |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252362968) (:text |{})
+                                  |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252363234)
+                                    :data $ {}
+                                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252364010) (:text |:style)
+                                      |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252366531) (:text |ui/row-parted)
+                              |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252367945)
+                                :data $ {}
+                                  |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252369275) (:text |a)
+                                  |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252370008)
+                                    :data $ {}
+                                      |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252370321) (:text |{})
+                                      |j $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252370714)
+                                        :data $ {}
+                                          |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252375965) (:text |:inner-text)
+                                          |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252443762) (:text "|\"Try & Play")
+                                      |r $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252404884)
+                                        :data $ {}
+                                          |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252406152) (:text |:target)
+                                          |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252411581) (:text "|\"_blank")
+                                      |v $ {} (:type :expr) (:by |rJG4IHzWf) (:at 1637252423792)
+                                        :data $ {}
+                                          |T $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252425006) (:text |:href)
+                                          |j $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252426251) (:text "|\"http://repo.calcit-lang.org/calcit-wasm-play/")
                           |T $ {} (:text |div) (:type :leaf) (:at 1499755354983) (:by |root)
                           |f $ {}
                             :data $ {}
@@ -1216,7 +1307,7 @@
                                   |j $ {}
                                     :data $ {}
                                       |D $ {} (:text |merge) (:type :leaf) (:at 1603121417862) (:by |rJG4IHzWf)
-                                      |T $ {} (:text |ui/column) (:type :leaf) (:at 1628677379384) (:by |rJG4IHzWf)
+                                      |T $ {} (:text |ui/column) (:type :leaf) (:at 1637252360018) (:by |rJG4IHzWf)
                                       |j $ {}
                                         :data $ {}
                                           |yT $ {}
@@ -3910,6 +4001,7 @@
                         |yT $ {} (:text |input) (:type :leaf) (:at 1552321107012) (:by |rJG4IHzWf)
                         |yr $ {} (:text |pre) (:type :leaf) (:at 1604978700418) (:by |rJG4IHzWf)
                         |yv $ {} (:text |list->) (:type :leaf) (:at 1619984504175) (:by |rJG4IHzWf)
+                        |yx $ {} (:type :leaf) (:by |rJG4IHzWf) (:at 1637252390744) (:text |a)
                         |T $ {} (:text |[]) (:type :leaf) (:at 1499755354983) (:by |root)
                         |j $ {} (:text |defcomp) (:type :leaf) (:at 1499755354983) (:by |root)
                         |l $ {} (:text |defeffect) (:type :leaf) (:at 1573355389740) (:by |rJG4IHzWf)
@@ -4846,6 +4938,8 @@
           :type :expr
           :at 1527788237503
           :by |root
-  :users $ {}
-    |root $ {} (:avatar nil) (:name |root) (:nickname |root) (:id |root) (:theme :star-trail) (:password |d41d8cd98f00b204e9800998ecf8427e)
-    |rJG4IHzWf $ {} (:avatar nil) (:name |chen) (:nickname |chen) (:id |rJG4IHzWf) (:theme :star-trail) (:password |d41d8cd98f00b204e9800998ecf8427e)
+  :configs $ {} (:reload-fn |app.main/reload!) (:port 6001) (:output |src) (:compact-output? true) (:storage-key |calcit.cirru)
+    :modules $ [] |lilac/compact.cirru |memof/compact.cirru |respo.calcit/compact.cirru |respo-ui.calcit/compact.cirru |respo-markdown.calcit/compact.cirru |calcit-theme.calcit/compact.cirru |reel.calcit/compact.cirru |respo-feather.calcit/
+    :init-fn |app.main/main!
+    :extension |.cljs
+  :entries $ {}
