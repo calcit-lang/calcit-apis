@@ -1870,3 +1870,8 @@
           3 1
           2 2
           1 3
+  {}
+    :name |negate
+    :tags $ #{} :number
+    :desc "|negate a number"
+    :snippets $ []

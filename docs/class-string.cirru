@@ -168,3 +168,13 @@
     :wip? true
     :desc "|like `append` from PureScript, string concat"
     :snippets $ []
+  {}
+    :name |.pad-left
+    :tags $ #{} :string
+    :desc "|pad string from left"
+    :snippets $ []
+  {}
+    :name |.pad-right
+    :tags $ #{} :string
+    :desc "|pad string from right"
+    :snippets $ []

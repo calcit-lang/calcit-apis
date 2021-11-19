@@ -3,13 +3,14 @@
   :configs $ {} (:init-fn |app.main/main!) (:reload-fn |app.main/reload!)
     :modules $ [] |lilac/compact.cirru |memof/compact.cirru |respo.calcit/compact.cirru |respo-ui.calcit/compact.cirru |respo-markdown.calcit/compact.cirru |calcit-theme.calcit/compact.cirru |reel.calcit/compact.cirru |respo-feather.calcit/
     :version nil
+  :entries $ {}
   :files $ {}
     |app.comp.container $ {}
       :ns $ quote
         ns app.comp.container $ :require
           [] respo.util.format :refer $ [] hsl
           [] respo-ui.core :as ui
-          [] respo.core :refer $ [] defcomp defeffect <> >> div button textarea span input pre list->
+          [] respo.core :refer $ [] defcomp defeffect <> >> div button textarea span input pre list-> a
           [] respo.comp.space :refer $ [] =<
           [] reel.comp.reel :refer $ [] comp-reel
           [] respo-md.comp.md :refer $ [] comp-md
@@ -107,7 +108,16 @@
                       :border-bottom $ str "\"1px solid " (hsl 0 0 90)
                       :box-shadow $ str "\"0 0 6px " (hsl 0 0 0 0.2)
                       :z-index 99
-                  comp-method-targets state cursor
+                  div
+                    {} $ :style ui/row-parted
+                    div
+                      {} $ :style ui/row-middle
+                      a $ {} (:inner-text "\"Calcit") (:target "\"_blank") (:href "\"http://calcit-lang.org/")
+                        :style $ {} (:font-size 20) (:font-family ui/font-fancy) (:text-decoration :none) (:font-weight :bold)
+                          :color $ hsl 200 100 60
+                      =< 12 nil
+                      comp-method-targets state cursor
+                    a $ {} (:inner-text "\"Try & Play") (:target "\"_blank") (:href "\"http://repo.calcit-lang.org/calcit-wasm-play/")
                   if
                     or
                       nil? $ :method-target state

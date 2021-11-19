@@ -670,3 +670,17 @@
     :tags $ #{} :set
     :desc "|find min value of a set"
     :snippets $ []
+  {}
+    :name |&str:pad-left
+    :tags $ #{} :string
+    :desc "|pad string from left"
+    :snippets $ []
+      quote $ &str:pad-left |a 4 |0
+      quote $ &str:pad-left |a 4 |01
+  {}
+    :name |&str:pad-right
+    :tags $ #{} :string
+    :desc "|pad string from right"
+    :snippets $ []
+      quote $ &str:pad-right |a 4 |0
+      quote $ &str:pad-right |a 4 |01
