@@ -684,3 +684,9 @@
     :snippets $ []
       quote $ &str:pad-right |a 4 |0
       quote $ &str:pad-right |a 4 |01
+  {}
+    :name |&format-ternary-tree
+    :tags $ #{} :debug :list
+    :desc "|display internal structure built with `im_ternary_tree`"
+    :snippets $ []
+      quote $ &format-ternary-tree $ range 30
