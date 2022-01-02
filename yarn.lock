@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@calcit/procs@^0.5.14":
-  version "0.5.14"
-  resolved "https://registry.npmjs.org/@calcit/procs/-/procs-0.5.14.tgz#cf8ee0e9009ab1126da384d81b6e85d48c4d55c0"
-  integrity sha512-LDhp3pAV4LEpTcwTf8G1r1cw39H4Xqlw4PVqyBtR2tgUKyx4djGFsj3gaQtl3GwkNIedNea3D3uMiamkorxvSQ==
+"@calcit/procs@^0.5.15":
+  version "0.5.15"
+  resolved "https://registry.npmjs.org/@calcit/procs/-/procs-0.5.15.tgz#b8375050fe7e288630e88b153b839bbb9cbb0f9e"
+  integrity sha512-cU/g/meb/2UG2PeGmnKKCzLZ5IiXZYVW9UFuaJ0kNW7/+fnUIV7RuqNysIFD49YwtLZwAdgg5yZ4J63KEoA6pQ==
   dependencies:
     "@calcit/ternary-tree" "0.0.18"
     "@cirru/parser.ts" "^0.0.5"
@@ -49,9 +49,9 @@ classnames@^2.2.5:
   integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
 
 core-js@^3.1.3:
-  version "3.20.0"
-  resolved "https://registry.npmjs.org/core-js/-/core-js-3.20.0.tgz#1c5ac07986b8d15473ab192e45a2e115a4a95b79"
-  integrity sha512-KjbKU7UEfg4YPpskMtMXPhUKn7m/1OdTHTVjy09ScR2LVaoUXe8Jh0UdvN2EKUR6iKTJph52SJP95mAB0MnVLQ==
+  version "3.20.2"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-3.20.2.tgz#46468d8601eafc8b266bd2dd6bf9dee622779581"
+  integrity sha512-nuqhq11DcOAbFBV4zCbKeGbKQsUDRqTX0oqx7AttUBuqe3h20ixsE039QHelbL6P4h+9kytVqyEtyZ6gsiwEYw==
 
 dom-walk@^0.1.0:
   version "0.1.2"
@@ -282,9 +282,9 @@ resolve@^1.20.0:
     path-parse "^1.0.6"
 
 rollup@^2.59.0:
-  version "2.61.1"
-  resolved "https://registry.npmjs.org/rollup/-/rollup-2.61.1.tgz#1a5491f84543cf9e4caf6c61222d9a3f8f2ba454"
-  integrity sha512-BbTXlEvB8d+XFbK/7E5doIcRtxWPRiqr0eb5vQ0+2paMM04Ye4PZY5nHOQef2ix24l/L0SpLd5hwcH15QHPdvA==
+  version "2.62.0"
+  resolved "https://registry.npmjs.org/rollup/-/rollup-2.62.0.tgz#9e640b419fc5b9e0241844f6d55258bd79986ecc"
+  integrity sha512-cJEQq2gwB0GWMD3rYImefQTSjrPYaC6s4J9pYqnstVLJ1CHa/aZNVkD4Epuvg4iLeMA4KRiq7UM7awKK6j7jcw==
   optionalDependencies:
     fsevents "~2.3.2"
 
@@ -312,10 +312,10 @@ virtual-dom@^2.1.1:
     x-is-array "0.1.0"
     x-is-string "0.1.0"
 
-vite@^2.7.4:
-  version "2.7.4"
-  resolved "https://registry.npmjs.org/vite/-/vite-2.7.4.tgz#06f68f8909943f9fe582c26120b0c2b85894a05e"
-  integrity sha512-f+0426k9R/roz5mRNwJlQ+6UOnhCwIypJSbfgCmsVzVJe9jTTM5iRX2GWYUean+iqPBWaU/dYLryx9AoH2pmrw==
+vite@^2.7.10:
+  version "2.7.10"
+  resolved "https://registry.npmjs.org/vite/-/vite-2.7.10.tgz#d12c4c10e56a0ecf7890cb529c15996c6111218f"
+  integrity sha512-KEY96ntXUid1/xJihJbgmLZx7QSC2D4Tui0FdS0Old5OokYzFclcofhtxtjDdGOk/fFpPbHv9yw88+rB93Tb8w==
   dependencies:
     esbuild "^0.13.12"
     postcss "^8.4.5"
