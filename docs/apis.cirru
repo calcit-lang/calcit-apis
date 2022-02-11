@@ -841,6 +841,15 @@
     :snippets $ []
       quote $ str |a 1 :k
   {}
+    :name |str-spaced
+    :tags $ #{} :string
+    :desc "|string concatenation with spaced inserted"
+    :snippets $ []
+      {}
+        :desc "|nil values are ignored"
+        :code $ quote $ str-spaced |a 1 nil :k
+        :result $ quote $ do "|a 1 :k"
+  {}
     :name |include
     :tags $ #{} :set
     :desc "|include multiple items to hashset"
