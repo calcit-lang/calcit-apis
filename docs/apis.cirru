@@ -129,6 +129,14 @@
           b $ + a 1
         + a b
   {}
+    :name |if-let
+    :tags $ #{} :macro
+    :desc "|bind expression to local variable, check not nil, then run"
+    :snippets $ []
+      quote $ if-let
+        a $ get (&{} :a 1) :aa
+        + a 10
+  {}
     :name |loop
     :tags $ #{} :macro
     :desc "|like Clojure `loop`, use tail recursion to loop inside expressions, implemented with macro"
