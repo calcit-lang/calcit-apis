@@ -1901,3 +1901,11 @@
     :tags $ #{} :number
     :desc "|negate a number"
     :snippets $ []
+  {}
+    :name |flipped
+    :tags $ #{} :macro
+    :desc "|macro to call a function with arguments flipped"
+    :snippets $ []
+      {}
+        :code $ quote $ flipped [] 1 2 3 4
+        :result $ quote $ [] 4 3 2 1
