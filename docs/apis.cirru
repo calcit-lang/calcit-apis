@@ -131,9 +131,18 @@
   {}
     :name |if-let
     :tags $ #{} :macro
-    :desc "|bind expression to local variable, check not nil, then run"
+    :desc "|bind expression to local variable, check not nil, then run like if"
     :snippets $ []
       quote $ if-let
+        a $ get (&{} :a 1) :aa
+        + a 10
+        , nil
+  {}
+    :name |when-let
+    :tags $ #{} :macro
+    :desc "|bind expression to local variable, check not nil, then run like when"
+    :snippets $ []
+      quote $ when-let
         a $ get (&{} :a 1) :aa
         + a 10
   {}
