@@ -29,3 +29,8 @@ body * {
 ::-webkit-resizer {
   background-color:transparent;
 }
+
+.calcit-tile {
+  background-image: url('./calcit-tile.png');
+  background-size: 163px 395px;
+}

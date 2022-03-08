@@ -99,14 +99,16 @@
                               includes? (:tags info) x
                         includes? (:name info) (:query state)
               div
-                {} $ :style
-                  merge ui/global ui/fullscreen ui/column $ {}
-                    :background-color $ hsl 0 0 96
+                {} (:class-name "\"calcit-tile")
+                  :style $ merge ui/global ui/fullscreen ui/column
+                    {} $ :background-color (hsl 0 0 100)
                 div
                   {} $ :style
-                    merge ui/column $ {} (:background-color :white) (:padding 8)
+                    merge ui/column $ {}
+                      :background-color $ hsl 0 0 100 0.6
+                      :padding "\"0px 8px 12px"
                       :border-bottom $ str "\"1px solid " (hsl 0 0 90)
-                      :box-shadow $ str "\"0 0 6px " (hsl 0 0 0 0.2)
+                      :box-shadow $ str "\"0 0 4px " (hsl 0 0 0 0.2)
                       :z-index 99
                   div
                     {} $ :style ui/row-parted
@@ -146,7 +148,8 @@
                       memof-call comp-wip-switcher state cursor
                 div
                   {} $ :style
-                    merge ui/expand $ {} (:background-color :white)
+                    merge ui/expand $ {}
+                      :background-color $ hsl 0 0 100 0.6
                   =< nil 8
                   list->
                     {} $ :style ui/expand
@@ -164,25 +167,16 @@
             div
               {} $ :style
                 {} $ :margin-bottom 8
-              case syntax
+              case-default syntax (str "\"Unknown code: " syntax)
                 :cirru $ div
                   {} $ :style
                     {} (:background-color :black) (:padding "\"4px 0")
                   render-expr code
                 :cirru-text $ pre
-                  {}
-                    :style $ {} (:font-family ui/font-code)
-                      :border $ str "\"1px solid " (hsl 0 0 94)
-                      :border-radius "\"4px"
-                      :display :inline-block
-                      :padding "\"2px 8px"
-                      :line-height "\"22px"
-                      :margin "\"0px 0px"
+                  {} (:style style-code)
                     :innerHTML $ trim
                       format-cirru ([] code) true
-                :lisp $ <> (lisp-style code)
-                  {} $ :font-family ui/font-code
-                <> $ str "\"Unknown code: " syntax
+                :lisp $ <> (lisp-style code) style-code
         |apis-data $ quote
           def apis-data $ {}
             :apis $ parse-cirru-edn (slurp-cirru-edn "\"docs/apis.cirru")
@@ -270,10 +264,7 @@
             div
               {} $ :style
                 merge ui/row
-                  {}
-                    :border-bottom $ str "\"1px solid " (hsl 0 0 93)
-                    :margin "\"4px"
-                    :padding "\"0px 4px"
+                  {} (:margin "\"4px") (:padding "\"0px 4px")
                   if (:wip? info)
                     {}
                       :color $ hsl 0 0 80
@@ -333,6 +324,15 @@
                   -> xs (map lisp-style) (join-str "\" ")
                   , "\")"
               true $ str "\"TODO: " (str xs)
+        |style-code $ quote
+          def style-code $ {} (:font-family ui/font-code)
+            :border $ str "\"1px solid " (hsl 0 0 94)
+            :border-radius "\"4px"
+            :display :inline-block
+            :padding "\"2px 8px"
+            :line-height "\"22px"
+            :margin "\"0px 0px"
+            :background-color :white
     |app.schema $ {}
       :ns $ quote (ns app.schema)
       :defs $ {}
