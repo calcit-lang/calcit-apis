@@ -1909,3 +1909,11 @@
       {}
         :code $ quote $ flipped [] 1 2 3 4
         :result $ quote $ [] 4 3 2 1
+  {}
+    :name |noted
+    :tags $ #{} :macro
+    :desc "|macro to decorate 1 or more notes to a value"
+    :snippets $ []
+      {}
+        :code $ quote $ noted "|this is note" 1
+        :result $ quote $ do 1
