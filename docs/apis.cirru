@@ -921,6 +921,12 @@
     :snippets $ []
       quote $ -> a (b) (c d)
   {}
+    :name |<-
+    :tags $ #{} :macro
+    :desc "|backward thread macro for nested functions, argument at head"
+    :snippets $ []
+      quote $ <- (b) (c d) a
+  {}
     :name |->>
     :tags $ #{} :macro
     :desc "|thread macro for nested functions, argument at tail"
@@ -931,7 +937,13 @@
     :tags $ #{} :macro
     :desc "|thread macro for nested functions, using `%` for argument"
     :snippets $ []
-      quote $ ->> a (+ % b) (* % c)
+      quote $ ->% a (+ % b) (* % c)
+  {}
+    :name |%<-
+    :tags $ #{} :macro
+    :desc "|backward thread macro for nested functions, using `%` for argument"
+    :snippets $ []
+      quote $ %<- (+ % b) (* % c) a
   {}
     :name |cond
     :tags $ #{} :macro
