@@ -1,13 +1,14 @@
 
-Calcit Runner APIs
+Calcit APIs
 ----
 
-> API docs for calcit-runner.nim
+> API docs for Calcit scripting language.
 
+http://apis.calcit-lang.org/
 
 ### Workflow
 
-Workflow https://github.com/mvc-works/calcit-workflow
+Workflow https://github.com/calcit-lang/respo-calcit-workflow
 
 ### License
 
