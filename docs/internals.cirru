@@ -690,3 +690,9 @@
     :desc "|display internal structure built with `im_ternary_tree`"
     :snippets $ []
       quote $ &format-ternary-tree $ range 30
+  {}
+    :name |&buffer
+    :tags $ #{} :native
+    :desc "|create buffer, takes numbers(0~255) and hex strings"
+    :snippets $ []
+      quote $ &buffer 0x11 |11
