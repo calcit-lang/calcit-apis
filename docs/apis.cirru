@@ -1289,8 +1289,8 @@
         :result $ quote $ [] 1 10 2 10 3 10 4
   {}
     :name |gensym
-    :tags $ #{} :native
-    :desc "|gensym, generates an unique symbol like Clojure"
+    :tags $ #{} :syntax
+    :desc "|takes a string or keyword, generates a namespace-level unique symbol for a variable name"
     :snippets $ []
       {}
         :code $ quote $ gensym
@@ -1298,9 +1298,6 @@
       {}
         :code $ quote $ gensym |a
         :result $ quote $ a__102
-      {}
-        :code $ quote $ gensym 'b
-        :result $ quote $ b__103
   {}
     :name |&PI
     :tags $ #{} :number

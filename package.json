@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@calcit/procs": "^0.5.32",
+    "@calcit/procs": "^0.5.34",
     "feather-icons": "^4.29.0"
   },
   "devDependencies": {
