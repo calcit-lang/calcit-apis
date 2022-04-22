@@ -696,3 +696,9 @@
     :desc "|create buffer, takes numbers(0~255) and hex strings"
     :snippets $ []
       quote $ &buffer 0x11 |11
+  {}
+    :name |&hash
+    :tags $ #{} :native :debug
+    :desc "|return hashing result of a value, for debugging. implementation inconsistent in Rust and js"
+    :snippets $ []
+      quote $ &hash 1
