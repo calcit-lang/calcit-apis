@@ -1530,6 +1530,10 @@
     :snippets $ []
       {}
         :code $ quote $ get-env |HOME
+      {}
+        :code $ quote $ get-env |mode |dev
+        :result $ quote $ do |dev
+        :desc "|provide a default value"
   {}
     :name |cpu-time
     :tags $ #{} :native
