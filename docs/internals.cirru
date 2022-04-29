@@ -702,3 +702,9 @@
     :desc "|return hashing result of a value, for debugging. implementation inconsistent in Rust and js"
     :snippets $ []
       quote $ &hash 1
+  {}
+    :name |&extract-code-into-edn
+    :tags $ #{} :native
+    :desc "|used in meta programming, extract internal data from symbols, like handling IR"
+    :snippets $ []
+      quote $ &extract-code-into-edn 'demo
