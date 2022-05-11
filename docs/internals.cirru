@@ -617,6 +617,13 @@
     :snippets $ []
       quote $ &call-dylib-edn-fn a b c $ fn (& args)
   {}
+    :name |&blocking-dylib-edn-fn
+    :tags $ #{} :injection
+    :wip? true
+    :desc "|call function from dynamic lib and block thread, using EDN arguments and result, also pass a closure. currently only used for calcit-paint, which requires main thread"
+    :snippets $ []
+      quote $ &blocking-dylib-edn-fn a b c $ fn (& args)
+  {}
     :name |&list:last-index-of
     :tags $ #{} :list :native
     :desc "|implementation for `.last-index-of` on list"
