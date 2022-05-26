@@ -624,12 +624,12 @@
     :snippets $ []
       quote $ reduce acc 0 +
   {}
-    :name |unless
+    :name |if-not
     :tags $ #{} :macro
     :desc "|if-not syntax"
     :snippets $ []
-      quote $ unless false |false |true
-      quote $ unless false |false
+      quote $ if-not false |false |true
+      quote $ if-not false |false
   {}
     :name |when
     :tags $ #{} :macro
