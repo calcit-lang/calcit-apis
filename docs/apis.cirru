@@ -1674,6 +1674,10 @@
     :desc "|(js only) convert from js data object to calcit data"
     :snippets $ []
       quote $ to-calcit-data $ js/window.performance
+      {}
+        :code $ quote $ to-calcit-data |:a true
+        :result $ quote $ |:a
+        :desc "|passing `true` as second argument to disable auto keyword converting"
   {}
     :name |aget
     :tags $ #{} :js

@@ -57,7 +57,7 @@
                         if
                           some? $ :desc code-snippet
                           <> (:desc code-snippet)
-                            {} (:margin-left 8)
+                            {} (:margin-left 8) (:line-height "\"1.5")
                               :color $ hsl 0 0 60
                         if
                           and (map? code-snippet)

@@ -371,6 +371,10 @@
                                                         :data $ {}
                                                           |T $ {} (:at 1650965722772) (:by |rJG4IHzWf) (:text |:margin-left) (:type :leaf)
                                                           |b $ {} (:at 1650965722772) (:by |rJG4IHzWf) (:text |8) (:type :leaf)
+                                                      |e $ {} (:at 1653642960091) (:by |rJG4IHzWf) (:type :expr)
+                                                        :data $ {}
+                                                          |T $ {} (:at 1653642966424) (:by |rJG4IHzWf) (:text |:line-height) (:type :leaf)
+                                                          |b $ {} (:at 1653642973595) (:by |rJG4IHzWf) (:text "|\"1.5") (:type :leaf)
                                                       |h $ {} (:at 1650965722772) (:by |rJG4IHzWf) (:type :expr)
                                                         :data $ {}
                                                           |T $ {} (:at 1650965722772) (:by |rJG4IHzWf) (:text |:color) (:type :leaf)
