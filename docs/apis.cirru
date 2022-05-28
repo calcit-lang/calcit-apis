@@ -791,9 +791,9 @@
   {}
     :name |macro?
     :tags $ #{}
-    :desc "|detects a macro"
+    :desc "|detects a macro(only inside Rust runtime)"
     :snippets $ []
-      quote $ fn? cond
+      quote $ macro? cond
   {}
     :name |ref?
     :tags $ #{}
