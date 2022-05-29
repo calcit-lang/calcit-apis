@@ -257,7 +257,15 @@
     :snippets $ []
       {}
         :code $ quote $ macroexpand $ quote $ when true 1 2 3
-        :result $ quote $ quote $ if true $ do 1 2 3
+        :result $ quote $ quote $ if true $ &let nil 1 2 3
+  {}
+    :name |macroexpand-1
+    :tags $ #{} :native :macro
+    :desc "|expand quoted code only once(even it's a `Recur`), notice that quote is required"
+    :snippets $ []
+      {}
+        :code $ quote $ macroexpand-1 $ quote $ when true 1 2 3
+        :result $ quote $ quote $ if true $ &let nil 1 2 3
   {}
     :name |macroexpand-all
     :tags $ #{} :native :macro
@@ -265,7 +273,7 @@
     :snippets $ []
       {}
         :code $ quote $ macroexpand-all $ quote $ when true 1 2 3
-        :result $ quote $ quote $ if true $ do 1 2 3
+        :result $ quote $ quote $ if true $ &let nil 1 2 3
       {}
         :code $ quote $ macroexpand-all
           quote
