@@ -452,6 +452,14 @@
         :code $ quote $ &number:format 1.2345 2
         :result $ quote $ do 1.23
   {}
+    :name |&number:display-by
+    :tags $ #{} :native :number
+    :desc "|format an integer to n base format, returns string. the base could be 2/8/16"
+    :snippets $ []
+      {}
+        :code $ quote $ &number:display-by 17 16
+        :result $ quote $ do |0x11
+  {}
     :name |&number:escape
     :tags $ #{} :native :string
     :desc "|string escaping"
