@@ -23,6 +23,12 @@
     :desc "|format a float with specified precision"
     :snippets $ []
   {}
+    :name |.display-by
+    :tags $ #{} :number
+    :desc "|display number with a base, which is 2/8/16"
+    :snippets $ []
+      quote $ .display-by 17 16
+  {}
     :name |.pow
     :tags $ #{} :number
     :desc "|power of a number"
