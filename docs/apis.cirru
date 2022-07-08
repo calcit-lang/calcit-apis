@@ -1886,10 +1886,40 @@
         _ (' "|no match")
   {}
     :name |bit-shr
-    :tags $ #{} :number
-    :desc "|bit op, shr"
+    :tags $ #{} :bitwise
+    :desc "|bitwise operation, shr"
     :snippets $ []
       quote $ bit-shr 2 1
+  {}
+    :name |bit-shl
+    :tags $ #{} :bitwise
+    :desc "|bitwise operation, shl"
+    :snippets $ []
+      quote $ bit-shl 2 1
+  {}
+    :name |bit-and
+    :tags $ #{} :bitwise
+    :desc "|bitwise operation, and"
+    :snippets $ []
+      quote $ bit-and 2 1
+  {}
+    :name |bit-or
+    :tags $ #{} :bitwise
+    :desc "|bitwise operation, or"
+    :snippets $ []
+      quote $ bit-or 2 1
+  {}
+    :name |bit-xor
+    :tags $ #{} :bitwise
+    :desc "|bitwise operation, xor"
+    :snippets $ []
+      quote $ bit-xor 2 1
+  {}
+    :name |bit-nor
+    :tags $ #{} :bitwise
+    :desc "|bitwise operation, not"
+    :snippets $ []
+      quote $ bit-not 2
   {}
     :name |on-control-c
     :tags $ #{} :injection
