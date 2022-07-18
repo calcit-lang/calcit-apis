@@ -343,9 +343,8 @@
                                               |T $ {} (:at 1604978958075) (:by |rJG4IHzWf) (:text |comp-code) (:type :leaf)
                                               |j $ {} (:at 1625762763939) (:by |rJG4IHzWf) (:type :expr)
                                                 :data $ {}
-                                                  |D $ {} (:at 1625762825161) (:by |rJG4IHzWf) (:text |nth) (:type :leaf)
+                                                  |D $ {} (:at 1658160410767) (:by |rJG4IHzWf) (:text |&cirru-quote:to-list) (:type :leaf)
                                                   |T $ {} (:at 1604978964295) (:by |rJG4IHzWf) (:text |code) (:type :leaf)
-                                                  |j $ {} (:at 1625762827619) (:by |rJG4IHzWf) (:text |1) (:type :leaf)
                                               |r $ {} (:at 1604978969602) (:by |rJG4IHzWf) (:text |syntax) (:type :leaf)
                                           |b $ {} (:at 1650965722772) (:by |rJG4IHzWf) (:type :expr)
                                             :data $ {}
@@ -456,12 +455,11 @@
                                                           |D $ {} (:at 1604979074192) (:by |rJG4IHzWf) (:text |comp-code) (:type :leaf)
                                                           |T $ {} (:at 1625762769430) (:by |rJG4IHzWf) (:type :expr)
                                                             :data $ {}
-                                                              |D $ {} (:at 1625762830429) (:by |rJG4IHzWf) (:text |nth) (:type :leaf)
-                                                              |T $ {} (:at 1604979022301) (:by |rJG4IHzWf) (:type :expr)
+                                                              |T $ {} (:at 1658160425929) (:by |rJG4IHzWf) (:text |&cirru-quote:to-list) (:type :leaf)
+                                                              |X $ {} (:at 1658160430911) (:by |rJG4IHzWf) (:type :expr)
                                                                 :data $ {}
-                                                                  |T $ {} (:at 1604979025739) (:by |rJG4IHzWf) (:text |:result) (:type :leaf)
-                                                                  |j $ {} (:at 1610954599998) (:by |rJG4IHzWf) (:text |code-snippet) (:type :leaf)
-                                                              |j $ {} (:at 1625762831862) (:by |rJG4IHzWf) (:text |1) (:type :leaf)
+                                                                  |T $ {} (:at 1658160430911) (:by |rJG4IHzWf) (:text |:result) (:type :leaf)
+                                                                  |b $ {} (:at 1658160430911) (:by |rJG4IHzWf) (:text |code-snippet) (:type :leaf)
                                                           |j $ {} (:at 1604979076076) (:by |rJG4IHzWf) (:text |syntax) (:type :leaf)
           |comp-cirru-ui-switcher $ {} (:at 1603353264317) (:by |rJG4IHzWf) (:type :expr)
             :data $ {}
