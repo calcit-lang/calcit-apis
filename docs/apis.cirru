@@ -520,9 +520,21 @@
         :code $ quote $ keywordize-edn $ {} (|a 1) (|b 2)
         :result $ quote $ {} (:a 1) (:b 2)
   {}
+    :name |cirru-quote
+    :tags $ #{} :native
+    :desc "|a special form at reader phase for creating `CirruQuote` variant"
+    :snippets $ []
+      quote $ cirru-quote $ defn f (a b) (+ a b)
+  {}
     :name |parse-cirru
     :tags $ #{} :native
-    :desc "|parse Cirru syntax with native parser"
+    :desc "|parse Cirru syntax with native parser, returns CirruQuote"
+    :snippets $ []
+      quote $ parse-cirru "|def f (x) y"
+  {}
+    :name |parse-cirru-list
+    :tags $ #{} :native
+    :desc "|parse Cirru syntax with native parser, returns a list"
     :snippets $ []
       quote $ parse-cirru "|def f (x) y"
   {}
@@ -538,6 +550,12 @@
     :desc "|generate Cirru syntax from data, with an extra `use_inline` option from Cirru"
     :snippets $ []
       quote $ format-cirru-edn data true
+  {}
+    :name |&cirru-quote:to-list
+    :tags $ #{} :native
+    :desc "|convert `CirruQuote` into Calcit List"
+    :snippets $ []
+      quote $ &cirru-quote:to-list $ cirru-quote $ a b c
   {}
     :name |sqrt
     :tags $ #{} :native :number

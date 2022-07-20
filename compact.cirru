@@ -53,7 +53,7 @@
                         code $ :code code-snippet
                       div
                         {} $ :style ui/row
-                        comp-code (nth code 1) syntax
+                        comp-code (&cirru-quote:to-list code) syntax
                         if
                           some? $ :desc code-snippet
                           <> (:desc code-snippet)
@@ -70,7 +70,7 @@
                               comp-i :arrow-right-circle 16 $ hsl 200 0 50
                             div ({})
                               comp-code
-                                nth (:result code-snippet) 1
+                                &cirru-quote:to-list $ :result code-snippet
                                 , syntax
         |comp-cirru-ui-switcher $ quote
           defcomp comp-cirru-ui-switcher (state cursor)
