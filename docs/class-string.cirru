@@ -90,13 +90,6 @@
         :code $ quote $ .strip-suffix |abc0 |bc
         :result $ quote $ do |abc0
   {}
-    :name |.substr
-    :tags $ #{} :string
-    :desc "|get sub string by indexes"
-    :snippets $ []
-      quote $ .substr |abcd 1
-      quote $ .substr |abcd 1 3
-  {}
     :name |.trim
     :tags $ #{} :string
     :desc "|trim spaces or characters from string"
