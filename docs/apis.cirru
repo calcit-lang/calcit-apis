@@ -425,11 +425,24 @@
   {}
     :name |range
     :tags $ #{} :native :list
-    :desc "|return a list of ranged numbers"
+    :desc "|return a range numbers"
     :snippets $ []
       quote $ range 10
       quote $ range 1 10
       quote $ range 1 10 2
+  {}
+    :name |range-bothway
+    :tags $ #{} :native :list
+    :desc "|return a range numbers, generate in both ways"
+    :snippets $ []
+      {}
+        :code $ quote $ range 3
+        :result $ quote $ -2 -1 0 2 1
+        :desc "|when 1 argument is passed, by default, `0` is the number in the middle"
+      {}
+        :code $ quote $ range 1 3
+        :result $ quote $ 0 1 2
+        :desc "|when 2 arguments are passed, `1` is the number in the middle, `3 - 1` is that last number"
   {}
     :name |format-ternary-tree
     :tags $ #{} :native :list :map
@@ -1221,9 +1234,15 @@
   {}
     :name |defatom
     :tags $ #{} :syntax :ref
-    :desc "|creating an atom(`ref`) of states. it requires a name, and currently not atomic, just states"
+    :desc "|creating an atom(`ref`) of states. use `atom` if you want a local one. it requires a name, and currently not atomic, just states"
     :snippets $ []
       quote $ defatom *a 1
+  {}
+    :name |atom
+    :tags $ #{} :ref
+    :desc "|creating an atom(`ref`) of states, locally. Use `defatom` is you want a global one"
+    :snippets $ []
+      quote $ atom 1
   {}
     :name |deref
     :tags $ #{} :ref :native
