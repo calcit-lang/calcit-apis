@@ -723,3 +723,9 @@
     :desc "|used in meta programming, extract internal data from symbols, like handling IR"
     :snippets $ []
       quote $ &extract-code-into-edn 'demo
+  {}
+    :name |&cirru-quote:to-list
+    :tags $ #{} :native
+    :desc "|convert `CirruQuote` into Calcit List"
+    :snippets $ []
+      quote $ &cirru-quote:to-list $ cirru-quote $ a b c

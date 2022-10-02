@@ -336,7 +336,8 @@
           feather.core :refer $ comp-i
     |app.config $ {}
       :defs $ {}
-        |dev? $ quote (def dev? true)
+        |dev? $ quote
+          def dev? $ get-env "\"mode" "\"release"
         |site $ quote
           def site $ {} (:dev-ui "\"http://localhost:8100/main-fonts.css") (:release-ui "\"http://cdn.tiye.me/favored-fonts/main-fonts.css") (:cdn-url "\"http://cdn.tiye.me/calcit-workflow/") (:title "\"APIs for calcit-runner") (:icon "\"http://cdn.tiye.me/logo/cirru.png") (:storage-key "\"calcit-runner-apis")
       :ns $ quote (ns app.config)
@@ -390,14 +391,14 @@
           def ssr? $ some? (js/document.querySelector |meta.respo-ssr)
       :ns $ quote
         ns app.main $ :require
-          [] respo.core :refer $ [] render! clear-cache! realize-ssr!
-          [] app.comp.container :refer $ [] comp-container
-          [] app.updater :refer $ [] updater
-          [] app.schema :as schema
-          [] reel.util :refer $ [] listen-devtools!
-          [] reel.core :refer $ [] reel-updater refresh-reel
-          [] reel.schema :as reel-schema
-          [] app.config :as config
+          respo.core :refer $ render! clear-cache! realize-ssr!
+          app.comp.container :refer $ comp-container
+          app.updater :refer $ updater
+          app.schema :as schema
+          reel.util :refer $ listen-devtools!
+          reel.core :refer $ reel-updater refresh-reel
+          reel.schema :as reel-schema
+          app.config :as config
           "\"bottom-tip" :default tip!
           "\"./calcit.build-errors" :default build-errors
     |app.schema $ {}

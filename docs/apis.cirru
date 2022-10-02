@@ -564,12 +564,6 @@
     :snippets $ []
       quote $ format-cirru-edn data true
   {}
-    :name |&cirru-quote:to-list
-    :tags $ #{} :native
-    :desc "|convert `CirruQuote` into Calcit List"
-    :snippets $ []
-      quote $ &cirru-quote:to-list $ cirru-quote $ a b c
-  {}
     :name |sqrt
     :tags $ #{} :native :number
     :desc "|square root of number"
