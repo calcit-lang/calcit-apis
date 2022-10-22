@@ -1916,6 +1916,18 @@
         (:b x y) (' "|pattern b:" x y)
         _ (' "|no match")
   {}
+    :name |tag-match
+    :tags $ #{} :macro
+    :desc "|a macro for pattern matching for tagged hashmaps"
+    :snippets $ []
+      quote $ tag-match data
+        :a new-name-a
+          str-spaced "|found branch of" :a "|with value" $ :sth-of-a new-name-a
+        :b new-name-b
+          str-spaced "|found branch of" :b "|with value" $ :sth-of-b new-name-b
+        _ :other
+
+  {}
     :name |bit-shr
     :tags $ #{} :bitwise
     :desc "|bitwise operation, shr"
