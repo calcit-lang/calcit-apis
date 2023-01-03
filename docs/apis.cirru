@@ -437,7 +437,7 @@
     :snippets $ []
       {}
         :code $ quote $ range 3
-        :result $ quote $ -2 -1 0 2 1
+        :result $ quote $ -2 -1 0 1 2
         :desc "|when 1 argument is passed, by default, `0` is the number in the middle"
       {}
         :code $ quote $ range 1 3
