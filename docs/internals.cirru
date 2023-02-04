@@ -729,3 +729,11 @@
     :desc "|convert `CirruQuote` into Calcit List"
     :snippets $ []
       quote $ &cirru-quote:to-list $ cirru-quote $ a b c
+  {}
+    :name |&str:escape
+    :tags $ #{} :string
+    :desc "|escape string to code"
+    :snippets $ []
+      {}
+        :code $ quote $ &str:escape |a
+        :result $ do "|\"a\""
