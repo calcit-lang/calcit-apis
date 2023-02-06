@@ -321,8 +321,8 @@
         :code $ quote $ pr-str "|demo with space"
         :result $ quote $ do "\"|demo with space\""
       {}
-        :code $ quote $ pr-str 1 2 3 4
-        :result $ quote $ do "|1 2 3 4"
+        :code $ quote $ pr-str $ [] 1 2 3 4
+        :result $ quote $ do "|([] 1 2 3 4)"
   {}
     :name |prepend
     :tags $ #{} :native :list
