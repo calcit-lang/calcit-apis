@@ -188,7 +188,7 @@
     :snippets $ []
       quote $ count $ []
       quote $ count $ {}
-      quote $ count $ |abc
+      quote $ count |abc
   {}
     :name |nth
     :tags $ #{} :native :map :list
