@@ -2018,8 +2018,16 @@
   {}
     :name |noted
     :tags $ #{} :macro
-    :desc "|macro to decorate 1 or more notes to a value"
+    :desc "|macro to decorate a docstring to a value"
     :snippets $ []
       {}
         :code $ quote $ noted "|this is note" 1
         :result $ quote $ do 1
+  {}
+    :name |doc-fn
+    :tags $ #{} :macro
+    :desc "|macro to decorate a docstring in a function, which evaluates to `nil`"
+    :snippets $ []
+      {}
+        :code $ quote $ doc-fn "|this is a comment"
+        :result $ quote $ do nil
