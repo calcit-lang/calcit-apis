@@ -100,6 +100,13 @@
         :desc "|expands to &{}, which creates a map"
         :result $ quote $ quote $ &{} :a 1 :b $ + 2 3
   {}
+    :name |::
+    :tags $ #{} :tuple
+    :desc "|operator for creating tuples, tuple takes 2 or more parameters"
+    :snippets $ []
+      quote $ :: :tag :data
+      quote $ :: :tag 1 2 3 4
+  {}
     :name |if
     :tags $ #{} :syntax
     :desc "|if syntax, any value other than `false` and `nil` are treated as `true`"
