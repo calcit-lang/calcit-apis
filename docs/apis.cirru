@@ -100,6 +100,20 @@
         :desc "|expands to &{}, which creates a map"
         :result $ quote $ quote $ &{} :a 1 :b $ + 2 3
   {}
+    :name |::
+    :tags $ #{} :tuple
+    :desc "|operator for creating tuples, tuple takes 1 or more parameters, first argument used as tag. internally it has a base class with no methods"
+    :snippets $ []
+      quote $ :: :tag
+      quote $ :: :tag 1 2 3 4
+  {}
+    :name |%::
+    :tags $ #{} :tuple
+    :desc "|operator for creating tuples, tuple takes 2 or more parameters, first argument is class, second argument used as tag"
+    :snippets $ []
+      quote $ :: %class :tag
+      quote $ :: %class :tag 1 2 3 4
+  {}
     :name |if
     :tags $ #{} :syntax
     :desc "|if syntax, any value other than `false` and `nil` are treated as `true`"
@@ -1907,20 +1921,20 @@
         assert= |1
           -> a (invoke :inc) (invoke :show)
   {}
-    :name |key-match
+    :name |tag-match
     :tags $ #{} :macro
     :desc "|a dynamic macro for simulating pattern matching"
     :snippets $ []
-      quote $ key-match data
+      quote $ tag-match data
         (:a x) (' "|pattern a:" x)
         (:b x y) (' "|pattern b:" x y)
         _ (' "|no match")
   {}
-    :name |tag-match
+    :name |field-match
     :tags $ #{} :macro
-    :desc "|a macro for pattern matching for tagged hashmaps"
+    :desc "|a macro for pattern matching for tagged hashmaps, by detecting `:tag` field"
     :snippets $ []
-      quote $ tag-match data
+      quote $ field-match data
         :a new-name-a
           str-spaced "|found branch of" :a "|with value" $ :sth-of-a new-name-a
         :b new-name-b

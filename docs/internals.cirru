@@ -199,6 +199,11 @@
     :desc "|create a new tuple with value changed"
     :snippets $ []
   {}
+    :name |&tuple:class
+    :tags $ #{} :tuple
+    :desc "|expose tuple class"
+    :snippets $ []
+  {}
     :name |&str:replace
     :tags $ #{} :string
     :desc "|internal function for replacing string"
