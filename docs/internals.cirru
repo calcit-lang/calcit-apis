@@ -204,6 +204,12 @@
     :desc "|expose tuple class"
     :snippets $ []
   {}
+    :name |&tuple:with-class
+    :tags $ #{} :tuple
+    :desc "|extend tuple with a new class"
+    :snippets $ []
+      quote $ &tuple:with-class t %class
+  {}
     :name |&str:replace
     :tags $ #{} :string
     :desc "|internal function for replacing string"
