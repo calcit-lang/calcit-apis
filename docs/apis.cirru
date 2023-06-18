@@ -2045,3 +2045,12 @@
       {}
         :code $ quote $ doc-fn "|this is a comment"
         :result $ quote $ do nil
+  {}
+    :name |:
+    :tags $ #{} :macro
+    :desc "|macro for creating tuple with fewer colons"
+    :snippets $ []
+      {}
+        :code $ quote $ : some 1
+        :result $ quote $ :: :some 1
+

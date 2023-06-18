@@ -4,7 +4,7 @@
 
 "@calcit/procs@^0.7.2":
   version "0.7.2"
-  resolved "https://registry.npmmirror.com/@calcit/procs/-/procs-0.7.2.tgz#4121b737c1a48682f6c1aaf8b45226bbe7d217ea"
+  resolved "https://registry.yarnpkg.com/@calcit/procs/-/procs-0.7.2.tgz#4121b737c1a48682f6c1aaf8b45226bbe7d217ea"
   integrity sha512-hfTSX4N/pYQW9GNf8aWDp95TByTujk49wJcPGbUivxEa+K2WlJ0jefbhe0N2Xv8wVd6k5AlYljneGDIs61fRnA==
   dependencies:
     "@calcit/ternary-tree" "0.0.19"
