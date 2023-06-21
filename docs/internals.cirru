@@ -54,7 +54,7 @@
     :desc "|turn a single item into string"
     :snippets $ []
       quote $ &str 1
-      quote $ = |keyword $ &str :keyword
+      quote $ = |tag $ &str :tag
   {}
     :name |&case
     :tags $ #{} :macro

@@ -41,7 +41,7 @@
   {}
     :name |.parse-json
     :tags $ #{} :string
-    :desc "|parse JSON string into Cirru data, notice that \":a\" will be parsed as keyword"
+    :desc "|parse JSON string into Cirru data, notice that \":a\" will be parsed as a tag"
     :snippets $ []
   {}
     :name |.replace

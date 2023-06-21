@@ -249,7 +249,7 @@
   {}
     :name |type-of
     :tags $ #{} :native
-    :desc "|gets type of a value, returns in a keyword"
+    :desc "|gets type of a value, returns in a tag"
     :snippets $ []
       quote $ type-of a
   {}
@@ -424,12 +424,12 @@
       quote $ turn-symbol |a
       quote $ turn-symbol :a
   {}
-    :name |turn-keyword
+    :name |turn-tag
     :tags $ #{} :native
-    :desc "|turn something into a keyword"
+    :desc "|turn something into a tag"
     :snippets $ []
-      quote $ turn-keyword |k
-      quote $ turn-keyword 'k
+      quote $ turn-tag |k
+      quote $ turn-tag 'k
   {}
     :name |identical?
     :tags $ #{} :native :list :map
@@ -539,12 +539,12 @@
     :snippets $ []
       quote $ parse-cirru-edn "|{} (:a 1)"
   {}
-    :name |keywordize-edn
+    :name |tagging-edn
     :tags $ #{} :edn
-    :desc "|turn string keys into keyword keys in nested data"
+    :desc "|turn string keys into tags in nested data"
     :snippets $ []
       {}
-        :code $ quote $ keywordize-edn $ {} (|a 1) (|b 2)
+        :code $ quote $ tagging-edn $ {} (|a 1) (|b 2)
         :result $ quote $ {} (:a 1) (:b 2)
   {}
     :name |cirru-quote
@@ -805,11 +805,11 @@
     :snippets $ []
       quote $ string? |demo
   {}
-    :name |keyword?
+    :name |tag?
     :tags $ #{}
-    :desc "|detects a keyword"
+    :desc "|detects a tag"
     :snippets $ []
-      quote $ keyword? :key
+      quote $ tag? :key
   {}
     :name |symbol?
     :tags $ #{}
@@ -1272,13 +1272,13 @@
   {}
     :name |add-watch
     :tags $ #{} :ref :native
-    :desc "|add a watch function to an atom by keyword"
+    :desc "|add a watch function to an atom by tag"
     :snippets $ []
       quote $ add-watch *a :log $ \ echo "|changed" %
   {}
     :name |remove-watch
     :tags $ #{} :ref :native
-    :desc "|remove a watch function from an atom by keyword"
+    :desc "|remove a watch function from an atom by tag"
     :snippets $ []
       quote $ remove-watch *a :log
   {}
@@ -1343,7 +1343,7 @@
   {}
     :name |gensym
     :tags $ #{} :syntax
-    :desc "|takes a string or keyword, generates a namespace-level unique symbol for a variable name"
+    :desc "|takes a string or tag, generates a namespace-level unique symbol for a variable name"
     :snippets $ []
       {}
         :code $ quote $ gensym
@@ -1648,7 +1648,7 @@
   {}
     :name |let{}
     :tags $ #{} :macro
-    :desc "|extracting from map with keywords"
+    :desc "|extracting from map with tags"
     :snippets $ []
       {}
         :code $ quote
@@ -1661,7 +1661,7 @@
                 a $ :a result__1
                 b $ :b result__1
               + a b
-        :desc "|extracting a map, use the names of symbols as keywords"
+        :desc "|extracting a map, use the names of symbols as tags"
   {}
     :name |let[]
     :tags $ #{} :macro
@@ -1730,7 +1730,7 @@
       {}
         :code $ quote $ to-calcit-data |:a true
         :result $ quote $ |:a
-        :desc "|passing `true` as second argument to disable auto keyword converting"
+        :desc "|passing `true` as second argument to disable auto tag converting"
   {}
     :name |aget
     :tags $ #{} :js
@@ -1864,7 +1864,7 @@
   {}
     :name |js-object
     :tags $ #{} :macro :js
-    :desc "|special function for creating a JavaScript object, keys can be strings or keywords"
+    :desc "|special function for creating a JavaScript object, keys can be strings or tags"
     :snippets $ []
       quote $ js-object (:a 1) (:b 2)
   {}
