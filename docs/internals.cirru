@@ -54,7 +54,7 @@
     :desc "|turn a single item into string"
     :snippets $ []
       quote $ &str 1
-      quote $ = |keyword $ &str :keyword
+      quote $ = |tag $ &str :tag
   {}
     :name |&case
     :tags $ #{} :macro
@@ -203,6 +203,12 @@
     :tags $ #{} :tuple
     :desc "|expose tuple class"
     :snippets $ []
+  {}
+    :name |&tuple:with-class
+    :tags $ #{} :tuple
+    :desc "|extend tuple with a new class"
+    :snippets $ []
+      quote $ &tuple:with-class t %class
   {}
     :name |&str:replace
     :tags $ #{} :string
