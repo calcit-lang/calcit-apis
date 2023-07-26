@@ -50,6 +50,7 @@
     :tags $ #{} :list
     :desc "|take a list and a function and call each item with function"
     :snippets $ []
+      quote $ .each ([] 1 2 3) $ fn (x) x
   {}
     :name |.empty
     :tags $ #{} :list
@@ -205,12 +206,6 @@
     :desc "|dissociate a key from a map"
     :snippets $ []
       quote $ .dissoc ([] 1 2 3) 1
-  {}
-    :name |.each
-    :tags $ #{} :list
-    :desc "|iterate values of a list"
-    :snippets $ []
-      quote $ .each ([] 1 2 3) $ fn (x) x
   {}
     :name |.sort-by
     :tags $ #{} :list

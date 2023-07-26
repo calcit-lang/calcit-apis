@@ -6,29 +6,33 @@
   :files $ {}
     |app.comp.container $ {}
       :defs $ {}
+        |add-tags $ quote
+          defn add-tags (t data)
+            map data $ fn (item)
+              -> item
+                update :tags $ fn (ts) (include ts t)
+                assoc :source t
         |apis-data $ quote
-          def apis-data $ {}
-            :apis $ parse-cirru-edn (slurp-cirru-edn "\"docs/apis.cirru")
-            :internals $ parse-cirru-edn (slurp-cirru-edn "\"docs/internals.cirru")
-            :methods $ {}
-              :list $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-list.cirru")
-              :map $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-map.cirru")
-              :set $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-set.cirru")
-              :record $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-record.cirru")
-              :number $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-number.cirru")
-              :string $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-string.cirru")
-              :nil $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-nil.cirru")
-              :fn $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-fn.cirru")
+          def apis-data $ concat
+            parse-cirru-edn $ slurp-cirru-edn "\"docs/apis.cirru"
+            add-tags :internal $ parse-cirru-edn (slurp-cirru-edn "\"docs/internals.cirru")
+            add-tags :list $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-list.cirru")
+            add-tags :map $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-map.cirru")
+            add-tags :set $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-set.cirru")
+            add-tags :record $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-record.cirru")
+            add-tags :number $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-number.cirru")
+            add-tags :string $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-string.cirru")
+            add-tags :nil $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-nil.cirru")
+            add-tags :fn $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-fn.cirru")
         |comp-api-entry $ quote
           defcomp comp-api-entry (info syntax)
             div
-              {} $ :style
-                merge ui/row
-                  {} (:margin "\"4px") (:padding "\"0px 4px")
-                  if (:wip? info)
-                    {}
-                      :color $ hsl 0 0 80
-                      :border-left $ str "\"8px solid " (hsl 0 0 90)
+              {}
+                :style $ if (:wip? info)
+                  {}
+                    :color $ hsl 0 0 80
+                    :border-left $ str "\"8px solid " (hsl 0 0 90)
+                :class-name $ str-spaced css/row css-api-entry
               div
                 {} $ :style ui/flex
                 <> (:name info)
@@ -123,38 +127,19 @@
                 state $ either (:data states)
                   {}
                     :query $ get-query!
-                    :method-target nil
                     :selected-tags $ #{}
                     :syntax :lisp
                     :wip? false
-                target $ :method-target state
-                visible-apis $ cond
-                    = target :internals
-                    -> (:internals apis-data)
-                      filter $ fn (info)
-                        and
-                          if (:wip? state) (:wip? info) true
-                          or
-                            empty? $ :selected-tags state
-                            -> (:selected-tags state)
-                              every? $ fn (x)
-                                includes? (:tags info) x
-                          includes? (:name info) (:query state)
-                  (some? target)
-                    ->
-                      get (:methods apis-data) target
-                      filter $ fn (info)
-                        includes? (:name info) (:query state)
-                  true $ -> (:apis apis-data)
-                    filter $ fn (info)
-                      and
-                        if (:wip? state) (:wip? info) true
-                        or
-                          empty? $ :selected-tags state
-                          -> (:selected-tags state)
-                            every? $ fn (x)
-                              includes? (:tags info) x
-                        includes? (:name info) (:query state)
+                visible-apis $ -> apis-data
+                  filter $ fn (info)
+                    and
+                      if (:wip? state) (:wip? info) true
+                      or
+                        empty? $ :selected-tags state
+                        -> (:selected-tags state)
+                          every? $ fn (x)
+                            includes? (:tags info) x
+                      includes? (:name info) (:query state)
               div
                 {} (:class-name "\"calcit-tile")
                   :style $ merge ui/global ui/fullscreen ui/column
@@ -174,16 +159,11 @@
                       a $ {} (:inner-text "\"Calcit") (:target "\"_blank") (:href "\"http://calcit-lang.org/")
                         :style $ {} (:font-size 20) (:font-family ui/font-fancy) (:text-decoration :none) (:font-weight :bold)
                           :color $ hsl 200 100 60
-                      =< 12 nil
-                      comp-method-targets state cursor
+                      memof-call comp-tags-list state cursor
                     a $ {} (:inner-text "\"Try & Play") (:target "\"_blank") (:href "\"http://repo.calcit-lang.org/calcit-wasm-play/")
-                  if
-                    or
-                      nil? $ :method-target state
-                      = :internals $ :method-target state
-                    memof-call comp-tags-list state cursor
                   div
-                    {} $ :style ui/row-parted
+                    {} $ :style
+                      merge ui/row-parted $ {} (:padding "\"0 8px")
                     div
                       {} $ :style ui/row-middle
                       input $ {}
@@ -209,12 +189,13 @@
                       :background-color $ hsl 0 0 100 0.6
                   =< nil 8
                   list->
-                    {} $ :style ui/expand
+                    {} $ :class-name (str-spaced css/expand css-list)
                     -> visible-apis
                       sort $ fn (a b)
                         &str:compare (:name a) (:name b)
                       map $ fn (info)
-                        [] (:name info)
+                        []
+                          str (:source info) (:name info)
                           memof1-call-by info comp-api-entry info $ :syntax state
                   =< nil 400
                 when dev? $ comp-reel (>> states :reel) reel ({})
@@ -260,6 +241,7 @@
                           :border-radius "\"4px"
                           :cursor :pointer
                           :line-height "\"20px"
+                          :user-select :none
                         if
                           includes? (:selected-tags state) tag
                           {} $ :color (hsl 280 80 50)
@@ -281,6 +263,14 @@
                 :on-click $ fn (e d!)
                   d! cursor $ update state :wip? not
               <> "\"All/WIP"
+        |css-api-entry $ quote
+          defstyle css-api-entry $ {}
+            "\"&" $ {} (:margin "\"4px") (:padding "\"0px 4px")
+            "\"&:hover" $ {}
+              :box-shadow $ str "\"0 1px 1px " (hsl 0 0 0 0.2)
+        |css-list $ quote
+          defstyle css-list $ {}
+            "\"&" $ {} (:padding "\"0 12px")
         |get-query! $ quote
           defn get-query! () $ let
               obj $ new js/URLSearchParams js/location.search
@@ -324,6 +314,7 @@
         ns app.comp.container $ :require
           respo.util.format :refer $ hsl
           respo-ui.core :as ui
+          respo-ui.css :as css
           respo.core :refer $ defcomp defeffect <> >> div button textarea span input pre list-> a
           respo.comp.space :refer $ =<
           reel.comp.reel :refer $ comp-reel
@@ -334,6 +325,7 @@
           memof.alias :refer $ memof-call
           memof.once :refer $ memof1-call-by
           feather.core :refer $ comp-i
+          respo.css :refer $ defstyle
     |app.config $ {}
       :defs $ {}
         |dev? $ quote
@@ -346,13 +338,12 @@
         |*reel $ quote
           defatom *reel $ -> reel-schema/reel (assoc :base schema/store) (assoc :store schema/store)
         |dispatch! $ quote
-          defn dispatch! (op op-data)
-            when
-              and config/dev? $ not= op :states
-              println "\"Dispatch:" op
-            reset! *reel $ reel-updater updater @*reel op op-data
+          defn dispatch! (op)
+            when (and config/dev?) (js/console.log "\"Dispatch:" op)
+            reset! *reel $ reel-updater updater @*reel op
         |main! $ quote
-          defn main! () (load-console-formatter!)
+          defn main! ()
+            if config/dev? $ load-console-formatter!
             println "\"Running mode:" $ if config/dev? "\"dev" "\"release"
             if ssr? $ render-app! realize-ssr!
             render-app! render!
@@ -361,9 +352,10 @@
             ; .addEventListener js/window |beforeunload persist-storage!
             ; repeat! 60 persist-storage!
             ; let
-                raw $ .getItem js/localStorage (:storage-key config/site)
+                raw $ js/localStorage.getItem (:storage-key config/site)
               when (some? raw)
-                dispatch! :hydrate-storage $ extract-cirru-data (js/JSON.parse raw)
+                dispatch! $ :: :hydrate-storage
+                  extract-cirru-data $ js/JSON.parse raw
             println "|App started."
         |mount-target $ quote
           def mount-target $ .querySelector js/document |.app
@@ -379,7 +371,7 @@
               println "|Code updated."
         |render-app! $ quote
           defn render-app! (renderer)
-            renderer mount-target (comp-container @*reel) (\ dispatch! % %2)
+            renderer mount-target (comp-container @*reel) dispatch!
         |repeat! $ quote
           defn repeat! (duration cb)
             js/setTimeout
@@ -411,10 +403,12 @@
     |app.updater $ {}
       :defs $ {}
         |updater $ quote
-          defn updater (store op data op-id op-time)
-            case-default op store
-              :states $ update-states store data
-              :hydrate-storage data
+          defn updater (store op op-id op-time)
+            tag-match op
+                :states cursor s
+                update-states store cursor s
+              (:hydrate-storage data) data
+              _ $ do (eprintln "\"Unknown op:" op) store
       :ns $ quote
         ns app.updater $ :require
           [] respo.cursor :refer $ [] update-states

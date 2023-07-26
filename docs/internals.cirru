@@ -747,4 +747,4 @@
     :snippets $ []
       {}
         :code $ quote $ &str:escape |a
-        :result $ do "|\"a\""
+        :result $ quote $ do "|\"a\""

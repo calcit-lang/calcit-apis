@@ -1164,12 +1164,6 @@
       quote $ update ({} (:a 1)) :a $ \ + % 1
       quote $ update (range 4) 1 $ \ + % 1
   {}
-    :name |update-in
-    :tags $ #{}
-    :desc "|update data deep in a structure"
-    :snippets $ []
-      quote $ update-in data ([] :a 1) (fn (x) (x + 1))
-  {}
     :name |dissoc-in
     :tags $ #{}
     :desc "|dissociate data deep in a structure"
@@ -1309,10 +1303,11 @@
   {}
     :name |update-in
     :tags $ #{} :number
-    :desc "|update a field deep inside"
+    :desc "|update data deep in a structure"
     :snippets $ []
       quote $ update-in data ([] :a :b :c)
       quote $ update-in data ([] :a 1 2)
+      quote $ update-in data ([] :a 1) (fn (x) (x + 1))
   {}
     :name |starts-with?
     :tags $ #{} :string
