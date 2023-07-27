@@ -1551,20 +1551,6 @@
     :snippets $ []
       quote $ wo-log 1
   {}
-    :name |dual-balanced-ternary
-    :tags $ #{} :ternary
-    :desc "|create a dual balanced ternary value from 2 numbers(dropped during refactor)"
-    :snippets $ []
-      quote $ dual-balanced-ternary 1.1 1.1
-  {}
-    :name |dbt->point
-    :tags $ #{} :ternary
-    :desc "|return a list of 2 numbers from a dual balanced ternary value(dropped during refactor)"
-    :snippets $ []
-      {}
-        :code $ quote $ dbt->point &4
-        :result $ quote $ [] 1 -1
-  {}
     :name |quit
     :tags $ #{} :native
     :desc "|call Nim's `quit` function"
@@ -1690,17 +1676,6 @@
             ([] b c) ([] 1 2)
             ({} d e) ({,} :d 1 :e 2)
           [] a b c d e
-  {}
-    :name |dbt-digits
-    :tags $ #{} :dual-balanced-ternary
-    :wip? true
-    :desc "|get list of digits from a dual-balanced-ternary value(dropped after refactor)"
-    :snippets $ []
-      {}
-        :code $ quote
-          dbt-digits &34.56
-        :result $ quote
-          [] (1 &3) (0 &4) (-1 &5) (-2 &6)
   {}
     :name |timeout-call
     :tags $ #{} :native
