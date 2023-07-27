@@ -34,21 +34,15 @@
                     :border-left $ str "\"8px solid " (hsl 0 0 90)
                 :class-name $ str-spaced css/row css-api-entry
               div
-                {} $ :style ui/flex
-                <> (:name info)
-                  {} $ :font-family ui/font-code
+                {} $ :class-name css/flex
+                <> (:name info) css/font-code
                 =< 8 nil
                 div
-                  {}
-                    :style $ {}
-                      :color $ hsl 0 0 70
-                      :padding-left 16
-                      :line-height "\"20px"
-                    :class-name "\"md-span"
+                  {} $ :class-name (str-spaced "\"md-span" css-desc)
                   comp-md $ either (:desc info) "\"TODO"
               div
-                {} $ :style
-                  merge ui/expand $ {} (:margin-left 20) (:flex 2)
+                {} (:class-name css/expand)
+                  :style $ {} (:margin-left 20) (:flex 2)
                 , & $ -> (:snippets info)
                   map $ fn (entry)
                     let
@@ -56,7 +50,7 @@
                           {} $ :code entry
                         code $ :code code-snippet
                       div
-                        {} $ :style ui/row
+                        {} $ :class-name css/row
                         comp-code (&cirru-quote:to-list code) syntax
                         if
                           some? $ :desc code-snippet
@@ -67,10 +61,10 @@
                           and (map? code-snippet)
                             some? $ :result code-snippet
                           div
-                            {} $ :style ui/row
+                            {} $ :class-name css/row
                             div
                               {} $ :style
-                                merge $ {} (:width 40) (:text-align :center)
+                                {} (:width 40) (:text-align :center)
                               comp-i :arrow-right-circle 16 $ hsl 200 0 50
                             div ({})
                               comp-code
@@ -79,11 +73,7 @@
         |comp-cirru-ui-switcher $ quote
           defcomp comp-cirru-ui-switcher (state cursor)
             div
-              {}
-                :style $ merge ui/row-middle
-                  {} (:cursor :pointer) (:font-family ui/font-fancy)
-                    :color $ hsl 200 80 80
-                    :font-weight 300
+              {} (:class-name css-switcher)
                 :on-click $ fn (e d!)
                   d! cursor $ update state :cirru-ui? not
               , & $ ->
@@ -114,10 +104,10 @@
                     {} (:background-color :black) (:padding "\"4px 0")
                   render-expr code
                 :cirru-text $ pre
-                  {} (:style style-code)
+                  {} (:class-name css-code)
                     :innerHTML $ trim
                       format-cirru ([] code) true
-                :lisp $ <> (lisp-style code) style-code
+                :lisp $ <> (lisp-style code) css-code
         |comp-container $ quote
           defcomp comp-container (reel)
             let
@@ -141,34 +131,26 @@
                             includes? (:tags info) x
                       includes? (:name info) (:query state)
               div
-                {} (:class-name "\"calcit-tile")
-                  :style $ merge ui/global ui/fullscreen ui/column
-                    {} $ :background-color (hsl 0 0 100)
+                {}
+                  :class-name $ str-spaced "\"calcit-tile" css/global css/fullscreen css/column
+                  :style $ {}
+                    :background-color $ hsl 0 0 100
                 div
-                  {} $ :style
-                    merge ui/column $ {}
-                      :background-color $ hsl 0 0 100 0.6
-                      :padding "\"0px 8px 12px"
-                      :border-bottom $ str "\"1px solid " (hsl 0 0 90)
-                      :box-shadow $ str "\"0 0 4px " (hsl 0 0 0 0.2)
-                      :z-index 99
+                  {} $ :class-name (str-spaced css/column css-nav)
                   div
-                    {} $ :style ui/row-parted
+                    {} $ :class-name css/row-parted
                     div
-                      {} $ :style ui/row-middle
-                      a $ {} (:inner-text "\"Calcit") (:target "\"_blank") (:href "\"http://calcit-lang.org/")
-                        :style $ {} (:font-size 20) (:font-family ui/font-fancy) (:text-decoration :none) (:font-weight :bold)
-                          :color $ hsl 200 100 60
+                      {} $ :class-name css/row-middle
+                      a $ {} (:inner-text "\"Calcit") (:target "\"_blank") (:href "\"http://calcit-lang.org/") (:class-name css-logo)
                       memof-call comp-tags-list state cursor
                     a $ {} (:inner-text "\"Try & Play") (:target "\"_blank") (:href "\"http://repo.calcit-lang.org/calcit-wasm-play/")
                   div
-                    {} $ :style
-                      merge ui/row-parted $ {} (:padding "\"0 8px")
+                    {} (:class-name css/row-parted)
+                      :style $ {} (:padding "\"0 8px")
                     div
-                      {} $ :style ui/row-middle
+                      {} $ :class-name css/row-middle
                       input $ {}
-                        :style $ merge ui/input
-                          {} $ :font-family ui/font-code
+                        :class-name $ str-spaced css/input css/font-code
                         :value $ :query state
                         :placeholder "\"search"
                         :on-input $ fn (e d!)
@@ -179,13 +161,13 @@
                         {} (:font-family ui/font-fancy)
                           :color $ hsl 0 0 70
                     div
-                      {} $ :style ui/row-middle
+                      {} $ :class-name css/row-middle
                       memof-call comp-cirru-ui-switcher state cursor
                       =< 12 nil
                       memof-call comp-wip-switcher state cursor
                 div
-                  {} $ :style
-                    merge ui/expand $ {}
+                  {} (:class-name css/expand)
+                    :style $ {}
                       :background-color $ hsl 0 0 100 0.6
                   =< nil 8
                   list->
@@ -229,22 +211,15 @@
         |comp-tags-list $ quote
           defcomp comp-tags-list (state cursor)
             div
-              {} $ :style ui/row
+              {} $ :class-name css/row
               <> "\"Data:" $ {} (:font-family ui/font-fancy) (:user-select :none)
               div ({}) & $ -> ([] :list :map :number :string :set :syntax :macro :record :native)
                 map $ fn (tag)
                   div
-                    {}
-                      :style $ merge
-                        {} (:display :inline-block) (:margin "\"4px 4px") (:padding "\"0 4px")
-                          :color $ hsl 280 80 84
-                          :border-radius "\"4px"
-                          :cursor :pointer
-                          :line-height "\"20px"
-                          :user-select :none
-                        if
-                          includes? (:selected-tags state) tag
-                          {} $ :color (hsl 280 80 50)
+                    {} (:class-name css-tag)
+                      :style $ if
+                        includes? (:selected-tags state) tag
+                        {} $ :color (hsl 280 80 50)
                       :on-click $ fn (e d!)
                         d! cursor $ assoc state :selected-tags
                           if
@@ -255,11 +230,7 @@
         |comp-wip-switcher $ quote
           defcomp comp-wip-switcher (state cursor)
             div
-              {}
-                :style $ {} (:font-family ui/font-fancy)
-                  :color $ hsl 200 80 70
-                  :font-weight 300
-                  :cursor :pointer
+              {} (:class-name css-wip-switcher)
                 :on-click $ fn (e d!)
                   d! cursor $ update state :wip? not
               <> "\"All/WIP"
@@ -268,9 +239,56 @@
             "\"&" $ {} (:margin "\"4px") (:padding "\"0px 4px")
             "\"&:hover" $ {}
               :box-shadow $ str "\"0 1px 1px " (hsl 0 0 0 0.2)
+        |css-code $ quote
+          def css-code $ {} (:font-family ui/font-code)
+            :border $ str "\"1px solid " (hsl 0 0 94)
+            :border-radius "\"4px"
+            :display :inline-block
+            :padding "\"2px 8px"
+            :line-height "\"22px"
+            :margin "\"0px 0px"
+            :background-color :white
+        |css-desc $ quote
+          defstyle css-desc $ {}
+            "\"&" $ {}
+              :color $ hsl 0 0 70
+              :padding-left 16
+              :line-height "\"20px"
         |css-list $ quote
           defstyle css-list $ {}
             "\"&" $ {} (:padding "\"0 12px")
+        |css-logo $ quote
+          defstyle css-logo $ {}
+            "\"&" $ {} (:font-size 20) (:font-family ui/font-fancy) (:text-decoration :none) (:font-weight :bold)
+              :color $ hsl 200 100 60
+        |css-nav $ quote
+          defstyle css-nav $ {}
+            "\"&" $ {}
+              :background-color $ hsl 0 0 100 0.6
+              :padding "\"0px 8px 12px"
+              :border-bottom $ str "\"1px solid " (hsl 0 0 90)
+              :box-shadow $ str "\"0 0 4px " (hsl 0 0 0 0.2)
+              :z-index 99
+        |css-switcher $ quote
+          defstyle css-switcher $ {}
+            "\"&" $ merge ui/row-middle
+              {} (:cursor :pointer) (:font-family ui/font-fancy)
+                :color $ hsl 200 80 80
+                :font-weight 300
+        |css-tag $ quote
+          defstyle css-tag $ {}
+            "\"&" $ {} (:display :inline-block) (:margin "\"4px 4px") (:padding "\"0 4px")
+              :color $ hsl 280 80 84
+              :border-radius "\"4px"
+              :cursor :pointer
+              :line-height "\"20px"
+              :user-select :none
+        |css-wip-switcher $ quote
+          defstyle css-wip-switcher $ {}
+            "\"&" $ {} (:font-family ui/font-fancy)
+              :color $ hsl 200 80 70
+              :font-weight 300
+              :cursor :pointer
         |get-query! $ quote
           defn get-query! () $ let
               obj $ new js/URLSearchParams js/location.search
@@ -301,15 +319,6 @@
                   , "\"]"
               true $ raise
                 str "\"Unknown type: " (type-of x) x
-        |style-code $ quote
-          def style-code $ {} (:font-family ui/font-code)
-            :border $ str "\"1px solid " (hsl 0 0 94)
-            :border-radius "\"4px"
-            :display :inline-block
-            :padding "\"2px 8px"
-            :line-height "\"22px"
-            :margin "\"0px 0px"
-            :background-color :white
       :ns $ quote
         ns app.comp.container $ :require
           respo.util.format :refer $ hsl
