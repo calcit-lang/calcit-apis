@@ -142,6 +142,7 @@
                     div
                       {} $ :class-name css/row-middle
                       a $ {} (:inner-text "\"Calcit") (:target "\"_blank") (:href "\"http://calcit-lang.org/") (:class-name css-logo)
+                      =< 16 nil
                       memof-call comp-tags-list state cursor
                     a $ {} (:inner-text "\"Try & Play") (:target "\"_blank") (:href "\"http://repo.calcit-lang.org/calcit-wasm-play/")
                   div
@@ -212,7 +213,8 @@
           defcomp comp-tags-list (state cursor)
             div
               {} $ :class-name css/row
-              <> "\"Data:" $ {} (:font-family ui/font-fancy) (:user-select :none)
+              <> "\"Tags:" $ {} (:font-family ui/font-fancy) (:user-select :none)
+                :color $ hsl 0 0 70
               div ({}) & $ -> ([] :list :map :number :string :set :syntax :macro :record :native)
                 map $ fn (tag)
                   div
