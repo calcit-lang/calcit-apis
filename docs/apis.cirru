@@ -2023,4 +2023,48 @@
       {}
         :code $ quote $ : some 1
         :result $ quote $ :: :some 1
-
+  {}
+    :name |destruct-str
+    :tags $ #{} :string
+    :desc "|destruct string for tag-match usages"
+    :snippets $ []
+      {}
+        :code $ quote $ destruct-str |123
+        :result $ quote $ :: :some |1 |23
+      {}
+        :code $ quote $ destruct-str |
+        :result $ quote $ :: :none
+  {}
+    :name |destruct-list
+    :tags $ #{} :list
+    :desc "|destruct list for tag-match usages"
+    :snippets $ []
+      {}
+        :code $ quote $ destruct-list $ [] 1 2 3
+        :result $ quote $ :: :some 1 $ [] 2 3
+      {}
+        :code $ quote $ destruct-list $ []
+        :result $ quote $ :: :none
+  {}
+    :name |destruct-set
+    :tags $ #{} :set
+    :desc "|destruct set for tag-match usages, order is not guaranteed"
+    :snippets $ []
+      quote $ destruct-set $ #{} 1 2 3
+  {}
+    :name |destruct-map
+    :tags $ #{} :map
+    :desc "|destruct map for tag-match usages, order is not guaranteed"
+    :snippets $ []
+      quote $ destruct-map $ &{} :a 1 :b 2
+  {}
+    :name |optionally
+    :tags $ #{} :nil
+    :desc "|destruct nil for tag-match usages"
+    :snippets $ []
+      {}
+        :code $ quote $ optionally nil
+        :result $ quote $ :: :none
+      {}
+        :code $ quote $ optionally 1
+        :result $ quote $ :: :some 1
