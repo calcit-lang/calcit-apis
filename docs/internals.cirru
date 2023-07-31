@@ -204,6 +204,14 @@
     :desc "|expose tuple class"
     :snippets $ []
   {}
+    :name |&tuple:params
+    :tags $ #{} :tuple
+    :desc "|turn tuple params in a list"
+    :snippets $ []
+      {}
+        :code $ quote $ &tuple:params $ :: :a 1 2 3
+        :result $ quote $ [] 1 2 3
+  {}
     :name |&tuple:with-class
     :tags $ #{} :tuple
     :desc "|extend tuple with a new class"
