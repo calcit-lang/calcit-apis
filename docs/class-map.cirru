@@ -111,18 +111,11 @@
     :desc "|returns a list of pairs from a map"
     :snippets $ []
   {}
-    :name |.first
+    :name |.destruct
     :tags $ #{} :map
-    :desc "|get a pair of key/vale from a map, order is not guaranteed"
+    :desc "|get a pair of first entry and rest map from an original map, order is not guaranteed"
     :snippets $ []
-      quote $ .first ({} (:a 1) (:b 2))
-  {}
-    :name |.rest
-    :tags $ #{} :map
-    :wip? true
-    :desc "|get a new map, without a first pair of entry, order is not guaranteed"
-    :snippets $ []
-      quote $ .rest
+      quote $ .destruct ({} (:a 1) (:b 2))
   {}
     :name |.diff-new
     :tags $ #{} :map

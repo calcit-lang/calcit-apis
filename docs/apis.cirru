@@ -1164,12 +1164,6 @@
       quote $ update ({} (:a 1)) :a $ \ + % 1
       quote $ update (range 4) 1 $ \ + % 1
   {}
-    :name |update-in
-    :tags $ #{}
-    :desc "|update data deep in a structure"
-    :snippets $ []
-      quote $ update-in data ([] :a 1) (fn (x) (x + 1))
-  {}
     :name |dissoc-in
     :tags $ #{}
     :desc "|dissociate data deep in a structure"
@@ -1309,10 +1303,11 @@
   {}
     :name |update-in
     :tags $ #{} :number
-    :desc "|update a field deep inside"
+    :desc "|update data deep in a structure"
     :snippets $ []
       quote $ update-in data ([] :a :b :c)
       quote $ update-in data ([] :a 1 2)
+      quote $ update-in data ([] :a 1) (fn (x) (x + 1))
   {}
     :name |starts-with?
     :tags $ #{} :string
@@ -1556,20 +1551,6 @@
     :snippets $ []
       quote $ wo-log 1
   {}
-    :name |dual-balanced-ternary
-    :tags $ #{} :ternary
-    :desc "|create a dual balanced ternary value from 2 numbers(dropped during refactor)"
-    :snippets $ []
-      quote $ dual-balanced-ternary 1.1 1.1
-  {}
-    :name |dbt->point
-    :tags $ #{} :ternary
-    :desc "|return a list of 2 numbers from a dual balanced ternary value(dropped during refactor)"
-    :snippets $ []
-      {}
-        :code $ quote $ dbt->point &4
-        :result $ quote $ [] 1 -1
-  {}
     :name |quit
     :tags $ #{} :native
     :desc "|call Nim's `quit` function"
@@ -1695,17 +1676,6 @@
             ([] b c) ([] 1 2)
             ({} d e) ({,} :d 1 :e 2)
           [] a b c d e
-  {}
-    :name |dbt-digits
-    :tags $ #{} :dual-balanced-ternary
-    :wip? true
-    :desc "|get list of digits from a dual-balanced-ternary value(dropped after refactor)"
-    :snippets $ []
-      {}
-        :code $ quote
-          dbt-digits &34.56
-        :result $ quote
-          [] (1 &3) (0 &4) (-1 &5) (-2 &6)
   {}
     :name |timeout-call
     :tags $ #{} :native
@@ -2053,4 +2023,48 @@
       {}
         :code $ quote $ : some 1
         :result $ quote $ :: :some 1
-
+  {}
+    :name |destruct-str
+    :tags $ #{} :string
+    :desc "|destruct string for tag-match usages"
+    :snippets $ []
+      {}
+        :code $ quote $ destruct-str |123
+        :result $ quote $ :: :some |1 |23
+      {}
+        :code $ quote $ destruct-str |
+        :result $ quote $ :: :none
+  {}
+    :name |destruct-list
+    :tags $ #{} :list
+    :desc "|destruct list for tag-match usages"
+    :snippets $ []
+      {}
+        :code $ quote $ destruct-list $ [] 1 2 3
+        :result $ quote $ :: :some 1 $ [] 2 3
+      {}
+        :code $ quote $ destruct-list $ []
+        :result $ quote $ :: :none
+  {}
+    :name |destruct-set
+    :tags $ #{} :set
+    :desc "|destruct set for tag-match usages, order is not guaranteed"
+    :snippets $ []
+      quote $ destruct-set $ #{} 1 2 3
+  {}
+    :name |destruct-map
+    :tags $ #{} :map
+    :desc "|destruct map for tag-match usages, order is not guaranteed"
+    :snippets $ []
+      quote $ destruct-map $ &{} :a 1 :b 2
+  {}
+    :name |optionally
+    :tags $ #{} :nil
+    :desc "|destruct nil for tag-match usages"
+    :snippets $ []
+      {}
+        :code $ quote $ optionally nil
+        :result $ quote $ :: :none
+      {}
+        :code $ quote $ optionally 1
+        :result $ quote $ :: :some 1

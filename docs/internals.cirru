@@ -204,6 +204,14 @@
     :desc "|expose tuple class"
     :snippets $ []
   {}
+    :name |&tuple:params
+    :tags $ #{} :tuple
+    :desc "|turn tuple params in a list"
+    :snippets $ []
+      {}
+        :code $ quote $ &tuple:params $ :: :a 1 2 3
+        :result $ quote $ [] 1 2 3
+  {}
     :name |&tuple:with-class
     :tags $ #{} :tuple
     :desc "|extend tuple with a new class"
@@ -355,14 +363,9 @@
     :desc "|detects if a map has given value"
     :snippets $ []
   {}
-    :name |&map:first
+    :name |&map:destruct
     :tags $ #{} :map
-    :desc "|return first entry as a pair from a map, order is not guaranteed"
-    :snippets $ []
-  {}
-    :name |&map:rest
-    :tags $ #{} :map
-    :desc "|return pairs of rest entries of a map, order is not guaranteed"
+    :desc "|return first entry as a pair from a map and a map of rest entries, order is not guaranteed"
     :snippets $ []
   {}
     :name |&map:assoc
@@ -385,14 +388,9 @@
     :desc "|detects if a set has given value"
     :snippets $ []
   {}
-    :name |&set:first
+    :name |&set:destruct
     :tags $ #{} :set
-    :desc "|return a first item from given set, order is not guaranteed"
-    :snippets $ []
-  {}
-    :name |&set:rest
-    :tags $ #{} :set
-    :desc "|return rest part of given set, order is not guaranteed"
+    :desc "|return a first item from given set and rest items of original set, order is not guaranteed"
     :snippets $ []
   {}
     :name |&set:assoc
@@ -747,4 +745,4 @@
     :snippets $ []
       {}
         :code $ quote $ &str:escape |a
-        :result $ do "|\"a\""
+        :result $ quote $ do "|\"a\""
