@@ -1900,6 +1900,16 @@
         (:b x y) (' "|pattern b:" x y)
         _ (' "|no match")
   {}
+    :name |list-match
+    :tags $ #{} :list
+    :desc "|low cost pattern matching for a list"
+    :snippets $ []
+      {}
+        :code $ quote $ list-match ([] 1 2 3)
+          () (:: :empty)
+          (x0 xs) (:: :some x0 xs)
+        :result $ quote $ :: :some 1 $ [] 2 3
+  {}
     :name |field-match
     :tags $ #{} :macro
     :desc "|a macro for pattern matching for tagged hashmaps, by detecting `:tag` field"
