@@ -1175,7 +1175,7 @@
     :tags $ #{} :macro
     :desc "|alias for an anounymous function, use `%` and `%2` for arguments"
     :snippets $ []
-      quote $ map (\ + x 1) (range 10)
+      quote $ map (\ + % 1) (range 10)
       quote $ map-indexed (\ [] % %2) (range 10)
   {}
     :name |\.
