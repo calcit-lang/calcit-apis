@@ -100,8 +100,7 @@
                 {} $ :margin-bottom 8
               case-default syntax (str "\"Unknown code: " syntax)
                 :cirru $ div
-                  {} $ :style
-                    {} (:background-color :black) (:padding "\"4px 0")
+                  {} $ :class-name css-theme-container
                   render-expr code
                 :cirru-text $ pre
                   {} (:class-name css-code)
@@ -118,7 +117,7 @@
                   {}
                     :query $ get-query!
                     :selected-tags $ #{}
-                    :syntax :lisp
+                    :syntax :cirru
                     :wip? false
                 visible-apis $ -> apis-data
                   filter $ fn (info)
@@ -151,9 +150,10 @@
                     div
                       {} $ :class-name css/row-middle
                       input $ {}
-                        :class-name $ str-spaced css/input css/font-code
+                        :class-name $ str-spaced css/input css/font-code!
                         :value $ :query state
                         :placeholder "\"search"
+                        :autofocus true
                         :on-input $ fn (e d!)
                           d! cursor $ assoc state :query (:value e)
                       =< 8 nil
@@ -238,18 +238,20 @@
               <> "\"All/WIP"
         |css-api-entry $ quote
           defstyle css-api-entry $ {}
-            "\"&" $ {} (:margin "\"4px") (:padding "\"0px 4px")
+            "\"&" $ {} (:margin "\"4px") (:padding "\"2px 12px")
             "\"&:hover" $ {}
-              :box-shadow $ str "\"0 1px 1px " (hsl 0 0 0 0.2)
+              ; :box-shadow $ str "\"0 1px 1px " (hsl 0 0 0 0.2)
+              :background-color $ hsl 0 0 96
         |css-code $ quote
-          def css-code $ {} (:font-family ui/font-code)
-            :border $ str "\"1px solid " (hsl 0 0 94)
-            :border-radius "\"4px"
-            :display :inline-block
-            :padding "\"2px 8px"
-            :line-height "\"22px"
-            :margin "\"0px 0px"
-            :background-color :white
+          defstyle css-code $ {}
+            "\"&" $ {} (:font-family ui/font-code)
+              :border $ str "\"1px solid " (hsl 0 0 94)
+              :border-radius "\"4px"
+              :display :inline-block
+              :padding "\"2px 8px"
+              :line-height "\"22px"
+              :margin "\"0px 0px"
+              ; :background-color :white
         |css-desc $ quote
           defstyle css-desc $ {}
             "\"&" $ {}
@@ -258,7 +260,7 @@
               :line-height "\"20px"
         |css-list $ quote
           defstyle css-list $ {}
-            "\"&" $ {} (:padding "\"0 12px")
+            "\"&" $ {} (:padding "\"0 0px")
         |css-logo $ quote
           defstyle css-logo $ {}
             "\"&" $ {} (:font-size 20) (:font-family ui/font-fancy) (:text-decoration :none) (:font-weight :bold)
@@ -285,6 +287,12 @@
               :cursor :pointer
               :line-height "\"20px"
               :user-select :none
+        |css-theme-container $ quote
+          defstyle css-theme-container $ {}
+            "\"&" $ {}
+              :background-color $ hsl 300 70 16
+              :padding "\"4px 0"
+              :border-radius "\"4px"
         |css-wip-switcher $ quote
           defstyle css-wip-switcher $ {}
             "\"&" $ {} (:font-family ui/font-fancy)
