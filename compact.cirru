@@ -35,7 +35,16 @@
                 :class-name $ str-spaced css/row css-api-entry
               div
                 {} $ :class-name css/flex
-                <> (:name info) css/font-code
+                div
+                  {} $ :class-name css/row-middle
+                  <> (:name info) css/font-code
+                  list->
+                    {}
+                      :class-name $ str-spaced css/row-middle style-tags css/font-fancy!
+                      :style $ {} (:margin-top 2)
+                    -> info :tags .to-list $ map
+                      fn (t)
+                        [] t $ <> (turn-string t) style-tag
                 =< 8 nil
                 div
                   {} $ :class-name (str-spaced "\"md-span" css-desc)
@@ -329,6 +338,23 @@
                   , "\"]"
               true $ raise
                 str "\"Unknown type: " (type-of x) x
+        |style-tag $ quote
+          defstyle style-tag $ {}
+            "\"&" $ {}
+              :color $ hsl 0 0 76
+              :line-height "\"1.2"
+              :padding "\"0 6px"
+              :border-radius "\"6px"
+              :cursor :default
+              :border $ str-spaced "\"1px solid" (hsl 0 0 90)
+              :font-size 12
+            "\"&:hover" $ {}
+              :border $ str-spaced "\"1px solid" (hsl 0 0 80)
+              :background-color $ hsl 0 0 100
+            "\"&:first-letter" $ {} (:text-transform :uppercase)
+        |style-tags $ quote
+          defstyle style-tags $ {}
+            "\"&" $ {} (:padding "\"0 16px") (:gap 6)
       :ns $ quote
         ns app.comp.container $ :require
           respo.util.format :refer $ hsl
