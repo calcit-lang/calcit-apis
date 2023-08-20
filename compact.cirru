@@ -19,7 +19,6 @@
             add-tags :list $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-list.cirru")
             add-tags :map $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-map.cirru")
             add-tags :set $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-set.cirru")
-            add-tags :record $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-record.cirru")
             add-tags :number $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-number.cirru")
             add-tags :string $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-string.cirru")
             add-tags :nil $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-nil.cirru")
@@ -224,7 +223,7 @@
               {} $ :class-name css/row
               <> "\"Tags:" $ {} (:font-family ui/font-fancy) (:user-select :none)
                 :color $ hsl 0 0 70
-              div ({}) & $ -> ([] :list :map :number :string :set :syntax :macro :record :native)
+              div ({}) & $ -> ([] :list :map :number :string :set :syntax :macro :native)
                 map $ fn (tag)
                   div
                     {} (:class-name css-tag)

@@ -538,6 +538,10 @@
     :desc "|parse data from Cirru EDN format"
     :snippets $ []
       quote $ parse-cirru-edn "|{} (:a 1)"
+      {}
+        :code $ quote $ parse-cirru-edn "|%{} :Person (:a 1)" $ {}
+          :Person Person
+        :desc "|pass options with a dictionary for how to hydrate records"
   {}
     :name |tagging-edn
     :tags $ #{} :edn
@@ -1766,6 +1770,12 @@
     :snippets $ []
       quote $ new-record :Person :name :age
   {}
+    :name |new-class-record
+    :tags $ #{} :record
+    :desc "|create a prototype of record with a class, first argument requires symbol value, with values in `nil`"
+    :snippets $ []
+      quote $ new-class-record Class :Person :name :age
+  {}
     :name |defrecord
     :tags $ #{} :record :macro
     :desc "|macro that wraps on new-record, first argument uses a bare symbol"
@@ -1920,7 +1930,17 @@
         :b new-name-b
           str-spaced "|found branch of" :b "|with value" $ :sth-of-b new-name-b
         _ :other
-
+  {}
+    :name |record-match
+    :tags $ #{} :macro :record
+    :desc "|a match function for records"
+    :snippets $ []
+      quote $ record-match r
+        R1 new-name-a
+          str-spaced "|found branch of" :a "|with value" $ :sth-of-a new-name-a
+        R2 new-name-b
+          str-spaced "|found branch of" :b "|with value" $ :sth-of-b new-name-b
+        _ other-name :other
   {}
     :name |bit-shr
     :tags $ #{} :bitwise

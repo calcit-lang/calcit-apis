@@ -107,17 +107,6 @@
                             :data $ {}
                               |T $ {} (:at 1690396710486) (:by |rJG4IHzWf) (:text |slurp-cirru-edn) (:type :leaf)
                               |b $ {} (:at 1690396710486) (:by |rJG4IHzWf) (:text "|\"docs/class-set.cirru") (:type :leaf)
-                  |Sj $ {} (:at 1690396720852) (:by |rJG4IHzWf) (:type :expr)
-                    :data $ {}
-                      |T $ {} (:at 1690396720852) (:by |rJG4IHzWf) (:text |add-tags) (:type :leaf)
-                      |b $ {} (:at 1690396720852) (:by |rJG4IHzWf) (:text |:record) (:type :leaf)
-                      |h $ {} (:at 1690396720852) (:by |rJG4IHzWf) (:type :expr)
-                        :data $ {}
-                          |T $ {} (:at 1690396720852) (:by |rJG4IHzWf) (:text |parse-cirru-edn) (:type :leaf)
-                          |b $ {} (:at 1690396720852) (:by |rJG4IHzWf) (:type :expr)
-                            :data $ {}
-                              |T $ {} (:at 1690396720852) (:by |rJG4IHzWf) (:text |slurp-cirru-edn) (:type :leaf)
-                              |b $ {} (:at 1690396720852) (:by |rJG4IHzWf) (:text "|\"docs/class-record.cirru") (:type :leaf)
                   |Sr $ {} (:at 1690396724393) (:by |rJG4IHzWf) (:type :expr)
                     :data $ {}
                       |T $ {} (:at 1690396724393) (:by |rJG4IHzWf) (:text |add-tags) (:type :leaf)
@@ -1580,7 +1569,6 @@
                               |x $ {} (:at 1603353223462) (:by |rJG4IHzWf) (:text |:set) (:type :leaf)
                               |y $ {} (:at 1603353223462) (:by |rJG4IHzWf) (:text |:syntax) (:type :leaf)
                               |yT $ {} (:at 1603353223462) (:by |rJG4IHzWf) (:text |:macro) (:type :leaf)
-                              |yb $ {} (:at 1615024849659) (:by |rJG4IHzWf) (:text |:record) (:type :leaf)
                               |yj $ {} (:at 1603353223462) (:by |rJG4IHzWf) (:text |:native) (:type :leaf)
                           |r $ {} (:at 1603353193859) (:by |rJG4IHzWf) (:type :expr)
                             :data $ {}

@@ -445,6 +445,18 @@
     :snippets $ []
       quote $ &record:matches? x y
   {}
+    :name |&record:class
+    :tags $ #{} :record
+    :desc "|get class of a record, could be `nil` in special cases"
+    :snippets $ []
+      quote $ &record:class r
+  {}
+    :name |&record:with-class
+    :tags $ #{} :record
+    :desc "|extend a record with a new class"
+    :snippets $ []
+      quote $ &record:with-class r class
+  {}
     :name |&display-stack
     :tags $ #{} :debug
     :desc "|display call stack information at current position"
