@@ -321,21 +321,15 @@
     :snippets $ []
       quote $ echo 1 2 3
   {}
-    :name |print-values
-    :tags $ #{} :debug
-    :desc "|displays formatted values with newline at end"
-    :snippets $ []
-      quote $ print-values 1 2 3
-  {}
-    :name |pr-str
+    :name |to-lispy-string
     :tags $ #{} :string
     :desc "|return string value with more details, string being escaped"
     :snippets $ []
       {}
-        :code $ quote $ pr-str "|demo with space"
+        :code $ quote $ to-lispy-string "|demo with space"
         :result $ quote $ do "\"|demo with space\""
       {}
-        :code $ quote $ pr-str $ [] 1 2 3 4
+        :code $ quote $ to-lispy-string $ [] 1 2 3 4
         :result $ quote $ do "|([] 1 2 3 4)"
   {}
     :name |prepend
@@ -1885,21 +1879,6 @@
       {}
         :code $ quote $ unselect-keys ({} (:a 1) (:b 2) (:c 3)) ([] :c :d)
         :result $ quote $ {} (:a 1) (:b 2)
-  {}
-    :name |invoke
-    :tags $ #{} :fn
-    :desc "|a dynamic function for simulating ad-hoc polyporphism"
-    :snippets $ []
-      quote $ let
-          %Num $ defrecord %Num :inc :show
-          Num $ %{} %Num
-            :inc $ fn (x) $ [] Num (&+ x 1)
-            :show &str
-        assert=
-          [] Num 2
-          -> a (invoke :inc) (invoke :inc)
-        assert= |1
-          -> a (invoke :inc) (invoke :show)
   {}
     :name |tag-match
     :tags $ #{} :macro
