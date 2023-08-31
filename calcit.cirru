@@ -4,7 +4,7 @@
     :modules $ [] |lilac/compact.cirru |memof/compact.cirru |respo.calcit/compact.cirru |respo-ui.calcit/compact.cirru |respo-markdown.calcit/compact.cirru |calcit-theme.calcit/compact.cirru |reel.calcit/compact.cirru |respo-feather.calcit/
   :entries $ {}
   :files $ {}
-    |app.comp.container $ {}
+    |app.comp.container $ %{} :FileEntry
       :defs $ {}
         |add-tags $ %{} :CodeEntry (:doc |)
           :code $ %{} :Expr (:at 1690396592220) (:by |rJG4IHzWf)
@@ -2537,7 +2537,7 @@
                     |h $ %{} :Expr (:at 1690397615084) (:by |rJG4IHzWf)
                       :data $ {}
                         |T $ %{} :Leaf (:at 1690397616800) (:by |rJG4IHzWf) (:text |defstyle)
-    |app.config $ {}
+    |app.config $ %{} :FileEntry
       :defs $ {}
         |dev? $ %{} :CodeEntry (:doc |)
           :code $ %{} :Expr (:at 1544873875614) (:by |rJG4IHzWf)
@@ -2586,7 +2586,7 @@
           :data $ {}
             |T $ %{} :Leaf (:at 1527788237503) (:by |root) (:text |ns)
             |j $ %{} :Leaf (:at 1527788237503) (:by |root) (:text |app.config)
-    |app.main $ {}
+    |app.main $ %{} :FileEntry
       :defs $ {}
         |*reel $ %{} :CodeEntry (:doc |)
           :code $ %{} :Expr (:at 1499755354983) (:by nil)
@@ -2994,7 +2994,7 @@
                     |T $ %{} :Leaf (:at 1626769418150) (:by |rJG4IHzWf) (:text "|\"./calcit.build-errors")
                     |j $ %{} :Leaf (:at 1626769421231) (:by |rJG4IHzWf) (:text |:default)
                     |r $ %{} :Leaf (:at 1626769421925) (:by |rJG4IHzWf) (:text |build-errors)
-    |app.schema $ {}
+    |app.schema $ %{} :FileEntry
       :defs $ {}
         |store $ %{} :CodeEntry (:doc |)
           :code $ %{} :Expr (:at 1499755354983) (:by nil)
@@ -3021,7 +3021,7 @@
           :data $ {}
             |T $ %{} :Leaf (:at 1499755354983) (:by |root) (:text |ns)
             |j $ %{} :Leaf (:at 1499755354983) (:by |root) (:text |app.schema)
-    |app.updater $ {}
+    |app.updater $ %{} :FileEntry
       :defs $ {}
         |updater $ %{} :CodeEntry (:doc |)
           :code $ %{} :Expr (:at 1499755354983) (:by nil)

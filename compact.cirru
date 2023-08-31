@@ -4,7 +4,7 @@
     :modules $ [] |lilac/compact.cirru |memof/compact.cirru |respo.calcit/compact.cirru |respo-ui.calcit/compact.cirru |respo-markdown.calcit/compact.cirru |calcit-theme.calcit/compact.cirru |reel.calcit/compact.cirru |respo-feather.calcit/
   :entries $ {}
   :files $ {}
-    |app.comp.container $ {}
+    |app.comp.container $ %{} :FileEntry
       :defs $ {}
         |add-tags $ %{} :CodeEntry (:doc |)
           :code $ quote
@@ -396,7 +396,7 @@
             memof.once :refer $ memof1-call-by
             feather.core :refer $ comp-i
             respo.css :refer $ defstyle
-    |app.config $ {}
+    |app.config $ %{} :FileEntry
       :defs $ {}
         |dev? $ %{} :CodeEntry (:doc |)
           :code $ quote
@@ -406,7 +406,7 @@
             def site $ {} (:dev-ui "\"http://localhost:8100/main-fonts.css") (:release-ui "\"http://cdn.tiye.me/favored-fonts/main-fonts.css") (:cdn-url "\"http://cdn.tiye.me/calcit-workflow/") (:title "\"APIs for calcit-runner") (:icon "\"http://cdn.tiye.me/logo/cirru.png") (:storage-key "\"calcit-runner-apis")
       :ns $ %{} :CodeEntry (:doc |)
         :code $ quote (ns app.config)
-    |app.main $ {}
+    |app.main $ %{} :FileEntry
       :defs $ {}
         |*reel $ %{} :CodeEntry (:doc |)
           :code $ quote
@@ -477,7 +477,7 @@
             app.config :as config
             "\"bottom-tip" :default tip!
             "\"./calcit.build-errors" :default build-errors
-    |app.schema $ {}
+    |app.schema $ %{} :FileEntry
       :defs $ {}
         |store $ %{} :CodeEntry (:doc |)
           :code $ quote
@@ -486,7 +486,7 @@
                 :cursor $ []
       :ns $ %{} :CodeEntry (:doc |)
         :code $ quote (ns app.schema)
-    |app.updater $ {}
+    |app.updater $ %{} :FileEntry
       :defs $ {}
         |updater $ %{} :CodeEntry (:doc |)
           :code $ quote
