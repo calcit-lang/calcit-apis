@@ -755,6 +755,14 @@
     :snippets $ []
       quote $ not= 1 2
   {}
+    :name |non-nil!
+    :tags $ #{}
+    :desc "|guards value that is not nil. throws error if nil value passed in."
+    :snippets $ []
+      {}
+        :code $ quote $ non-nil! 1
+        :result $ quote $ do 1
+  {}
     :name |>=
     :tags $ #{} :number
     :desc "|compare multiple numbers"
