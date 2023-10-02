@@ -1254,7 +1254,7 @@
   {}
     :name |deref
     :tags $ #{} :ref :native
-    :desc "|grab data from atom"
+    :desc "|extract data from atom, or polymorphic data that implements `.deref`"
     :snippets $ []
       quote $ deref *a
   {}
