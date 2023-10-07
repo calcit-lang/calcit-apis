@@ -758,3 +758,9 @@
       {}
         :code $ quote $ &str:escape |a
         :result $ quote $ do "|\"a\""
+  {}
+    :name |&atom:deref
+    :tags $ #{} :ref
+    :desc "|dereference on an atom"
+    :snippets $ []
+      quote $ deref *a
