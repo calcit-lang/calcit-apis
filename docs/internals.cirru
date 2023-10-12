@@ -185,7 +185,7 @@
   {}
     :name |&compare
     :tags $ #{} :native
-    :desc "compare data in any kinds with native code, returns `-1` `0` `1`"
+    :desc "|compare data in any kinds with native code, returns `-1` `0` `1`"
     :snippets $ []
       quote $ &compare :a 1
   {}
@@ -757,6 +757,14 @@
             {} (:val "|::") (:at-def |main!) (:ns "|app.main") (:kind :symbol)
               :resolved $ {} (|kind nil)
             , :a 1
+  {}
+    :name |&data-to-code
+    :tags $ #{} :native
+    :desc "|turn data back into code, targeting case generating js from Cirru data, which is used inside a macro"
+    :snippets $ []
+      quote $ &data-to-code $ [] 1 2
+      quote $ &data-to-code $ :: :t |v
+      quote $ &data-to-code $ {} (:a 1)
   {}
     :name |&cirru-quote:to-list
     :tags $ #{} :native

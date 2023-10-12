@@ -6,25 +6,6 @@
   :files $ {}
     |app.comp.container $ %{} :FileEntry
       :defs $ {}
-        |add-tags $ %{} :CodeEntry (:doc |)
-          :code $ quote
-            defn add-tags (t data)
-              map data $ fn (item)
-                -> item
-                  update :tags $ fn (ts) (include ts t)
-                  assoc :source t
-        |apis-data $ %{} :CodeEntry (:doc |)
-          :code $ quote
-            def apis-data $ concat
-              parse-cirru-edn $ slurp-cirru-edn "\"docs/apis.cirru"
-              add-tags :internal $ parse-cirru-edn (slurp-cirru-edn "\"docs/internals.cirru")
-              add-tags :list $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-list.cirru")
-              add-tags :map $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-map.cirru")
-              add-tags :set $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-set.cirru")
-              add-tags :number $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-number.cirru")
-              add-tags :string $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-string.cirru")
-              add-tags :nil $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-nil.cirru")
-              add-tags :fn $ parse-cirru-edn (slurp-cirru-edn "\"docs/class-fn.cirru")
         |comp-api-entry $ %{} :CodeEntry (:doc |)
           :code $ quote
             defcomp comp-api-entry (info syntax)
@@ -345,9 +326,6 @@
                     -> xs (map lisp-style) (join-str "\" ")
                     , "\")"
                 true $ str "\"TODO: " (str xs)
-        |slurp-cirru-edn $ %{} :CodeEntry (:doc |)
-          :code $ quote
-            defmacro slurp-cirru-edn (file) (read-file file)
         |stringify-cirru $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn stringify-cirru (x)
@@ -396,6 +374,7 @@
             memof.once :refer $ memof1-call-by
             feather.core :refer $ comp-i
             respo.css :refer $ defstyle
+            app.schema :refer $ apis-data
     |app.config $ %{} :FileEntry
       :defs $ {}
         |dev? $ %{} :CodeEntry (:doc |)
@@ -479,6 +458,28 @@
             "\"./calcit.build-errors" :default build-errors
     |app.schema $ %{} :FileEntry
       :defs $ {}
+        |add-tags $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            defn add-tags (t data)
+              map data $ fn (item)
+                -> item
+                  update :tags $ fn (ts) (include ts t)
+                  assoc :source t
+        |apis-data $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            def apis-data $ concat (slurp-cirru-code "\"docs/apis.cirru")
+              add-tags :internal $ slurp-cirru-code "\"docs/internals.cirru"
+              add-tags :list $ slurp-cirru-code "\"docs/class-list.cirru"
+              add-tags :map $ slurp-cirru-code "\"docs/class-map.cirru"
+              add-tags :set $ slurp-cirru-code "\"docs/class-set.cirru"
+              add-tags :number $ slurp-cirru-code "\"docs/class-number.cirru"
+              add-tags :string $ slurp-cirru-code "\"docs/class-string.cirru"
+              add-tags :nil $ slurp-cirru-code "\"docs/class-nil.cirru"
+              add-tags :fn $ slurp-cirru-code "\"docs/class-fn.cirru"
+        |slurp-cirru-code $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            defmacro slurp-cirru-code (file)
+              &data-to-code $ parse-cirru-edn (read-file file)
         |store $ %{} :CodeEntry (:doc |)
           :code $ quote
             def store $ {}
