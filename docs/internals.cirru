@@ -185,7 +185,7 @@
   {}
     :name |&compare
     :tags $ #{} :native
-    :desc "compare data in any kinds with native code, returns `-1` `0` `1`"
+    :desc "|compare data in any kinds with native code, returns `-1` `0` `1`"
     :snippets $ []
       quote $ &compare :a 1
   {}
@@ -741,9 +741,30 @@
   {}
     :name |&extract-code-into-edn
     :tags $ #{} :native
-    :desc "|used in meta programming, extract internal data from symbols, like handling IR"
+    :desc "|used in meta programming, extract internal information from symbols, like handling IR"
     :snippets $ []
-      quote $ &extract-code-into-edn 'demo
+      {}
+        :code $ quote $ &extract-code-into-edn 'a
+        :result $ quote $ {} (:val |a) (:at-def |main!) (:ns "|app.main") (:kind :symbol)
+          :resolved $ {} (|kind nil)
+      {}
+        :code $ quote $ &extract-code-into-edn 1
+        :result $ quote $ do 1
+      {}
+        :code $ quote $ &extract-code-into-edn $ quote $ :: :a 1
+        :result $ quote
+          []
+            {} (:val "|::") (:at-def |main!) (:ns "|app.main") (:kind :symbol)
+              :resolved $ {} (|kind nil)
+            , :a 1
+  {}
+    :name |&data-to-code
+    :tags $ #{} :native
+    :desc "|turn data back into code, targeting case generating js from Cirru data, which is used inside a macro"
+    :snippets $ []
+      quote $ &data-to-code $ [] 1 2
+      quote $ &data-to-code $ :: :t |v
+      quote $ &data-to-code $ {} (:a 1)
   {}
     :name |&cirru-quote:to-list
     :tags $ #{} :native
