@@ -767,10 +767,22 @@
       quote $ &data-to-code $ {} (:a 1)
   {}
     :name |&cirru-quote:to-list
-    :tags $ #{} :native
+    :tags $ #{} :native :cirru
     :desc "|convert `CirruQuote` into Calcit List"
     :snippets $ []
       quote $ &cirru-quote:to-list $ cirru-quote $ a b c
+  {}
+    :name |&cirru-type
+    :tags $ #{} :native :cirru
+    :desc "|detects list of leaf of a Cirru tree node, returns `:list` or `:leaf`"
+    :snippets $ []
+      quote $ &cirru-type $ parse-cirru "|+ 1 2"
+  {}
+    :name |&cirru-nth
+    :tags $ #{} :native :cirru
+    :desc "|returns nth item of a Cirru list. throws on string"
+    :snippets $ []
+      quote $ &cirru-nth (parse-cirru "|+ 1 2") 0
   {}
     :name |&str:escape
     :tags $ #{} :string
