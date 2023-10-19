@@ -614,6 +614,12 @@
     :snippets $ []
       quote $ pow 2 2
   {}
+    :name |abs
+    :tags $ #{} :native :number
+    :desc "|absolute value of a number"
+    :snippets $ []
+      quote $ abs -1
+  {}
     :name |#{}
     :tags $ #{} :native :set
     :desc "|hashset. it' based on Nim's hashset, might be slower"
