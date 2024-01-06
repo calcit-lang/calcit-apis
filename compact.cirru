@@ -96,11 +96,9 @@
                   :cirru $ div
                     {} $ :class-name css-theme-container
                     render-expr code
-                  :cirru-text $ pre
-                    {} (:class-name css-code)
-                      :innerHTML $ trim
-                        format-cirru ([] code) true
-                  :lisp $ <> (lisp-style code) css-code
+                  :cirru-text $ comp-cirru-snippet
+                    trim $ format-cirru ([] code) true
+                  :lisp $ comp-cirru-snippet (lisp-style code)
         |comp-container $ %{} :CodeEntry (:doc |)
           :code $ quote
             defcomp comp-container (reel)
@@ -126,7 +124,7 @@
                         includes? (:name info) (:query state)
                 div
                   {}
-                    :class-name $ str-spaced "\"calcit-tile" css/global css/fullscreen css/column
+                    :class-name $ str-spaced "\"calcit-tile" css/preset css/global css/fullscreen css/column
                     :style $ {}
                       :background-color $ hsl 0 0 100
                   div
@@ -137,30 +135,31 @@
                         {} $ :class-name css/row-middle
                         a $ {} (:inner-text "\"Calcit") (:target "\"_blank") (:href "\"http://calcit-lang.org/") (:class-name css-logo)
                         =< 16 nil
-                        memof-call comp-tags-list state cursor
-                      a $ {} (:inner-text "\"Try & Play") (:target "\"_blank") (:href "\"http://repo.calcit-lang.org/calcit-wasm-play/")
-                    div
-                      {} (:class-name css/row-parted)
-                        :style $ {} (:padding "\"0 8px")
-                      div
-                        {} $ :class-name css/row-middle
-                        input $ {}
-                          :class-name $ str-spaced css/input css/font-code!
-                          :value $ :query state
-                          :placeholder "\"search"
-                          :autofocus true
-                          :on-input $ fn (e d!)
-                            d! cursor $ assoc state :query (:value e)
+                        div
+                          {} $ :class-name css/row-middle
+                          input $ {}
+                            :class-name $ str-spaced css/input css/font-code!
+                            :value $ :query state
+                            :placeholder "\"search"
+                            :autofocus true
+                            :on-input $ fn (e d!)
+                              d! cursor $ assoc state :query (:value e)
+                          =< 8 nil
+                          <>
+                            str "\"has " (count visible-apis) "\" entries."
+                            {} (:font-family ui/font-fancy)
+                              :color $ hsl 0 0 70
                         =< 8 nil
-                        <>
-                          str "\"has " (count visible-apis) "\" entries."
-                          {} (:font-family ui/font-fancy)
-                            :color $ hsl 0 0 70
+                        div
+                          {} $ :class-name css/row-middle
+                          memof1-call comp-cirru-ui-switcher state cursor
+                          =< 12 nil
+                          memof1-call comp-wip-switcher state cursor
                       div
                         {} $ :class-name css/row-middle
-                        memof-call comp-cirru-ui-switcher state cursor
-                        =< 12 nil
-                        memof-call comp-wip-switcher state cursor
+                        memof1-call comp-tags-list state cursor
+                        =< 16 nil
+                        a $ {} (:inner-text "\"Try & Play") (:target "\"_blank") (:href "\"http://repo.calcit-lang.org/calcit-wasm-play/")
                   div
                     {} (:class-name css/expand)
                       :style $ {}
@@ -211,7 +210,7 @@
               div
                 {} $ :class-name css/row
                 <> "\"Tags:" $ {} (:font-family ui/font-fancy) (:user-select :none)
-                  :color $ hsl 0 0 70
+                  :color $ hsl 0 0 85
                 div ({}) & $ -> ([] :list :map :number :string :set :syntax :macro :native)
                   map $ fn (tag)
                     div
@@ -241,17 +240,6 @@
               "\"&:hover" $ {}
                 ; :box-shadow $ str "\"0 1px 1px " (hsl 0 0 0 0.2)
                 :background-color $ hsl 0 0 96
-        |css-code $ %{} :CodeEntry (:doc |)
-          :code $ quote
-            defstyle css-code $ {}
-              "\"&" $ {} (:font-family ui/font-code)
-                :border $ str "\"1px solid " (hsl 0 0 94)
-                :border-radius "\"4px"
-                :display :inline-block
-                :padding "\"2px 8px"
-                :line-height "\"22px"
-                :margin "\"0px 0px"
-                ; :background-color :white
         |css-desc $ %{} :CodeEntry (:doc |)
           :code $ quote
             defstyle css-desc $ {}
@@ -273,7 +261,7 @@
             defstyle css-nav $ {}
               "\"&" $ {}
                 :background-color $ hsl 0 0 100 0.6
-                :padding "\"0px 8px 12px"
+                :padding "\"0px 8px 0px"
                 :border-bottom $ str "\"1px solid " (hsl 0 0 90)
                 :box-shadow $ str "\"0 0 4px " (hsl 0 0 0 0.2)
                 :z-index 99
@@ -363,6 +351,7 @@
             respo.util.format :refer $ hsl
             respo-ui.core :as ui
             respo-ui.css :as css
+            respo-ui.comp :refer $ comp-cirru-snippet comp-snippet
             respo.core :refer $ defcomp defeffect <> >> div button textarea span input pre list-> a
             respo.comp.space :refer $ =<
             reel.comp.reel :refer $ comp-reel
@@ -370,8 +359,7 @@
             app.config :refer $ dev?
             respo-md.comp.md :refer $ comp-md
             calcit-theme.comp.expr :refer $ render-expr
-            memof.alias :refer $ memof-call
-            memof.once :refer $ memof1-call-by
+            memof.once :refer $ memof1-call memof1-call-by
             feather.core :refer $ comp-i
             respo.css :refer $ defstyle
             app.schema :refer $ apis-data
