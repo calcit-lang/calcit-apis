@@ -797,3 +797,15 @@
     :desc "|dereference on an atom"
     :snippets $ []
       quote $ deref *a
+  {}
+    :name |&call-spread
+    :tags $ #{} :syntax
+    :desc "|call with arguments after `&` spreaded, by default Calcit insert `&call-spread` during preprocessing when `&` is found. it also can be used manually"
+    :snippets $ []
+      quote $ &call-spread f & xs
+  {}
+    :name |&raw-code
+    :tags $ #{} :js
+    :desc "|takes a string, inserts raw js code. it's more flexible than `js/` syntax"
+    :snippets $ []
+      quote $ &raw-code "|/^\\d+$/"

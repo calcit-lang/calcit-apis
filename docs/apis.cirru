@@ -817,6 +817,12 @@
     :snippets $ []
       quote $ string? |demo
   {}
+    :name |is-spreading-mark?
+    :tags $ #{}
+    :desc "|detects `&` mark which now a syntax element"
+    :snippets $ []
+      quote $ is-spreading-mark? x
+  {}
     :name |tag?
     :tags $ #{}
     :desc "|detects a tag"
