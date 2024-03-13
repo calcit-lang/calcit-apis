@@ -1870,6 +1870,30 @@
         hint-fn async
         js-await async-f
   {}
+    :name |js-get
+    :tags $ #{} :js :syntax
+    :desc "|alias for `aget`, which generates `a[b]`"
+    :snippets $ []
+      quote $ let
+          a $ js-object (:a 1)
+        js-get a |a
+  {}
+    :name |js-set
+    :tags $ #{} :js :syntax
+    :desc "|alias for `aset`, which generates `a[b]=c`"
+    :snippets $ []
+      quote $ let
+          a $ js-object
+        js-set a |a 1
+  {}
+    :name |js-delete
+    :tags $ #{} :js :syntax
+    :desc "|which generates `delete a[b]`"
+    :snippets $ []
+      quote $ let
+          a $ js-object (:a 1)
+        js-delete a |a
+  {}
     :name |hint-fn
     :tags $ #{} :syntax :js
     :desc "|syntax inside a js function to indicate `async`"
