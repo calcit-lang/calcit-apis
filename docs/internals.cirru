@@ -747,6 +747,7 @@
         :code $ quote $ &extract-code-into-edn 'a
         :result $ quote $ {} (:val |a) (:at-def |main!) (:ns "|app.main") (:kind :symbol)
           :resolved $ {} (|kind nil)
+          :location $ [] 4 1 1
       {}
         :code $ quote $ &extract-code-into-edn 1
         :result $ quote $ do 1
@@ -756,6 +757,7 @@
           []
             {} (:val "|::") (:at-def |main!) (:ns "|app.main") (:kind :symbol)
               :resolved $ {} (|kind nil)
+              :location $ [] 4 1 1
             , :a 1
   {}
     :name |&data-to-code
