@@ -811,3 +811,9 @@
     :desc "|takes a string, inserts raw js code. it's more flexible than `js/` syntax"
     :snippets $ []
       quote $ &raw-code "|/^\\d+$/"
+  {}
+    :name |disable-list-structure-check!
+    :tags $ #{} :js
+    :desc "|js only optimization to disable structures checking in ternary-tree list. import from the procs package first."
+    :snippets $ []
+      quote $ |@calcit/procs :refer $ disable-list-structure-check!
