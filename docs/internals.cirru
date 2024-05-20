@@ -636,13 +636,13 @@
   {}
     :name |&call-dylib-edn
     :tags $ #{} :injection
-    :desc "|call function from dynamic lib, using EDN arguments and result"
+    :desc "|call function defined in a dynamic lib, with arguments and result in EDN. libraries will be cached for consistency and performance."
     :snippets $ []
       quote $ &call-dylib-edn a b c
   {}
     :name |&call-dylib-edn-fn
     :tags $ #{} :injection
-    :desc "|call function from dynamic lib, using EDN arguments and result, also pass a closure"
+    :desc "|call function defined in a dynamic lib, with arguments and result in EDN, also pass a closure for callback. libraries will be cached for consistency and performance."
     :snippets $ []
       quote $ &call-dylib-edn-fn a b c $ fn (& args)
   {}
