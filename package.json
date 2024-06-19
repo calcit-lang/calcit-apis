@@ -1,13 +1,13 @@
 {
   "dependencies": {
-    "@calcit/procs": "^0.8.52",
+    "@calcit/procs": "^0.8.58",
     "cirru-color": "^0.2.4",
     "copy-text-to-clipboard": "^3.2.0",
     "feather-icons": "^4.29.2"
   },
   "devDependencies": {
     "bottom-tip": "^0.1.5",
-    "vite": "^5.2.11"
+    "vite": "^5.3.1"
   },
   "version": "0.0.1"
 }
