@@ -1784,6 +1784,12 @@
     :snippets $ []
       quote $ new-record :Person :name :age
   {}
+    :name |record-with
+    :tags $ #{} :record :macro
+    :desc "|update record fields with new values, syntax in pairs"
+    :snippets $ []
+      quote $ record-with r (:f1 v1) (:f2 v2)
+  {}
     :name |new-class-record
     :tags $ #{} :record
     :desc "|create a prototype of record with a class, first argument requires symbol value, with values in `nil`"

@@ -457,6 +457,12 @@
     :snippets $ []
       quote $ &record:with-class r class
   {}
+    :name |&record:with
+    :tags $ #{} :record
+    :desc "|update record fields with new values, internal function"
+    :snippets $ []
+      quote $ &record:with r :f1 v1 :f2 v2
+  {}
     :name |&display-stack
     :tags $ #{} :debug
     :desc "|display call stack information at current position"
