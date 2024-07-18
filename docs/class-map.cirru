@@ -81,14 +81,14 @@
     :desc "|map key and value for a map"
     :snippets $ []
       {}
-        :code $ quote $ map-kv
+        :code $ quote $ .map-kv
           {} (:a 1) (:b 2)
           fn (k v)
             [] k $ + v 1
         :result $ quote $ {} (:a 2) (:b 3)
       {}
         :desc "|use it like filter for map"
-        :code $ quote $ map-kv
+        :code $ quote $ .map-kv
           {} (:a 1) (:b 2) (:c 13)
           fn (k v)
             if (> v 10) nil
