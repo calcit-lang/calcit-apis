@@ -10,12 +10,8 @@
           :code $ quote
             defcomp comp-api-entry (info syntax)
               div
-                {}
-                  :style $ if (:wip? info)
-                    {}
-                      :color $ hsl 0 0 80
-                      :border-left $ str "\"8px solid " (hsl 0 0 90)
-                  :class-name $ str-spaced css/row css-api-entry
+                {} $ :class-name
+                  str-spaced css/row css-api-entry $ if (:wip? info) css-api-entry-wip
                 div
                   {} $ :class-name css/flex
                   div
@@ -33,8 +29,7 @@
                     {} $ :class-name (str-spaced "\"md-span" css-desc)
                     comp-md $ either (:desc info) "\"TODO"
                 div
-                  {} (:class-name css/expand)
-                    :style $ {} (:margin-left 20) (:flex 2)
+                  {} $ :class-name (str-spaced css/expand style-api-demo)
                   , & $ -> (:snippets info)
                     map $ fn (entry)
                       let
@@ -46,17 +41,17 @@
                           comp-code (&cirru-quote:to-list code) syntax
                           if
                             some? $ :desc code-snippet
-                            <> (:desc code-snippet)
-                              {} (:margin-left 8) (:line-height "\"1.5")
-                                :color $ hsl 0 0 60
+                            ; <> $ :desc code-snippet
+                            div
+                              {} $ :class-name style-desc
+                              comp-md $ :desc code-snippet
                           if
                             and (map? code-snippet)
                               some? $ :result code-snippet
                             div
                               {} $ :class-name css/row
                               div
-                                {} $ :style
-                                  {} (:width 40) (:text-align :center)
+                                {} $ :class-name style-api-result
                                 comp-i :arrow-right-circle 16 $ hsl 200 0 50
                               div ({})
                                 comp-code
@@ -240,6 +235,12 @@
               "\"&:hover" $ {}
                 ; :box-shadow $ str "\"0 1px 1px " (hsl 0 0 0 0.2)
                 :background-color $ hsl 0 0 96
+        |css-api-entry-wip $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            defstyle css-api-entry-wip $ {}
+              "\"&" $ {}
+                :color $ hsl 0 0 80
+                :border-left $ str "\"8px solid " (hsl 0 0 90)
         |css-desc $ %{} :CodeEntry (:doc |)
           :code $ quote
             defstyle css-desc $ {}
@@ -326,6 +327,19 @@
                     , "\"]"
                 true $ raise
                   str "\"Unknown type: " (type-of x) x
+        |style-api-demo $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            defstyle style-api-demo $ {}
+              "\"&" $ {} (:margin-left 20) (:flex 2)
+        |style-api-result $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            defstyle style-api-result $ {}
+              "\"&" $ {} (:width 40) (:text-align :center)
+        |style-desc $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            defstyle style-desc $ {}
+              "\"&" $ {} (:margin-left 8) (:line-height "\"1.5")
+                :color $ hsl 0 0 60
         |style-tag $ %{} :CodeEntry (:doc |)
           :code $ quote
             defstyle style-tag $ {}
@@ -357,7 +371,6 @@
             reel.comp.reel :refer $ comp-reel
             respo-md.comp.md :refer $ comp-md
             app.config :refer $ dev?
-            respo-md.comp.md :refer $ comp-md
             calcit-theme.comp.expr :refer $ render-expr
             memof.once :refer $ memof1-call memof1-call-by
             feather.core :refer $ comp-i
