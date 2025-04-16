@@ -1900,6 +1900,12 @@
           a $ js-object (:a 1)
         js-delete a |a
   {}
+    :name |js-for-await
+    :tags $ #{} :js :syntax
+    :desc "|a for...await syntax support with an async function"
+    :snippets $ []
+      quote $ js-await $ js-for-await stream fn-promise
+  {}
     :name |hint-fn
     :tags $ #{} :syntax :js
     :desc "|syntax inside a js function to indicate `async`"
