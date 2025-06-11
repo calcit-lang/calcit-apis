@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@calcit/procs": "^0.9.12",
+    "@calcit/procs": "^0.9.13",
     "cirru-color": "^0.2.4",
     "copy-text-to-clipboard": "^3.2.0",
     "feather-icons": "^4.29.2"
