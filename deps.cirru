@@ -7,6 +7,6 @@
     |Respo/respo.calcit |main
     |Respo/reel.calcit |main
     |Respo/respo-markdown.calcit |0.4.9
-    |Respo/respo-ui.calcit |main
+    |Respo/respo-ui.calcit |0.6.3
     |Respo/respo-feather.calcit |main
-    |Cirru/calcit-theme.calcit |main
+    |Cirru/calcit-theme.calcit |0.4.2
