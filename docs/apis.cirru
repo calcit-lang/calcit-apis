@@ -5,8 +5,8 @@
     :tags $ #{} :syntax
     :desc "|create functions on namespaces"
     :snippets $ []
-      quote $ defn (a b) $ + a b
-      quote $ defn (a $ xs)
+      quote $ defn add (a b) $ + a b
+      quote $ defn echo2 (a $ xs)
         echo a xs
   {}
     :name |fn
