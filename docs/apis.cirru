@@ -111,8 +111,8 @@
     :tags $ #{} :tuple
     :desc "|operator for creating tuples, tuple takes 2 or more parameters, first argument is class, second argument used as tag"
     :snippets $ []
-      quote $ :: %class :tag
-      quote $ :: %class :tag 1 2 3 4
+      quote $ %:: %class :tag
+      quote $ %:: %class :tag 1 2 3 4
   {}
     :name |if
     :tags $ #{} :syntax
