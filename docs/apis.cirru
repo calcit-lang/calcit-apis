@@ -9,6 +9,13 @@
       quote $ defn echo2 (a $ xs)
         echo a xs
   {}
+    :name |assert-type
+    :tags $ #{} :syntax
+    :desc "|static type assertion for local variables. it evaluates to `nil` at runtime."
+    :snippets $ []
+      quote $ assert-type x :number
+      quote $ assert-type y $ :: :optional :string
+  {}
     :name |fn
     :tags $ #{} :macro
     :desc "|create anounymous functions"
@@ -102,10 +109,13 @@
   {}
     :name |::
     :tags $ #{} :tuple
-    :desc "|operator for creating tuples, tuple takes 1 or more parameters, first argument used as tag. internally it has a base class with no methods"
+    :desc "|operator for creating tuples, tuple takes 1 or more parameters, first argument used as tag. internally it has a base class with no methods. it is also used for type annotations like `:optional` (which requires exactly one inner type)."
     :snippets $ []
       quote $ :: :tag
       quote $ :: :tag 1 2 3 4
+      quote $ defn f (x)
+        assert-type x $ :: :optional :number
+        x
   {}
     :name |%::
     :tags $ #{} :tuple
@@ -113,6 +123,12 @@
     :snippets $ []
       quote $ %:: %class :tag
       quote $ %:: %class :tag 1 2 3 4
+  {}
+    :name |%%::
+    :tags $ #{} :tuple
+    :desc "|Enum Tuple Constructor. Instantiates a tuple with class and enum metadata, enforcing runtime validation."
+    :snippets $ []
+      quote $ %%:: class enum :tag payload1 payload2
   {}
     :name |if
     :tags $ #{} :syntax
@@ -575,6 +591,12 @@
     :desc "|generate Cirru syntax from data, with an extra `use_inline` option from Cirru"
     :snippets $ []
       quote $ format-cirru-edn data true
+  {}
+    :name |format-cirru-one-liner
+    :tags $ #{} :native
+    :desc "|formats Calcit data into a compact, single-line Cirru string"
+    :snippets $ []
+      quote $ format-cirru-one-liner $ [] 1 2 3
   {}
     :name |sqrt
     :tags $ #{} :native :number
@@ -1908,11 +1930,14 @@
   {}
     :name |hint-fn
     :tags $ #{} :syntax :js
-    :desc "|syntax inside a js function to indicate `async`"
+    :desc "|syntax inside a function to provide metadata like `async` or `return-type`"
     :snippets $ []
       quote $ defn f ()
         hint-fn async
         js-await async-f
+      quote $ defn g (x)
+        hint-fn $ return-type :number
+        + x 1
   {}
     :name |select-keys
     :tags $ #{} :map
@@ -1938,7 +1963,7 @@
   {}
     :name |tag-match
     :tags $ #{} :macro
-    :desc "|a dynamic macro for simulating pattern matching"
+    :desc "|a dynamic macro for simulating pattern matching. it performs runtime validation for enum-typed tuples."
     :snippets $ []
       quote $ tag-match data
         (:a x) (' "|pattern a:" x)

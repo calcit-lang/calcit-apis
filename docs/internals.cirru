@@ -165,6 +165,13 @@
         :code $ quote
           &get-calcit-running-mode
   {}
+    :name |&inspect-class-methods
+    :tags $ #{} :meta
+    :desc "|a meta-programming tool to inspect the methods available on a value's class"
+    :snippets $ []
+      quote $ &inspect-class-methods 1
+      quote $ &inspect-class-methods |a
+  {}
     :name |&%{}
     :tags $ #{} :record
     :desc "|internal implementation of `%{}`, first argument is record"
@@ -217,6 +224,24 @@
     :desc "|extend tuple with a new class"
     :snippets $ []
       quote $ &tuple:with-class t %class
+  {}
+    :name |&tuple:enum
+    :tags $ #{} :tuple
+    :desc "|reflection procedure for enum-typed tuples, returns the enum prototype"
+    :snippets $ []
+      quote $ &tuple:enum t
+  {}
+    :name |&tuple:enum-has-variant?
+    :tags $ #{} :tuple
+    :desc "|reflection procedure to check if an enum-typed tuple has a specific variant"
+    :snippets $ []
+      quote $ &tuple:enum-has-variant? t :tag
+  {}
+    :name |&tuple:enum-variant-arity
+    :tags $ #{} :tuple
+    :desc "|reflection procedure to retrieve variant arity of an enum-typed tuple"
+    :snippets $ []
+      quote $ &tuple:enum-variant-arity t :tag
   {}
     :name |&str:replace
     :tags $ #{} :string
