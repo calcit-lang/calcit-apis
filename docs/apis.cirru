@@ -3,9 +3,12 @@
   {}
     :name |defn
     :tags $ #{} :syntax
-    :desc "|create functions on namespaces"
+    :desc "|create functions on namespaces. It automatically detects type hints from (assert-type x :type) calls in the function body during preprocessing."
     :snippets $ []
       quote $ defn add (a b) $ + a b
+      quote $ defn process (n)
+        assert-type n :number
+        + n 1
       quote $ defn echo2 (a $ xs)
         echo a xs
   {}
@@ -15,6 +18,8 @@
     :snippets $ []
       quote $ assert-type x :number
       quote $ assert-type y $ :: :optional :string
+      quote $ assert-type z $ :: :record Person
+      quote $ assert-type res $ :: :tuple Result
   {}
     :name |fn
     :tags $ #{} :macro
@@ -118,17 +123,10 @@
         x
   {}
     :name |%::
-    :tags $ #{} :tuple
-    :desc "|operator for creating tuples, tuple takes 2 or more parameters, first argument is class, second argument used as tag"
+    :tags $ #{} :tuple :enum
+    :desc "|Enum Tuple Constructor. Instantiates a tuple with enum metadata (no class info). Usage: `%:: Enum :tag payload...`"
     :snippets $ []
-      quote $ %:: %class :tag
-      quote $ %:: %class :tag 1 2 3 4
-  {}
-    :name |%%::
-    :tags $ #{} :tuple
-    :desc "|Enum Tuple Constructor. Instantiates a tuple with class and enum metadata, enforcing runtime validation."
-    :snippets $ []
-      quote $ %%:: class enum :tag payload1 payload2
+      quote $ %:: Result :ok 1
   {}
     :name |if
     :tags $ #{} :syntax
@@ -1833,6 +1831,20 @@
     :snippets $ []
       quote $ defrecord! Person (:name |Cat) (:age 10)
   {}
+    :name |defstruct
+    :tags $ #{} :struct :macro
+    :desc "|defines a struct with typed fields"
+    :snippets $ []
+      quote $ defstruct Person (:name :string) (:age :number)
+  {}
+    :name |defenum
+    :tags $ #{} :enum :macro
+    :desc "|defines an enum with variants and their types"
+    :snippets $ []
+      quote $ defenum Result
+        :ok :number
+        :err :string
+  {}
     :name |record?
     :tags $ #{} :record
     :desc "|detects record"
@@ -1963,12 +1975,19 @@
   {}
     :name |tag-match
     :tags $ #{} :macro
-    :desc "|a dynamic macro for simulating pattern matching. it performs runtime validation for enum-typed tuples."
+    :desc "|Pattern matching on tagged tuples. It dispatches based on the first element (tag) of the tuple and binds payload elements to the specified symbols."
     :snippets $ []
-      quote $ tag-match data
-        (:a x) (' "|pattern a:" x)
-        (:b x y) (' "|pattern b:" x y)
-        _ (' "|no match")
+      {}
+        :desc "|Match an enum variant"
+        :code $ quote $ tag-match data
+          (:ok x) (str "|ok: " x)
+          (:err msg) (str "|error: " msg)
+          _ "|others"
+      {}
+        :desc "|Using destruct-str for matching"
+        :code $ quote $ tag-match (destruct-str |123)
+          :: :empty "|empty"
+          (:some s0 ss) (str "|first: " s0)
   {}
     :name |list-match
     :tags $ #{} :list
@@ -1993,13 +2012,13 @@
   {}
     :name |record-match
     :tags $ #{} :macro :record
-    :desc "|a match function for records"
+    :desc "|a match function for records. Dispatches based on the record type."
     :snippets $ []
       quote $ record-match r
-        R1 new-name-a
-          str-spaced "|found branch of" :a "|with value" $ :sth-of-a new-name-a
-        R2 new-name-b
-          str-spaced "|found branch of" :b "|with value" $ :sth-of-b new-name-b
+        Person p
+          str "|Hello " (:name p)
+        Cat c
+          str "|Meow " (:color c)
         _ other-name :other
   {}
     :name |bit-shr

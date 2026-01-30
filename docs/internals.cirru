@@ -243,6 +243,36 @@
     :snippets $ []
       quote $ &tuple:enum-variant-arity t :tag
   {}
+    :name |&tuple:validate-enum
+    :tags $ #{} :tuple
+    :desc "|validate if an enum tuple matches the definition and variant"
+    :snippets $ []
+      quote $ &tuple:validate-enum t :ok
+  {}
+    :name |&struct::new
+    :tags $ #{} :struct
+    :desc "|create a new struct with name and fields"
+    :snippets $ []
+      quote $ &struct::new :Person ([] :name :age)
+  {}
+    :name |&enum::new
+    :tags $ #{} :enum
+    :desc "|create a new enum with name and variants"
+    :snippets $ []
+      quote $ &enum::new :Result $ {} (:ok 1) (:err 1)
+  {}
+    :name |&struct:with-class
+    :tags $ #{} :struct
+    :desc "|extend a struct with a class"
+    :snippets $ []
+      quote $ &struct:with-class s Class
+  {}
+    :name |&enum:with-class
+    :tags $ #{} :enum
+    :desc "|extend an enum with a class"
+    :snippets $ []
+      quote $ &enum:with-class e Class
+  {}
     :name |&str:replace
     :tags $ #{} :string
     :desc "|internal function for replacing string"
