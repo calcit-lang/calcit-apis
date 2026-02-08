@@ -165,12 +165,25 @@
         :code $ quote
           &get-calcit-running-mode
   {}
-    :name |&inspect-class-methods
+    :name |&methods-of
     :tags $ #{} :meta
-    :desc "|a meta-programming tool to inspect the methods available on a value's class"
+    :desc "|returns available runtime method names (strings with leading dot) for a value"
     :snippets $ []
-      quote $ &inspect-class-methods 1
-      quote $ &inspect-class-methods |a
+      quote $ &methods-of 1
+      quote $ &methods-of $ [] 1 2
+  {}
+    :name |&inspect-methods
+    :tags $ #{} :meta
+    :desc "|prints impl records and resolved methods for debugging; returns the value unchanged"
+    :snippets $ []
+      quote $ &inspect-methods 1 |number
+      quote $ &inspect-methods ({} (:a 1)) |map
+  {}
+    :name |&trait-call
+    :tags $ #{} :meta
+    :desc "|explicit trait method call to disambiguate same-named methods. Usage: &trait-call Trait :method receiver & args"
+    :snippets $ []
+      quote $ &trait-call calcit.core/Show :show 1
   {}
     :name |&%{}
     :tags $ #{} :record

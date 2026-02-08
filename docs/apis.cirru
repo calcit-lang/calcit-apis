@@ -21,6 +21,40 @@
       quote $ assert-type z $ :: :record Person
       quote $ assert-type res $ :: :tuple Result
   {}
+    :name |assert-traits
+    :tags $ #{} :syntax
+    :desc "|runtime trait assertion for values. it returns the value unchanged when passing, and throws when missing required methods."
+    :snippets $ []
+      quote $ assert-traits 1 calcit.core/Show
+      quote $ assert-traits ([]) calcit.core/Mappable calcit.core/Show
+  {}
+    :name |deftrait
+    :tags $ #{} :macro
+    :desc "|define a trait with method signatures. methods are declared as (:method (:: :fn (..args..) (..args..) return-type))."
+    :snippets $ []
+      quote
+        deftrait MyFoo
+          :foo (:: :fn ('T) ('T) :string)
+  {}
+    :name |defimpl
+    :tags $ #{} :macro
+    :desc "|define an impl record for a trait. it is commonly attached to values via impl-traits, and can be selected explicitly via &trait-call."
+    :snippets $ []
+      quote
+        defimpl MyFoo MyFooImpl
+          :foo $ fn (p) (str-spaced |foo (:name p))
+  {}
+    :name |impl-traits
+    :tags $ #{} :meta
+    :desc "|attach one or more impl records to a value (record/tuple/struct/enum). later impls override earlier ones for the same method name on user values."
+    :snippets $ []
+      quote
+        let
+            Person0 $ new-record :Person :name
+            Person $ impl-traits Person0 MyFooImpl
+            p $ %{} Person (:name |Alice)
+          .foo p
+  {}
     :name |fn
     :tags $ #{} :macro
     :desc "|create anounymous functions"
