@@ -179,9 +179,15 @@
       quote $ &inspect-methods 1 |number
       quote $ &inspect-methods ({} (:a 1)) |map
   {}
+    :name |&impl:origin
+    :tags $ #{} :meta
+    :desc "|returns the trait origin stored on an impl record, or nil"
+    :snippets $ []
+      quote $ &impl:origin &core-show-impl
+  {}
     :name |&trait-call
     :tags $ #{} :meta
-    :desc "|explicit trait method call to disambiguate same-named methods. Usage: &trait-call Trait :method receiver & args"
+    :desc "|explicit trait method call to disambiguate same-named methods. it matches impls by trait origin. Usage: &trait-call Trait :method receiver & args"
     :snippets $ []
       quote $ &trait-call calcit.core/Show :show 1
   {}

@@ -38,7 +38,7 @@
   {}
     :name |defimpl
     :tags $ #{} :macro
-    :desc "|define an impl record for a trait. it is commonly attached to values via impl-traits, and can be selected explicitly via &trait-call."
+    :desc "|define an impl record for a trait. it stores the trait as origin, can be attached via impl-traits, and can be selected explicitly via &trait-call."
     :snippets $ []
       quote
         defimpl MyFoo MyFooImpl
