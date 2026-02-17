@@ -23,10 +23,14 @@
   {}
     :name |assert-traits
     :tags $ #{} :syntax
-    :desc "|runtime trait assertion for values. it returns the value unchanged when passing, and throws when missing required methods."
+    :desc "|runtime trait assertion for local values. first argument must be a local binding. it returns the value unchanged when passing, and throws when missing required methods."
     :snippets $ []
-      quote $ assert-traits 1 calcit.core/Show
-      quote $ assert-traits ([]) calcit.core/Mappable calcit.core/Show
+      quote $ let
+          x 1
+        assert-traits x calcit.core/Show
+      quote $ let
+          xs $ []
+        assert-traits xs calcit.core/Mappable calcit.core/Show
   {}
     :name |deftrait
     :tags $ #{} :macro
@@ -38,19 +42,19 @@
   {}
     :name |defimpl
     :tags $ #{} :macro
-    :desc "|define an impl record for a trait. it stores the trait as origin, can be attached via impl-traits, and can be selected explicitly via &trait-call."
+    :desc "|define an impl record for a trait. argument order is `(defimpl ImplName Trait ...)`. impl can later be attached to struct/enum definitions via impl-traits."
     :snippets $ []
       quote
-        defimpl MyFoo MyFooImpl
+        defimpl MyFooImpl MyFoo
           :foo $ fn (p) (str-spaced |foo (:name p))
   {}
     :name |impl-traits
     :tags $ #{} :meta
-    :desc "|attach one or more impl records to a value (record/tuple/struct/enum). later impls override earlier ones for the same method name on user values."
+    :desc "|attach one or more impl records to a struct/enum definition. instances created from that definition inherit the capability; later impls override earlier ones for the same method name."
     :snippets $ []
       quote
         let
-            Person0 $ new-record :Person :name
+            Person0 $ defstruct Person (:name :string)
             Person $ impl-traits Person0 MyFooImpl
             p $ %{} Person (:name |Alice)
           .foo p
@@ -1604,13 +1608,13 @@
     :snippets $ []
       quote $ wo-log 1
   {}
-    :name |with-js-log
+    :name |w-js-log
     :tags $ #{} :debug :macro
     :desc "|for debug purpose, add `console.log` to an expression"
     :snippets $ []
       {}
         :code $ quote
-          macroexpand $ quote $ with-js-log $ + 1 2
+          macroexpand $ quote $ w-js-log $ + 1 2
         :result $ quote
           &let
             v__1 $ + 1 2
@@ -1619,9 +1623,9 @@
   {}
     :name |wo-js-log
     :tags $ #{} :debug :macro
-    :desc "|for debug purpose, log-less version of w-js0log, like `identity`"
+    :desc "|for debug purpose, log-less version of w-js-log, like `identity`"
     :snippets $ []
-      quote $ wo-log 1
+      quote $ wo-js-log 1
   {}
     :name |quit
     :tags $ #{} :native
