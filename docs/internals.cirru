@@ -502,6 +502,12 @@
     :desc "|get record name"
     :snippets $ []
   {}
+    :name |&record:struct
+    :tags $ #{} :record
+    :desc "|get struct prototype from a record, returns struct or nil"
+    :snippets $ []
+      quote $ &record:struct r
+  {}
     :name |&record:assoc
     :tags $ #{} :record
     :desc "|associate new value to an existing field"
