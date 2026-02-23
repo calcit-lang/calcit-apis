@@ -42,7 +42,7 @@
   {}
     :name |defimpl
     :tags $ #{} :macro
-    :desc "|define an impl record for a trait. argument order is `(defimpl ImplName Trait ...)`. impl can later be attached to struct/enum definitions via impl-traits."
+    :desc "|define an impl record for a trait. the first argument is impl name, second is trait. it stores the trait as origin, can be attached via impl-traits, and can be selected explicitly via &trait-call."
     :snippets $ []
       quote
         defimpl MyFooImpl MyFoo
@@ -54,7 +54,7 @@
     :snippets $ []
       quote
         let
-            Person0 $ defstruct Person (:name :string)
+            Person0 $ defstruct Person0 (:name :string)
             Person $ impl-traits Person0 MyFooImpl
             p $ %{} Person (:name |Alice)
           .foo p
@@ -1836,38 +1836,11 @@
       quote
         exists? x
   {}
-    :name |new-record
-    :tags $ #{} :record
-    :desc "|create a prototype of record, first argument requires symbol value, with values in `nil`"
-    :snippets $ []
-      quote $ new-record :Person :name :age
-  {}
     :name |record-with
     :tags $ #{} :record :macro
     :desc "|update record fields with new values, syntax in pairs"
     :snippets $ []
       quote $ record-with r (:f1 v1) (:f2 v2)
-  {}
-    :name |new-class-record
-    :tags $ #{} :record
-    :desc "|create a prototype of record with a class, first argument requires symbol value, with values in `nil`"
-    :snippets $ []
-      quote $ new-class-record Class :Person :name :age
-  {}
-    :name |defrecord
-    :tags $ #{} :record :macro
-    :desc "|macro that wraps on new-record, first argument uses a bare symbol"
-    :snippets $ []
-      quote $ defrecord Person :name :age
-      {}
-        :code $ quote $ macroexpand $ quote $ defrecord Person :name :age
-        :result $ quote $ quote $ def Person $ new-record :Person :name :age
-  {}
-    :name |defrecord!
-    :tags $ #{} :record :macro
-    :desc "|macro that wraps on defrecord with values defined, first argument uses a bare symbol"
-    :snippets $ []
-      quote $ defrecord! Person (:name |Cat) (:age 10)
   {}
     :name |defstruct
     :tags $ #{} :struct :macro
@@ -1891,9 +1864,15 @@
   {}
     :name |%{}
     :tags $ #{} :record :macro
-    :desc "|create a record, first argument is a record, wraps `&%{}`"
+    :desc "|create a record from a struct prototype, wraps `&%{}`"
     :snippets $ []
       quote $ %{} Person (:name |Ye) (:age 21)
+  {}
+    :name |%{}?
+    :tags $ #{} :record :macro
+    :desc "|create a partial record from a struct prototype, missing fields default to nil, wraps `&%{}?`"
+    :snippets $ []
+      quote $ %{}? Person (:name |Ye)
   {}
     :name |load-console-formatter!
     :tags $ #{} :js :debug
