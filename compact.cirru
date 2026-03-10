@@ -1,6 +1,6 @@
 
 {} (:package |app)
-  :configs $ {} (:init-fn |app.main/main!) (:reload-fn |app.main/reload!) (:version nil)
+  :configs $ {} (:init-fn |app.main/main!) (:reload-fn |app.main/reload!) (:version |0.0.1)
     :modules $ [] |lilac/compact.cirru |memof/compact.cirru |respo.calcit/compact.cirru |respo-ui.calcit/compact.cirru |respo-markdown.calcit/compact.cirru |calcit-theme.calcit/compact.cirru |reel.calcit/compact.cirru |respo-feather.calcit/
   :entries $ {}
   :files $ {}
@@ -92,7 +92,7 @@
                     {} $ :class-name css-theme-container
                     render-expr code
                   :cirru-text $ comp-cirru-snippet
-                    trim $ format-cirru ([] code) true
+                    trim $ format-cirru ([] code)
                   :lisp $ comp-cirru-snippet (lisp-style code)
         |comp-container $ %{} :CodeEntry (:doc |)
           :code $ quote

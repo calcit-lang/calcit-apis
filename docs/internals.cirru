@@ -165,6 +165,32 @@
         :code $ quote
           &get-calcit-running-mode
   {}
+    :name |&methods-of
+    :tags $ #{} :meta
+    :desc "|returns available runtime method names (strings with leading dot) for a value"
+    :snippets $ []
+      quote $ &methods-of 1
+      quote $ &methods-of $ [] 1 2
+  {}
+    :name |&inspect-methods
+    :tags $ #{} :meta
+    :desc "|prints impl records and resolved methods for debugging; returns the value unchanged"
+    :snippets $ []
+      quote $ &inspect-methods 1 |number
+      quote $ &inspect-methods ({} (:a 1)) |map
+  {}
+    :name |&impl:origin
+    :tags $ #{} :meta
+    :desc "|returns the trait origin stored on an impl record, or nil"
+    :snippets $ []
+      quote $ &impl:origin &core-show-impl
+  {}
+    :name |&trait-call
+    :tags $ #{} :meta
+    :desc "|explicit trait method call to disambiguate same-named methods. it matches impls by trait origin. Usage: &trait-call Trait :method receiver & args"
+    :snippets $ []
+      quote $ &trait-call calcit.core/Show :show 1
+  {}
     :name |&%{}
     :tags $ #{} :record
     :desc "|internal implementation of `%{}`, first argument is record"
@@ -217,6 +243,54 @@
     :desc "|extend tuple with a new class"
     :snippets $ []
       quote $ &tuple:with-class t %class
+  {}
+    :name |&tuple:enum
+    :tags $ #{} :tuple
+    :desc "|reflection procedure for enum-typed tuples, returns the enum prototype"
+    :snippets $ []
+      quote $ &tuple:enum t
+  {}
+    :name |&tuple:enum-has-variant?
+    :tags $ #{} :tuple
+    :desc "|reflection procedure to check if an enum-typed tuple has a specific variant"
+    :snippets $ []
+      quote $ &tuple:enum-has-variant? t :tag
+  {}
+    :name |&tuple:enum-variant-arity
+    :tags $ #{} :tuple
+    :desc "|reflection procedure to retrieve variant arity of an enum-typed tuple"
+    :snippets $ []
+      quote $ &tuple:enum-variant-arity t :tag
+  {}
+    :name |&tuple:validate-enum
+    :tags $ #{} :tuple
+    :desc "|validate if an enum tuple matches the definition and variant"
+    :snippets $ []
+      quote $ &tuple:validate-enum t :ok
+  {}
+    :name |&struct::new
+    :tags $ #{} :struct
+    :desc "|create a new struct with name and fields"
+    :snippets $ []
+      quote $ &struct::new :Person ([] :name :age)
+  {}
+    :name |&enum::new
+    :tags $ #{} :enum
+    :desc "|create a new enum with name and variants"
+    :snippets $ []
+      quote $ &enum::new :Result $ {} (:ok 1) (:err 1)
+  {}
+    :name |&struct:with-class
+    :tags $ #{} :struct
+    :desc "|extend a struct with a class"
+    :snippets $ []
+      quote $ &struct:with-class s Class
+  {}
+    :name |&enum:with-class
+    :tags $ #{} :enum
+    :desc "|extend an enum with a class"
+    :snippets $ []
+      quote $ &enum:with-class e Class
   {}
     :name |&str:replace
     :tags $ #{} :string
@@ -427,6 +501,12 @@
     :tags $ #{} :record
     :desc "|get record name"
     :snippets $ []
+  {}
+    :name |&record:struct
+    :tags $ #{} :record
+    :desc "|get struct prototype from a record, returns struct or nil"
+    :snippets $ []
+      quote $ &record:struct r
   {}
     :name |&record:assoc
     :tags $ #{} :record

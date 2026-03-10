@@ -3,11 +3,61 @@
   {}
     :name |defn
     :tags $ #{} :syntax
-    :desc "|create functions on namespaces"
+    :desc "|create functions on namespaces. It automatically detects type hints from (assert-type x :type) calls in the function body during preprocessing."
     :snippets $ []
       quote $ defn add (a b) $ + a b
+      quote $ defn process (n)
+        assert-type n :number
+        + n 1
       quote $ defn echo2 (a $ xs)
         echo a xs
+  {}
+    :name |assert-type
+    :tags $ #{} :syntax
+    :desc "|static type assertion for local variables. it evaluates to `nil` at runtime."
+    :snippets $ []
+      quote $ assert-type x :number
+      quote $ assert-type y $ :: :optional :string
+      quote $ assert-type z $ :: :record Person
+      quote $ assert-type res $ :: :tuple Result
+  {}
+    :name |assert-traits
+    :tags $ #{} :syntax
+    :desc "|runtime trait assertion for local values. first argument must be a local binding. it returns the value unchanged when passing, and throws when missing required methods."
+    :snippets $ []
+      quote $ let
+          x 1
+        assert-traits x calcit.core/Show
+      quote $ let
+          xs $ []
+        assert-traits xs calcit.core/Mappable calcit.core/Show
+  {}
+    :name |deftrait
+    :tags $ #{} :macro
+    :desc "|define a trait with method signatures. methods are declared as (:method (:: :fn (..args..) (..args..) return-type))."
+    :snippets $ []
+      quote
+        deftrait MyFoo
+          :foo (:: :fn ('T) ('T) :string)
+  {}
+    :name |defimpl
+    :tags $ #{} :macro
+    :desc "|define an impl record for a trait. the first argument is impl name, second is trait. it stores the trait as origin, can be attached via impl-traits, and can be selected explicitly via &trait-call."
+    :snippets $ []
+      quote
+        defimpl MyFooImpl MyFoo
+          :foo $ fn (p) (str-spaced |foo (:name p))
+  {}
+    :name |impl-traits
+    :tags $ #{} :meta
+    :desc "|attach one or more impl records to a struct/enum definition. instances created from that definition inherit the capability; later impls override earlier ones for the same method name."
+    :snippets $ []
+      quote
+        let
+            Person0 $ defstruct Person0 (:name :string)
+            Person $ impl-traits Person0 MyFooImpl
+            p $ %{} Person (:name |Alice)
+          .foo p
   {}
     :name |fn
     :tags $ #{} :macro
@@ -102,17 +152,19 @@
   {}
     :name |::
     :tags $ #{} :tuple
-    :desc "|operator for creating tuples, tuple takes 1 or more parameters, first argument used as tag. internally it has a base class with no methods"
+    :desc "|operator for creating tuples, tuple takes 1 or more parameters, first argument used as tag. internally it has a base class with no methods. it is also used for type annotations like `:optional` (which requires exactly one inner type)."
     :snippets $ []
       quote $ :: :tag
       quote $ :: :tag 1 2 3 4
+      quote $ defn f (x)
+        assert-type x $ :: :optional :number
+        x
   {}
     :name |%::
-    :tags $ #{} :tuple
-    :desc "|operator for creating tuples, tuple takes 2 or more parameters, first argument is class, second argument used as tag"
+    :tags $ #{} :tuple :enum
+    :desc "|Enum Tuple Constructor. Instantiates a tuple with enum metadata (no class info). Usage: `%:: Enum :tag payload...`"
     :snippets $ []
-      quote $ %:: %class :tag
-      quote $ %:: %class :tag 1 2 3 4
+      quote $ %:: Result :ok 1
   {}
     :name |if
     :tags $ #{} :syntax
@@ -575,6 +627,12 @@
     :desc "|generate Cirru syntax from data, with an extra `use_inline` option from Cirru"
     :snippets $ []
       quote $ format-cirru-edn data true
+  {}
+    :name |format-cirru-one-liner
+    :tags $ #{} :native
+    :desc "|formats Calcit data into a compact, single-line Cirru string"
+    :snippets $ []
+      quote $ format-cirru-one-liner $ [] 1 2 3
   {}
     :name |sqrt
     :tags $ #{} :native :number
@@ -1550,13 +1608,13 @@
     :snippets $ []
       quote $ wo-log 1
   {}
-    :name |with-js-log
+    :name |w-js-log
     :tags $ #{} :debug :macro
     :desc "|for debug purpose, add `console.log` to an expression"
     :snippets $ []
       {}
         :code $ quote
-          macroexpand $ quote $ with-js-log $ + 1 2
+          macroexpand $ quote $ w-js-log $ + 1 2
         :result $ quote
           &let
             v__1 $ + 1 2
@@ -1565,9 +1623,9 @@
   {}
     :name |wo-js-log
     :tags $ #{} :debug :macro
-    :desc "|for debug purpose, log-less version of w-js0log, like `identity`"
+    :desc "|for debug purpose, log-less version of w-js-log, like `identity`"
     :snippets $ []
-      quote $ wo-log 1
+      quote $ wo-js-log 1
   {}
     :name |quit
     :tags $ #{} :native
@@ -1778,38 +1836,25 @@
       quote
         exists? x
   {}
-    :name |new-record
-    :tags $ #{} :record
-    :desc "|create a prototype of record, first argument requires symbol value, with values in `nil`"
-    :snippets $ []
-      quote $ new-record :Person :name :age
-  {}
     :name |record-with
     :tags $ #{} :record :macro
     :desc "|update record fields with new values, syntax in pairs"
     :snippets $ []
       quote $ record-with r (:f1 v1) (:f2 v2)
   {}
-    :name |new-class-record
-    :tags $ #{} :record
-    :desc "|create a prototype of record with a class, first argument requires symbol value, with values in `nil`"
+    :name |defstruct
+    :tags $ #{} :struct :macro
+    :desc "|defines a struct with typed fields"
     :snippets $ []
-      quote $ new-class-record Class :Person :name :age
+      quote $ defstruct Person (:name :string) (:age :number)
   {}
-    :name |defrecord
-    :tags $ #{} :record :macro
-    :desc "|macro that wraps on new-record, first argument uses a bare symbol"
+    :name |defenum
+    :tags $ #{} :enum :macro
+    :desc "|defines an enum with variants and their types"
     :snippets $ []
-      quote $ defrecord Person :name :age
-      {}
-        :code $ quote $ macroexpand $ quote $ defrecord Person :name :age
-        :result $ quote $ quote $ def Person $ new-record :Person :name :age
-  {}
-    :name |defrecord!
-    :tags $ #{} :record :macro
-    :desc "|macro that wraps on defrecord with values defined, first argument uses a bare symbol"
-    :snippets $ []
-      quote $ defrecord! Person (:name |Cat) (:age 10)
+      quote $ defenum Result
+        :ok :number
+        :err :string
   {}
     :name |record?
     :tags $ #{} :record
@@ -1819,9 +1864,15 @@
   {}
     :name |%{}
     :tags $ #{} :record :macro
-    :desc "|create a record, first argument is a record, wraps `&%{}`"
+    :desc "|create a record from a struct prototype, wraps `&%{}`"
     :snippets $ []
       quote $ %{} Person (:name |Ye) (:age 21)
+  {}
+    :name |%{}?
+    :tags $ #{} :record :macro
+    :desc "|create a partial record from a struct prototype, missing fields default to nil, wraps `&%{}?`"
+    :snippets $ []
+      quote $ %{}? Person (:name |Ye)
   {}
     :name |load-console-formatter!
     :tags $ #{} :js :debug
@@ -1908,11 +1959,14 @@
   {}
     :name |hint-fn
     :tags $ #{} :syntax :js
-    :desc "|syntax inside a js function to indicate `async`"
+    :desc "|syntax inside a function to provide metadata like `async` or `return-type`"
     :snippets $ []
       quote $ defn f ()
         hint-fn async
         js-await async-f
+      quote $ defn g (x)
+        hint-fn $ return-type :number
+        + x 1
   {}
     :name |select-keys
     :tags $ #{} :map
@@ -1938,12 +1992,19 @@
   {}
     :name |tag-match
     :tags $ #{} :macro
-    :desc "|a dynamic macro for simulating pattern matching"
+    :desc "|Pattern matching on tagged tuples. It dispatches based on the first element (tag) of the tuple and binds payload elements to the specified symbols."
     :snippets $ []
-      quote $ tag-match data
-        (:a x) (' "|pattern a:" x)
-        (:b x y) (' "|pattern b:" x y)
-        _ (' "|no match")
+      {}
+        :desc "|Match an enum variant"
+        :code $ quote $ tag-match data
+          (:ok x) (str "|ok: " x)
+          (:err msg) (str "|error: " msg)
+          _ "|others"
+      {}
+        :desc "|Using destruct-str for matching"
+        :code $ quote $ tag-match (destruct-str |123)
+          :: :empty "|empty"
+          (:some s0 ss) (str "|first: " s0)
   {}
     :name |list-match
     :tags $ #{} :list
@@ -1968,13 +2029,13 @@
   {}
     :name |record-match
     :tags $ #{} :macro :record
-    :desc "|a match function for records"
+    :desc "|a match function for records. Dispatches based on the record type."
     :snippets $ []
       quote $ record-match r
-        R1 new-name-a
-          str-spaced "|found branch of" :a "|with value" $ :sth-of-a new-name-a
-        R2 new-name-b
-          str-spaced "|found branch of" :b "|with value" $ :sth-of-b new-name-b
+        Person p
+          str "|Hello " (:name p)
+        Cat c
+          str "|Meow " (:color c)
         _ other-name :other
   {}
     :name |bit-shr
