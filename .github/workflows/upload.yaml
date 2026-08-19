@@ -10,12 +10,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
 
     - uses: actions/setup-node@v6
       with:
         node-version: 24.x
-        cache: yarn
+        package-manager-cache: false
 
     - uses: calcit-lang/setup-cr@0.0.9
 
@@ -25,10 +25,18 @@ jobs:
         corepack prepare yarn@4.12.0 --activate
         yarn --version
 
-    - name: "compiles to js"
+    - name: "install modules"
+      run: caps --ci
+
+    - name: "validate snapshot and compile"
       run: |
-        caps --ci
-        cr js
+        cr calcit.cirru edit format
+        git diff --exit-code -- calcit.cirru
+        cr calcit.cirru --check-only
+        cr calcit.cirru analyze check-types --summary-only --format json
+        cr calcit.cirru analyze weak-types --only schema-dynamic,code-dynamic --intent unresolved --summary-only --format json
+        cr calcit.cirru analyze deprecated --summary-only --format json
+        cr calcit.cirru js
         yarn install --immutable
         yarn vite build --base=./
 
@@ -46,4 +54,5 @@ jobs:
         dest: 'rsync-user@tiye.me:/web-assets/repo/${{ github.repository }}'
 
     - name: Display status from deploy
+      if: steps.deploy.outcome != 'skipped'
       run: echo "${{ steps.deploy.outputs.status }}"
