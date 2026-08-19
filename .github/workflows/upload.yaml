@@ -28,13 +28,6 @@ jobs:
     - name: "compiles to js"
       run: |
         caps --ci
-        memof_snapshot="$(readlink -f .calcit/modules/memof/calcit.cirru)"
-        if grep -Fq '&= args $ first cached-pair' "$memof_snapshot"; then
-          mkdir -p .calcit/memof-compat
-          cp "$memof_snapshot" .calcit/memof-compat/calcit.cirru
-          perl -0pi -e 's/&= args \$ first cached-pair/= args \$ option:unwrap (first cached-pair)/' .calcit/memof-compat/calcit.cirru
-          ln -sfn ../memof-compat .calcit/modules/memof
-        fi
         cr js
         yarn install --immutable
         yarn vite build --base=./

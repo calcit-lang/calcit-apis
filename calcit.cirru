@@ -3,7 +3,7 @@
   :entries $ {}
     :default $ {} (:description |) (:init-fn 'app.main/main!) (:mode :native) (:reload-fn 'app.main/reload!)
       :feature-policy $ {}
-      :modules $ [] |lilac/ |memof/ |respo.calcit/ |respo-ui.calcit/ |respo-markdown.calcit/ |reel.calcit/ |respo-feather.calcit/ |js-ffi/ |calcit-theme.calcit/calcit.cirru
+      :modules $ [] |lilac/ |respo.calcit/ |respo-ui.calcit/ |respo-markdown.calcit/ |reel.calcit/ |respo-feather.calcit/ |js-ffi/
       :type-slots $ {}
   :files $ {}
     |app.comp.container $ %{} 'FileEntry
@@ -102,7 +102,8 @@
                 case-default syntax (str "|Unknown code: " syntax)
                   :cirru $ div
                     {} $ :class-name css-theme-container
-                    render-expr code
+                    comp-cirru-snippet $ trim
+                      format-cirru $ [] code
                   :cirru-text $ comp-cirru-snippet
                     trim $ format-cirru ([] code)
                   :lisp $ comp-cirru-snippet (lisp-style code)
@@ -173,12 +174,12 @@
                         =< 8 nil
                         div
                           {} $ :class-name css/row-middle
-                          memof1-call comp-cirru-ui-switcher state cursor
+                          comp-cirru-ui-switcher state cursor
                           =< 12 nil
-                          memof1-call comp-wip-switcher state cursor
+                          comp-wip-switcher state cursor
                       div
                         {} $ :class-name css/row-middle
-                        memof1-call comp-tags-list state cursor
+                        comp-tags-list state cursor
                         =< 16 nil
                         a $ {} (:inner-text "|Try & Play") (:target |_blank) (:href |http://repo.calcit-lang.org/calcit-wasm-play/)
                   div
@@ -200,7 +201,7 @@
                                 option:unwrap $ get info :source
                                 option:unwrap $ get info :name
                               option:unwrap $ get info :name
-                            memof1-call-by info comp-api-entry info $ option:unwrap (get state :syntax)
+                            comp-api-entry info $ option:unwrap (get state :syntax)
                     =< nil 400
                   when dev? $ comp-reel (>> states :reel) reel ({})
           :examples $ []
@@ -455,8 +456,6 @@
             reel.comp.reel :refer $ comp-reel
             respo-md.comp.md :refer $ comp-md
             app.config :refer $ dev?
-            calcit-theme.comp.expr :refer $ render-expr
-            memof.once :refer $ memof1-call memof1-call-by
             feather.core :refer $ comp-i
             respo.css :refer $ defstyle
             app.schema :refer $ apis-data
