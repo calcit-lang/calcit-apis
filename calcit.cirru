@@ -1,8 +1,9 @@
 
-{} (:about "|Machine-generated snapshot. Do not edit directly — changes will be overwritten. Use `cr query` to inspect and `cr edit`/`cr tree` to modify. Run `cr docs agents --full` first. Manual edits must follow format and schema conventions, then run `cr edit format`.") (:package |app) (:version |0.0.1)
+{} (:about "|Machine-generated snapshot. Do not edit directly — changes will be overwritten. Use `cr query` to inspect and `cr edit`/`cr tree` to modify. Run `cr docs agents --full` first. Manual edits must follow format and schema conventions, then run `cr edit format`.") (:package |app)
   :entries $ {}
     :default $ {} (:description |) (:init-fn 'app.main/main!) (:mode :native) (:reload-fn 'app.main/reload!)
-      :modules $ [] |lilac/ |memof/ |respo.calcit/ |respo-ui.calcit/ |respo-markdown.calcit/ |calcit-theme.calcit/ |reel.calcit/ |respo-feather.calcit/
+      :feature-policy $ {}
+      :modules $ [] |lilac/ |memof/ |respo.calcit/ |respo-ui.calcit/ |respo-markdown.calcit/ |reel.calcit/ |respo-feather.calcit/ |js-ffi/ |calcit-theme.calcit/calcit.cirru
       :type-slots $ {}
   :files $ {}
     |app.comp.container $ %{} 'FileEntry
@@ -12,51 +13,54 @@
             defcomp comp-api-entry (info syntax)
               div
                 {} $ :class-name
-                  str-spaced css/row css-api-entry $ if (:wip? info) css-api-entry-wip
+                  str-spaced css/row css-api-entry $ if
+                    option:unwrap-or (get info :wip?) false
+                    , css-api-entry-wip
                 div
                   {} $ :class-name css/flex
                   div
                     {} $ :class-name css/row-middle
-                    <> (:name info) css/font-code
+                    <>
+                      option:unwrap $ get info :name
+                      , css/font-code
                     list->
                       {}
                         :class-name $ str-spaced css/row-middle style-tags css/font-fancy!
                         :style $ {} (:margin-top 2)
-                      -> info :tags .to-list $ map
+                      map
                         fn (t)
                           [] t $ <> (turn-string t) style-tag
+                        .to-list $ option:unwrap-or (get info :tags) []
                   =< 8 nil
                   div
                     {} $ :class-name (str-spaced |md-span css-desc)
-                    comp-md $ either (:desc info) |TODO
+                    comp-md $ option:unwrap-or (get info :desc) |TODO
                 div
                   {} $ :class-name (str-spaced css/expand style-api-demo)
-                  , & $ -> (:snippets info)
+                  , & $ ->
+                    option:unwrap-or (get info :snippets) []
                     map $ fn (entry)
                       let
                           code-snippet $ if (map? entry) entry
                             {} $ :code entry
-                          code $ :code code-snippet
+                          code $ option:unwrap (get code-snippet :code)
                         div
                           {} $ :class-name css/row
                           comp-code (&cirru-quote:to-list code) syntax
                           if
-                            some? $ :desc code-snippet
-                            ; <> $ :desc code-snippet
+                            option:some? $ get code-snippet :desc
+                            ; <> $ option:unwrap (get code-snippet :desc)
                             div
                               {} $ :class-name style-desc
-                              comp-md $ :desc code-snippet
+                              option:unwrap $ get code-snippet :desc
                           if
                             and (map? code-snippet)
-                              some? $ :result code-snippet
-                            div
-                              {} $ :class-name css/row
-                              div
-                                {} $ :class-name style-api-result
-                                comp-i :arrow-right-circle 16 $ hsl 200 0 50
+                              option:some? $ get code-snippet :result
+                            div ({})
+                              comp-i :arrow-right-circle 16 $ hsl 200 0 50
                               div ({})
                                 comp-code
-                                  &cirru-quote:to-list $ :result code-snippet
+                                  &cirru-quote:to-list $ option:unwrap (get code-snippet :result)
                                   , syntax
           :examples $ []
           :schema $ :: 'Dynamic
@@ -75,14 +79,17 @@
                   map $ fn (item)
                     div
                       {}
-                        :style $ merge
+                        :style $ if
+                          =
+                            option:unwrap $ get state :syntax
+                            option:unwrap $ get item :value
+                          {} (:margin "|0 4px")
+                            :color $ hsl 200 90 50
                           {} $ :margin "|0 4px"
-                          if
-                            = (:syntax state) (:value item)
-                            {} $ :color (hsl 200 90 50)
                         :on-click $ fn (e d!)
-                          d! cursor $ assoc state :syntax (:value item)
-                      <> $ :display item
+                          d! cursor $ assoc state :syntax
+                            option:unwrap $ get item :value
+                      <> $ option:unwrap (get item :display)
           :examples $ []
           :schema $ :: 'Dynamic
         |comp-code $ %{} 'CodeEntry (:doc |)
@@ -105,10 +112,13 @@
           :code $ quote
             defcomp comp-container (reel)
               let
-                  store $ :store reel
-                  states $ :states store
-                  cursor $ either (:cursor states) ([])
-                  state $ either (:data states)
+                  store $ option:unwrap-or (get reel :store) ({})
+                  states $ option:unwrap-or (get store :states) ({})
+                  cursor $ either
+                    option:unwrap-or (get states :cursor) []
+                    []
+                  state $ either
+                    option:unwrap-or (get states :data) ({})
                     {}
                       :query $ get-query!
                       :selected-tags $ #{}
@@ -117,13 +127,21 @@
                   visible-apis $ -> apis-data
                     filter $ fn (info)
                       and
-                        if (:wip? state) (:wip? info) true
+                        if
+                          option:unwrap-or (get state :wip?) false
+                          option:unwrap-or (get info :wip?) false
+                          , true
                         or
-                          empty? $ :selected-tags state
-                          -> (:selected-tags state)
+                          empty? $ option:unwrap-or (get state :selected-tags) #{}
+                          ->
+                            option:unwrap-or (get state :selected-tags) #{}
                             every? $ fn (x)
-                              includes? (:tags info) x
-                        includes? (:name info) (:query state)
+                              includes?
+                                option:unwrap-or (get info :tags) []
+                                , x
+                        includes?
+                          option:unwrap $ get info :name
+                          option:unwrap $ get state :query
                 div
                   {}
                     :class-name $ str-spaced |calcit-tile css/preset css/global css/fullscreen css/column
@@ -141,11 +159,12 @@
                           {} $ :class-name css/row-middle
                           input $ {}
                             :class-name $ str-spaced css/input css/font-code!
-                            :value $ :query state
+                            :value $ option:unwrap (get state :query)
                             :placeholder |search
                             :autofocus true
                             :on-input $ fn (e d!)
-                              d! cursor $ assoc state :query (:value e)
+                              d! cursor $ assoc state :query
+                                option:unwrap $ get e :value
                           =< 8 nil
                           <>
                             str "|has " (count visible-apis) "| entries."
@@ -171,11 +190,17 @@
                       {} $ :class-name (str-spaced css/expand css-list)
                       -> visible-apis
                         sort $ fn (a b)
-                          &str:compare (:name a) (:name b)
+                          &str:compare
+                            option:unwrap $ get a :name
+                            option:unwrap $ get b :name
                         map $ fn (info)
                           []
-                            str (:source info) (:name info)
-                            memof1-call-by info comp-api-entry info $ :syntax state
+                            str
+                              str
+                                option:unwrap $ get info :source
+                                option:unwrap $ get info :name
+                              option:unwrap $ get info :name
+                            memof1-call-by info comp-api-entry info $ option:unwrap (get state :syntax)
                     =< nil 400
                   when dev? $ comp-reel (>> states :reel) reel ({})
           :examples $ []
@@ -222,14 +247,22 @@
                     div
                       {} (:class-name css-tag)
                         :style $ if
-                          includes? (:selected-tags state) tag
+                          includes?
+                            option:unwrap-or (get state :selected-tags) #{}
+                            , tag
                           {} $ :color (hsl 280 80 50)
                         :on-click $ fn (e d!)
                           d! cursor $ assoc state :selected-tags
                             if
-                              includes? (:selected-tags state) tag
-                              exclude (:selected-tags state) tag
-                              include (:selected-tags state) tag
+                              includes?
+                                option:unwrap-or (get state :selected-tags) #{}
+                                , tag
+                              exclude
+                                option:unwrap-or (get state :selected-tags) #{}
+                                , tag
+                              include
+                                option:unwrap-or (get state :selected-tags) #{}
+                                , tag
                       <> $ turn-string tag
           :examples $ []
           :schema $ :: 'Dynamic
@@ -431,7 +464,8 @@
       :defs $ {}
         |dev? $ %{} 'CodeEntry (:doc |)
           :code $ quote
-            def dev? $ = |dev (get-env |mode |release)
+            def dev? $ = |dev
+              option:unwrap-or (get-env |mode) |release
           :examples $ []
           :schema $ :: 'Dynamic
         |site $ %{} 'CodeEntry (:doc |)
@@ -516,7 +550,7 @@
           :schema $ :: 'Dynamic
         |ssr? $ %{} 'CodeEntry (:doc |)
           :code $ quote
-            def ssr? $ some? (js/document.querySelector |meta.respo-ssr)
+            def ssr? $ js-present? (js/document.querySelector |meta.respo-ssr)
           :examples $ []
           :schema $ :: 'Dynamic
       :ns $ %{} 'NsEntry (:doc |)
