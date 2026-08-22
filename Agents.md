@@ -1,6 +1,17 @@
-`docs/` 目录当中用 Cirru EDN 格式存储 API 数据, 可以用 `cr cirru parse-edn` 命令验证基本的格式正确性.
+# Agent notes
 
-其他关键工具:
+This project publishes API data for the Calcit language. Keep project-specific notes short and use the maintained Calcit documentation.
 
-- read `llms/Calcit.md` for language tool usages,
-- read `llms/Respo.md` for UI framework usages.
+Before editing or validating:
+
+```bash
+calcit docs agents --full
+calcit docs read upgrade --full
+caps --ci
+calcit calcit.cirru edit format
+calcit calcit.cirru --check-only
+calcit calcit.cirru js
+```
+
+The source snapshot is `calcit.cirru`. Do not use or add `compact.cirru`; use `calcit edit` / `calcit tree` for structural changes. Use `calcit cirru parse-edn` for API-data checks and `calcit docs read` for syntax or migration details.
+
