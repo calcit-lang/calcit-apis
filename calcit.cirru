@@ -6,9 +6,9 @@
       :modules $ [] |lilac/ |respo.calcit/ |respo-ui.calcit/ |respo-markdown.calcit/ |reel.calcit/ |respo-feather.calcit/ |js-ffi/
       :type-slots $ {}
   :files $ {}
-    |app.comp.container $ %{} 'FileEntry
+    'app.comp.container $ %{} 'FileEntry
       :defs $ {}
-        |comp-api-entry $ %{} 'CodeEntry (:doc |)
+        'comp-api-entry $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defcomp comp-api-entry (info syntax)
               div
@@ -64,7 +64,7 @@
                                   , syntax
           :examples $ []
           :schema $ :: 'Dynamic
-        |comp-cirru-ui-switcher $ %{} 'CodeEntry (:doc |)
+        'comp-cirru-ui-switcher $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defcomp comp-cirru-ui-switcher (state cursor)
               div
@@ -92,7 +92,7 @@
                       <> $ option:unwrap (get item :display)
           :examples $ []
           :schema $ :: 'Dynamic
-        |comp-code $ %{} 'CodeEntry (:doc |)
+        'comp-code $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defcomp comp-code (code syntax)
               assert "|expected code in list" $ list? code
@@ -109,7 +109,7 @@
                   :lisp $ comp-cirru-snippet (lisp-style code)
           :examples $ []
           :schema $ :: 'Dynamic
-        |comp-container $ %{} 'CodeEntry (:doc |)
+        'comp-container $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defcomp comp-container (reel)
               let
@@ -206,7 +206,7 @@
                   when dev? $ comp-reel (>> states :reel) reel ({})
           :examples $ []
           :schema $ :: 'Dynamic
-        |comp-method-targets $ %{} 'CodeEntry (:doc |)
+        'comp-method-targets $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defcomp comp-method-targets (state cursor)
               div
@@ -236,7 +236,7 @@
                         <> |None $ {} (:font-weight 300) (:font-family ui/font-fancy)
           :examples $ []
           :schema $ :: 'Dynamic
-        |comp-tags-list $ %{} 'CodeEntry (:doc |)
+        'comp-tags-list $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defcomp comp-tags-list (state cursor)
               div
@@ -267,7 +267,7 @@
                       <> $ turn-string tag
           :examples $ []
           :schema $ :: 'Dynamic
-        |comp-wip-switcher $ %{} 'CodeEntry (:doc |)
+        'comp-wip-switcher $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defcomp comp-wip-switcher (state cursor)
               div
@@ -277,7 +277,7 @@
                 <> |All/WIP
           :examples $ []
           :schema $ :: 'Dynamic
-        |css-api-entry $ %{} 'CodeEntry (:doc |)
+        'css-api-entry $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle css-api-entry $ {}
               |& $ {} (:margin |4px) (:padding "|2px 12px")
@@ -286,7 +286,7 @@
                 :background-color $ hsl 0 0 96
           :examples $ []
           :schema $ :: 'Dynamic
-        |css-api-entry-wip $ %{} 'CodeEntry (:doc |)
+        'css-api-entry-wip $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle css-api-entry-wip $ {}
               |& $ {}
@@ -294,7 +294,7 @@
                 :border-left $ str "|8px solid " (hsl 0 0 90)
           :examples $ []
           :schema $ :: 'Dynamic
-        |css-desc $ %{} 'CodeEntry (:doc |)
+        'css-desc $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle css-desc $ {}
               |& $ {}
@@ -303,20 +303,20 @@
                 :line-height |20px
           :examples $ []
           :schema $ :: 'Dynamic
-        |css-list $ %{} 'CodeEntry (:doc |)
+        'css-list $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle css-list $ {}
               |& $ {} (:padding "|0 0px")
           :examples $ []
           :schema $ :: 'Dynamic
-        |css-logo $ %{} 'CodeEntry (:doc |)
+        'css-logo $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle css-logo $ {}
               |& $ {} (:font-size 20) (:font-family ui/font-fancy) (:text-decoration :none) (:font-weight :bold)
                 :color $ hsl 200 100 60
           :examples $ []
           :schema $ :: 'Dynamic
-        |css-nav $ %{} 'CodeEntry (:doc |)
+        'css-nav $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle css-nav $ {}
               |& $ {}
@@ -327,7 +327,7 @@
                 :z-index 99
           :examples $ []
           :schema $ :: 'Dynamic
-        |css-switcher $ %{} 'CodeEntry (:doc |)
+        'css-switcher $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle css-switcher $ {}
               |& $ merge ui/row-middle
@@ -336,7 +336,7 @@
                   :font-weight 300
           :examples $ []
           :schema $ :: 'Dynamic
-        |css-tag $ %{} 'CodeEntry (:doc |)
+        'css-tag $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle css-tag $ {}
               |& $ {} (:display :inline-block) (:margin "|4px 4px") (:padding "|0 4px")
@@ -347,7 +347,7 @@
                 :user-select :none
           :examples $ []
           :schema $ :: 'Dynamic
-        |css-theme-container $ %{} 'CodeEntry (:doc |)
+        'css-theme-container $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle css-theme-container $ {}
               |& $ {}
@@ -356,7 +356,7 @@
                 :border-radius |4px
           :examples $ []
           :schema $ :: 'Dynamic
-        |css-wip-switcher $ %{} 'CodeEntry (:doc |)
+        'css-wip-switcher $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle css-wip-switcher $ {}
               |& $ {} (:font-family ui/font-fancy)
@@ -365,14 +365,14 @@
                 :cursor :pointer
           :examples $ []
           :schema $ :: 'Dynamic
-        |get-query! $ %{} 'CodeEntry (:doc |)
+        'get-query! $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn get-query! () $ let
                 obj $ new js/URLSearchParams js/location.search
               if (.!has obj |q) (.!get obj |q) |
           :examples $ []
           :schema $ :: 'Dynamic
-        |lisp-style $ %{} 'CodeEntry (:doc |)
+        'lisp-style $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn lisp-style (xs)
               cond
@@ -388,7 +388,7 @@
                 true $ str "|TODO: " (str xs)
           :examples $ []
           :schema $ :: 'Dynamic
-        |stringify-cirru $ %{} 'CodeEntry (:doc |)
+        'stringify-cirru $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn stringify-cirru (x)
               cond
@@ -402,26 +402,26 @@
                   str "|Unknown type: " (type-of x) x
           :examples $ []
           :schema $ :: 'Dynamic
-        |style-api-demo $ %{} 'CodeEntry (:doc |)
+        'style-api-demo $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle style-api-demo $ {}
               |& $ {} (:margin-left 20) (:flex 2)
           :examples $ []
           :schema $ :: 'Dynamic
-        |style-api-result $ %{} 'CodeEntry (:doc |)
+        'style-api-result $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle style-api-result $ {}
               |& $ {} (:width 40) (:text-align :center)
           :examples $ []
           :schema $ :: 'Dynamic
-        |style-desc $ %{} 'CodeEntry (:doc |)
+        'style-desc $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle style-desc $ {}
               |& $ {} (:margin-left 8) (:line-height |1.5)
                 :color $ hsl 0 0 60
           :examples $ []
           :schema $ :: 'Dynamic
-        |style-tag $ %{} 'CodeEntry (:doc |)
+        'style-tag $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle style-tag $ {}
               |& $ {}
@@ -438,7 +438,7 @@
               |&:first-letter $ {} (:text-transform :uppercase)
           :examples $ []
           :schema $ :: 'Dynamic
-        |style-tags $ %{} 'CodeEntry (:doc |)
+        'style-tags $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defstyle style-tags $ {}
               |& $ {} (:padding "|0 16px") (:gap 6)
@@ -459,36 +459,36 @@
             feather.core :refer $ comp-i
             respo.css :refer $ defstyle
             app.schema :refer $ apis-data
-    |app.config $ %{} 'FileEntry
+    'app.config $ %{} 'FileEntry
       :defs $ {}
-        |dev? $ %{} 'CodeEntry (:doc |)
+        'dev? $ %{} 'CodeEntry (:doc |)
           :code $ quote
             def dev? $ = |dev
               option:unwrap-or (get-env |mode) |release
           :examples $ []
           :schema $ :: 'Dynamic
-        |site $ %{} 'CodeEntry (:doc |)
+        'site $ %{} 'CodeEntry (:doc |)
           :code $ quote
             def site $ {} (:dev-ui |http://localhost:8100/main-fonts.css) (:release-ui |http://cdn.tiye.me/favored-fonts/main-fonts.css) (:cdn-url |http://cdn.tiye.me/calcit-workflow/) (:title "|APIs for calcit-runner") (:icon |http://cdn.tiye.me/logo/cirru.png) (:storage-key |calcit-runner-apis)
           :examples $ []
           :schema $ :: 'Dynamic
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote (ns app.config)
-    |app.main $ %{} 'FileEntry
+    'app.main $ %{} 'FileEntry
       :defs $ {}
-        |*reel $ %{} 'CodeEntry (:doc |)
+        '*reel $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defatom *reel $ -> reel-schema/reel (assoc :base schema/store) (assoc :store schema/store)
           :examples $ []
           :schema $ :: 'Dynamic
-        |dispatch! $ %{} 'CodeEntry (:doc |)
+        'dispatch! $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn dispatch! (op)
               when (and config/dev?) (js/console.log |Dispatch: op)
               reset! *reel $ reel-updater updater @*reel op
           :examples $ []
           :schema $ :: 'Dynamic
-        |main! $ %{} 'CodeEntry (:doc |)
+        'main! $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn main! ()
               if config/dev? $ load-console-formatter!
@@ -507,18 +507,18 @@
               println "|App started."
           :examples $ []
           :schema $ :: 'Dynamic
-        |mount-target $ %{} 'CodeEntry (:doc |)
+        'mount-target $ %{} 'CodeEntry (:doc |)
           :code $ quote
             def mount-target $ js/document.querySelector |.app
           :examples $ []
           :schema $ :: 'Dynamic
-        |persist-storage! $ %{} 'CodeEntry (:doc |)
+        'persist-storage! $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn persist-storage! () $ ; .setItem js/localStorage (:storage-key config/site)
               js/JSON.stringify $ to-calcit-data (:store @*reel)
           :examples $ []
           :schema $ :: 'Dynamic
-        |reload! $ %{} 'CodeEntry (:doc |)
+        'reload! $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn reload! () $ if (some? build-errors) (tip! |error build-errors)
               do (tip! |inactive nil) (remove-watch *reel :changes) (clear-cache!)
@@ -528,13 +528,13 @@
                 println "|Code updated."
           :examples $ []
           :schema $ :: 'Dynamic
-        |render-app! $ %{} 'CodeEntry (:doc |)
+        'render-app! $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn render-app! (renderer)
               renderer mount-target (comp-container @*reel) dispatch!
           :examples $ []
           :schema $ :: 'Dynamic
-        |repeat! $ %{} 'CodeEntry (:doc |)
+        'repeat! $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn repeat! (duration cb)
               js/setTimeout
@@ -542,12 +542,12 @@
                 * 1000 duration
           :examples $ []
           :schema $ :: 'Dynamic
-        |snippets $ %{} 'CodeEntry (:doc |)
+        'snippets $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn snippets () $ println config/cdn?
           :examples $ []
           :schema $ :: 'Dynamic
-        |ssr? $ %{} 'CodeEntry (:doc |)
+        'ssr? $ %{} 'CodeEntry (:doc |)
           :code $ quote
             def ssr? $ js-present? (js/document.querySelector |meta.respo-ssr)
           :examples $ []
@@ -565,9 +565,9 @@
             app.config :as config
             |bottom-tip :default tip!
             |./calcit.build-errors :default build-errors
-    |app.schema $ %{} 'FileEntry
+    'app.schema $ %{} 'FileEntry
       :defs $ {}
-        |add-tags $ %{} 'CodeEntry (:doc |)
+        'add-tags $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn add-tags (t data)
               map data $ fn (item)
@@ -576,7 +576,7 @@
                   assoc :source t
           :examples $ []
           :schema $ :: 'Dynamic
-        |apis-data $ %{} 'CodeEntry (:doc |)
+        'apis-data $ %{} 'CodeEntry (:doc |)
           :code $ quote
             def apis-data $ concat (slurp-cirru-code |docs/apis.cirru)
               add-tags :internal $ slurp-cirru-code |docs/internals.cirru
@@ -589,13 +589,17 @@
               add-tags :fn $ slurp-cirru-code |docs/class-fn.cirru
           :examples $ []
           :schema $ :: 'Dynamic
-        |slurp-cirru-code $ %{} 'CodeEntry (:doc |)
+        'slurp-cirru-code $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defmacro slurp-cirru-code (file)
               &data-to-code $ parse-cirru-edn (read-file file)
           :examples $ []
-          :schema $ :: 'Dynamic
-        |store $ %{} 'CodeEntry (:doc |)
+          :schema $ :: 'Macro
+            {}
+              :capabilities $ #{} :fs-read
+              :expansion $ :: 'Expr 'Dynamic
+              :required $ [] (:: 'Expr 'String)
+        'store $ %{} 'CodeEntry (:doc |)
           :code $ quote
             def store $ {}
               :states $ {}
@@ -604,9 +608,9 @@
           :schema $ :: 'Dynamic
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote (ns app.schema)
-    |app.updater $ %{} 'FileEntry
+    'app.updater $ %{} 'FileEntry
       :defs $ {}
-        |updater $ %{} 'CodeEntry (:doc |)
+        'updater $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn updater (store op op-id op-time)
               tag-match op
